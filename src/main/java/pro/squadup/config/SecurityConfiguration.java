@@ -42,7 +42,7 @@ public class SecurityConfiguration {
                 .authorizeRequests()
                 .antMatchers(
                         "/",
-                        "/index",
+                        "/contact",
                         "/reviews",
                         "/review/all/view",
                         "/pwreset"
