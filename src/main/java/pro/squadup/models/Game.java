@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="games")
-public class GameModel {
+public class Game {
 
     //* to be created when those specific models are created NOTE ** update constructors at this time
     @Id
@@ -47,16 +47,16 @@ public class GameModel {
         this.rating = rating;
     }
 
-    public GameModel(){
+    public Game(){
     }
 
-    public GameModel(String title, String artwork, String rating) {
+    public Game(String title, String artwork, String rating) {
         this.title = title;
         this.artwork = artwork;
         this.rating = rating;
     }
 
-    public GameModel(long id, String title, String artwork, String rating) {
+    public Game(long id, String title, String artwork, String rating) {
         this.id = id;
         this.title = title;
         this.artwork = artwork;
