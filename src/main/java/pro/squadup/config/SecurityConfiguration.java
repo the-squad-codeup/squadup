@@ -31,21 +31,14 @@ public class SecurityConfiguration {
                 .and()
                 .authorizeRequests()
                 .antMatchers(
-                        "/movie/list/*",
-                        "/movies",
-                        "/movie/list",
-                        "/review/user/view"
+                        "/dashboard"
                 )
                 .authenticated()
                 // Pages viewable without logging in
                 .and()
                 .authorizeRequests()
                 .antMatchers(
-                        "/",
-                        "/index",
-                        "/reviews",
-                        "/review/all/view",
-                        "/pwreset"
+                        "/"
                 )
                 .permitAll()
         ;
