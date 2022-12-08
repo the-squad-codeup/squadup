@@ -9,7 +9,7 @@ public class Game {
     //* to be created when those specific models are created NOTE ** update constructors at this time
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
 //*   private long igbdId;
 
@@ -24,7 +24,8 @@ public class Game {
 
 //*    private String genre;
 
-//*    private String platform;
+    ////Relationship to games still need to be established
+//    private List<Platforms> platforms;
 
     public String getTitle() {
         return title;
