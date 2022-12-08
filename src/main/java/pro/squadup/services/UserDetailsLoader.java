@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import pro.squadup.models.User;
 import pro.squadup.models.UserWithRoles;
+import pro.squadup.repositories.UserRepository;
 
 @Service
 public class UserDetailsLoader implements UserDetailsService {
