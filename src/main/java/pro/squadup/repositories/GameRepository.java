@@ -6,5 +6,4 @@ import pro.squadup.models.Game;
 
 @Repository
 public interface GameRepository extends JpaRepository<Game, Long> {
-    Game findById(Long id);
 }

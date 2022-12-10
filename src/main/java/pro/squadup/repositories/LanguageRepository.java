@@ -6,5 +6,4 @@ import pro.squadup.models.Language;
 
 @Repository
 public interface LanguageRepository extends JpaRepository<Language, Long> {
-    Language findById(Long id);
 }

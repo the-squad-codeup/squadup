@@ -6,5 +6,4 @@ import pro.squadup.models.Genre;
 
 @Repository
 public interface GenreRepository extends JpaRepository<Genre, Long> {
-    Genre findById(Long id);
 }

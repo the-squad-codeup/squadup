@@ -6,5 +6,4 @@ import pro.squadup.models.Platform;
 
 @Repository
 public interface PlatformRepository extends JpaRepository<Platform, Long> {
-    Platform findById(Long id);
 }
