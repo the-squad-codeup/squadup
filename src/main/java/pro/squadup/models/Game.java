@@ -6,10 +6,11 @@ import javax.persistence.*;
 @Table(name="games")
 public class Game {
 
+
     //* to be created when those specific models are created NOTE ** update constructors at this time
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
 //*   private long igbdId;
 
@@ -24,7 +25,15 @@ public class Game {
 
 //*    private String genre;
 
-//*    private String platform;
+    ////Relationship to games still need to be established
+//    private List<Platforms> platforms;
+
+    public Long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getTitle() {
         return title;
