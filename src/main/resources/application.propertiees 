@@ -1,8 +1,0 @@
-#------------ MySQL Database Credentials ------------
-spring.datasource.url=jdbc:mysql://localhost:3306/<squadup_db>?allowPublicKeyRetrieval=true&useSSL=false
-spring.datasource.username=squadup_user
-spring.datasource.password=password
-spring.jpa.hibernate.ddl-auto=update
-spring.jpa.show-sql=true
-spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
-spring.mvc.hiddenmethod.filter.enabled=true
