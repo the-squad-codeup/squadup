@@ -31,7 +31,7 @@ public class SecurityConfiguration {
                 .and()
                 .authorizeRequests()
                 .antMatchers(
-                        "/dashboard"
+                        "/home"
                 )
                 .authenticated()
                 // Pages viewable without logging in
