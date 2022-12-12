@@ -1,6 +1,7 @@
 package pro.squadup.models;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -18,6 +19,12 @@ public class User {
 
     @Column(nullable = false, length = 50)
     private String password;
+
+    private Preferences preferences;
+
+    private Set<User> recruits;
+
+    private Set<User> comrades;
 
     public Long getId() {
         return id;
@@ -49,6 +56,30 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Preferences getPreferences() {
+        return preferences;
+    }
+
+    public void setPreferences(Preferences preferences) {
+        this.preferences = preferences;
+    }
+
+    public Set<User> getRecruits() {
+        return recruits;
+    }
+
+    public void setRecruits(Set<User> recruits) {
+        this.recruits = recruits;
+    }
+
+    public Set<User> getComrades() {
+        return comrades;
+    }
+
+    public void setComrades(Set<User> comrades) {
+        this.comrades = comrades;
     }
 
     public User() {
