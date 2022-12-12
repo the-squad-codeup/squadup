@@ -21,7 +21,7 @@ public class SecurityConfiguration {
                 // Login configuration
                 .formLogin()
                 .loginPage("/login")
-                .defaultSuccessUrl("/dashboard")
+                .defaultSuccessUrl("/home")
                 .permitAll()
                 // Logout configuration
                 .and()
