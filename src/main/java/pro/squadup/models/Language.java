@@ -2,9 +2,10 @@ package pro.squadup.models;
 
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
-@Table(name = "language")
+@Table(name = "languages")
 public class Language {
 
     @Id
@@ -13,6 +14,8 @@ public class Language {
 
     @Column(nullable = false)
     private String language;
+
+    private Set<Preferences> preferences;
 
     public Long getId() {
         return id;
@@ -28,6 +31,14 @@ public class Language {
 
     public void setLanguage(String language) {
         this.language = language;
+    }
+
+    public Set<Preferences> getPreferences() {
+        return preferences;
+    }
+
+    public void setPreferences(Set<Preferences> preferences) {
+        this.preferences = preferences;
     }
 
     public Language() {
