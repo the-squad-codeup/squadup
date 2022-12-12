@@ -20,6 +20,8 @@ public class Platform {
     @JsonIgnore
     private Set<Preferences> preferences;
 
+    @ManyToMany(mappedBy = "platforms")
+    @JsonIgnore
     private Set<Game> games;
 
     public Long getId() {

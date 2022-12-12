@@ -21,6 +21,8 @@ public class Genre {
     @JsonIgnore
     private Set<Preferences> preferences;
 
+    @ManyToMany(mappedBy = "genres")
+    @JsonIgnore
     private Set<Game> games;
 
     public Long getId() {

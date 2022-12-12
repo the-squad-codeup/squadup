@@ -31,8 +31,20 @@ public class Game {
     @JsonIgnore
     private Set<Preferences> preferences;
 
+    @ManyToMany
+    @JoinTable(
+            name = "game_genre",
+            joinColumns = {@JoinColumn(name = "game_id")},
+            inverseJoinColumns = {@JoinColumn(name = "genre_id")}
+    )
     private Set<Genre> genres;
 
+    @ManyToMany
+    @JoinTable(
+            name = "game_platform",
+            joinColumns = {@JoinColumn(name = "game_id")},
+            inverseJoinColumns = {@JoinColumn(name = "platform_id")}
+    )
     private Set<Platform> platforms;
 
     public Long getId() {
