@@ -18,7 +18,7 @@ public class Platform {
 
     @ManyToMany(mappedBy = "platforms")
     @JsonIgnore
-    private Set<Preferences> preferences;
+    private Set<Profile> profiles;
 
     @ManyToMany(mappedBy = "platforms")
     @JsonIgnore
@@ -38,12 +38,12 @@ public class Platform {
         this.type = type;
     }
 
-    public Set<Preferences> getPreferences() {
-        return preferences;
+    public Set<Profile> getProfiles() {
+        return profiles;
     }
 
-    public void setPreferences(Set<Preferences> preferences) {
-        this.preferences = preferences;
+    public void setProfiles(Set<Profile> profiles) {
+        this.profiles = profiles;
     }
 
     public Set<Game> getGames() {

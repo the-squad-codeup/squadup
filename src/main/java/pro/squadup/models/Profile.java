@@ -5,8 +5,8 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "preferences")
-public class Preferences {
+@Table(name = "profiles")
+public class Profile {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,37 +24,37 @@ public class Preferences {
     @Column(nullable = false)
     private String game_age_rating;
 
-    @OneToOne(mappedBy = "preferences")
+    @OneToOne(mappedBy = "profiles")
     private User user;
 
     @ManyToMany
     @JoinTable(
-            name = "preferences_platform",
-            joinColumns = {@JoinColumn(name = "preferences_id")},
+            name = "profile_platform",
+            joinColumns = {@JoinColumn(name = "profile_id")},
             inverseJoinColumns = {@JoinColumn(name = "platform_id")}
     )
     private Set<Platform> platforms;
 
     @ManyToMany
     @JoinTable(
-            name = "preferences_game",
-            joinColumns = {@JoinColumn(name = "preferences_id")},
+            name = "profile_game",
+            joinColumns = {@JoinColumn(name = "profile_id")},
             inverseJoinColumns = {@JoinColumn(name = "game_id")}
     )
     private Set<Game> games;
 
     @ManyToMany
     @JoinTable(
-            name = "preferences_genre",
-            joinColumns = {@JoinColumn(name = "preferences_id")},
+            name = "profile_genre",
+            joinColumns = {@JoinColumn(name = "profile_id")},
             inverseJoinColumns = {@JoinColumn(name = "genre_id")}
     )
     private Set<Genre> genres;
 
     @ManyToMany
     @JoinTable(
-            name = "preferences_language",
-            joinColumns = {@JoinColumn(name = "preferences_id")},
+            name = "profile_language",
+            joinColumns = {@JoinColumn(name = "profile_id")},
             inverseJoinColumns = {@JoinColumn(name = "language_id")}
     )
     private Set<Language> languages;
@@ -139,17 +139,17 @@ public class Preferences {
         this.languages = languages;
     }
 
-    public Preferences() {
+    public Profile() {
     }
 
-    public Preferences(String location, String language, String mature_language, String game_age_rating) {
+    public Profile(String location, String language, String mature_language, String game_age_rating) {
         this.location = location;
         this.language = language;
         this.mature_language = mature_language;
         this.game_age_rating = game_age_rating;
     }
 
-    public Preferences(Long id, String location, String language, String mature_language, String game_age_rating) {
+    public Profile(Long id, String location, String language, String mature_language, String game_age_rating) {
         this.id = id;
         this.location = location;
         this.language = language;
