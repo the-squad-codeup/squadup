@@ -1,5 +1,7 @@
 package pro.squadup.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -20,11 +22,33 @@ public class User {
     @Column(nullable = false, length = 50)
     private String password;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "preferences_id")
     private Preferences preferences;
 
-    private Set<User> recruits;
+    @ManyToMany
+    @JoinTable(
+            name = "recruits",
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "recruit_id")}
+    )
+    private Set<User> matchedRecruits;
 
-    private Set<User> comrades;
+    @ManyToMany(mappedBy = "matchedRecruits")
+    @JsonIgnore
+    private Set<User> recruitsMatchedWithUser;
+
+    @ManyToMany
+    @JoinTable(
+            name = "comrades",
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "comrade_id")}
+    )
+    private Set<User> userComrades;
+
+    @ManyToMany(mappedBy = "userComrades")
+    @JsonIgnore
+    private Set<User> comradesOfUser;
 
     public Long getId() {
         return id;
@@ -66,20 +90,36 @@ public class User {
         this.preferences = preferences;
     }
 
-    public Set<User> getRecruits() {
-        return recruits;
+    public Set<User> getMatchedRecruits() {
+        return matchedRecruits;
     }
 
-    public void setRecruits(Set<User> recruits) {
-        this.recruits = recruits;
+    public void setMatchedRecruits(Set<User> matchedRecruits) {
+        this.matchedRecruits = matchedRecruits;
     }
 
-    public Set<User> getComrades() {
-        return comrades;
+    public Set<User> getRecruitsMatchedWithUser() {
+        return recruitsMatchedWithUser;
     }
 
-    public void setComrades(Set<User> comrades) {
-        this.comrades = comrades;
+    public void setRecruitsMatchedWithUser(Set<User> recruitsMatchedWithUser) {
+        this.recruitsMatchedWithUser = recruitsMatchedWithUser;
+    }
+
+    public Set<User> getUserComrades() {
+        return userComrades;
+    }
+
+    public void setUserComrades(Set<User> userComrades) {
+        this.userComrades = userComrades;
+    }
+
+    public Set<User> getComradesOfUser() {
+        return comradesOfUser;
+    }
+
+    public void setComradesOfUser(Set<User> comradesOfUser) {
+        this.comradesOfUser = comradesOfUser;
     }
 
     public User() {

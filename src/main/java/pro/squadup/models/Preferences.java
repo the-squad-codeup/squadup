@@ -24,6 +24,7 @@ private String mature_language;
 @Column(nullable = false)
 private String game_age_rating;
 
+@OneToOne(mappedBy = "preferences")
 private User user;
 
 private Set<Platform> platforms;
