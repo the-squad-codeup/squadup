@@ -24,7 +24,7 @@ public class Profile {
     @Column(nullable = false)
     private String game_age_rating;
 
-    @OneToOne(mappedBy = "profiles")
+    @OneToOne(mappedBy = "profile")
     private User user;
 
     @ManyToMany
