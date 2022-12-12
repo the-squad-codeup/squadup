@@ -21,7 +21,7 @@ public class SecurityConfiguration {
                 // Login configuration
                 .formLogin()
                 .loginPage("/login")
-                .defaultSuccessUrl("/dashboard")
+                .defaultSuccessUrl("/home")
                 .permitAll()
                 // Logout configuration
                 .and()
@@ -31,14 +31,21 @@ public class SecurityConfiguration {
                 .and()
                 .authorizeRequests()
                 .antMatchers(
-                        "/dashboard"
+                        "/home",
+                        "/comrades",
+                        "/recruits",
+                        "/preferences",
+                        "/build-profile",
+                        "/games"
                 )
                 .authenticated()
                 // Pages viewable without logging in
                 .and()
                 .authorizeRequests()
                 .antMatchers(
-                        "/"
+                        "/",
+                        "/contact",
+                        "/about"
                 )
                 .permitAll()
         ;
