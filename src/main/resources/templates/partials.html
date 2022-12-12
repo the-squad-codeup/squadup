@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <!-- Head Fragment -->
+    <div th:fragment="headFragment(title)" th:remove="tag">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="UTF-8">
+        <title th:text="${title}"></title>
+        <link rel="icon" type="image/x-icon" th:href="@{/favicon.ico}">
+        <!-- Bootstrap -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+        <!-- Bootstrap Icons -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+        <script th:src="@{/js/jquery-3.6.1.min.js}"></script>
+    </div>
+
+</head>
+<body>
+
+<!--Sitebar Fragment-->
+<nav id="site-bar" th:fragment="siteBar" class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container-fluid">
+        <!-- Links on Left -->
+        <div class="navbar-collapse collapse w-100 order-1 order-lg-0 collapse-portion">
+            <ul class="navbar-nav me-auto">
+                <li sec:authorize="isAuthenticated()" class="nav-item">
+                    <a id="nav-create-list-link" class="nav-link" href="#">Authorized Left Links</a>
+                </li>
+                <li sec:authorize="isAnonymous()" class="nav-item">
+                    <a id="nav-reviews-link" class="nav-link" href="#">Anonymous Left Links</a>
+                </li>
+            </ul>
+        </div>
+        <!-- Center Name Link -->
+        <div class="mx-auto order-0">
+            <a class="navbar-brand mx-auto ps-3" th:href="@{/}">SquadUp</a>
+            <button class="navbar-toggler me-2" type="button" data-bs-toggle="collapse" data-bs-target=".collapse-portion">
+                <img th:src="@{/squadup.png}" style="max-height: 1.75em; max-width: 1.75em;">
+            </button>
+        </div>
+        <!-- Links on Right -->
+        <div class="navbar-collapse collapse w-100 order-3 collapse-portion">
+            <ul class="navbar-nav ms-auto">
+                <li sec:authorize="isAuthenticated()">
+                    <form id="site-bar-logout-form" th:action="@{/logout}" th:method="post">
+                        <a id="site-bar-logout-link" role="button" class="nav-link" href="#">Logout</a>
+                    </form>
+                </li>
+                <li sec:authorize="isAnonymous()" class="nav-item">
+                    <a class="nav-link" th:href="@{/signup}">Signup</a>
+                </li>
+                <li sec:authorize="isAnonymous()" class="nav-item">
+                    <a class="nav-link" th:href="@{/login}">Login</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!--Scripts Fragment-->
+<div th:fragment="scripts" th:remove="tag">
+    <script th:src="@{/js/sitebar.js}"></script>
+    <!-- Bootstrap Masonry CDN-->
+    <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous" async></script>
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+</div>
+
+</body>
+</html>
