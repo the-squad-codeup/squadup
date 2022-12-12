@@ -19,7 +19,7 @@ public class User {
     @Column(nullable = false, length = 75, unique = true)
     private String email;
 
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false)
     private String password;
 
     @OneToOne(cascade = CascadeType.ALL)
