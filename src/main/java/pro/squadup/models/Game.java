@@ -25,6 +25,8 @@ public class Game {
     @Column(length = 25)
     private String rating;
 
+    private Set<Preferences> preferences;
+
     private Set<Genre> genres;
 
     private Set<Platform> platforms;
@@ -63,6 +65,14 @@ public class Game {
     }
     public void setRating(String rating) {
         this.rating = rating;
+    }
+
+    public Set<Preferences> getPreferences() {
+        return preferences;
+    }
+
+    public void setPreferences(Set<Preferences> preferences) {
+        this.preferences = preferences;
     }
 
     public Set<Genre> getGenres() {

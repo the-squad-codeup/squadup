@@ -4,7 +4,7 @@ package pro.squadup.models;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "genre")
+@Table(name = "genres")
 public class Genre {
 
     @Id
