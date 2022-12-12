@@ -2,6 +2,7 @@ package pro.squadup.models;
 
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "genres")
@@ -13,6 +14,10 @@ public class Genre {
 
     @Column(nullable = false)
     private String name;
+
+    private Set<Preferences> preferences;
+
+    private Set<Game> games;
 
     public Long getId() {
         return id;
@@ -28,6 +33,22 @@ public class Genre {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Set<Preferences> getPreferences() {
+        return preferences;
+    }
+
+    public void setPreferences(Set<Preferences> preferences) {
+        this.preferences = preferences;
+    }
+
+    public Set<Game> getGames() {
+        return games;
+    }
+
+    public void setGames(Set<Game> games) {
+        this.games = games;
     }
 
     public Genre() {
