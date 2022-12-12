@@ -29,7 +29,7 @@ public class Game {
 
     @ManyToMany(mappedBy = "games")
     @JsonIgnore
-    private Set<Preferences> preferences;
+    private Set<Profile> profiles;
 
     @ManyToMany
     @JoinTable(
@@ -83,12 +83,12 @@ public class Game {
         this.rating = rating;
     }
 
-    public Set<Preferences> getPreferences() {
-        return preferences;
+    public Set<Profile> getProfiles() {
+        return profiles;
     }
 
-    public void setPreferences(Set<Preferences> preferences) {
-        this.preferences = preferences;
+    public void setProfiles(Set<Profile> profiles) {
+        this.profiles = profiles;
     }
 
     public Set<Genre> getGenres() {
