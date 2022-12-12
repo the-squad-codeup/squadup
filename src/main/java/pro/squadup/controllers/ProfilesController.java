@@ -5,21 +5,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class PreferencesController {
+public class ProfilesController {
 
-    @GetMapping("/preferences")
-    public String preferencesPage(){
-        return "preferences/preferences";
+    @GetMapping("/profile")
+    public String profilePage(){
+        return "profile/profile";
     }
 
     @GetMapping("/build-profile")
     public String buildProfilePage(){
-        return "preferences/build-profile";
+        return "profile/build-profile";
     }
 
     @GetMapping("/games")
     public String gamesPage(){
-        return "preferences/games";
+        return "profile/games";
     }
 
 }

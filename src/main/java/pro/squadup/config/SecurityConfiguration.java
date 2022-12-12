@@ -34,7 +34,7 @@ public class SecurityConfiguration {
                         "/home",
                         "/comrades",
                         "/recruits",
-                        "/preferences",
+                        "/profile",
                         "/build-profile",
                         "/games"
                 )
