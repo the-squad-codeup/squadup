@@ -1,6 +1,9 @@
 package pro.squadup.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name="platforms")
@@ -13,11 +16,14 @@ public class Platform {
     @Column(nullable = false, length = 25)
     private String type;
 
-    //Relationship to games still need to be established
+    @ManyToMany(mappedBy = "platforms")
+    @JsonIgnore
+    private Set<Preferences> preferences;
 
-//    private List<Games> games;
+    @ManyToMany(mappedBy = "platforms")
+    @JsonIgnore
+    private Set<Game> games;
 
-    @Column
     public Long getId() {
         return id;
     }
@@ -30,6 +36,22 @@ public class Platform {
     }
     public void setType(String type) {
         this.type = type;
+    }
+
+    public Set<Preferences> getPreferences() {
+        return preferences;
+    }
+
+    public void setPreferences(Set<Preferences> preferences) {
+        this.preferences = preferences;
+    }
+
+    public Set<Game> getGames() {
+        return games;
+    }
+
+    public void setGames(Set<Game> games) {
+        this.games = games;
     }
 
     public Platform(){

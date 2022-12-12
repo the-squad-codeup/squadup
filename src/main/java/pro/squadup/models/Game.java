@@ -1,6 +1,9 @@
 package pro.squadup.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name="games")
@@ -12,7 +15,8 @@ public class Game {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//*   private long igbdId;
+    @Column
+    private Long igbdId;
 
     @Column(nullable = false, length = 100)
     private String title;
@@ -23,16 +27,39 @@ public class Game {
     @Column(length = 25)
     private String rating;
 
-//*    private String genre;
+    @ManyToMany(mappedBy = "games")
+    @JsonIgnore
+    private Set<Preferences> preferences;
 
-    ////Relationship to games still need to be established
-//    private List<Platforms> platforms;
+    @ManyToMany
+    @JoinTable(
+            name = "game_genre",
+            joinColumns = {@JoinColumn(name = "game_id")},
+            inverseJoinColumns = {@JoinColumn(name = "genre_id")}
+    )
+    private Set<Genre> genres;
+
+    @ManyToMany
+    @JoinTable(
+            name = "game_platform",
+            joinColumns = {@JoinColumn(name = "game_id")},
+            inverseJoinColumns = {@JoinColumn(name = "platform_id")}
+    )
+    private Set<Platform> platforms;
 
     public Long getId() {
         return id;
     }
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getIgbdId() {
+        return igbdId;
+    }
+
+    public void setIgbdId(Long igbdId) {
+        this.igbdId = igbdId;
     }
 
     public String getTitle() {
@@ -54,6 +81,30 @@ public class Game {
     }
     public void setRating(String rating) {
         this.rating = rating;
+    }
+
+    public Set<Preferences> getPreferences() {
+        return preferences;
+    }
+
+    public void setPreferences(Set<Preferences> preferences) {
+        this.preferences = preferences;
+    }
+
+    public Set<Genre> getGenres() {
+        return genres;
+    }
+
+    public void setGenres(Set<Genre> genres) {
+        this.genres = genres;
+    }
+
+    public Set<Platform> getPlatforms() {
+        return platforms;
+    }
+
+    public void setPlatforms(Set<Platform> platforms) {
+        this.platforms = platforms;
     }
 
     public Game(){
