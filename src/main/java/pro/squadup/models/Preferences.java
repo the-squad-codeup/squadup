@@ -8,32 +8,56 @@ import java.util.Set;
 @Table(name = "preferences")
 public class Preferences {
 
-@Id
-@GeneratedValue(strategy = GenerationType.IDENTITY)
-private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-@Column(nullable = false)
-private String location;
+    @Column(nullable = false)
+    private String location;
 
-@Column(nullable = false)
-private String language;
+    @Column(nullable = false)
+    private String language;
 
-@Column(nullable = false)
-private String mature_language;
+    @Column(nullable = false)
+    private String mature_language;
 
-@Column(nullable = false)
-private String game_age_rating;
+    @Column(nullable = false)
+    private String game_age_rating;
 
-@OneToOne(mappedBy = "preferences")
-private User user;
+    @OneToOne(mappedBy = "preferences")
+    private User user;
 
-private Set<Platform> platforms;
+    @ManyToMany
+    @JoinTable(
+            name = "preferences_platform",
+            joinColumns = {@JoinColumn(name = "preferences_id")},
+            inverseJoinColumns = {@JoinColumn(name = "platform_id")}
+    )
+    private Set<Platform> platforms;
 
-private Set<Game> games;
+    @ManyToMany
+    @JoinTable(
+            name = "preferences_game",
+            joinColumns = {@JoinColumn(name = "preferences_id")},
+            inverseJoinColumns = {@JoinColumn(name = "game_id")}
+    )
+    private Set<Game> games;
 
-private Set<Genre> genres;
+    @ManyToMany
+    @JoinTable(
+            name = "preferences_genre",
+            joinColumns = {@JoinColumn(name = "preferences_id")},
+            inverseJoinColumns = {@JoinColumn(name = "genre_id")}
+    )
+    private Set<Genre> genres;
 
-private Set<Language> languages;
+    @ManyToMany
+    @JoinTable(
+            name = "preferences_language",
+            joinColumns = {@JoinColumn(name = "preferences_id")},
+            inverseJoinColumns = {@JoinColumn(name = "language_id")}
+    )
+    private Set<Language> languages;
 
     public Long getId() {
         return id;

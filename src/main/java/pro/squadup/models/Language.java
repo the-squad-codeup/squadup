@@ -1,6 +1,8 @@
 package pro.squadup.models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -15,6 +17,8 @@ public class Language {
     @Column(nullable = false)
     private String language;
 
+    @ManyToMany(mappedBy = "languages")
+    @JsonIgnore
     private Set<Preferences> preferences;
 
     public Long getId() {

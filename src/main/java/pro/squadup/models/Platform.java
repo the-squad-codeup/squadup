@@ -1,5 +1,7 @@
 package pro.squadup.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -14,6 +16,8 @@ public class Platform {
     @Column(nullable = false, length = 25)
     private String type;
 
+    @ManyToMany(mappedBy = "platforms")
+    @JsonIgnore
     private Set<Preferences> preferences;
 
     private Set<Game> games;
