@@ -11,17 +11,17 @@ public class GeneralController {
         return "general/splash";
     }
 
-    @GetMapping("/general/about")
+    @GetMapping("/about")
     public String showAboutUsPage() {
         return "general/about-us";
     }
 
-    @GetMapping("/general/contact")
+    @GetMapping("/contact")
     public String showContactUsPage() {
         return "general/contact-us";
     }
 
-    @GetMapping("/general/home")
+    @GetMapping("/home")
     public String showHomePage() {
         return "general/home";
     }
