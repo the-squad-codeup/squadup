@@ -74,6 +74,19 @@
         </div>
     </div>
 </nav>
+<footer id="footer" th:fragment="footer" class="nav navbar-expand-lg navbar-dark bg-dark fixed-bottom">
+    <div class="container-fluid d-flex flex-wrap justify-content-center">
+        <ul class="nav-foot d-flex flex-wrap pt-3">
+            <li class="nav-foot">
+                <a id="footer-contact" class="navbar-brand p-4" th:href="@{/contact}">CONTACT US</a>
+            </li>
+            <li class="nav-foot">
+                <a id="footer-about" class="navbar-brand p-4" th:href="@{/about}">ABOUT US</a>
+            </li>
+        </ul>
+    </div>
+</footer>
+
 
 <!--Scripts Fragment-->
 <div th:fragment="scripts" th:remove="tag">
