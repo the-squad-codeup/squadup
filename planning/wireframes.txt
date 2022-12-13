@@ -4,3 +4,18 @@ https://www.figma.com/file/ijpnP3nR2Ogc4KrW2s2T7n/The-Squad-Wireframe?node-id=0%
 Created a final view of the splash page - 12/12/22
 
 Began the Build Profile view - 12/12/22
+
+---------------------------------
+Profile Page  - 12/13/22
+----------------------------------
+Created mature language switch
+Added languages
+added location
+Added profile image
+Added profile bio
+added Gamertag
+Added genres
+Added platforms
+Added games
+Created various icons for favorite, location, and languages
+Completed Profile page
