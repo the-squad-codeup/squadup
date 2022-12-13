@@ -1,0 +1,39 @@
+body{
+    font-family: Chakra Petch, sans-serif;
+}
+.jumbotron{
+    color: #5CFD42;
+    font-size: 200px;
+    padding-top: 50px;
+}
+.center{
+    display: flex;
+    justify-content: center
+}
+.box{
+    background-color: transparent;
+    border: 15px solid #5CFD42;
+}
+#statement{
+    color: white;
+    padding: 20px 200px 1px;
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 42px;
+    text-align: center;
+}
+#feature1{
+    width: 1374px;
+    height: 341px;
+}
+#feature2{
+    width: 1714px;
+    height: 341px;
+}
+#feature3{
+    width: 1374px;
+    height: 341px;
+}
+.space{
+    padding-top: 30px
+}
