@@ -3,10 +3,66 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <div th:replace="partials :: headFragment('About-Us Page')"></div>
-
-
+    <title>About Us</title>
 </head>
 <body>
+
+<div class="cards-wrapper">
+    <div class="col">
+        <div class="card-group" style="max-width: 18rem;">
+            <div class="card-header bg-transparent">THE Squad</div>
+            <div class="card-body text-success">
+                <p class="card-text">SquadUp brought to you by lonely gamers who found the power in making connections to level up their gaming experience. Helping lonely gamers one squad at a time. </p>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card-group" style="max-width: 18rem;">
+                <img src="/images/Jack.png" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">JACK GRAHAM</h5>
+                    <p class="card-text">jacks bio</p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card-group" style="max-width: 18rem;">
+                <img src="/images/Stephen.png" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">STEPHEN PFLUG</h5>
+                    <p class="card-text">stephens bio</p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card-group" style="max-width: 18rem;">
+                <img src="/images/Adien.png" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">AIDEN LUCE</h5>
+                    <p class="card-text">aidens bio</p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card-group" style="max-width: 18rem;">
+                <img src="/images/Cesar.png" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">CESAR LOPEZ</h5>
+                    <p class="card-text">cesars bio</p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card-group" style="max-width: 18rem;">
+                <img src="/images/Jazmine.png" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">JAZMINE HUDSON</h5>
+                    <p class="card-text">jazmines bio</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
 
 <nav th:replace="partials :: footer"></nav>
 
