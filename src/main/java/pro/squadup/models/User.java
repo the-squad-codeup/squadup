@@ -26,29 +26,19 @@ public class User {
     @JoinColumn(name = "profile_id")
     private Profile profile;
 
-    @ManyToMany
-    @JoinTable(
-            name = "recruits",
-            joinColumns = {@JoinColumn(name = "user_id")},
-            inverseJoinColumns = {@JoinColumn(name = "recruit_id")}
-    )
-    private Set<User> matchedRecruits;
+    @OneToMany(mappedBy = "userOne")
+    private Set<Recruit> recruits;
 
-    @ManyToMany(mappedBy = "matchedRecruits")
+    @OneToMany(mappedBy = "userTwo")
     @JsonIgnore
-    private Set<User> recruitsMatchedWithUser;
+    private Set<Recruit> recruitsMatchedWithUser;
 
-    @ManyToMany
-    @JoinTable(
-            name = "comrades",
-            joinColumns = {@JoinColumn(name = "user_id")},
-            inverseJoinColumns = {@JoinColumn(name = "comrade_id")}
-    )
-    private Set<User> userComrades;
+    @OneToMany(mappedBy = "userOne")
+    private Set<Recruit> comrades;
 
-    @ManyToMany(mappedBy = "userComrades")
+    @OneToMany(mappedBy = "userTwo")
     @JsonIgnore
-    private Set<User> comradesOfUser;
+    private Set<Recruit> comradesOfUser;
 
     public Long getId() {
         return id;
@@ -90,35 +80,35 @@ public class User {
         this.profile = profile;
     }
 
-    public Set<User> getMatchedRecruits() {
-        return matchedRecruits;
+    public Set<Recruit> getRecruits() {
+        return recruits;
     }
 
-    public void setMatchedRecruits(Set<User> matchedRecruits) {
-        this.matchedRecruits = matchedRecruits;
+    public void setRecruits(Set<Recruit> recruits) {
+        this.recruits = recruits;
     }
 
-    public Set<User> getRecruitsMatchedWithUser() {
+    public Set<Recruit> getRecruitsMatchedWithUser() {
         return recruitsMatchedWithUser;
     }
 
-    public void setRecruitsMatchedWithUser(Set<User> recruitsMatchedWithUser) {
+    public void setRecruitsMatchedWithUser(Set<Recruit> recruitsMatchedWithUser) {
         this.recruitsMatchedWithUser = recruitsMatchedWithUser;
     }
 
-    public Set<User> getUserComrades() {
-        return userComrades;
+    public Set<Recruit> getComrades() {
+        return comrades;
     }
 
-    public void setUserComrades(Set<User> userComrades) {
-        this.userComrades = userComrades;
+    public void setComrades(Set<Recruit> comrades) {
+        this.comrades = comrades;
     }
 
-    public Set<User> getComradesOfUser() {
+    public Set<Recruit> getComradesOfUser() {
         return comradesOfUser;
     }
 
-    public void setComradesOfUser(Set<User> comradesOfUser) {
+    public void setComradesOfUser(Set<Recruit> comradesOfUser) {
         this.comradesOfUser = comradesOfUser;
     }
 

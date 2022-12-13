@@ -8,8 +8,74 @@
 </head>
 <body>
 <nav th:replace="partials :: siteBar"></nav>
+<title>Profile Preferences</title>
 
+<h1 class="text-center pt-5 my-5 outlined">Let's fill out your profile</h1>
+
+<div class="container bg-dark rounded-3 p-5">
+    <form class="text-light">
+        <div class="mb-3">
+            <p>
+                <img th:src="@{/US-Time-Zone-Map.jpeg}">
+            </p>
+            <label for="location">Pick your time Zone</label>
+            <select id="location" name="location">
+                <option value="eastern">Eastern Time Zone</option>
+                <option value="central">Central Time Zone</option>
+                <option value="Mountain">Mountain Time Zone</option>
+                <option value="Pacific">Pacific Time Zone</option>
+                <option value="Alaska">Alaska Time Zone</option>
+                <option value="Hawaii">Hawaii-Aleutian Time Zone</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="language">Pick your language</label>
+            <select id="language" name="language">
+                <option value="english">English</option>
+                <option value="chinese">Chinese</option>
+                <option value="japanese">Japanese</option>
+                <option value="korean">Korean</option>
+                <option value="german">German</option>
+                <option value="french">French</option>
+                <option value="italian">Italian</option>
+                <option value="portuguese">Portuguese</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="game-rating">Select game rating</label>
+            <select id="game-rating" name="game-rating">
+                <option value="everyone">Everyone</option>
+                <option value="ten-and-up">Everyone 10 & up</option>
+                <option value="teen">Teen (13 & up)</option>
+                <option value="mature">Mature (17 & up)</option>
+                <option value="adults">Adults Only (18 & up)</option>
+                <option value="rating-pending">Rating Pending</option>
+                <option value="rating-pending-MA">Rating Pending Likely Mature</option>
+            </select>
+        </div>
+        <div>
+            Mature Language is Ok?
+            <label class="switch">
+                <input type="checkbox">
+                <span class="slider"></span>
+            </label>
+        </div><br>
+        <div class="mb-3">
+            <label for="platform">Select game rating</label>
+            <select id="platform" name="platform">
+                <option value="ps">PC</option>
+                <option value="ps">Play Station</option>
+                <option value="xbox">Xbox</option>
+                <option value="nintendo">Nintendo</option>
+            </select>
+        </div>
+        <label for="gamertag">Enter your gamertag:</label>
+        <input type="text" id="gamertag" name="gamertag"><br><br>
+        <label for="bio">What kind of people you want in your squad?</label><br>
+        <textarea type="text" id="bio" name="bio"></textarea><br>
+        <input type="submit" value="Submit">
+    </form>
+</div>
 <div th:replace="partials :: scripts"></div>
-
 </body>
 </html>
