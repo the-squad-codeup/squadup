@@ -30,6 +30,7 @@ public class User {
     private Set<Recruit> recruits;
 
     @OneToMany(mappedBy = "userTwo")
+    @JsonIgnore
     private Set<Recruit> recruitsMatchedWithUser;
 
     @ManyToMany

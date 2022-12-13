@@ -27,7 +27,6 @@ public class Recruit {
 
     @ManyToOne
     @JoinColumn(name = "recruit_id")
-    @JsonIgnore
     private User userTwo;
 
     public Long getId() {
