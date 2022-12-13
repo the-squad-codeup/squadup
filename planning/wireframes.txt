@@ -19,3 +19,4 @@ Added platforms
 Added games
 Created various icons for favorite, location, and languages
 Completed Profile page
+Completed mobile view design for Profile page

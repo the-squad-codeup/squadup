@@ -3,12 +3,15 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <div th:replace="partials :: headFragment('Splash Page')"></div>
-
+<link th:href="@{/css/splash.css}" rel="stylesheet">
 </head>
+
 <body>
 <nav th:replace="partials :: siteBar"></nav>
 
-<div th:replace="partials :: scripts"></div>
 
+<h1 style="font-family: Chakra Petch, sans-serif; color: #5CFD42">SQUADUP</h1>
+
+<div th:replace="partials :: scripts"></div>
 </body>
 </html>
