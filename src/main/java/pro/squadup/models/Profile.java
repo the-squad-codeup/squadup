@@ -16,13 +16,16 @@ public class Profile {
     private String bio;
 
     @Column(nullable = false)
+    private String gamertag;
+
+    @Column(nullable = false)
     private String location;
 
     @Column(nullable = false)
     private String language;
 
     @Column(nullable = false)
-    private String mature_language;
+    private boolean mature_language;
 
     @Column(nullable = false)
     private String game_age_rating;
@@ -78,6 +81,14 @@ public class Profile {
         this.bio = bio;
     }
 
+    public String getGamertag() {
+        return gamertag;
+    }
+
+    public void setGamertag(String gamertag) {
+        this.gamertag = gamertag;
+    }
+
     public String getLocation() {
         return location;
     }
@@ -94,11 +105,11 @@ public class Profile {
         this.language = language;
     }
 
-    public String getMature_language() {
+    public boolean isMature_language() {
         return mature_language;
     }
 
-    public void setMature_language(String mature_language) {
+    public void setMature_language(boolean mature_language) {
         this.mature_language = mature_language;
     }
 
@@ -151,17 +162,23 @@ public class Profile {
     }
 
     public Profile() {
+        this.bio = "";
+        this.location = "";
+        this.language = "";
+        this.mature_language = false;
+        this.game_age_rating = "";
     }
 
-    public Profile(String bio, String location, String language, String mature_language, String game_age_rating) {
+    public Profile(String bio, String gamertag, String location, String language, boolean mature_language, String game_age_rating) {
         this.bio = bio;
+        this.gamertag = gamertag;
         this.location = location;
         this.language = language;
         this.mature_language = mature_language;
         this.game_age_rating = game_age_rating;
     }
 
-    public Profile(Long id, String location, String language, String mature_language, String game_age_rating) {
+    public Profile(Long id, String location, String language, boolean mature_language, String game_age_rating) {
         this.id = id;
         this.location = location;
         this.language = language;

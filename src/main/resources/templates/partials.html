@@ -6,6 +6,7 @@
     <div th:fragment="headFragment(title)" th:remove="tag">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta charset="UTF-8">
+        <meta name="_csrf" data-th-content="${_csrf.token}">
         <title th:text="${title}"></title>
         <link rel="shortcut icon" type="images/png" th:href="@{/squadup.png}">
         <!--Google Font-->
