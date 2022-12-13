@@ -31,13 +31,13 @@ public class RecruitScheduleConfiguration {
 //        for(User user : allUsers) {
 //            for(User otherUser : allUsers) {
 //                if(
-//                        user.getId() != otherUser.getId() &&
-//                        !areComrades(user, otherUser) &&
-//                        !alreadyRecruited(user, otherUser) &&
-//                        (
-//                            containsMatchingGames(user, otherUser) ||
-//                            containsMatchingGenres(user, otherUser)
-//                        )
+//                    user.getId() != otherUser.getId() &&
+//                    !areComrades(user, otherUser) &&
+//                    !alreadyRecruited(user, otherUser) &&
+//                    (
+//                        containsMatchingGames(user, otherUser) ||
+//                        containsMatchingGenres(user, otherUser)
+//                    )
 //
 //                ) {
 //                    addRecruits(user, otherUser);

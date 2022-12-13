@@ -26,17 +26,11 @@ public class User {
     @JoinColumn(name = "profile_id")
     private Profile profile;
 
-    @ManyToMany
-    @JoinTable(
-            name = "recruits",
-            joinColumns = {@JoinColumn(name = "user_id")},
-            inverseJoinColumns = {@JoinColumn(name = "recruit_id")}
-    )
-    private Set<User> matchedRecruits;
+    @OneToMany(mappedBy = "userOne")
+    private Set<Recruit> recruits;
 
-    @ManyToMany(mappedBy = "matchedRecruits")
-    @JsonIgnore
-    private Set<User> recruitsMatchedWithUser;
+    @OneToMany(mappedBy = "userTwo")
+    private Set<Recruit> recruitsMatchedWithUser;
 
     @ManyToMany
     @JoinTable(
@@ -90,19 +84,19 @@ public class User {
         this.profile = profile;
     }
 
-    public Set<User> getMatchedRecruits() {
-        return matchedRecruits;
+    public Set<Recruit> getRecruits() {
+        return recruits;
     }
 
-    public void setMatchedRecruits(Set<User> matchedRecruits) {
-        this.matchedRecruits = matchedRecruits;
+    public void setRecruits(Set<Recruit> recruits) {
+        this.recruits = recruits;
     }
 
-    public Set<User> getRecruitsMatchedWithUser() {
+    public Set<Recruit> getRecruitsMatchedWithUser() {
         return recruitsMatchedWithUser;
     }
 
-    public void setRecruitsMatchedWithUser(Set<User> recruitsMatchedWithUser) {
+    public void setRecruitsMatchedWithUser(Set<Recruit> recruitsMatchedWithUser) {
         this.recruitsMatchedWithUser = recruitsMatchedWithUser;
     }
 
