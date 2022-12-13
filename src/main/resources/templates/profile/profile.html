@@ -56,7 +56,7 @@
         <div>
             Mature Language is Ok?
             <label class="switch">
-                <input type="checkbox">
+                <input id="mature-language" type="checkbox">
                 <span class="slider"></span>
             </label>
         </div><br>
@@ -71,11 +71,12 @@
         </div>
         <label for="gamertag">Enter your gamertag:</label>
         <input type="text" id="gamertag" name="gamertag"><br><br>
-        <label for="bio">What kind of people you want in your squad?</label><br>
-        <textarea type="text" id="bio" name="bio"></textarea><br>
-        <input type="submit" value="Submit">
+        <label for="bio">Tell us a little about you:</label><br>
+        <textarea type="text" id="bio" name="bio" cols="40" rows="5"></textarea><br>
+        <button id="edit-preferences-submit-button">Submit</button>
     </form>
 </div>
 <div th:replace="partials :: scripts"></div>
+<script th:src="@{/js/preferences.js}"></script>
 </body>
 </html>

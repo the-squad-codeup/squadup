@@ -13,6 +13,9 @@ public class Profile {
     private Long id;
 
     @Column(nullable = false)
+    private String bio;
+
+    @Column(nullable = false)
     private String location;
 
     @Column(nullable = false)
@@ -65,6 +68,14 @@ public class Profile {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
     }
 
     public String getLocation() {
@@ -142,7 +153,8 @@ public class Profile {
     public Profile() {
     }
 
-    public Profile(String location, String language, String mature_language, String game_age_rating) {
+    public Profile(String bio, String location, String language, String mature_language, String game_age_rating) {
+        this.bio = bio;
         this.location = location;
         this.language = language;
         this.mature_language = mature_language;
