@@ -1,10 +1,7 @@
 package pro.squadup.services;
 
 import org.springframework.stereotype.Service;
-import pro.squadup.models.Game;
-import pro.squadup.models.Genre;
-import pro.squadup.models.Recruit;
-import pro.squadup.models.User;
+import pro.squadup.models.*;
 import pro.squadup.repositories.ComradeRepository;
 import pro.squadup.repositories.GenreRepository;
 import pro.squadup.repositories.RecruitRepository;
@@ -48,6 +45,7 @@ public class RecruitMatchingService {
                     user.getId() != otherUser.getId() &&
                     !areComrades(user, otherUser) &&
                     !alreadyRecruited(user, otherUser) &&
+                    containsMatchingPlatform(user, otherUser) &&
                     (
                             containsMatchingGames(user, otherUser) ||
                             containsMatchingGenres(user, otherUser)
@@ -64,6 +62,17 @@ public class RecruitMatchingService {
 
     private boolean alreadyRecruited(User user1, User user2) {
         return comradeDao.existsByUserOneAndUserTwo(user1, user2);
+    }
+
+    private boolean containsMatchingPlatform(User user1, User user2) {
+        Set<Platform> user1Platforms = user1.getProfile().getPlatforms();
+        Set<Platform> user2Platforms = user2.getProfile().getPlatforms();
+        for(Platform platform1 : user1Platforms) {
+            if(user2Platforms.contains(platform1)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private boolean containsMatchingGames(User user1, User user2) {
