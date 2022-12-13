@@ -33,17 +33,12 @@ public class User {
     @JsonIgnore
     private Set<Recruit> recruitsMatchedWithUser;
 
-    @ManyToMany
-    @JoinTable(
-            name = "comrades",
-            joinColumns = {@JoinColumn(name = "user_id")},
-            inverseJoinColumns = {@JoinColumn(name = "comrade_id")}
-    )
-    private Set<User> userComrades;
+    @OneToMany(mappedBy = "userOne")
+    private Set<Recruit> comrades;
 
-    @ManyToMany(mappedBy = "userComrades")
+    @OneToMany(mappedBy = "userTwo")
     @JsonIgnore
-    private Set<User> comradesOfUser;
+    private Set<Recruit> comradesOfUser;
 
     public Long getId() {
         return id;
@@ -101,19 +96,19 @@ public class User {
         this.recruitsMatchedWithUser = recruitsMatchedWithUser;
     }
 
-    public Set<User> getUserComrades() {
-        return userComrades;
+    public Set<Recruit> getComrades() {
+        return comrades;
     }
 
-    public void setUserComrades(Set<User> userComrades) {
-        this.userComrades = userComrades;
+    public void setComrades(Set<Recruit> comrades) {
+        this.comrades = comrades;
     }
 
-    public Set<User> getComradesOfUser() {
+    public Set<Recruit> getComradesOfUser() {
         return comradesOfUser;
     }
 
-    public void setComradesOfUser(Set<User> comradesOfUser) {
+    public void setComradesOfUser(Set<Recruit> comradesOfUser) {
         this.comradesOfUser = comradesOfUser;
     }
 

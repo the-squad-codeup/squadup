@@ -5,21 +5,17 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Date;
-import java.util.Set;
 
 @Entity
-@Table(name = "recruits")
-public class Recruit {
+@Table(name = "comrades")
+public class Comrade {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
-    private Timestamp dateRecruited;
-
-    @Column(nullable = false)
-    private boolean isRejected;
+    private Timestamp dateComraded;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -27,7 +23,7 @@ public class Recruit {
     private User userOne;
 
     @ManyToOne
-    @JoinColumn(name = "recruit_id")
+    @JoinColumn(name = "comrade_id")
     private User userTwo;
 
     public Long getId() {
@@ -38,20 +34,12 @@ public class Recruit {
         this.id = id;
     }
 
-    public Timestamp getDateRecruited() {
-        return dateRecruited;
+    public Timestamp getDateComraded() {
+        return dateComraded;
     }
 
-    public void setDateRecruited(Timestamp dateRecruited) {
-        this.dateRecruited = dateRecruited;
-    }
-
-    public boolean isRejected() {
-        return isRejected;
-    }
-
-    public void setRejected(boolean rejected) {
-        isRejected = rejected;
+    public void setDateComraded(Timestamp dateComraded) {
+        this.dateComraded = dateComraded;
     }
 
     public User getUserOne() {
@@ -70,11 +58,10 @@ public class Recruit {
         this.userTwo = userTwo;
     }
 
-    public Recruit() {
+    public Comrade() {
     }
 
-    public Recruit(Timestamp dateRecruited, boolean isRejected) {
-        this.dateRecruited = dateRecruited;
-        this.isRejected = isRejected;
+    public Comrade(Timestamp dateComraded) {
+        this.dateComraded = dateComraded;
     }
 }
