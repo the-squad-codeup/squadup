@@ -1,6 +1,7 @@
 package pro.squadup.controllers;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +14,7 @@ import pro.squadup.repositories.LanguageRepository;
 import pro.squadup.repositories.PlatformRepository;
 import pro.squadup.repositories.PreferencesRepository;
 import pro.squadup.repositories.UserRepository;
+import pro.squadup.services.UrlService;
 import pro.squadup.utils.Utils;
 
 @Controller
@@ -22,6 +24,9 @@ public class ProfileController {
     private PreferencesRepository preferencesDao;
     private PlatformRepository platformDao;
     private LanguageRepository languageDao;
+
+    @Autowired
+    private UrlService url;
 
     public ProfileController(UserRepository userDao, PreferencesRepository preferencesDao, PlatformRepository platformDao, LanguageRepository languageDao) {
         this.userDao = userDao;
@@ -33,7 +38,7 @@ public class ProfileController {
     @GetMapping("/profile/preferences")
     public String preferencesPage(Model model){
         User user = userDao.findById(Utils.currentUserId()).get();
-        if(user.getPreferences().getId() != null) {
+        if(user.getPreferences() != null) {
             model.addAttribute("preferences", user.getPreferences());
         } else {
             Preferences preferences = new Preferences();
@@ -42,6 +47,7 @@ public class ProfileController {
             userDao.save(user);
             model.addAttribute("preferences", preferences);
         }
+        model.addAttribute("url", url);
         model.addAttribute("languages", languageDao.findAll());
         model.addAttribute("platforms", platformDao.findAll());
         return "profile/preferences";
@@ -65,7 +71,7 @@ public class ProfileController {
         Preferences userPreferences = currentUser.getPreferences();
         userPreferences.setBio(updatedPreferences.getBio());
         userPreferences.setLocation(updatedPreferences.getLocation());
-        userPreferences.setLanguage(updatedPreferences.getLanguage());
+        userPreferences.setLanguages(updatedPreferences.getLanguages());
         userPreferences.setMature_language(updatedPreferences.isMature_language());
         userPreferences.setGame_age_rating(updatedPreferences.getGame_age_rating());
         preferencesDao.save(userPreferences);
