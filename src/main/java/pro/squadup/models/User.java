@@ -23,8 +23,8 @@ public class User {
     private String password;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "profile_id")
-    private Profile profile;
+    @JoinColumn(name = "preferences_id")
+    private Preferences preferences;
 
     @OneToMany(mappedBy = "userOne")
     private Set<Recruit> recruits;
@@ -72,12 +72,12 @@ public class User {
         this.password = password;
     }
 
-    public Profile getProfile() {
-        return profile;
+    public Preferences getPreferences() {
+        return preferences;
     }
 
-    public void setProfile(Profile profile) {
-        this.profile = profile;
+    public void setPreferences(Preferences preferences) {
+        this.preferences = preferences;
     }
 
     public Set<Recruit> getRecruits() {

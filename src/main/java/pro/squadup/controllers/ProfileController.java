@@ -7,46 +7,44 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import pro.squadup.models.Profile;
+import pro.squadup.models.Preferences;
 import pro.squadup.models.User;
 import pro.squadup.repositories.LanguageRepository;
 import pro.squadup.repositories.PlatformRepository;
-import pro.squadup.repositories.ProfilesRepository;
+import pro.squadup.repositories.PreferencesRepository;
 import pro.squadup.repositories.UserRepository;
 import pro.squadup.utils.Utils;
 
-import java.util.prefs.Preferences;
-
 @Controller
-public class ProfilesController {
+public class ProfileController {
 
     private UserRepository userDao;
-    private ProfilesRepository profileDao;
+    private PreferencesRepository preferencesDao;
     private PlatformRepository platformDao;
     private LanguageRepository languageDao;
 
-    public ProfilesController(UserRepository userDao, ProfilesRepository profileDao, PlatformRepository platformDao, LanguageRepository languageDao) {
+    public ProfileController(UserRepository userDao, PreferencesRepository preferencesDao, PlatformRepository platformDao, LanguageRepository languageDao) {
         this.userDao = userDao;
-        this.profileDao = profileDao;
+        this.preferencesDao = preferencesDao;
         this.platformDao = platformDao;
         this.languageDao = languageDao;
     }
 
-    @GetMapping("/profile")
-    public String profilePage(Model model){
+    @GetMapping("/profile/preferences")
+    public String preferencesPage(Model model){
         User user = userDao.findById(Utils.currentUserId()).get();
-        if(user.getProfile().getId() != null) {
-            model.addAttribute("preferences", user.getProfile());
+        if(user.getPreferences().getId() != null) {
+            model.addAttribute("preferences", user.getPreferences());
         } else {
-            Profile profile = new Profile();
-            profileDao.save(profile);
-            user.setProfile(profile);
+            Preferences preferences = new Preferences();
+            preferencesDao.save(preferences);
+            user.setPreferences(preferences);
             userDao.save(user);
-            model.addAttribute("preferences", profile);
+            model.addAttribute("preferences", preferences);
         }
         model.addAttribute("languages", languageDao.findAll());
         model.addAttribute("platforms", platformDao.findAll());
-        return "profile/profile";
+        return "profile/preferences";
     }
 
     @GetMapping("/build-profile")
@@ -59,18 +57,18 @@ public class ProfilesController {
         return "profile/games";
     }
 
-    @PostMapping("/profile/{id}/edit")
-    public String editProfile(@PathVariable Long id, @RequestBody Profile updatedPreferences) {
+    @PostMapping("/profile/preferences/{id}/edit")
+    public String editProfilePreferences(@PathVariable Long id, @RequestBody Preferences updatedPreferences) {
         User currentUser = userDao.findById(Utils.currentUserId()).get();
         System.out.println("Inside editProfile method");
         System.out.println(updatedPreferences.toString());
-        Profile userPreferences = currentUser.getProfile();
+        Preferences userPreferences = currentUser.getPreferences();
         userPreferences.setBio(updatedPreferences.getBio());
         userPreferences.setLocation(updatedPreferences.getLocation());
         userPreferences.setLanguage(updatedPreferences.getLanguage());
         userPreferences.setMature_language(updatedPreferences.isMature_language());
         userPreferences.setGame_age_rating(updatedPreferences.getGame_age_rating());
-        profileDao.save(userPreferences);
+        preferencesDao.save(userPreferences);
         return "redirect:/recruits";
     }
 

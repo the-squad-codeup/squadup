@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-    <div th:replace="partials :: headFragment('Profile Page')"></div>
+    <div th:replace="partials :: headFragment('Preferences Page')"></div>
 
 
 </head>
@@ -10,7 +10,7 @@
 <nav th:replace="partials :: siteBar"></nav>
 <title>Profile Preferences</title>
 
-<h1 class="text-center pt-5 my-5 outlined">Let's fill out your profile</h1>
+<h1 class="text-center pt-5 my-5 outlined">Let's fill out your preferences</h1>
 <div hidden th:text="${preferences.id}" id="hidden-preferences-id"></div>
 <div class="container bg-dark rounded-3 p-5">
 <!--    <form class="text-light" th:object="${preferences}">-->

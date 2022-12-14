@@ -5,8 +5,8 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "profiles")
-public class Profile {
+@Table(name = "preferences")
+public class Preferences {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,37 +30,37 @@ public class Profile {
     @Column(nullable = false)
     private String game_age_rating;
 
-    @OneToOne(mappedBy = "profile")
+    @OneToOne(mappedBy = "preferences")
     private User user;
 
     @ManyToMany
     @JoinTable(
-            name = "profile_platform",
-            joinColumns = {@JoinColumn(name = "profile_id")},
+            name = "preferences_platform",
+            joinColumns = {@JoinColumn(name = "preferences_id")},
             inverseJoinColumns = {@JoinColumn(name = "platform_id")}
     )
     private Set<Platform> platforms;
 
     @ManyToMany
     @JoinTable(
-            name = "profile_game",
-            joinColumns = {@JoinColumn(name = "profile_id")},
+            name = "preferences_game",
+            joinColumns = {@JoinColumn(name = "preferences_id")},
             inverseJoinColumns = {@JoinColumn(name = "game_id")}
     )
     private Set<Game> games;
 
     @ManyToMany
     @JoinTable(
-            name = "profile_genre",
-            joinColumns = {@JoinColumn(name = "profile_id")},
+            name = "preferences_genre",
+            joinColumns = {@JoinColumn(name = "preferences_id")},
             inverseJoinColumns = {@JoinColumn(name = "genre_id")}
     )
     private Set<Genre> genres;
 
     @ManyToMany
     @JoinTable(
-            name = "profile_language",
-            joinColumns = {@JoinColumn(name = "profile_id")},
+            name = "preferences_language",
+            joinColumns = {@JoinColumn(name = "preferences_id")},
             inverseJoinColumns = {@JoinColumn(name = "language_id")}
     )
     private Set<Language> languages;
@@ -161,7 +161,7 @@ public class Profile {
         this.languages = languages;
     }
 
-    public Profile() {
+    public Preferences() {
         this.bio = "";
         this.location = "";
         this.language = "";
@@ -169,7 +169,7 @@ public class Profile {
         this.game_age_rating = "";
     }
 
-    public Profile(String bio, String gamertag, String location, String language, boolean mature_language, String game_age_rating) {
+    public Preferences(String bio, String gamertag, String location, String language, boolean mature_language, String game_age_rating) {
         this.bio = bio;
         this.gamertag = gamertag;
         this.location = location;
@@ -178,7 +178,7 @@ public class Profile {
         this.game_age_rating = game_age_rating;
     }
 
-    public Profile(Long id, String location, String language, boolean mature_language, String game_age_rating) {
+    public Preferences(Long id, String location, String language, boolean mature_language, String game_age_rating) {
         this.id = id;
         this.location = location;
         this.language = language;

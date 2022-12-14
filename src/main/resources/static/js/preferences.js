@@ -40,7 +40,7 @@ $(function() {
                 }
                 console.log(preferencesObject);
                 console.log(postOptions);
-                let results = await fetch(`/profile/${$("#hidden-preferences-id").text()}/edit`, postOptions).then(res => res);
+                let results = await fetch(`/profile/preferences/${$("#hidden-preferences-id").text()}/edit`, postOptions).then(res => res);
 
             }
         }
@@ -65,7 +65,7 @@ $(function() {
             let languages = await Fetch.Get.all("language").then(res => res);
             let $languages = $("#language");
             for(let language in languages) {
-
+                // check if any
             }
         }
     }

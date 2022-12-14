@@ -65,8 +65,8 @@ public class RecruitMatchingService {
     }
 
     private boolean containsMatchingPlatform(User user1, User user2) {
-        Set<Platform> user1Platforms = user1.getProfile().getPlatforms();
-        Set<Platform> user2Platforms = user2.getProfile().getPlatforms();
+        Set<Platform> user1Platforms = user1.getPreferences().getPlatforms();
+        Set<Platform> user2Platforms = user2.getPreferences().getPlatforms();
         for(Platform platform1 : user1Platforms) {
             if(user2Platforms.contains(platform1)) {
                 return true;
@@ -76,8 +76,8 @@ public class RecruitMatchingService {
     }
 
     private boolean containsMatchingGames(User user1, User user2) {
-        Set<Game> user1Games = user1.getProfile().getGames();
-        Set<Game> user2Games = user2.getProfile().getGames();
+        Set<Game> user1Games = user1.getPreferences().getGames();
+        Set<Game> user2Games = user2.getPreferences().getGames();
         for(Game game1 : user1Games) {
             if(user2Games.contains(game1)) {
                 return true;
@@ -101,8 +101,8 @@ public class RecruitMatchingService {
 
     private Set<Genre> extractUserGenres(User user) {
         Set<Genre> allGenres = new HashSet<>();
-        allGenres.addAll(user.getProfile().getGenres());
-        for(Game game : user.getProfile().getGames()) {
+        allGenres.addAll(user.getPreferences().getGenres());
+        for(Game game : user.getPreferences().getGames()) {
             for(Genre genre : game.getGenres()) {
                 if(!allGenres.contains(genre)) {
                     allGenres.add(genreDao.findById(genre.getId()).get());
