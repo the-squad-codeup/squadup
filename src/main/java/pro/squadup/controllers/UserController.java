@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import pro.squadup.models.User;
 import pro.squadup.repositories.UserRepository;
 import pro.squadup.services.UrlService;
+import pro.squadup.utils.Utils;
 
 @Controller
 public class UserController {

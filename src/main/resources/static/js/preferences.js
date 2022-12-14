@@ -60,14 +60,29 @@ $(function() {
             this.platformSelectElement(user);
         },
         async locationSelectElement(user) {
+            console.log("inside locationSelectElement. User in here: ");
+            console.log(user);
+            // user = await user.then(res => res);
             let locations = await Fetch.Get.all("location").then(res => res);
             console.log("All locations get results:");
             console.log(locations);
             let $locations = $("#locations");
             $locations.empty();
-            for(let location in locations) {
+            for(let location of locations) {
+                console.log("inside the for-in loop to print out select options. Single location object: ");
+                console.log(location);
+                console.log(typeof location);
                 //check if location matches user location
                 // append option element with "selected" if match
+                if(user.preferences.location != null && user.preferences.location.timezone === location.timezone) {
+                    $locations.append(`
+                        <option value="${location.timezone}">${location.timezone}</option>
+                    `);
+                } else {
+                    $locations.append(`
+                        <option value="${location.timezone}" selected>${location.timezone}</option>
+                    `);
+                }
             }
         },
         async languageSelectElement(user) {
@@ -75,9 +90,18 @@ $(function() {
             console.log("All languages get results:");
             console.log(languages);
             let $languages = $("#languages");
-            for(let language in languages) {
+            for(let language of languages) {
                 // check if language matches user language
                 // append option element with "selected" if match
+                if(user.preferences.language != null && user.preferences.language.language === language.language) {
+                    $languages.append(`
+                        <option value="${language.language}">${language.language}</option>
+                    `);
+                } else {
+                    $languages.append(`
+                        <option value="${language.language}" selected>${language.language}</option>
+                    `);
+                }
             }
         },
         async gameRatingSelectElement(user) {
@@ -85,7 +109,7 @@ $(function() {
             console.log("All ratings get results:");
             console.log(gameRatings);
             let $gameRatings = $("#game-ratings");
-            for(let gameRating in gameRatings) {
+            for(let gameRating of gameRatings) {
                 //check if gameRating matches user gameRating
                 // append option element with "selected" if match
             }
@@ -95,7 +119,7 @@ $(function() {
             console.log("All platforms get results:");
             console.log(platforms);
             let $platforms = $("#platforms");
-            for(let platform in platforms) {
+            for(let platform of platforms) {
                 //check if platform matches user platform
                 //append option element with "selected" if match
             }
