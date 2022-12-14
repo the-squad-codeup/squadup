@@ -15,7 +15,7 @@ public class Location {
     public String timezone;
 
     @OneToMany(mappedBy = "location")
-    private Set<Profile> profiles;
+    private Set<Preferences> preferences;
 
     public Long getId() {
         return id;
@@ -33,26 +33,26 @@ public class Location {
         this.timezone = timezone;
     }
 
-    public Set<Profile> getProfiles() {
-        return profiles;
+    public Set<Preferences> getPreferencess() {
+        return preferences;
     }
 
-    public void setProfiles(Set<Profile> profiles) {
-        this.profiles = profiles;
+    public void setPreferencess(Set<Preferences> preferences) {
+        this.preferences = preferences;
     }
 
     public Location() {
     }
 
-    public Location(String timezone, Set<Profile> profiles) {
+    public Location(String timezone, Set<Preferences> preferences) {
         this.timezone = timezone;
-        this.profiles = profiles;
+        this.preferences = preferences;
     }
 
-    public Location(Long id, String timezone, Set<Profile> profiles) {
+    public Location(Long id, String timezone, Set<Preferences> preferences) {
         this.id = id;
         this.timezone = timezone;
-        this.profiles = profiles;
+        this.preferences = preferences;
     }
 
 }
