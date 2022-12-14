@@ -9,47 +9,53 @@ git <!DOCTYPE html>
 <body>
 <div th:replace="partials :: baseUrlFragment"></div>
 <nav th:replace="partials :: siteBar"></nav>
-<title>Profile Preferences</title>
+<div class="page-wrapper">
 
-<h1 class="text-center pt-5 my-5 outlined">Let's fill out your preferences</h1>
-<div hidden th:text="${preferences.id}" id="hidden-preferences-id"></div>
-<div class="container bg-dark rounded-3 p-5">
-        <div class="mb-3">
-            <p>
-                <img th:src="@{/US-Time-Zone-Map.jpeg}">
-            </p>
-            <label for="locations">Pick your time Zone</label>
-            <select id="locations" name="locations">
-            </select>
-        </div>
-        <div class="mb-3">
-            <label for="languages">Pick your languages</label>
-            <select id="languages" name="languages" multiple>
-            </select>
-        </div>
-        <div class="mb-3">
-            <label for="game-ratings">Select game rating</label>
-            <select id="game-ratings" name="game-ratings">
-            </select>
-        </div>
-        <div>
-            Mature Language is Ok?
-            <label class="switch">
-                <input id="mature-language" type="checkbox">
-                <span class="slider"></span>
-            </label>
-        </div><br>
-        <div class="mb-3">
-            <label for="platforms">Select game platform</label>
-            <select id="platforms" name="platforms" multiple>
-            </select>
-        </div>
-        <label for="gamertag">Enter your gamertag:</label>
-        <input type="text" id="gamertag" name="gamertag"><br><br>
-        <label for="bio">Tell us a little about you:</label><br>
-        <textarea type="text" id="bio" name="bio" cols="40" rows="5"></textarea><br>
-        <button id="edit-preferences-submit-button">Submit</button>
-</div>
+
+
+
+    <title>Profile Preferences</title>
+
+    <h1 class="text-center pt-5 my-5 outlined">Let's fill out your preferences</h1>
+    <div hidden th:text="${preferences.id}" id="hidden-preferences-id"></div>
+    <div class="container bg-dark rounded-3 p-5">
+            <div class="mb-3">
+                <p>
+                    <img th:src="@{/US-Time-Zone-Map.jpeg}">
+                </p>
+                <label for="locations">Pick your time Zone</label>
+                <select id="locations" name="locations">
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="languages">Pick your languages</label>
+                <select id="languages" name="languages" multiple>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="game-ratings">Select game rating</label>
+                <select id="game-ratings" name="game-ratings">
+                </select>
+            </div>
+            <div>
+                Mature Language is Ok?
+                <label class="switch">
+                    <input id="mature-language" type="checkbox">
+                    <span class="slider"></span>
+                </label>
+            </div><br>
+            <div class="mb-3">
+                <label for="platforms">Select game platform</label>
+                <select id="platforms" name="platforms" multiple>
+                </select>
+            </div>
+            <label for="gamertag">Enter your gamertag:</label>
+            <input type="text" id="gamertag" name="gamertag"><br><br>
+            <label for="bio">Tell us a little about you:</label><br>
+            <textarea type="text" id="bio" name="bio" cols="40" rows="5"></textarea><br>
+            <button id="edit-preferences-submit-button">Submit</button>
+    </div>
+</div><!--Page Wrapper-->
 
 <nav th:replace="partials :: footer"></nav>
 <div th:replace="partials :: scripts"></div>
