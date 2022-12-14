@@ -1,4 +1,7 @@
-/* bootstrap.min.css */
-.btn-success {
-    border-color: #5CFD42;
+:root {
+    --bs-gamergreen: #5CFD42;
+}
+
+.card-body {
+    border-color: var(--bs-gamergreen);
 }

@@ -1,59 +1,106 @@
+:root {
+    --bs-gamergreen: #5CFD42;
+    --bs-gamerpurp: rgb(63, 5, 79);
+}
+
 body {
     font-family: Chakra Petch, sans-serif;
 }
 
+hr {
+    border: 5px solid purple;
+    border-bottom-style: ridge;
+}
+
+.text-success {
+    color: var(--bs-gamergreen) !important;
+
+}
+
+
+.card-squad {
+    margin-top: 10%;
+}
+
+.card {
+    border: ridge 12px;
+    border-color: var(--bs-gamergreen) !important;
+}
+
+.card-title, .card-text {
+    text-align: center;
+    color: antiquewhite;
+}
+
+.card-pro {
+    border: ridge 12px;
+    border-color: var(--bs-gamerpurp) !important;
+    margin-top: 5%;
+    margin-bottom: 30%;
+}
+
+/*.card-order{*/
+/*    display: flex;*/
+/*    flex-direction: row;*/
+/*    flex-wrap: wrap;*/
+/*    justify-content: center;*/
+/*    !*height: auto;*!*/
+/*    !*width: auto;*!*/
+/*}*/
+
+
 /* The switch - the box around the slider */
-.switch {
-    position: relative;
-    display: inline-block;
-    width: 60px;
-    height: 25px;
-}
+/*.switch {*/
+/*    position: relative;*/
+/*    display: inline-block;*/
+/*    width: 60px;*/
+/*    height: 25px;*/
+/*}*/
 
-/* Hide default HTML checkbox */
-.switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
+/*!* Hide default HTML checkbox *!*/
+/*.switch input {*/
+/*    opacity: 0;*/
+/*    width: 0;*/
+/*    height: 0;*/
+/*}*/
 
-/* The slider */
-.slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    -webkit-transition: .4s;
-    transition: .4s;
-}
+/*!* The slider *!*/
+/*.slider {*/
+/*    position: absolute;*/
+/*    cursor: pointer;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    right: 0;*/
+/*    bottom: 0;*/
+/*    background-color: #ccc;*/
+/*    -webkit-transition: .4s;*/
+/*    transition: .4s;*/
+/*}*/
 
-.slider:before {
-    position: absolute;
-    content: "";
-    height: 17px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
-    background-color: white;
-    -webkit-transition: .4s;
-    transition: .4s;
-}
+/*.slider:before {*/
+/*    position: absolute;*/
+/*    content: "";*/
+/*    height: 17px;*/
+/*    width: 26px;*/
+/*    left: 4px;*/
+/*    bottom: 4px;*/
+/*    background-color: white;*/
+/*    -webkit-transition: .4s;*/
+/*    transition: .4s;*/
+/*}*/
 
-input:checked + .slider {
-    background-color: #41f307;
-}
+/*input:checked + .slider {*/
+/*    background-color: #41f307;*/
+/*}*/
 
-input:focus + .slider {
-    box-shadow: 0 0 1px #2196F3;
-}
+/*input:focus + .slider {*/
+/*    box-shadow: 0 0 1px #2196F3;*/
+/*}*/
 
-input:checked + .slider:before {
-    -webkit-transform: translateX(26px);
-    -ms-transform: translateX(26px);
-    transform: translateX(26px);
-}
+/*input:checked + .slider:before {*/
+/*    -webkit-transform: translateX(26px);*/
+/*    -ms-transform: translateX(26px);*/
+/*    transform: translateX(26px);*/
+/*}*/
 
 
