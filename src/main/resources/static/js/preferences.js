@@ -5,6 +5,24 @@ $(function() {
             Events.initialize();
             Print.form();
         },
+        arrayIncludesLanguage(array, language) {
+            for(let e of array) {
+                console.log(e.language);
+                console.log(language.language);
+                if(e.language === language.language) {
+                    return true;
+                }
+            }
+            return false;
+        },
+        arrayIncludesPlatform(array, platform) {
+            for(let e of array) {
+                if(e.type === platform.type) {
+                    return true;
+                }
+            }
+            return false;
+        },
         packageLanguageOptions($div) {
             let options = [];
             for(let child of $div.children()) {
@@ -75,11 +93,16 @@ $(function() {
     const Print = {
         async form() {
             let user = await Fetch.Get.currentUser().then(res => res);
-            console.log(user);
             await this.locationSelectElement(user);
             await this.languageSelectElement(user);
             await this.gameRatingSelectElement(user);
             await this.platformSelectElement(user);
+            await this.matureLanguageCheckboxElement(user);
+        },
+        async matureLanguageCheckboxElement(user){
+            if(user.preferences.mature_language) {
+                $("#mature-language").attr("checked", "checked");
+            }
         },
         async locationSelectElement(user) {
             // user = await user.then(res => res);
@@ -91,11 +114,11 @@ $(function() {
                 // append option element with "selected" if match
                 if(user.preferences.location != null && user.preferences.location.timezone === location.timezone) {
                     $locations.append(`
-                        <option value="${location.timezone}">${location.timezone}</option>
+                        <option value="${location.timezone}" selected>${location.timezone}</option>
                     `);
                 } else {
                     $locations.append(`
-                        <option value="${location.timezone}" selected>${location.timezone}</option>
+                        <option value="${location.timezone}">${location.timezone}</option>
                     `);
                 }
             }
@@ -106,13 +129,13 @@ $(function() {
             for(let language of languages) {
                 // check if language matches user language
                 // append option element with "selected" if match
-                if(user.preferences.language != null && user.preferences.languages.includes(language)) {
+                if(user.preferences.languages != null && MyPreferences.arrayIncludesLanguage(user.preferences.languages, language)) {
                     $languages.append(`
-                        <option value="${language.language}">${language.language}</option>
+                        <option value="${language.language}" selected>${language.language}</option>
                     `);
                 } else {
                     $languages.append(`
-                        <option value="${language.language}" selected>${language.language}</option>
+                        <option value="${language.language}">${language.language}</option>
                     `);
                 }
             }
@@ -125,11 +148,11 @@ $(function() {
                 // append option element with "selected" if match
                 if(user.preferences.game_age_rating != null && user.preferences.game_age_rating.rating === gameRating.rating) {
                     $gameRatings.append(`
-                        <option value="${gameRating.rating}">${gameRating.rating}</option>
+                        <option value="${gameRating.rating}" selected>${gameRating.rating}</option>
                     `);
                 } else {
                     $gameRatings.append(`
-                        <option value="${gameRating.rating}" selected>${gameRating.rating}</option>
+                        <option value="${gameRating.rating}">${gameRating.rating}</option>
                     `);
                 }
             }
@@ -140,13 +163,13 @@ $(function() {
             for(let platform of platforms) {
                 //check if platform matches user platform
                 //append option element with "selected" if match
-                if(user.preferences.platforms != null && user.preferences.platforms.includes(platform)) {
+                if(user.preferences.platforms != null && MyPreferences.arrayIncludesPlatform(user.preferences.platforms, platform)) {
                     $platforms.append(`
-                        <option value="${platform.type}">${platform.type}</option>
+                        <option value="${platform.type}" selected>${platform.type}</option>
                     `);
                 } else {
                     $platforms.append(`
-                        <option value="${platform.type}" selected>${platform.type}</option>
+                        <option value="${platform.type}">${platform.type}</option>
                     `);
                 }
             }
@@ -158,12 +181,6 @@ $(function() {
             $(document).on("click", "#edit-preferences-submit-button", async function() {
                 Fetch.Post.updatedPreferences(MyPreferences.packagePreferencesObject());
             });
-        }
-    }
-
-    const Utils = {
-        containsString(array, string) {
-
         }
     }
 
