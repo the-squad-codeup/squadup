@@ -19,6 +19,7 @@ public class LocationController {
 
     @GetMapping("/location/all")
     public List<Location> getAllLocations(){
+        System.out.println("Inside get all Locations");
         return locationDao.findAll();
     }
 

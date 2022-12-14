@@ -1,5 +1,7 @@
 package pro.squadup.controllers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -51,7 +53,11 @@ public class UserController {
     }
 
     @GetMapping("/user/get")
-    public @ResponseBody User getCurrentUser() {
-        return userDao.findById(Utils.currentUserId()).get();
+    public @ResponseBody User getCurrentUser() throws JsonProcessingException {
+        System.out.println("Inside getCurrentUser");
+        User currentUser = userDao.findById(Utils.currentUserId()).get();
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.writeValueAsString(currentUser);
+        return currentUser;
     }
 }
