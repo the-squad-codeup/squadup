@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <div th:replace="partials :: headFragment('Preferences Page')"></div>
+
+
+</head>
+<body>
+<nav th:replace="partials :: siteBar"></nav>
+<title>Profile Preferences</title>
+
+<h1 class="text-center pt-5 my-5 outlined">Let's fill out your preferences</h1>
+<div hidden th:text="${preferences.id}" id="hidden-preferences-id"></div>
+<div class="container bg-dark rounded-3 p-5">
+<!--    <form class="text-light" th:object="${preferences}">-->
+        <div class="mb-3">
+            <p>
+                <img th:src="@{/US-Time-Zone-Map.jpeg}">
+            </p>
+            <label for="location">Pick your time Zone</label>
+            <select id="location" name="location">
+                <option th:value="eastern">Eastern Time Zone</option>
+                <option th:value="central">Central Time Zone</option>
+                <option th:value="mountain">Mountain Time Zone</option>
+                <option th:value="pacific">Pacific Time Zone</option>
+                <option th:value="alaska">Alaska Time Zone</option>
+                <option th:value="hawaii">Hawaii-Aleutian Time Zone</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="language">Pick your language</label>
+            <select id="language" name="language">
+                <option th:each="language : ${languages}" th:value="${language.language}" th:text="${language.language}" th:selected="${language.language==preferences.language}"></option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="game-rating">Select game rating</label>
+            <select id="game-rating" name="game-rating">
+                <option th:value="everyone">Everyone</option>
+                <option th:value="ten-and-up">Everyone 10 & up</option>
+                <option th:value="teen">Teen (13 & up)</option>
+                <option th:value="mature">Mature (17 & up)</option>
+                <option th:value="adults">Adults Only (18 & up)</option>
+                <option th:value="rating-pending">Rating Pending</option>
+                <option th:value="rating-pending-MA">Rating Pending Likely Mature</option>
+            </select>
+        </div>
+        <div>
+            Mature Language is Ok?
+            <label class="switch">
+                <input id="mature-language" type="checkbox">
+                <span class="slider"></span>
+            </label>
+        </div><br>
+        <div class="mb-3">
+            <label for="platform">Select game platform</label>
+            <select id="platform" name="platform" multiple>
+                <option th:each="platform : ${platforms}" th:value="${platform.type}" th:text="${platform.type}" th:selected="${preferences.platforms.contains(platform.type)}">
+            </select>
+        </div>
+        <label for="gamertag">Enter your gamertag:</label>
+        <input type="text" id="gamertag" name="gamertag"><br><br>
+        <label for="bio">Tell us a little about you:</label><br>
+        <textarea type="text" id="bio" name="bio" cols="40" rows="5"></textarea><br>
+        <button id="edit-preferences-submit-button">Submit</button>
+<!--    </form>-->
+</div>
+
+<nav th:replace="partials :: footer"></nav>
+<div th:replace="partials :: scripts"></div>
+<script th:src="@{/js/preferences.js}"></script>
+</body>
+</html>
