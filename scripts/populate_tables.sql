@@ -1,6 +1,6 @@
 USE squadup_db;
 
-TRUNCATE locations;
+# TRUNCATE locations;
 INSERT INTO locations (timezone)
     VALUES ('Eastern Time Zone'),
            ('Central Time Zone'),
@@ -9,9 +9,10 @@ INSERT INTO locations (timezone)
            ('Alaska Time Zone'),
            ('Hawaii-Aleutian Time Zone');
 
-TRUNCATE languages;
+# TRUNCATE languages;
 INSERT INTO languages (language)
     VALUES ('English'),
+           ('Spanish'),
            ('Chinese'),
            ('Japanese'),
            ('Korean'),
@@ -20,7 +21,7 @@ INSERT INTO languages (language)
            ('Italian'),
            ('Portuguese');
 
-TRUNCATE ratings;
+# TRUNCATE ratings;
 INSERT INTO ratings (rating)
     VALUES ('Everyone'),
            ('Everyone 10 & up'),
@@ -30,7 +31,7 @@ INSERT INTO ratings (rating)
            ('Rating Pending'),
            ('Rating Pending Likely Mature');
 
-TRUNCATE platforms;
+# TRUNCATE platforms;
 INSERT INTO platforms (type)
     VALUES ('PC'),
            ('Playstation'),
