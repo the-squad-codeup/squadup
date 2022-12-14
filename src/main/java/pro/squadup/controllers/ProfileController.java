@@ -54,12 +54,14 @@ public class ProfileController {
     }
 
     @GetMapping("/build-profile")
-    public String buildProfilePage(){
+    public String buildProfilePage(Model model){
+        model.addAttribute("url", url);
         return "profile/build-profile";
     }
 
     @GetMapping("/games")
-    public String gamesPage(){
+    public String gamesPage(Model model){
+        model.addAttribute("url", url);
         return "profile/games";
     }
 

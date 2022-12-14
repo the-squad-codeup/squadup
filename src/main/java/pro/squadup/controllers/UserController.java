@@ -1,5 +1,6 @@
 package pro.squadup.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,10 +10,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import pro.squadup.models.User;
 import pro.squadup.repositories.UserRepository;
-import pro.squadup.utils.Utils;
+import pro.squadup.services.UrlService;
 
 @Controller
 public class UserController {
+
+    @Autowired
+    private UrlService url;
 
 
     // Repositories and Services
@@ -29,6 +33,7 @@ public class UserController {
     @GetMapping("/signup")
     public String showSignupForm(Model model) {
         // Sending empty user to template
+        model.addAttribute("url", url);
         model.addAttribute("user", new User());
         return "user/signup";
     }
