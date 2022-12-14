@@ -50,6 +50,14 @@ public class ProfileController {
         this.ratingDao = ratingDao;
     }
 
+    @GetMapping("/profile")
+    public String myProfilePage(Model model) {
+        User user = userDao.findById(Utils.currentUserId()).get();
+        model.addAttribute("user", user);
+        model.addAttribute("url", url);
+        return "profile/myprofile";
+    }
+
     @GetMapping("/profile/preferences")
     public String preferencesPage(Model model){
         User user = userDao.findById(Utils.currentUserId()).get();
