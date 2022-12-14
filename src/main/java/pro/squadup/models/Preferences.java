@@ -18,8 +18,9 @@ public class Preferences {
     @Column(nullable = false)
     private String gamertag;
 
-    @Column(nullable = false)
-    private String location;
+    @ManyToOne
+    @JoinColumn(name = "location_id")
+    private Location location;
 
     @Column(nullable = false)
     private String language;
@@ -27,8 +28,9 @@ public class Preferences {
     @Column(nullable = false)
     private boolean mature_language;
 
-    @Column(nullable = false)
-    private String game_age_rating;
+    @ManyToOne
+    @JoinColumn(name = "rating_id")
+    private Rating game_age_rating;
 
     @OneToOne(mappedBy = "preferences")
     private User user;
@@ -89,11 +91,11 @@ public class Preferences {
         this.gamertag = gamertag;
     }
 
-    public String getLocation() {
+    public Location getLocation() {
         return location;
     }
 
-    public void setLocation(String location) {
+    public void setLocation(Location location) {
         this.location = location;
     }
 
@@ -113,11 +115,11 @@ public class Preferences {
         this.mature_language = mature_language;
     }
 
-    public String getGame_age_rating() {
+    public Rating getGame_age_rating() {
         return game_age_rating;
     }
 
-    public void setGame_age_rating(String game_age_rating) {
+    public void setGame_age_rating(Rating game_age_rating) {
         this.game_age_rating = game_age_rating;
     }
 
@@ -162,14 +164,14 @@ public class Preferences {
     }
 
     public Preferences() {
-        this.bio = "";
-        this.location = "";
-        this.language = "";
-        this.mature_language = false;
-        this.game_age_rating = "";
+//        this.bio = "";
+//        this.location = "";
+//        this.language = "";
+//        this.mature_language = false;
+//        this.game_age_rating = "";
     }
 
-    public Preferences(String bio, String gamertag, String location, String language, boolean mature_language, String game_age_rating) {
+    public Preferences(String bio, String gamertag, Location location, String language, boolean mature_language, Rating game_age_rating) {
         this.bio = bio;
         this.gamertag = gamertag;
         this.location = location;
@@ -178,7 +180,7 @@ public class Preferences {
         this.game_age_rating = game_age_rating;
     }
 
-    public Preferences(Long id, String location, String language, boolean mature_language, String game_age_rating) {
+    public Preferences(Long id, Location location, String language, boolean mature_language, Rating game_age_rating) {
         this.id = id;
         this.location = location;
         this.language = language;
