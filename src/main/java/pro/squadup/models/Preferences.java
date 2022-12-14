@@ -1,6 +1,8 @@
 package pro.squadup.models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -38,6 +40,7 @@ public class Preferences {
     private Rating game_age_rating;
 
     @OneToOne(mappedBy = "preferences")
+    @JsonIgnore
     private User user;
 
     @ManyToMany

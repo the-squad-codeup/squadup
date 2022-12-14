@@ -6,4 +6,5 @@ import pro.squadup.models.Location;
 
 @Repository
 public interface LocationRepository extends JpaRepository<Location, Long> {
+    Location findByTimezone(String timezone);
 }
