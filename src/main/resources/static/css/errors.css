@@ -1,6 +1,7 @@
 body{
     text-align: center;
-    padding-top: 50%;
+    text-justify: auto;
+    padding-top: 10em;
     color: chartreuse;
 }
 
