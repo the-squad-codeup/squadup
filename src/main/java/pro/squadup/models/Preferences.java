@@ -154,10 +154,11 @@ public class Preferences {
     }
 
     public Preferences() {
-//        this.bio = "";
+        this.bio = "";
+        this.gamertag = "";
 //        this.location = "";
 //        this.language = "";
-//        this.mature_language = false;
+        this.mature_language = false;
 //        this.game_age_rating = "";
     }
 
