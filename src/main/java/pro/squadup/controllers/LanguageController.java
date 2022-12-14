@@ -20,6 +20,7 @@ public class LanguageController {
 
     @GetMapping("/language/all")
     public List<Language> getAllLanguages(){
+        System.out.println("Inside get all Languages");
         return languageDao.findAll();
     }
 

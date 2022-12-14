@@ -18,6 +18,7 @@ public class RatingController {
 
     @GetMapping("/rating/all")
     public List<Rating> getAllRatings(){
+        System.out.println("Inside get all Ratings");
         return ratingDao.findAll();
     }
 

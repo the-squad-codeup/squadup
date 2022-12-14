@@ -17,7 +17,6 @@ public class Location {
     public String timezone;
 
     @OneToMany(mappedBy = "location")
-    @JsonIgnore
     private Set<Preferences> preferences;
 
     public Long getId() {
@@ -36,6 +35,7 @@ public class Location {
         this.timezone = timezone;
     }
 
+    @JsonIgnore
     public Set<Preferences> getPreferencess() {
         return preferences;
     }
