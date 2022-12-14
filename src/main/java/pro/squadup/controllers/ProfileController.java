@@ -81,9 +81,11 @@ public class ProfileController {
     }
 
     @PostMapping("/profile/preferences/{id}/edit")
-    public String editProfilePreferences(@PathVariable Long id, @RequestBody Preferences updatedPreferences) {
+    public String editProfilePreferences(@PathVariable Long id, @RequestBody Preferences updatedPreferences) throws JsonProcessingException {
         User currentUser = userDao.findById(Utils.currentUserId()).get();
         Preferences userPreferences = currentUser.getPreferences();
+        ObjectMapper mapper = new ObjectMapper();
+        System.out.println(mapper.writeValueAsString(userPreferences));
         userPreferences.setBio(updatedPreferences.getBio());
         userPreferences.setLocation(locationDao.findByTimezone(updatedPreferences.getLocation().getTimezone()));
         Set<Language> updatedLanguages = new HashSet<>();
@@ -98,6 +100,7 @@ public class ProfileController {
             updatedPlatforms.add(platformDao.findByType(platform.getType()));
         }
         userPreferences.setPlatforms(updatedPlatforms);
+        userPreferences.setGamertag(updatedPreferences.getGamertag());
         preferencesDao.save(userPreferences);
         return "redirect:/recruits";
     }

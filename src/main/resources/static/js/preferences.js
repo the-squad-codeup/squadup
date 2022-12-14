@@ -7,8 +7,6 @@ $(function() {
         },
         arrayIncludesLanguage(array, language) {
             for(let e of array) {
-                console.log(e.language);
-                console.log(language.language);
                 if(e.language === language.language) {
                     return true;
                 }
@@ -53,7 +51,7 @@ $(function() {
                     rating: $("#game-ratings").find(":selected").text()
                 },
                 platforms: MyPreferences.packagePlatformOptions($("#platforms")),
-                gamertag: $("#gamertag").text()
+                gamertag: $("#gamertag").val()
             };
             return preferencesObject;
         },
@@ -75,7 +73,6 @@ $(function() {
         },
         Post: {
             async updatedPreferences(preferencesObject) {
-
                 const postOptions = {
                     method: 'POST',
                     headers: {
@@ -85,7 +82,6 @@ $(function() {
                     body: JSON.stringify(preferencesObject)
                 }
                 let results = await fetch(`/profile/preferences/${$("#hidden-preferences-id").text()}/edit`, postOptions).then(res => res);
-
             }
         }
     }
@@ -98,20 +94,25 @@ $(function() {
             await this.gameRatingSelectElement(user);
             await this.platformSelectElement(user);
             await this.matureLanguageCheckboxElement(user);
+            await this.gamertagElement(user);
+            await this.bioElement(user);
         },
         async matureLanguageCheckboxElement(user){
             if(user.preferences.mature_language) {
                 $("#mature-language").attr("checked", "checked");
             }
         },
+        async gamertagElement(user) {
+            $("#gamertag").val(`${user.preferences.gamertag}`);
+        },
+        async bioElement(user) {
+            $("#bio").text(`${user.preferences.bio}`);
+        },
         async locationSelectElement(user) {
-            // user = await user.then(res => res);
             let locations = await Fetch.Get.all("location").then(res => res);
             let $locations = $("#locations");
             $locations.empty();
             for(let location of locations) {
-                //check if location matches user location
-                // append option element with "selected" if match
                 if(user.preferences.location != null && user.preferences.location.timezone === location.timezone) {
                     $locations.append(`
                         <option value="${location.timezone}" selected>${location.timezone}</option>
@@ -127,8 +128,6 @@ $(function() {
             let languages = await Fetch.Get.all("language").then(res => res);
             let $languages = $("#languages");
             for(let language of languages) {
-                // check if language matches user language
-                // append option element with "selected" if match
                 if(user.preferences.languages != null && MyPreferences.arrayIncludesLanguage(user.preferences.languages, language)) {
                     $languages.append(`
                         <option value="${language.language}" selected>${language.language}</option>
@@ -144,8 +143,6 @@ $(function() {
             let gameRatings = await Fetch.Get.all("rating").then(res => res);
             let $gameRatings = $("#game-ratings");
             for(let gameRating of gameRatings) {
-                //check if gameRating matches user gameRating
-                // append option element with "selected" if match
                 if(user.preferences.game_age_rating != null && user.preferences.game_age_rating.rating === gameRating.rating) {
                     $gameRatings.append(`
                         <option value="${gameRating.rating}" selected>${gameRating.rating}</option>
@@ -161,8 +158,6 @@ $(function() {
             let platforms = await Fetch.Get.all("platform").then(res => res);
             let $platforms = $("#platforms");
             for(let platform of platforms) {
-                //check if platform matches user platform
-                //append option element with "selected" if match
                 if(user.preferences.platforms != null && MyPreferences.arrayIncludesPlatform(user.preferences.platforms, platform)) {
                     $platforms.append(`
                         <option value="${platform.type}" selected>${platform.type}</option>
@@ -179,7 +174,8 @@ $(function() {
     const Events = {
         initialize() {
             $(document).on("click", "#edit-preferences-submit-button", async function() {
-                Fetch.Post.updatedPreferences(MyPreferences.packagePreferencesObject());
+                await Fetch.Post.updatedPreferences(MyPreferences.packagePreferencesObject());
+                window.location.replace(`${MyPreferences.baseUrl}`);
             });
         }
     }
