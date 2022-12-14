@@ -22,8 +22,13 @@ public class Preferences {
     @JoinColumn(name = "location_id")
     private Location location;
 
-    @Column(nullable = false)
-    private String language;
+    @ManyToMany
+    @JoinTable(
+            name = "preferences_language",
+            joinColumns = {@JoinColumn(name = "preferences_id")},
+            inverseJoinColumns = {@JoinColumn(name = "language_id")}
+    )
+    private Set<Language> languages;
 
     @Column(nullable = false)
     private boolean mature_language;
@@ -59,14 +64,6 @@ public class Preferences {
     )
     private Set<Genre> genres;
 
-    @ManyToMany
-    @JoinTable(
-            name = "preferences_language",
-            joinColumns = {@JoinColumn(name = "preferences_id")},
-            inverseJoinColumns = {@JoinColumn(name = "language_id")}
-    )
-    private Set<Language> languages;
-
     public Long getId() {
         return id;
     }
@@ -99,13 +96,6 @@ public class Preferences {
         this.location = location;
     }
 
-    public String getLanguage() {
-        return language;
-    }
-
-    public void setLanguage(String language) {
-        this.language = language;
-    }
 
     public boolean isMature_language() {
         return mature_language;
@@ -171,19 +161,19 @@ public class Preferences {
 //        this.game_age_rating = "";
     }
 
-    public Preferences(String bio, String gamertag, Location location, String language, boolean mature_language, Rating game_age_rating) {
+    public Preferences(String bio, String gamertag, Location location, Set<Language> languages, boolean mature_language, Rating game_age_rating) {
         this.bio = bio;
         this.gamertag = gamertag;
         this.location = location;
-        this.language = language;
+        this.languages = languages;
         this.mature_language = mature_language;
         this.game_age_rating = game_age_rating;
     }
 
-    public Preferences(Long id, Location location, String language, boolean mature_language, Rating game_age_rating) {
+    public Preferences(Long id, Location location, Set<Language> languages, boolean mature_language, Rating game_age_rating) {
         this.id = id;
         this.location = location;
-        this.language = language;
+        this.languages = languages;
         this.mature_language = mature_language;
         this.game_age_rating = game_age_rating;
     }

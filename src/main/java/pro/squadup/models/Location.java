@@ -1,5 +1,7 @@
 package pro.squadup.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -15,6 +17,7 @@ public class Location {
     public String timezone;
 
     @OneToMany(mappedBy = "location")
+    @JsonIgnore
     private Set<Preferences> preferences;
 
     public Long getId() {
