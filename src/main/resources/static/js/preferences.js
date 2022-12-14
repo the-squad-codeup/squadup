@@ -15,13 +15,15 @@ $(function() {
                 game_age_rating: $("#game-rating").find(":selected").text()
             }
             return preferencesObject;
-        }
+        },
+        baseUrl: $("#base-url").text()
     }
 
     const Fetch = {
         Get: {
             async all(type) {
-                return await fetch(`${type}/all`).then(res => res);
+                let res = await fetch(`${MyPreferences.baseUrl}${type}/all`).then(res => res);
+                return res.json();
             },
             async currentUser() {
                 return await fetch('user/get').then(res => res);
@@ -48,11 +50,11 @@ $(function() {
 
     const Print = {
         async form() {
-            let user = await Fetch.Get.currentUser().then(res => res);
-            this.locationSelectElement(user);
-            this.languageSelectElement(user);
-            this.gameRatingSelectElement(user);
-            this.platformSelectElement(user);
+            // let user = await Fetch.Get.currentUser().then(res => res);
+            // this.locationSelectElement(user);
+            // this.languageSelectElement(user);
+            // this.gameRatingSelectElement(user);
+            this.platformSelectElement();
         },
         async locationSelectElement(user) {
             let locations = await Fetch.Get.all("location").then(res => res);
@@ -85,7 +87,7 @@ $(function() {
                 // append option element with "selected" if match
             }
         },
-        async platformSelectElement(user) {
+        async platformSelectElement() {
             let platforms = await Fetch.Get.all("platform").then(res => res);
             console.log("All platforms get results:");
             console.log(platforms);
