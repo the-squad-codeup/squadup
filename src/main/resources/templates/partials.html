@@ -6,6 +6,7 @@
     <div th:fragment="headFragment(title)" th:remove="tag">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta charset="UTF-8">
+        <meta name="_csrf" data-th-content="${_csrf.token}">
         <title th:text="${title}"></title>
         <link rel="shortcut icon" type="images/png" th:href="@{/squadup.png}">
         <!--Google Font-->
@@ -41,7 +42,7 @@
                     <a id="nav-comrades-link" class="nav-link" th:href="@{/comrades}">Comrades</a>
                 </li>
                 <li sec:authorize="isAuthenticated()" class="nav-item">
-                    <a id="nav-profile-link" class="nav-link" th:href="@{/profile}">Profile</a>
+                    <a id="nav-preferences-link" class="nav-link" th:href="@{/profile/preferences}">Profile</a>
                 </li>
                 <li sec:authorize="isAuthenticated()" class="nav-item">
                     <a id="nav-games-link" class="nav-link" th:href="@{/games}">Games</a>

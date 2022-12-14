@@ -5,12 +5,18 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "profiles")
-public class Profile {
+@Table(name = "preferences")
+public class Preferences {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false)
+    private String bio;
+
+    @Column(nullable = false)
+    private String gamertag;
 
     @Column(nullable = false)
     private String location;
@@ -19,42 +25,42 @@ public class Profile {
     private String language;
 
     @Column(nullable = false)
-    private String mature_language;
+    private boolean mature_language;
 
     @Column(nullable = false)
     private String game_age_rating;
 
-    @OneToOne(mappedBy = "profile")
+    @OneToOne(mappedBy = "preferences")
     private User user;
 
     @ManyToMany
     @JoinTable(
-            name = "profile_platform",
-            joinColumns = {@JoinColumn(name = "profile_id")},
+            name = "preferences_platform",
+            joinColumns = {@JoinColumn(name = "preferences_id")},
             inverseJoinColumns = {@JoinColumn(name = "platform_id")}
     )
     private Set<Platform> platforms;
 
     @ManyToMany
     @JoinTable(
-            name = "profile_game",
-            joinColumns = {@JoinColumn(name = "profile_id")},
+            name = "preferences_game",
+            joinColumns = {@JoinColumn(name = "preferences_id")},
             inverseJoinColumns = {@JoinColumn(name = "game_id")}
     )
     private Set<Game> games;
 
     @ManyToMany
     @JoinTable(
-            name = "profile_genre",
-            joinColumns = {@JoinColumn(name = "profile_id")},
+            name = "preferences_genre",
+            joinColumns = {@JoinColumn(name = "preferences_id")},
             inverseJoinColumns = {@JoinColumn(name = "genre_id")}
     )
     private Set<Genre> genres;
 
     @ManyToMany
     @JoinTable(
-            name = "profile_language",
-            joinColumns = {@JoinColumn(name = "profile_id")},
+            name = "preferences_language",
+            joinColumns = {@JoinColumn(name = "preferences_id")},
             inverseJoinColumns = {@JoinColumn(name = "language_id")}
     )
     private Set<Language> languages;
@@ -65,6 +71,22 @@ public class Profile {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
+
+    public String getGamertag() {
+        return gamertag;
+    }
+
+    public void setGamertag(String gamertag) {
+        this.gamertag = gamertag;
     }
 
     public String getLocation() {
@@ -83,11 +105,11 @@ public class Profile {
         this.language = language;
     }
 
-    public String getMature_language() {
+    public boolean isMature_language() {
         return mature_language;
     }
 
-    public void setMature_language(String mature_language) {
+    public void setMature_language(boolean mature_language) {
         this.mature_language = mature_language;
     }
 
@@ -139,17 +161,24 @@ public class Profile {
         this.languages = languages;
     }
 
-    public Profile() {
+    public Preferences() {
+        this.bio = "";
+        this.location = "";
+        this.language = "";
+        this.mature_language = false;
+        this.game_age_rating = "";
     }
 
-    public Profile(String location, String language, String mature_language, String game_age_rating) {
+    public Preferences(String bio, String gamertag, String location, String language, boolean mature_language, String game_age_rating) {
+        this.bio = bio;
+        this.gamertag = gamertag;
         this.location = location;
         this.language = language;
         this.mature_language = mature_language;
         this.game_age_rating = game_age_rating;
     }
 
-    public Profile(Long id, String location, String language, String mature_language, String game_age_rating) {
+    public Preferences(Long id, String location, String language, boolean mature_language, String game_age_rating) {
         this.id = id;
         this.location = location;
         this.language = language;
