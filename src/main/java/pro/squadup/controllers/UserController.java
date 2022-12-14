@@ -6,8 +6,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import pro.squadup.models.User;
 import pro.squadup.repositories.UserRepository;
+import pro.squadup.utils.Utils;
 
 @Controller
 public class UserController {
@@ -40,5 +42,10 @@ public class UserController {
         user.setPassword(hash);
         userDao.save(user);
         return "redirect:/login?registered";
+    }
+
+    @GetMapping("/user/get")
+    public @ResponseBody User getCurrentUser() {
+        return userDao.findById(Utils.currentUserId()).get();
     }
 }

@@ -26,7 +26,8 @@ $(function() {
                 return res.json();
             },
             async currentUser() {
-                return await fetch(`${MyPreferences.baseUrl}user/get`).then(res => res);
+                let res = await fetch(`${MyPreferences.baseUrl}user/get`).then(res => res);
+                return res.json();
             }
         },
         Post: {
@@ -51,6 +52,8 @@ $(function() {
     const Print = {
         async form() {
             let user = await Fetch.Get.currentUser().then(res => res);
+            console.log("Currently logged in user: ");
+            console.log(user);
             this.locationSelectElement(user);
             this.languageSelectElement(user);
             this.gameRatingSelectElement(user);
@@ -87,7 +90,7 @@ $(function() {
                 // append option element with "selected" if match
             }
         },
-        async platformSelectElement() {
+        async platformSelectElement(user) {
             let platforms = await Fetch.Get.all("platform").then(res => res);
             console.log("All platforms get results:");
             console.log(platforms);
