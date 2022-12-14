@@ -26,7 +26,7 @@ $(function() {
                 return res.json();
             },
             async currentUser() {
-                return await fetch('user/get').then(res => res);
+                return await fetch(`${MyPreferences.baseUrl}user/get`).then(res => res);
             }
         },
         Post: {
@@ -50,11 +50,11 @@ $(function() {
 
     const Print = {
         async form() {
-            // let user = await Fetch.Get.currentUser().then(res => res);
-            // this.locationSelectElement(user);
-            // this.languageSelectElement(user);
-            // this.gameRatingSelectElement(user);
-            this.platformSelectElement();
+            let user = await Fetch.Get.currentUser().then(res => res);
+            this.locationSelectElement(user);
+            this.languageSelectElement(user);
+            this.gameRatingSelectElement(user);
+            this.platformSelectElement(user);
         },
         async locationSelectElement(user) {
             let locations = await Fetch.Get.all("location").then(res => res);
