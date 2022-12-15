@@ -5,23 +5,29 @@
     <div th:replace="partials :: headFragment('Contact-Us Page')"></div>
 </head>
 <body>
-<div class="container pt-5 my-5">
-    <div class="row g-5">
-        <div class="col-12">
-            <div class="container bg-dark rounded-3 p-5">
+<nav th:replace="partials :: siteBar"></nav>
+<div id="page-wrapper">
+    <div class="g-5">
+        <div class="col">
+            <div class="card bg-dark rounded-3 p-5">
                 <h1 class="text-center text-success">Contact the SQUADUP support Team</h1>
-                <form class="emailBody">
-                    <label for="fname">Enter your first name:</label>
-                    <input type="text" id="fname" name="fname">
-                    <label for="lname">Enter your last name:</label>
-                    <input type="text" id="lname" name="lname">
-                    <label for="phonenumber">Enter your phonenumber:</label>
-                    <input type="text" id="phonenumber" name="phonenumber">
-                    <label for="email">Enter you email:</label><br>
-                    <input type="textarea" id="email" name="email"><br>
-                    <label for="body"></label><br>
-                    <button type="submit" name></button>
-                </form>
+                <div class="container">
+                    <form>
+                        <label for="fname"></label>
+                        <input type="text" id="fname" name="fname" placeholder="First Name">
+                        <label for="lname"></label>
+                        <input type="text" id="lname" name="lname" placeholder="Last Name">
+                        <label for="email"></label>
+                        <input type="text" id="email" name="email" placeholder="Email Address">
+                        <label for="phonenumber"></label>
+                        <input type="text" id="phonenumber" name="phonenumber" placeholder="Phone Number">
+                        <label for="body"></label>
+                        <textarea id="body" placeholder="Talk to us here"></textarea>
+
+                        <button id="emailSubmit" type="submit" class="text-success" disabled>Send</button>
+                    </form>
+                </div>
+
             </div>
         </div>
     </div>
