@@ -1,10 +1,35 @@
 $(function () {
     console.log("Inside games.js");
 
-    const Games = {
+    const MyGames = {
         initialize() {
             console.log("inside Games.initialize()");
             Events.initialize();
+        },
+        baseUrl: $("#base-url").text(),
+        igdbGamesUrl: "https://api.igdb.com/v4/games"
+    }
+
+    const Print = {
+        gameResults(games) {
+
+        }
+    }
+
+    const Fetch = {
+        Get: {
+            async gameSearch(query) {
+                const postOptions = {
+                    method: 'POST',
+                    headers: {
+
+                    }
+                };
+                let results = await fetch(`${MyGames.igdbGamesUrl}`)
+            }
+        },
+        Post: {
+
         }
     }
 
@@ -25,5 +50,5 @@ $(function () {
         }
     }
 
-    Games.initialize();
+    MyGames.initialize();
 });
