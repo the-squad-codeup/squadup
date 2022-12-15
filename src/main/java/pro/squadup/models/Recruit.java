@@ -23,7 +23,6 @@ public class Recruit {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    @JsonIgnore
     private User userOne;
 
     @ManyToOne
@@ -54,6 +53,7 @@ public class Recruit {
         isRejected = rejected;
     }
 
+    @JsonIgnore
     public User getUserOne() {
         return userOne;
     }

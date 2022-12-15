@@ -1,5 +1,7 @@
 package pro.squadup.services;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 import pro.squadup.models.*;
 import pro.squadup.repositories.ComradeRepository;
@@ -32,24 +34,21 @@ public class RecruitMatchingService {
         this.genreDao = genreDao;
     }
 
-    public void matchAllRecruits() {
+    public void matchAllRecruits() throws JsonProcessingException {
         Set<User> allUsers = new HashSet<>(userDao.findAll());
         for(User user : allUsers) {
             matchRecruits(user, allUsers);
         }
     }
 
-    public void matchRecruits(User user, Set<User> allUsers) {
+    public void matchRecruits(User user, Set<User> allUsers) throws JsonProcessingException {
         for(User otherUser : allUsers) {
             if(
                     user.getId() != otherUser.getId() &&
                     !areComrades(user, otherUser) &&
                     !alreadyRecruited(user, otherUser) &&
                     containsMatchingPlatform(user, otherUser) &&
-                    (
-                            containsMatchingGames(user, otherUser) ||
-                            containsMatchingGenres(user, otherUser)
-                    )
+                    containsMatchingGames(user, otherUser)
             ) {
                 addRecruits(user, otherUser);
             }
@@ -61,12 +60,15 @@ public class RecruitMatchingService {
     }
 
     private boolean alreadyRecruited(User user1, User user2) {
-        return comradeDao.existsByUserOneAndUserTwo(user1, user2);
+        return recruitDao.existsByUserOneAndUserTwo(user1, user2);
     }
 
-    private boolean containsMatchingPlatform(User user1, User user2) {
+    private boolean containsMatchingPlatform(User user1, User user2) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
         Set<Platform> user1Platforms = user1.getPreferences().getPlatforms();
+        System.out.println(mapper.writeValueAsString(user1Platforms));
         Set<Platform> user2Platforms = user2.getPreferences().getPlatforms();
+        System.out.println(mapper.writeValueAsString(user2Platforms));
         for(Platform platform1 : user1Platforms) {
             if(user2Platforms.contains(platform1)) {
                 return true;

@@ -19,7 +19,6 @@ public class Comrade {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    @JsonIgnore
     private User userOne;
 
     @ManyToOne
@@ -42,6 +41,8 @@ public class Comrade {
         this.dateComraded = dateComraded;
     }
 
+
+    @JsonIgnore
     public User getUserOne() {
         return userOne;
     }
