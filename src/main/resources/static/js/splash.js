@@ -15,19 +15,19 @@ function startAnimations() {
         $('.item--'+items[4]).css({ zIndex: -1 });
 
         $('.item--'+items[0]).animate({
-            left: '70vw',
+            left: '80%',
         }, 1000);
         $('.item--'+items[1]).animate({
-            left: '55vw',
+            left: '60%',
         }, 1000);
         $('.item--'+items[2]).animate({
-            left: '40vw'
+            left: '40%'
         }, 1000);
         $('.item--'+items[3]).animate({
-            left: '25vw'
+            left: '20%'
         }, 1000);
         $('.item--'+items[4]).animate({
-            left: '10vw'
+            left: '0%'
         }, 1000);
         console.log('animations-complete');
         setTimeout(function(){
