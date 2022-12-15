@@ -31,14 +31,12 @@ public class User {
     private Set<Recruit> recruits;
 
     @OneToMany(mappedBy = "userTwo")
-    @JsonIgnore
     private Set<Recruit> recruitsMatchedWithUser;
 
     @OneToMany(mappedBy = "userOne")
     private Set<Recruit> comrades;
 
     @OneToMany(mappedBy = "userTwo")
-    @JsonIgnore
     private Set<Recruit> comradesOfUser;
 
     public Long getId() {
@@ -81,6 +79,7 @@ public class User {
         this.preferences = preferences;
     }
 
+    @JsonIgnore
     public Set<Recruit> getRecruits() {
         return recruits;
     }
@@ -89,6 +88,8 @@ public class User {
         this.recruits = recruits;
     }
 
+
+    @JsonIgnore
     public Set<Recruit> getRecruitsMatchedWithUser() {
         return recruitsMatchedWithUser;
     }
@@ -97,6 +98,7 @@ public class User {
         this.recruitsMatchedWithUser = recruitsMatchedWithUser;
     }
 
+    @JsonIgnore
     public Set<Recruit> getComrades() {
         return comrades;
     }
@@ -105,6 +107,7 @@ public class User {
         this.comrades = comrades;
     }
 
+    @JsonIgnore
     public Set<Recruit> getComradesOfUser() {
         return comradesOfUser;
     }

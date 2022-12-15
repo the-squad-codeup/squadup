@@ -1,5 +1,6 @@
 package pro.squadup.config;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -14,7 +15,7 @@ public class RecruitScheduleConfiguration {
     private RecruitMatchingService recruitMatchingService;
 
     @Scheduled(fixedRateString = "${recruit.matcher.delay.in.milliseconds}")
-    public void runRecruitMatchScheduler() {
+    public void runRecruitMatchScheduler() throws JsonProcessingException {
         recruitMatchingService.matchAllRecruits();
     }
 
