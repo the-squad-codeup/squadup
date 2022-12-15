@@ -1,0 +1,7 @@
+:root {
+    --bs-gamergreen: #5CFD42;
+}
+
+.card-body {
+    border-color: var(--bs-gamergreen);
+}
