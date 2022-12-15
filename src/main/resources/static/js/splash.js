@@ -1,4 +1,4 @@
-let items = [0,1,2,3,4];
+let items = [0,1,2,3,4,5,6];
 let animating = false;
 
 window.setInterval(function(){
@@ -8,26 +8,34 @@ window.setInterval(function(){
 function startAnimations() {
     if(!animating){
         animating = true;
-        $('.item--'+items[0]).css({ zIndex: -5 });
-        $('.item--'+items[1]).css({ zIndex: -4 });
-        $('.item--'+items[2]).css({ zIndex: -3 });
-        $('.item--'+items[3]).css({ zIndex: -2 });
-        $('.item--'+items[4]).css({ zIndex: -1 });
+        $('.item--'+items[0]).css({ zIndex: -8 });
+        $('.item--'+items[1]).css({ zIndex: -7 });
+        $('.item--'+items[2]).css({ zIndex: -6 });
+        $('.item--'+items[3]).css({ zIndex: -5 });
+        $('.item--'+items[4]).css({ zIndex: -4 });
+        $('.item--'+items[5]).css({ zIndex: -3 });
+        $('.item--'+items[6]).css({ zIndex: -2 });
 
         $('.item--'+items[0]).animate({
-            left: '80%',
+            left: '100%',
         }, 1000);
         $('.item--'+items[1]).animate({
-            left: '60%',
+            left: '80%',
         }, 1000);
         $('.item--'+items[2]).animate({
-            left: '40%'
+            left: '60%'
         }, 1000);
         $('.item--'+items[3]).animate({
-            left: '20%'
+            left: '40%'
         }, 1000);
         $('.item--'+items[4]).animate({
+            left: '20%'
+        }, 1000);
+        $('.item--'+items[5]).animate({
             left: '0%'
+        }, 1000);
+        $('.item--'+items[6]).animate({
+            left: '-20%'
         }, 1000);
         console.log('animations-complete');
         setTimeout(function(){
