@@ -9,9 +9,7 @@ body{
 }
 
 .container {
-    margin-bottom: 20px;
-    align-items: center;
-    justify-content: center;
+    margin-top: 20px;
 }
 
 .topContainer {
@@ -49,11 +47,13 @@ body{
     line-height: 78px;
     text-align: center;
     color: white;
-    position: relative;
-    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSU0XW9kaBAo0pEwxXurOTkjmnOUMwwZOSdPg&usqp=CAU")
+    background-position: left,right;
+    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSU0XW9kaBAo0pEwxXurOTkjmnOUMwwZOSdPg&usqp=CAU"),url("https://media.istockphoto.com/id/1356139121/photo/gamers-playing-online-video-games-together.jpg?s=612x612&w=0&k=20&c=h0pz3618eN6BB9c8nkSGahU9LMYaXOonkkFVwkJilU4=");
+    background-size: 50% auto;
+    background-repeat: no-repeat;
 }
 #feature2{
-    width: 90vw;
+    width: 100vw;
     height: 350px;
     font-weight: 500;
     font-size: 64px;
@@ -62,7 +62,7 @@ body{
     color: white;
 }
 #feature3{
-    width: 90vw;
+    width: 80vw;
     height: 350px;
     font-weight: 500;
     font-size: 64px;
@@ -88,3 +88,55 @@ body{
     width: 125px;
     height: 125px;
 }
+.carousel-container {
+    width: 800px;
+    border: 2px solid grey;
+    text-align: center;
+    height: 150px;
+}
+
+.item {
+    display: inline-block;
+    position: absolute;
+}
+
+.item--0 {
+    left: 250px;
+    background: brown;
+    z-index: 0;
+    width: 90px;
+    height: 60px;
+}
+
+.item--1 {
+    left: 100px;
+    z-index: 1;
+    background: orange;
+    width: 150px;
+    height: 100px;
+}
+
+.item--2 {
+    left: 325px;
+    z-index: 2;
+    background: skyblue;
+    width: 150px;
+    height: 100px;
+}
+
+.item--3 {
+    left: 550px;
+    z-index: 1;
+    background: yellow;
+    width: 150px;
+    height: 100px;
+}
+
+.item--4 {
+    left: 450px;
+    background: lightgrey;
+    z-index: 0;
+    width: 90px;
+    height: 60px;
+}
+
