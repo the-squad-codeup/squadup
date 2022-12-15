@@ -1,16 +1,25 @@
 package pro.squadup.controllers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import pro.squadup.models.User;
 import pro.squadup.repositories.UserRepository;
+import pro.squadup.services.UrlService;
+import pro.squadup.utils.Utils;
 
 @Controller
 public class UserController {
+
+    @Autowired
+    private UrlService url;
 
 
     // Repositories and Services
@@ -27,6 +36,7 @@ public class UserController {
     @GetMapping("/signup")
     public String showSignupForm(Model model) {
         // Sending empty user to template
+        model.addAttribute("url", url);
         model.addAttribute("user", new User());
         return "user/signup";
     }
@@ -40,5 +50,14 @@ public class UserController {
         user.setPassword(hash);
         userDao.save(user);
         return "redirect:/login?registered";
+    }
+
+    @GetMapping("/user/get")
+    public @ResponseBody User getCurrentUser() throws JsonProcessingException {
+        System.out.println("Inside getCurrentUser");
+        User currentUser = userDao.findById(Utils.currentUserId()).get();
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.writeValueAsString(currentUser);
+        return currentUser;
     }
 }
