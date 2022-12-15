@@ -67,15 +67,16 @@ hr {
     /*height: 40%;*/
 }
 
-button {
+#emailSubmit {
     border: var(--bs-gamergreen) solid;
     border-radius: 8px;
     margin: 2%;
 }
 
 form {
-    max-width: 50%;
-    padding-top: 10%;
+    border: purple ridge 10px;
+    max-width: 40%;
+    padding-top: 5%;
     padding-bottom: 10%;
     margin: auto;
     display: flex;
@@ -86,12 +87,14 @@ form {
 }
 
 input {
-    margin: 2%
+    margin: 2%;
+    overflow: hidden;
 }
 
 textarea {
-    min-width: 95%;
+    width: 95%;
     margin: 2%;
+    height: 30%;
 }
 
 /*==========================================================*/
