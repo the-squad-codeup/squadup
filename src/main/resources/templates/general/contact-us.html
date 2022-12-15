@@ -3,16 +3,31 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <div th:replace="partials :: headFragment('Contact-Us Page')"></div>
-
-
 </head>
 <body>
-
+<div class="container pt-5 my-5">
+    <div class="row g-5">
+        <div class="col-12">
+            <div class="container bg-dark rounded-3 p-5">
+                <h1 class="text-center text-success">Contact the SQUADUP support Team</h1>
+                <form class="emailBody">
+                    <label for="fname">Enter your first name:</label>
+                    <input type="text" id="fname" name="fname">
+                    <label for="lname">Enter your last name:</label>
+                    <input type="text" id="lname" name="lname">
+                    <label for="phonenumber">Enter your phonenumber:</label>
+                    <input type="text" id="phonenumber" name="phonenumber">
+                    <label for="email">Enter you email:</label><br>
+                    <input type="textarea" id="email" name="email"><br>
+                    <label for="body"></label><br>
+                    <button type="submit" name></button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 <nav th:replace="partials :: footer"></nav>
-
 <nav th:replace="partials :: siteBar"></nav>
-
 <div th:replace="partials :: scripts"></div>
-
 </body>
 </html>

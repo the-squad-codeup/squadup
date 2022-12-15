@@ -6,7 +6,7 @@
 body {
     font-family: Chakra Petch, sans-serif;
 }
-
+/*edits for about us page*/
 hr {
     border: 5px solid purple;
     border-bottom-style: ridge;
@@ -38,7 +38,7 @@ hr {
     margin-top: 5%;
     margin-bottom: 30%;
 }
-
+ /*END of About us edits*/
 
  /*The switch - the box around the slider */
 .switch {
@@ -48,14 +48,14 @@ hr {
     height: 25px;
 }
 
-/* Hide default HTML checkbox */
+/*The switch - Hide default HTML checkbox */
 .switch input {
     opacity: 0;
     width: 0;
     height: 0;
 }
 
-/* The slider */
+/* The switch - slider */
 .slider {
     position: absolute;
     cursor: pointer;
@@ -93,5 +93,6 @@ input:checked + .slider:before {
     -ms-transform: translateX(26px);
     transform: translateX(26px);
 }
+/*End of switch*/
 
 
