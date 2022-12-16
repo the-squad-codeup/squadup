@@ -34,25 +34,63 @@
 <!--end of map and overlays div-->
 
 <!--timezone dropdown-->
-                <select id="locations" name="locations">
+                <span>Pick your time Zone</span>
+                <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                    <option selected>(UTC ??:??) Unspecified</option>
                     <option value="1">(UTC-10:00) Hawaii-Aleutian Standard Time</option>
-                    <option value="2">(UTC-09:00) Alaskan Standard Time</option>
+                    <option value="2">(UTC-9:00) Alaskan Standard Time</option>
                     <option value="3">(UTC-8:00) Pacific Standard Time</option>
                     <option value="4">(UTC-7:00) Mountain Standard Time</option>
-                    <option value="5">(UTC-7:00) Mountain ST Arizona</option>
+                    <option value="5">(UTC-7:00) Mountain S.T. Arizona</option>
                     <option value="6">(UTC-6:00) Central Standard Time</option>
                     <option value="7">(UTC-5:00) Eastern Standard Time</option>
                     <option value="8">(UTC-4:00) Atlantic Standard Time</option>
                 </select>
-                <label for="locations">Pick your time Zone</label>
+<!--Puerto Rico, Virgin Islands,Hawaii and Arizona do not observe Daylight Savings Time, the Aleutian islands do though-->
 <!--end of timezone dropdown-->
-                <!--Puerto Rico, Virgin Islands,Hawaii and Arizona do not observe Daylight Savings Time, the Aleutian island do though-->
+                <span>Preferred Language</span>
+                <select class="form-select form-select-lg mb-3" size="6" aria-label=".form-select-lg example">
+                    <option value="1">Arabic</option>
+                    <option value="2">Afrikaans</option>
+                    <option value="3">Chinese, Cantonese</option>
+                    <option value="4">Chinese, Mandarin</option>
+                    <option value="5">Dutch</option>
+                    <option value="6">English</option>
+                    <option value="7">Farsi</option>
+                    <option value="8">French</option>
+                    <option value="9">German</option>
+                    <option value="10">Hebrew</option>
+                    <option value="11">Hindi</option>
+                    <option value="12">Indonesian</option>
+                    <option value="13">Italian</option>
+                    <option value="14">Japanese</option>
+                    <option value="15">Korean</option>
+                    <option value="16">Mongolian</option>
+                    <option value="17">Nahuatl</option>
+                    <option value="18">Pirate</option>
+                    <option value="19">Polish</option>
+                    <option value="20">Portuguese</option>
+                    <option value="21">Quechua</option>
+                    <option value="22">Romanian</option>
+                    <option value="23">Russian</option>
+                    <option value="24">Spanish</option>
+                    <option value="25">Ukrainian</option>
+                    <option value="26">Urdu</option>
+                    <option value="27">Vietnamese</option>
+                    <option value="28">Zulu</option>
+                </select>
+
+
+
+
             </div>
             <div class="mb-3">
                 <label for="languages">Pick your languages</label>
                 <select id="languages" name="languages" multiple>
                 </select>
             </div>
+
+
             <div class="mb-3">
                 <label for="game-ratings">Select game rating</label>
                 <select id="game-ratings" name="game-ratings">
