@@ -12,8 +12,8 @@
 
     <h1 class="text-center pt-5 my-5 outlined">Sign Up to SquadUp!</h1>
 
-    <div class="container bg-dark rounded-3 p-5">
-        <form class="text-light" th:action="@{/signup}" method="POST" th:object="${user}">
+    <div class="card-signtwo container rounded-3 p-5">
+        <form class="form-signtwo text-light" th:action="@{/signup}" method="POST" th:object="${user}">
             <div class="mb-3">
                 <label for="signupEmailAddress" class="form-label">Email Address</label>
                 <input type="email" class="form-control" id="signupEmailAddress" th:field="*{email}" autocomplete="off">
