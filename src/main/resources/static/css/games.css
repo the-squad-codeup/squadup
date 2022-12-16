@@ -1,0 +1,23 @@
+#games-div {
+    color: white;
+}
+
+#games-div img {
+    cursor: pointer;
+}
+
+.game-card {
+    border-radius: 2em;
+    overflow: hidden;
+    box-shadow: 6px 12px 12px #254895;
+}
+
+.all-games-img {
+    height: 429px;
+}
+.game-card {
+    transition: all 200ms;
+}
+.game-card:hover {
+    transform: scale(1.1);
+}

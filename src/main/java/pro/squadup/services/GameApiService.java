@@ -10,6 +10,7 @@ import okhttp3.MediaType.*;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -27,7 +28,10 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.time.ZonedDateTime;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -101,10 +105,10 @@ public class GameApiService {
 ////        System.out.println(mapper.writeValueAsString(response));
 //    }
 
-    public void searchGames(String query) throws JsonProcessingException {
+    public List<Object> searchGames(String query) throws JsonProcessingException {
         System.out.println("Inside searchGames. Query: " + query);
         String bodyString = (
-                "search `" + query + "`; fields name,cover.image_id,genres.name,platforms.name;"
+                "search `" + query + "`; fields name,cover.image_id,age_ratings.rating,age_ratings.category,genres.name,platforms.name;"
         ).replace('`', '"');
         System.out.println("Body String: " + bodyString);
         // Initialize http client and web client
@@ -163,7 +167,7 @@ public class GameApiService {
 //        Mono<String> res = headersSpec.retrieve()
 //                .bodyToMono(String.class);
 
-        Mono<String> res = client.post()
+        Mono<List<Object>> res = client.post()
                 .uri(IGDB_API_URL + "games")
                 .contentType(MediaType.TEXT_PLAIN)
                 .body(BodyInserters.fromValue(bodyString))
@@ -171,13 +175,20 @@ public class GameApiService {
                 .header("Authorization", "Bearer " + IGDB_ACCESS_TOKEN)
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_PLAIN_VALUE)
                 .retrieve()
-                .bodyToMono(String.class);
+                .bodyToMono(new ParameterizedTypeReference<List<Object>>() {});
 
-        System.out.println(res.block());
+        List<Object> objects = res.block();
+
+
 
 
 
 //        ObjectMapper mapper = new ObjectMapper();
-//        System.out.println(mapper.writeValueAsString(res));
+//        Set<Game> games = new HashSet<>();
+//        for(Object object : objects) {
+//            games.add()
+//            System.out.println(mapper.writeValueAsString(object));
+//        }
+        return objects;
     }
 }

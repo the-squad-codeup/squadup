@@ -8,6 +8,8 @@ import pro.squadup.repositories.GenreRepository;
 import pro.squadup.services.GameApiService;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/game")
@@ -26,9 +28,9 @@ public class GameController {
 
 
     @PostMapping("/search")
-    public void searchGames(@RequestBody String query) throws IOException {
+    public List<Object> searchGames(@RequestBody String query) throws IOException {
         System.out.println("Inside searchGames. Query string: ");
         System.out.println(query);
-        gameApiService.searchGames(query);
+        return gameApiService.searchGames(query);
     }
 }
