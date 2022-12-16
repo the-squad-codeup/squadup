@@ -13,6 +13,7 @@ hr {
     border-bottom-style: ridge;
 }
 
+
 .text-success {
     color: var(--bs-gamergreen) !important;
 }
@@ -29,12 +30,12 @@ hr {
     justify-content: center;
     border: ridge 12px;
     border-color: var(--bs-gamergreen) !important;
-    opacity: 50%;
+    background: rgba(33, 37, 41, .3);
 }
 
 .card-title, .card-text {
     text-align: center;
-    color: antiquewhite;
+    color: whitesmoke;
 }
 
 .card-pro {
@@ -61,19 +62,25 @@ hr {
 }
 
 /*------------------Form edits START----------------------------------*/
-.emailCard {
-    /*display: flex;*/
-    /*flex-wrap: wrap;*/
-    /*height: 40%;*/
-}
 
-#emailSubmit {
-    border: var(--bs-gamergreen) solid;
-    border-radius: 8px;
+#emailSend, #signupPasswordSubmit, #loginPasswordSubmit {
     margin: 2%;
+    border: var(--bs-gamergreen) ridge 5px;
+    border-radius: 8px;
+    background-color: dimgray;
 }
 
-form {
+button:active {
+    box-shadow: 0 5px black;
+    transform: translateY(4px);
+}
+
+#emailSend {
+    margin-top: 8%;
+    width: 95%;
+}
+
+.card-con {
     border: purple ridge 10px;
     max-width: 40%;
     padding-top: 5%;
@@ -83,11 +90,16 @@ form {
     flex-wrap: wrap;
     justify-content: center;
     align-content: center;
-
+    background: rgba(33, 37, 41, .3);
 }
 
-input {
+#fname, #lname, #email, #phonenumber {
     margin: 2%;
+}
+
+/*both login and contact us form*/
+input {
+    margin: inherit;
     overflow: hidden;
 }
 
@@ -96,8 +108,25 @@ textarea {
     margin: 2%;
     height: 30%;
 }
-
 /*==========================================================*/
+/*Login Form and Sign In Form*/
+.card-log, .card-sign, .card-signtwo{
+    margin: auto;
+    border: ridge 12px;
+    border-color: var(--bs-gamergreen) !important;
+}
+
+.form-log, .form-sign, .form-signtwo{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    border: purple ridge 10px;
+    padding-top: 5%;
+    padding-bottom: 10%;
+}
+
+
 /* The switch - slider */
 .slider {
     position: absolute;
