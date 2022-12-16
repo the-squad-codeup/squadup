@@ -14,4 +14,5 @@ public interface RecruitRepository extends JpaRepository<Recruit, Long> {
     Set<Recruit> findAllByUserOne(User userOne);
 
     Recruit findByUserOneAndUserTwo(User userOne, User userTwo);
+
 }

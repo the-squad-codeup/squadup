@@ -19,7 +19,8 @@ $(function() {
         }
     }
 
-   addEventListener('click', function (e){
+
+    addEventListener('click', function (e){
         e.preventDefault();
 
     })
