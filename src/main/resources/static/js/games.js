@@ -75,6 +75,20 @@ $(function () {
                 let data = await results.json();
                 console.log(data);
                 return data;
+            },
+            async addGame(igdbId) {
+                console.log("inside addGame. IgdbId: ");
+                console.log(igdbId);
+                const fetchOptions = {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN' : MyGames.csrfToken
+                    }
+                };
+                let results = await fetch(`${MyGames.baseUrl}game/${igdbId}/add`, fetchOptions);
+                let data = await results.json();
+                console.log(data);
+                return data;
             }
         }
     }
@@ -93,6 +107,10 @@ $(function () {
                     if($("#game-search-input").is(":focus") && e.key === "Enter") {
                         $("#game-search-button").trigger("click");
                     }
+                })
+                .on("click", ".game-card", function() {
+                    console.log("Game Card clicked");
+                    Fetch.Post.addGame($(this).parent().attr("data-game-igdb-id"));
                 })
             ;
         }

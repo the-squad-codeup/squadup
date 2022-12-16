@@ -16,7 +16,7 @@ public class Game {
     private Long id;
 
     @Column
-    private Long igbdId;
+    private Long igdbId;
 
     @Column(nullable = false, length = 100)
     private String title;
@@ -24,8 +24,9 @@ public class Game {
     @Column
     private String artwork;
 
-    @Column(length = 25)
-    private String rating;
+    @ManyToOne
+    @JoinColumn(name = "rating_id")
+    private Rating rating;
 
     @ManyToMany(mappedBy = "games")
     @JsonIgnore
@@ -54,12 +55,12 @@ public class Game {
         this.id = id;
     }
 
-    public Long getIgbdId() {
-        return igbdId;
+    public Long getIgdbId() {
+        return igdbId;
     }
 
-    public void setIgbdId(Long igbdId) {
-        this.igbdId = igbdId;
+    public void setIgdbId(Long igdbId) {
+        this.igdbId = igdbId;
     }
 
     public String getTitle() {
@@ -76,10 +77,11 @@ public class Game {
         this.artwork = artwork;
     }
 
-    public String getRating() {
+    public Rating getRating() {
         return rating;
     }
-    public void setRating(String rating) {
+
+    public void setRating(Rating rating) {
         this.rating = rating;
     }
 
@@ -110,13 +112,13 @@ public class Game {
     public Game(){
     }
 
-    public Game(String title, String artwork, String rating) {
+    public Game(String title, String artwork, Rating rating) {
         this.title = title;
         this.artwork = artwork;
         this.rating = rating;
     }
 
-    public Game(long id, String title, String artwork, String rating) {
+    public Game(long id, String title, String artwork, Rating rating) {
         this.id = id;
         this.title = title;
         this.artwork = artwork;

@@ -83,7 +83,7 @@ public class GameApiService {
         return objects;
     }
 
-    public Game addGame(long igdbId) {
+    public Object addGame(long igdbId) throws JsonProcessingException {
         System.out.println("Inside addGame. Body String: ");
         String bodyString = (
                 "fields name,cover.image_id,age_ratings.rating,age_ratings.category,genres.name,platforms.name; where category = 0; where id = " + igdbId + ";"
@@ -96,7 +96,7 @@ public class GameApiService {
         WebClient client = apiService.buildWebClient(httpClient, bodyString);
 
         // Creating Async Mono object to hold list of objects returned from api call
-        Mono<Game> res = client.post()
+        Mono<Object> res = client.post()
                 .uri(IGDB_API_URL + "games")
                 .contentType(MediaType.TEXT_PLAIN)
                 .body(BodyInserters.fromValue(bodyString))
@@ -104,9 +104,12 @@ public class GameApiService {
                 .header("Authorization", "Bearer " + IGDB_ACCESS_TOKEN)
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_PLAIN_VALUE)
                 .retrieve()
-                .bodyToMono(Game.class);
+                .bodyToMono(Object.class);
 
         // Waiting for async call to resolve to a POJO
-        return res.block();
+        Object game = res.block();
+        ObjectMapper mapper = new ObjectMapper();
+        System.out.println(mapper.writeValueAsString(game));
+        return game;
     }
 }

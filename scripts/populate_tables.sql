@@ -22,14 +22,12 @@ INSERT INTO languages (language)
            ('Portuguese');
 
 # TRUNCATE ratings;
-INSERT INTO ratings (rating)
-    VALUES ('Everyone'),
-           ('Everyone 10 & up'),
-           ('Teen (13 & up)'),
-           ('Mature (17 & up)'),
-           ('Adults Only (18 & up)'),
-           ('Rating Pending'),
-           ('Rating Pending Likely Mature');
+INSERT INTO ratings (igdb_id, rating)
+    VALUES (8, 'Everyone'),
+           (9, 'Everyone 10 & up'),
+           (10, 'Teen (13 & up)'),
+           (11, 'Mature (17 & up)'),
+           (12, 'Adults Only (18 & up)');
 
 # TRUNCATE platforms;
 INSERT INTO platforms (type)

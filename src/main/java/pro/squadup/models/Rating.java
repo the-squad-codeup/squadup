@@ -14,11 +14,18 @@ public class Rating {
     private Long id;
 
     @Column(nullable = false)
-    public String rating;
+    private int igdbId;
 
-    @OneToMany(mappedBy = "game_age_rating")
+    @Column(nullable = false)
+    private String rating;
+
+    @OneToMany(mappedBy = "rating")
     @JsonIgnore
     private Set<Preferences> preferences;
+
+    @OneToMany(mappedBy = "rating")
+    @JsonIgnore
+    private Set<Game> games;
 
     public Long getId() {
         return id;
@@ -26,6 +33,14 @@ public class Rating {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public int getIgdbId() {
+        return igdbId;
+    }
+
+    public void setIgdbId(int igdbId) {
+        this.igdbId = igdbId;
     }
 
     public String getRating() {
@@ -44,10 +59,19 @@ public class Rating {
         this.preferences = preferences;
     }
 
+    public Set<Game> getGames() {
+        return games;
+    }
+
+    public void setGames(Set<Game> games) {
+        this.games = games;
+    }
+
     public Rating() {
     }
 
-    public Rating(String rating, Set<Preferences> preferences) {
+    public Rating(int igdbId, String rating, Set<Preferences> preferences) {
+        this.igdbId = igdbId;
         this.rating = rating;
         this.preferences = preferences;
     }
