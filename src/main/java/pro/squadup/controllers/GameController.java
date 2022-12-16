@@ -2,13 +2,12 @@ package pro.squadup.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pro.squadup.repositories.GameRepository;
 import pro.squadup.repositories.GenreRepository;
 import pro.squadup.services.GameApiService;
+
+import java.io.IOException;
 
 @RestController
 @RequestMapping("/game")
@@ -26,8 +25,10 @@ public class GameController {
     }
 
 
-    @PostMapping("/{query}")
-    public void searchGames(@PathVariable String query) throws JsonProcessingException {
+    @PostMapping("/search")
+    public void searchGames(@RequestBody String query) throws IOException {
+        System.out.println("Inside searchGames. Query string: ");
+        System.out.println(query);
         gameApiService.searchGames(query);
     }
 }

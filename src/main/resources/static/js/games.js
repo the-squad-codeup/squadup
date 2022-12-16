@@ -5,9 +5,10 @@ $(function () {
         initialize() {
             console.log("inside Games.initialize()");
             Events.initialize();
-            Fetch.Get.gameSearch("hollow knight");
+            // Fetch.Get.gameSearch("hollow knight");
         },
-        baseUrl: $("#base-url").text()
+        baseUrl: $("#base-url").text(),
+        csrfToken: $("meta[name='_csrf']").attr("content")
     }
 
     const Print = {
@@ -40,10 +41,22 @@ $(function () {
                 let results = await fetch(`${keys.igdb_PROXY_URL}games`, fetchOptions);
                 let data = await results.json();
                 console.log(data);
-            }
+            },
         },
         Post: {
-
+            async backendGameSearch(query) {
+                // let keys = await this.keys();
+                console.log("Inside backendGameSearch. query: ");
+                console.log(query);
+                const fetchOptions = {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN' : MyGames.csrfToken
+                    },
+                    body: query
+                }
+                let results = await fetch(`${MyGames.baseUrl}game/search`, fetchOptions);
+            }
         }
     }
 
@@ -54,6 +67,8 @@ $(function () {
                 .on("click", "#game-search-button", function() {
                     console.log("button has been clicked. Value in input: ");
                     console.log($("#game-search-input").val());
+                    Fetch.Post.backendGameSearch($("#game-search-input").val());
+                    Fetch.Get.gameSearch($("#game-search-input").val());
                 })
                 .on("keyup", function(e) {
                     if($("#game-search-input").is(":focus") && e.key === "Enter") {
