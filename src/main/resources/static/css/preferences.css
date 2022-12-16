@@ -1,0 +1,57 @@
+body {
+    color: chartreuse;
+}
+
+.mapcontainer {
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+.map {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+.overlay {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#AK {
+    visibility: hidden;
+}
+
+#AZ {
+    visibility: hidden;
+}
+
+#AST {
+    visibility: hidden;
+}
+
+#CT {
+    visibility: hidden;
+}
+
+#ET {
+    visibility: hidden;
+}
+
+#HAST {
+    visibility: hidden;
+}
+
+#MT {
+    visibility: hidden;
+}
+
+#PT {
+    visibility: hidden;
+}
