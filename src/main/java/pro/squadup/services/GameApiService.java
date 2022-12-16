@@ -46,64 +46,12 @@ public class GameApiService {
     @Value("${igdb.api.url}")
     private String IGDB_API_URL;
 
-//    @Autowired
-//    ApiService apiService;
+    @Autowired
+    private ApiService apiService;
 
     public GameApiService() {
 
     }
-
-
-
-//    public void searchGames(String query) throws IOException {
-//
-//        ObjectMapper mapper = new ObjectMapper();
-//        System.out.println("Inside searchGames");
-//        String bodyString = (
-//                "search `" + query + "`; fields name,cover.image_id,genres.name,platforms.name;"
-//        ).replace('`', '"');
-//        System.out.println("Body String: " + bodyString);
-//        System.out.println("Client ID Header: " + IGDB_CLIENT_ID);
-//        System.out.println("Authorization Header: " + "Bearer " + IGDB_ACCESS_TOKEN);
-//        OkHttpClient client = new OkHttpClient();
-//        RequestBody body = RequestBody.create(MediaType.get("text/plain;charset=UTF-8"), bodyString);
-////        RequestBody formBody = new FormBody.Builder()
-////                .add("search", query)
-////                .add("fields", "name,cover.image_id,genres.name,platforms.name")
-////                .build();
-//        mapper.writeValueAsString(body);
-//        Request request = new Request.Builder()
-//                .url(IGDB_API_URL + "games")
-//                .addHeader("Client-ID", IGDB_CLIENT_ID)
-//                .addHeader("Authorization", "Bearer " + IGDB_ACCESS_TOKEN)
-//                .addHeader("Content-Type", "text/plain")
-//                .post(body)
-//                .build();
-//
-//        mapper.writeValueAsString(request);
-//
-//        Call call = client.newCall(request);
-////        Response response = call.execute();
-//        call.enqueue(new Callback() {
-//            @Override
-//            public void onFailure(@NotNull Call call, @NotNull IOException e) {
-//                e.printStackTrace();
-//            }
-//
-//            @Override
-//            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-//                if (!response.isSuccessful()) {
-//                    throw new IOException("Unexpected code " + response);
-//                } else {
-//                    ObjectMapper mapper = new ObjectMapper();
-//                    System.out.println(mapper.writeValueAsString(response));
-//                }
-//            }
-//        });
-//
-////        ObjectMapper mapper = new ObjectMapper();
-////        System.out.println(mapper.writeValueAsString(response));
-//    }
 
     public List<Object> searchGames(String query) throws JsonProcessingException {
         System.out.println("Inside searchGames. Query: " + query);
@@ -111,62 +59,14 @@ public class GameApiService {
                 "search `" + query + "`; fields name,cover.image_id,age_ratings.rating,age_ratings.category,genres.name,platforms.name; where category = 0;"
         ).replace('`', '"');
         System.out.println("Body String: " + bodyString);
-        // Initialize http client and web client
-//        HttpClient httpClient = apiService.buildHttpClient();
-        HttpClient httpClient = HttpClient.create()
-                .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 5000)
-                .responseTimeout(Duration.ofMillis(5000))
-                .doOnConnected(connection ->
-                        connection.addHandlerLast(new ReadTimeoutHandler(5000, TimeUnit.MILLISECONDS))
-                                .addHandlerLast(new WriteTimeoutHandler(5000, TimeUnit.MILLISECONDS)));
 
+        // Creating httpclient object with timeout parameters
+        HttpClient httpClient = apiService.buildHttpClient();
 
-//        WebClient client = apiService.buildWebClient(httpClient);
-        WebClient client = WebClient.builder()
-                .clientConnector(new ReactorClientHttpConnector(httpClient))
-                .build();
+        // Creating webclient object to make API request
+        WebClient client = apiService.buildWebClient(httpClient, bodyString);
 
-        // Defining method as POST
-//        WebClient.UriSpec<WebClient.RequestBodySpec> uriSpec = client.post();
-
-        // Setting request URL
-//        WebClient.RequestBodySpec bodySpec = uriSpec.uri(IGDB_API_URL + "games");
-
-        // Setting  body
-//        WebClient.RequestHeadersSpec<?> headersSpec = bodySpec.bodyValue(bodyString);
-
-        // Setting headers
-//        HttpHeaders httpHeaders = new HttpHeaders();
-//        httpHeaders.add("Client-ID", IGDB_CLIENT_ID);
-//        httpHeaders.add("Authorization", "Bearer " + IGDB_ACCESS_TOKEN);
-//        headersSpec.header("Client-ID", IGDB_CLIENT_ID);
-//        headersSpec.header("Authorization", "Bearer " + IGDB_ACCESS_TOKEN);
-
-//        WebClient.ResponseSpec responseSpec = headersSpec.header(
-//                        HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-//                .accept(MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML)
-//                .acceptCharset(StandardCharsets.UTF_8)
-//                .ifNoneMatch("*")
-//                .ifModifiedSince(ZonedDateTime.now())
-//                .retrieve();
-
-        // Sending Request and Receiving Response
-//        Mono<String> res = headersSpec.exchangeToMono(response -> {
-//            if (response.statusCode().equals(HttpStatus.OK)) {
-//                System.out.println("Status OK");
-//                return response.bodyToMono(String.class);
-//            } else if (response.statusCode().is4xxClientError()) {
-//                System.out.println("4xx Error");
-//                return Mono.just("Error response");
-//            } else {
-//                System.out.println("Exception");
-//                return response.createException()
-//                        .flatMap(Mono::error);
-//            }
-//        });
-//        Mono<String> res = headersSpec.retrieve()
-//                .bodyToMono(String.class);
-
+        // Creating Async Mono object to hold list of objects returned from api call
         Mono<List<Object>> res = client.post()
                 .uri(IGDB_API_URL + "games")
                 .contentType(MediaType.TEXT_PLAIN)
@@ -177,22 +77,36 @@ public class GameApiService {
                 .retrieve()
                 .bodyToMono(new ParameterizedTypeReference<List<Object>>() {});
 
+        // Waiting for async call to resolve to a POJO
         List<Object> objects = res.block();
 
-
-
-
-
-//        ObjectMapper mapper = new ObjectMapper();
-//        Set<Game> games = new HashSet<>();
-//        for(Object object : objects) {
-//            games.add()
-//            System.out.println(mapper.writeValueAsString(object));
-//        }
         return objects;
     }
 
     public Game addGame(long igdbId) {
+        System.out.println("Inside addGame. Body String: ");
+        String bodyString = (
+                "fields name,cover.image_id,age_ratings.rating,age_ratings.category,genres.name,platforms.name; where category = 0; where id = " + igdbId + ";"
+                );
+        System.out.println(bodyString);
+        // Creating httpclient object with timeout parameters
+        HttpClient httpClient = apiService.buildHttpClient();
 
+        // Creating webclient object to make API request
+        WebClient client = apiService.buildWebClient(httpClient, bodyString);
+
+        // Creating Async Mono object to hold list of objects returned from api call
+        Mono<Game> res = client.post()
+                .uri(IGDB_API_URL + "games")
+                .contentType(MediaType.TEXT_PLAIN)
+                .body(BodyInserters.fromValue(bodyString))
+                .header("Client-ID", IGDB_CLIENT_ID)
+                .header("Authorization", "Bearer " + IGDB_ACCESS_TOKEN)
+                .header(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_PLAIN_VALUE)
+                .retrieve()
+                .bodyToMono(Game.class);
+
+        // Waiting for async call to resolve to a POJO
+        return res.block();
     }
 }
