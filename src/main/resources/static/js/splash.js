@@ -8,17 +8,17 @@ window.setInterval(function(){
 function startAnimations() {
     if(!animating){
         animating = true;
-        $('.item--'+items[0]).css({ zIndex: -8 });
-        $('.item--'+items[1]).css({ zIndex: -7 });
-        $('.item--'+items[2]).css({ zIndex: -6 });
-        $('.item--'+items[3]).css({ zIndex: -5 });
-        $('.item--'+items[4]).css({ zIndex: -4 });
-        $('.item--'+items[5]).css({ zIndex: -3 });
-        $('.item--'+items[6]).css({ zIndex: -2 });
+        $('.item--'+items[0]).css({ zIndex: -22 });
+        $('.item--'+items[1]).css({ zIndex: -21 });
+        $('.item--'+items[2]).css({ zIndex: -20 });
+        $('.item--'+items[3]).css({ zIndex: -19 });
+        $('.item--'+items[4]).css({ zIndex: -18 });
+        $('.item--'+items[5]).css({ zIndex: -17 });
+        $('.item--'+items[6]).css({ zIndex: -16 });
 
         $('.item--'+items[0]).animate({
             left: '100%',
-        }, 1000);
+        }, 0);
         $('.item--'+items[1]).animate({
             left: '80%',
         }, 1000);
