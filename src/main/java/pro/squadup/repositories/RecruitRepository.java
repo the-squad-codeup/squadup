@@ -12,4 +12,6 @@ public interface RecruitRepository extends JpaRepository<Recruit, Long> {
     boolean existsByUserOneAndUserTwo(User userOne, User userTwo);
 
     Set<Recruit> findAllByUserOne(User userOne);
+
+    Recruit findByUserOneAndUserTwo(User userOne, User userTwo);
 }
