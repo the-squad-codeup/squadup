@@ -33,5 +33,10 @@ public class RecruitController {
         return new HashSet<>(recruitDao.findAllByUserOne(user));
     }
 
+//    @GetMapping("/recruits/{id}/accept")
+//
+//
+//    @GetMapping("/recruit/{id}/reject")
+
 
 }

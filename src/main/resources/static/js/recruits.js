@@ -19,6 +19,11 @@ $(function() {
         }
     }
 
+    addEventListener('click', function (e){
+        e.preventDefault();
+
+    })
+
     async function getAllRecruits(){
         let results = await fetch("http://localhost:8080/recruits/all");
         let data = await results.json();
