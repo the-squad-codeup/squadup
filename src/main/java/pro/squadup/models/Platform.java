@@ -13,6 +13,9 @@ public class Platform {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
+    private int igdbId;
+
     @Column(nullable = false, length = 25)
     private String type;
 
@@ -29,6 +32,14 @@ public class Platform {
     }
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public int getIgdbId() {
+        return igdbId;
+    }
+
+    public void setIgdbId(int igdbId) {
+        this.igdbId = igdbId;
     }
 
     public String getType() {
@@ -56,6 +67,10 @@ public class Platform {
 
     public Platform(){
 
+    }
+
+    public Platform(int igdbId) {
+        this.igdbId = igdbId;
     }
 
     public Platform(String type) {

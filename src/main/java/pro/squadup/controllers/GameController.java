@@ -36,7 +36,7 @@ public class GameController {
     }
 
     @PostMapping("/{igdbId}/add")
-    public Object addGame(@PathVariable long igdbId) throws JsonProcessingException {
+    public Game addGame(@PathVariable long igdbId) throws JsonProcessingException {
         System.out.println("Inside addGame. Game ID: ");
         System.out.println(igdbId);
         if(!gameDao.existsByIgdbId(igdbId)) {

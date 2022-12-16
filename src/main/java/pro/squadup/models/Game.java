@@ -1,12 +1,15 @@
 package pro.squadup.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import pro.squadup.utils.GameDeserializer;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
 @Table(name="games")
+@JsonDeserialize(using = GameDeserializer.class)
 public class Game {
 
 
@@ -123,5 +126,14 @@ public class Game {
         this.title = title;
         this.artwork = artwork;
         this.rating = rating;
+    }
+
+    public Game(Long igdbId, String title, String artwork, Rating rating, Set<Genre> genres, Set<Platform> platforms) {
+        this.igdbId = igdbId;
+        this.title = title;
+        this.artwork = artwork;
+        this.rating = rating;
+        this.genres = genres;
+        this.platforms = platforms;
     }
 }

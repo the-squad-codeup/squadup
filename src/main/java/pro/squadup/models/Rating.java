@@ -70,6 +70,10 @@ public class Rating {
     public Rating() {
     }
 
+    public Rating(int igdbId) {
+        this.igdbId = igdbId;
+    }
+
     public Rating(int igdbId, String rating, Set<Preferences> preferences) {
         this.igdbId = igdbId;
         this.rating = rating;

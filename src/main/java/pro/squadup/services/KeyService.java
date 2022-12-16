@@ -12,11 +12,7 @@ public class KeyService {
     @Value("${igdb.access.token}")
     private String IGDB_ACCESS_TOKEN;
 
-    @Value("${igdb.proxy.key}")
-    private String IGDB_PROXY_KEY;
 
-    @Value("${igdb.proxy.url}")
-    private String IGDB_PROXY_URL;
 
     public KeyService() {
     }
@@ -37,19 +33,4 @@ public class KeyService {
         this.IGDB_ACCESS_TOKEN = IGDB_ACCESS_TOKEN;
     }
 
-    public String getIGDB_PROXY_KEY() {
-        return IGDB_PROXY_KEY;
-    }
-
-    public void setIGDB_PROXY_KEY(String IGDB_PROXY_KEY) {
-        this.IGDB_PROXY_KEY = IGDB_PROXY_KEY;
-    }
-
-    public String getIGDB_PROXY_URL() {
-        return IGDB_PROXY_URL;
-    }
-
-    public void setIGDB_PROXY_URL(String IGDB_PROXY_URL) {
-        this.IGDB_PROXY_URL = IGDB_PROXY_URL;
-    }
 }
