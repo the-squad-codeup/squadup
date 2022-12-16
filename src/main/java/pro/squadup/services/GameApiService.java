@@ -108,7 +108,7 @@ public class GameApiService {
     public List<Object> searchGames(String query) throws JsonProcessingException {
         System.out.println("Inside searchGames. Query: " + query);
         String bodyString = (
-                "search `" + query + "`; fields name,cover.image_id,age_ratings.rating,age_ratings.category,genres.name,platforms.name;"
+                "search `" + query + "`; fields name,cover.image_id,age_ratings.rating,age_ratings.category,genres.name,platforms.name; where category = 0;"
         ).replace('`', '"');
         System.out.println("Body String: " + bodyString);
         // Initialize http client and web client
@@ -190,5 +190,9 @@ public class GameApiService {
 //            System.out.println(mapper.writeValueAsString(object));
 //        }
         return objects;
+    }
+
+    public Game addGame(long igdbId) {
+
     }
 }

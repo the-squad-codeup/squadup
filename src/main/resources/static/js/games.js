@@ -25,7 +25,7 @@ $(function () {
             div.append(`
                 <div class="div-card col-3" data-game-igdb-id="${game.id}">
                     <div class="card game-card border-0">
-                        <img src="https://images.igdb.com/igdb/image/upload/t_screenshot_med/${game.cover.image_id}.jpg" class="card-img all-games-img">
+                        <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/${game.cover.image_id}.jpg" class="card-img all-games-img">
                     </div>
                 </div>
             `);

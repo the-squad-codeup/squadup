@@ -3,6 +3,7 @@ package pro.squadup.controllers;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import pro.squadup.models.Game;
 import pro.squadup.repositories.GameRepository;
 import pro.squadup.repositories.GenreRepository;
 import pro.squadup.services.GameApiService;
@@ -32,5 +33,16 @@ public class GameController {
         System.out.println("Inside searchGames. Query string: ");
         System.out.println(query);
         return gameApiService.searchGames(query);
+    }
+
+    @PostMapping("game/{igdbId}/add")
+    public Game addGame(@PathVariable long igdbId) {
+        System.out.println("Inside addGame. Game ID: ");
+        System.out.println(igdbId);
+        if(gameDao.existsByIgdbId(igdbId)) {
+            return gameApiService.addGame(igdbId);
+        } else {
+            return gameDao.findByIgdbId(igdbId);
+        }
     }
 }
