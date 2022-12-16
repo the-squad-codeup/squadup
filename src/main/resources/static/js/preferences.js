@@ -1,3 +1,5 @@
+// this needs to be refactored
+
 $(function() {
 
     const MyPreferences = {
@@ -181,5 +183,6 @@ $(function() {
     }
 
     MyPreferences.initialize();
+
 
 });
