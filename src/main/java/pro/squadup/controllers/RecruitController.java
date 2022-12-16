@@ -34,8 +34,9 @@ public class RecruitController {
     }
 
 //    @GetMapping("/recruits/{id}/accept")
-//
-//
+
+
+
 //    @GetMapping("/recruit/{id}/reject")
 
 
