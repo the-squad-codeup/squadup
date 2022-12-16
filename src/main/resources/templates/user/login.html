@@ -17,7 +17,8 @@
     <div class="container pt-5 my-5">
         <div class="row g-5">
             <div class="col-12 col-lg-5">
-                <div class="container bg-dark rounded-3 p-5">
+<!--EDIT FROM JH changed from a container to card-log class for design-->
+                <div class="card-log container rounded-3 p-5">
                     <h1 class="text-center text-light">Login</h1>
                     <!--Div that shows user they entered invalid parameters if it receives and error-->
                     <div th:if="${param.error}" class="text-light">
@@ -33,7 +34,7 @@
                     </div>
 
                     <!--Login Form-->
-                    <form class="text-light" th:action="@{/login}" method="POST">
+                    <form class="form-log text-light" th:action="@{/login}" method="POST">
                         <div class="mb-3">
                             <label for="username" class="form-label">Username</label>
                             <input type="text" class="form-control" id="username" name="username" autocomplete="off">
@@ -42,7 +43,7 @@
                             <label for="password" class="form-label">Password</label>
                             <input type="password" class="form-control" id="password" name="password" autocomplete="off">
                         </div>
-                        <button id="loginPasswordSubmit" type="submit" class="btn btn-primary">Login</button>
+                        <button id="loginPasswordSubmit" type="submit">Login</button>
                     </form>
                     <p id="notAUserToggle" class="text-light mt-5" style="cursor: pointer;">
                         Not a user? Click here to signup
@@ -50,10 +51,10 @@
                 </div>
             </div>
             <div class="col-12 col-lg-7">
-                <div id="signupContainer" class="container bg-dark rounded-3 p-5" style="display: none;">
+                <div id="signupContainer" class="card-sign container rounded-3 p-5" style="display: none;">
                     <h1 class="text-center text-light">Signup</h1>
 
-                    <form class="text-light" th:action="@{/signup}" method="POST" th:object="${user}">
+                    <form class="form-sign text-light" th:action="@{/signup}" method="POST" th:object="${user}">
                         <div class="mb-3">
                             <label for="signupEmailAddress" class="form-label">Email Address</label>
                             <input type="email" class="form-control" id="signupEmailAddress" th:field="*{email}" autocomplete="off">
@@ -76,7 +77,7 @@
                             <input type="password" class="form-control" id="signupConfirmPassword">
                             <div id="passwordsMustMatch" class="form-text d-none" style="color: #F00;">Passwords must match</div>
                         </div>
-                        <button id="signupPasswordSubmit" type="submit" class="btn btn-primary" disabled>Signup</button>
+                        <button id="signupPasswordSubmit" type="submit" disabled>Signup</button>
                     </form>
 
                 </div>
