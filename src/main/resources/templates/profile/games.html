@@ -3,7 +3,7 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <div th:replace="partials :: headFragment('Games Page')"></div>
-
+    <link rel="stylesheet" th:href="@{/css/games.css}">
 
 </head>
 <body>
@@ -12,7 +12,7 @@
 
     <input id="game-search-input" type="text">
     <button id="game-search-button">Search</button>
-    <div id="games-div">
+    <div id="games-div" class="row container">
 
     </div>
 

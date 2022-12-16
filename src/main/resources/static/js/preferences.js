@@ -46,8 +46,8 @@ $(function() {
                     timezone: $("#locations").find(":selected").text()
                 },
                 languages: MyPreferences.packageLanguageOptions($("#languages")),
-                mature_language: $("#mature-language").is(":checked"),
-                game_age_rating: {
+                matureLanguage: $("#mature-language").is(":checked"),
+                rating: {
                     rating: $("#game-ratings").find(":selected").text()
                 },
                 platforms: MyPreferences.packagePlatformOptions($("#platforms")),
@@ -98,7 +98,7 @@ $(function() {
             await this.bioElement(user);
         },
         async matureLanguageCheckboxElement(user){
-            if(user.preferences.mature_language) {
+            if(user.preferences.matureLanguage) {
                 $("#mature-language").attr("checked", "checked");
             }
         },
@@ -143,7 +143,7 @@ $(function() {
             let gameRatings = await Fetch.Get.all("rating").then(res => res);
             let $gameRatings = $("#game-ratings");
             for(let gameRating of gameRatings) {
-                if(user.preferences.game_age_rating != null && user.preferences.game_age_rating.rating === gameRating.rating) {
+                if(user.preferences.rating != null && user.preferences.rating.rating === gameRating.rating) {
                     $gameRatings.append(`
                         <option value="${gameRating.rating}" selected>${gameRating.rating}</option>
                     `);

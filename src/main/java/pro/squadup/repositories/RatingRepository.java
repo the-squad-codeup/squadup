@@ -7,4 +7,5 @@ import pro.squadup.models.Rating;
 @Repository
 public interface RatingRepository extends JpaRepository<Rating, Long> {
     Rating findByRating(String rating);
+    Rating findByIgdbId(int igdbId);
 }

@@ -101,8 +101,8 @@ public class ProfileController {
             updatedLanguages.add(languageDao.findByLanguage(language.getLanguage()));
         }
         userPreferences.setLanguages(updatedLanguages);
-        userPreferences.setMature_language(updatedPreferences.isMature_language());
-        userPreferences.setGame_age_rating(ratingDao.findByRating(updatedPreferences.getGame_age_rating().getRating()));
+        userPreferences.setMatureLanguage(updatedPreferences.isMatureLanguage());
+        userPreferences.setRating(ratingDao.findByRating(updatedPreferences.getRating().getRating()));
         Set<Platform> updatedPlatforms = new HashSet<>();
         for(Platform platform : updatedPreferences.getPlatforms()) {
             updatedPlatforms.add(platformDao.findByType(platform.getType()));
