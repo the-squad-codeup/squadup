@@ -2,12 +2,22 @@ USE squadup_db;
 
 # TRUNCATE locations;
 INSERT INTO locations (timezone)
-    VALUES ('Eastern Time Zone'),
-           ('Central Time Zone'),
-           ('Mountain Time Zone'),
+    VALUES ('Unspecified Time Zone'),
+           ('Hawaii-Aleutian Time Zone'),
+           ('Alaskan Time Zone'),
            ('Pacific Time Zone'),
-           ('Alaska Time Zone'),
-           ('Hawaii-Aleutian Time Zone');
+           ('Mountain Time Zone'),
+           ('Mountain Arizona Time Zone'),
+           ('Central Time Zone'),
+           ('Eastern Time Zone'),
+           ('Atlantic Time Zone');
+
+#           ('Eastern Time Zone'),
+#            ('Central Time Zone'),
+#            ('Mountain Time Zone'),
+#            ('Pacific Time Zone'),
+#            ('Alaska Time Zone'),
+#            ('Hawaii-Aleutian Time Zone');
 
 # TRUNCATE languages;
 INSERT INTO languages (language)
@@ -24,7 +34,7 @@ INSERT INTO languages (language)
 # TRUNCATE ratings;
 INSERT INTO ratings (rating)
     VALUES ('Everyone'),
-           ('Everyone 10 & up'),
+           ('Everyone (10 & up)'),
            ('Teen (13 & up)'),
            ('Mature (17 & up)'),
            ('Adults Only (18 & up)'),
