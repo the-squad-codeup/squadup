@@ -7,4 +7,5 @@ import pro.squadup.models.PlatformMapping;
 @Repository
 public interface PlatformMappingRepository extends JpaRepository<PlatformMapping, Long> {
     boolean existsByIgdbId(Long igdbId);
+    PlatformMapping findByIgdbId(Long igdbId);
 }
