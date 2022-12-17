@@ -4,14 +4,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import pro.squadup.models.PlatformMapping;
-import pro.squadup.models.Game;
-import pro.squadup.models.Genre;
-import pro.squadup.models.Platform;
-import pro.squadup.repositories.GameRepository;
-import pro.squadup.repositories.GenreRepository;
-import pro.squadup.repositories.PlatformMappingRepository;
-import pro.squadup.repositories.PlatformRepository;
+import pro.squadup.models.*;
+import pro.squadup.repositories.*;
 import pro.squadup.services.GameApiService;
 
 import java.io.IOException;
@@ -27,6 +21,7 @@ public class GameController {
     private final GenreRepository genreDao;
     private final PlatformRepository platformDao;
     private final PlatformMappingRepository platformMappingDao;
+    private final RatingRepository ratingDao;
 
     @Autowired
     private GameApiService gameApiService;
@@ -36,13 +31,14 @@ public class GameController {
                         GameRepository gameDao,
                         GenreRepository genreDao,
                         PlatformRepository platformDao,
-                        PlatformMappingRepository platformMappingDao
-                        )
+                        PlatformMappingRepository platformMappingDao,
+                        RatingRepository ratingDao)
     {
         this.gameDao = gameDao;
         this.genreDao = genreDao;
         this.platformDao = platformDao;
         this.platformMappingDao = platformMappingDao;
+        this.ratingDao = ratingDao;
     }
 
 
@@ -99,8 +95,8 @@ public class GameController {
         }
         game.setPlatforms(platforms);
 
-
-
+        Rating rating = ratingDao.findByIgdbId(game.getRating().getIgdbId());
+        game.setRating(rating);
 
 //        gameDao.save(game);
         return game;
