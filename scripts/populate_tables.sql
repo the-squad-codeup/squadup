@@ -45,3 +45,13 @@ INSERT INTO platforms (type)
            ('Playstation'),
            ('Xbox'),
            ('Nintendo');
+
+INSERT INTO platform_mapping (igdb_id, platform_id)
+    VALUES (6, 1),
+           (9, 2),
+           (48, 2),
+           (167, 2),
+           (12, 3),
+           (49, 3),
+           (169, 3),
+           (130, 4);

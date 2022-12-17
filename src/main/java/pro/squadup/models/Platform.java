@@ -73,6 +73,10 @@ public class Platform {
         this.type = type;
     }
 
+    public Platform(Set<PlatformMapping> igdbId) {
+        this.igdbId = igdbId;
+    }
+
     public Platform(Long id, String type) {
         this.id = id;
         this.type = type;
