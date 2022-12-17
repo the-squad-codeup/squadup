@@ -6,4 +6,6 @@ import pro.squadup.models.Game;
 
 @Repository
 public interface GameRepository extends JpaRepository<Game, Long> {
+    boolean existsByIgdbId(Long igdbId);
+    Game findByIgdbId(Long igdbId);
 }
