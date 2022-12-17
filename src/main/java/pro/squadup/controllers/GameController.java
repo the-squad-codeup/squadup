@@ -65,6 +65,7 @@ public class GameController {
             game = gameDao.findByIgdbId(igdbId);
         } else {
             game = gameApiService.addGame(igdbId);
+
             Set<Genre> genres = new HashSet<>();
             for (Genre genre : game.getGenres()) {
                 if (genreDao.existsByName(genre.getName())) {
@@ -91,8 +92,8 @@ public class GameController {
                 System.out.println("Platforms set does not contain platform to add: " + !platforms.contains(platformToAdd));
                 if (
                         platformMappingDao.existsByIgdbId(mappingId) &&
-                                platformDao.existsByIgdbIdsIgdbId(mappingId) &&
-                                !platforms.contains(platformToAdd)
+                        platformDao.existsByIgdbIdsIgdbId(mappingId) &&
+                        !platforms.contains(platformToAdd)
                 ) {
                     System.out.println("inside if statement");
                     platforms.add(platformToAdd);

@@ -33,7 +33,9 @@ INSERT INTO languages (language)
 
 # TRUNCATE ratings;
 INSERT INTO ratings (igdb_id, rating)
-    VALUES (8, 'Everyone'),
+    VALUES (6, 'Rating Pending'),
+           (7, 'Early Childhood'),
+           (8, 'Everyone'),
            (9, 'Everyone 10 & up'),
            (10, 'Teen (13 & up)'),
            (11, 'Mature (17 & up)'),
