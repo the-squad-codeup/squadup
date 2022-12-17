@@ -50,12 +50,16 @@ public class GameController {
         Set<Genre> genres = new HashSet<>();
         for(Genre genre : game.getGenres()) {
             if(genreDao.existsByName(genre.getName())) {
+                System.out.println("inside genre exists by name");
                 genres.add(genreDao.findByName(genre.getName()));
+            } else {
+                genres.add(genreDao.save(genre));
             }
-            genres.add(genreDao.save(genre));
         }
         game.setGenres(genres);
-        gameDao.save(game);
+
+
+//        gameDao.save(game);
         return game;
     }
 }
