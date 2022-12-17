@@ -4,11 +4,13 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pro.squadup.models.Game;
+import pro.squadup.models.Genre;
 import pro.squadup.repositories.GameRepository;
 import pro.squadup.repositories.GenreRepository;
 import pro.squadup.services.GameApiService;
 
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -44,7 +46,16 @@ public class GameController {
             return gameDao.findByIgdbId(igdbId);
         }
 
-
-        return gameApiService.addGame(igdbId);
+        Game game = gameApiService.addGame(igdbId);
+        Set<Genre> genres = new HashSet<>();
+        for(Genre genre : game.getGenres()) {
+            if(genreDao.existsByName(genre.getName())) {
+                genres.add(genreDao.findByName(genre.getName()));
+            }
+            genres.add(genreDao.save(genre));
+        }
+        game.setGenres(genres);
+        gameDao.save(game);
+        return game;
     }
 }
