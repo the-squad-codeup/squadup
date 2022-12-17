@@ -39,11 +39,12 @@ public class GameController {
     public Game addGame(@PathVariable long igdbId) throws JsonProcessingException {
         System.out.println("Inside addGame. Game ID: ");
         System.out.println(igdbId);
-        if(!gameDao.existsByIgdbId(igdbId)) {
-            return gameApiService.addGame(igdbId);
-        } else {
-//            return gameDao.findByIgdbId(igdbId);
-            return null;
+
+        if(gameDao.existsByIgdbId(igdbId)) {
+            return gameDao.findByIgdbId(igdbId);
         }
+
+
+        return gameApiService.addGame(igdbId);
     }
 }
