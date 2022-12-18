@@ -7,14 +7,7 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
-import com.fasterxml.jackson.databind.node.IntNode;
-import com.fasterxml.jackson.databind.node.LongNode;
-import org.springframework.beans.factory.annotation.Autowired;
-import pro.squadup.models.Game;
-import pro.squadup.models.Genre;
-import pro.squadup.models.Platform;
-import pro.squadup.models.Rating;
-import pro.squadup.services.DeserializerRepositoryService;
+import pro.squadup.models.*;
 
 import java.io.IOException;
 import java.util.HashSet;
@@ -30,17 +23,6 @@ public class GameDeserializer extends StdDeserializer<Game> {
     public GameDeserializer(Class<?> vc) {
         super(vc);
     }
-
-//    @Override
-//    public Item deserialize(JsonParser jp, DeserializationContext ctxt)
-//            throws IOException, JsonProcessingException {
-//        JsonNode node = jp.getCodec().readTree(jp);
-//        int id = (Integer) ((IntNode) node.get("id")).numberValue();
-//        String itemName = node.get("itemName").asText();
-//        int userId = (Integer) ((IntNode) node.get("createdBy")).numberValue();
-//
-//        return new Item(id, itemName, new User(userId, null));
-//    }
 
     @Override
     public Game deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JacksonException {
@@ -93,21 +75,23 @@ public class GameDeserializer extends StdDeserializer<Game> {
             genres.add(new Genre(genreName));
         }
         JsonNode platformsNode = node.path("platforms");
-        Set<Integer> igdbPlatformIds = new HashSet<>();
+        Set<Long> igdbPlatformIds = new HashSet<>();
         if(platformsNode.isArray()) {
             for(JsonNode platformNode : platformsNode) {
-                int igdbPlatformId = (Integer) platformNode.get("id").numberValue();
+                long igdbPlatformId = platformNode.get("id").asLong();
                 igdbPlatformIds.add(igdbPlatformId);
             }
         } else {
-            int igdbPlatformId = (Integer) platformsNode.get("id").numberValue();
+            long igdbPlatformId = platformsNode.get("id").asLong();
             igdbPlatformIds.add(igdbPlatformId);
         }
         System.out.println("igdbPlatformIds: ");
         System.out.println(mapper.writeValueAsString(igdbPlatformIds));
         Set<Platform> platforms = new HashSet<>();
-        for(Integer igdbPlatformId : igdbPlatformIds) {
-            platforms.add(new Platform(igdbPlatformId));
+        for(Long igdbPlatformId : igdbPlatformIds) {
+            Set<PlatformMapping> igdbPlatforms = new HashSet<>();
+            igdbPlatforms.add(new PlatformMapping(igdbPlatformId));
+            platforms.add(new Platform(igdbPlatforms));
         }
 
         Game game = new Game(igdbId, title, artwork, rating, genres, platforms);

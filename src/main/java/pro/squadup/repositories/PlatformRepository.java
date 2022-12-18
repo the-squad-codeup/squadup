@@ -7,4 +7,6 @@ import pro.squadup.models.Platform;
 @Repository
 public interface PlatformRepository extends JpaRepository<Platform, Long> {
     Platform findByType(String type);
+    Platform findByIgdbIdsIgdbId(Long igdbId);
+    boolean existsByIgdbIdsIgdbId(Long igdbId);
 }

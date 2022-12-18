@@ -181,4 +181,8 @@ public class Preferences {
         this.rating = rating;
     }
 
+    public void addGame(Game game) {
+        this.games.add(game);
+    }
+
 }

@@ -54,7 +54,7 @@ public class UserController {
         user.setPassword(hash);
         userDao.save(user);
         authWithHttpServletRequest(httpServletRequest, user.getUsername(), plainPassword);
-        return "redirect:/recruits";
+        return "redirect:/profile/preferences";
     }
 
     @GetMapping("/user/get")
