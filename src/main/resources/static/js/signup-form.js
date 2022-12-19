@@ -122,6 +122,18 @@ $(function() {
             specialMet ? Output.Text.revert($("#signupPasswordHelpSpecialCharacters")) : Output.Text.makeRed($("#signupPasswordHelpSpecialCharacters"));
         },
 
+        //Does this appear now!?
+        submitButtonEnableDisable: () => {
+            disabledAttribute = $("#signupPasswordSubmit").attr("disabled");
+            if(!(Check.requirementsNotMet($("#signupPassword").val())) && Check.confirmMatchesPassword()) {
+                passwordFulfillsRequirements = true;
+            }
+            if(passwordFulfillsRequirements) {
+                $("#signupPasswordSubmit").removeAttr("disabled");
+            } else if(typeof disabledAttribute === undefined || typeof disabledAttribute === false) {
+                $("#signupPasswordSubmit").attr("disabled", "");
+            }
+        }
     }
 
     // Checking and changing password field and text based on requirements
