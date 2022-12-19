@@ -14,7 +14,20 @@ body:before{
     background-size: cover;
 }
 
+:root {
+    --bs-gamergreen: rgb(140, 250, 98);
+    --bs-gamerpurp: rgb(63, 5, 79);
+    --bs-lighterpurp: #800080FF;
+}
+
 #page-wrapper {
     margin: 60px 0px;
     color: white;
 }
+
+body {
+    font-family: Chakra Petch, sans-serif;
+    /*color: white; this can't be here because it will make the unordered list in the footer dots visible*/
+}
+
+/**/
