@@ -6,7 +6,7 @@ $(function() {
         $("#card").html('');
         for (let recruit of recruits) {
             $(`#card`).append(`
-                <div class="card mx-auto" data-recruit-id="${recruit.id}">
+                <div class="card col-6" data-recruit-id="${recruit.id}">
                     <img class="card-img-top" src="https://i.imgur.com/0Z0Z0Z0.jpg" alt="Card image">
                         <div class="card-body">
                             <h4 class="card-title">${recruit.userTwo.username}</h4>
@@ -20,10 +20,10 @@ $(function() {
     }
 
 
-    addEventListener('click', function (e){
-        e.preventDefault();
-
-    })
+    // addEventListener('click', function (e){
+    //     e.preventDefault();
+    //
+    // })
 
     async function getAllRecruits(){
         let results = await fetch("http://localhost:8080/recruits/all");
