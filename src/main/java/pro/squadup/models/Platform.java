@@ -13,8 +13,9 @@ public class Platform {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private int igdbId;
+    @OneToMany(mappedBy = "platformId")
+    @JsonIgnore
+    private Set<PlatformMapping> igdbIds;
 
     @Column(nullable = false, length = 25)
     private String type;
@@ -34,12 +35,12 @@ public class Platform {
         this.id = id;
     }
 
-    public int getIgdbId() {
-        return igdbId;
+    public Set<PlatformMapping> getIgdbIds() {
+        return igdbIds;
     }
 
-    public void setIgdbId(int igdbId) {
-        this.igdbId = igdbId;
+    public void setIgdbIds(Set<PlatformMapping> igdbIds) {
+        this.igdbIds = igdbIds;
     }
 
     public String getType() {
@@ -69,12 +70,12 @@ public class Platform {
 
     }
 
-    public Platform(int igdbId) {
-        this.igdbId = igdbId;
-    }
-
     public Platform(String type) {
         this.type = type;
+    }
+
+    public Platform(Set<PlatformMapping> igdbIds) {
+        this.igdbIds = igdbIds;
     }
 
     public Platform(Long id, String type) {

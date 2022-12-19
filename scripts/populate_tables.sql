@@ -33,7 +33,9 @@ INSERT INTO languages (language)
 
 # TRUNCATE ratings;
 INSERT INTO ratings (igdb_id, rating)
-    VALUES (8, 'Everyone'),
+    VALUES (6, 'Rating Pending'),
+           (7, 'Early Childhood'),
+           (8, 'Everyone'),
            (9, 'Everyone 10 & up'),
            (10, 'Teen (13 & up)'),
            (11, 'Mature (17 & up)'),
@@ -45,3 +47,13 @@ INSERT INTO platforms (type)
            ('Playstation'),
            ('Xbox'),
            ('Nintendo');
+
+INSERT INTO platform_mapping (igdb_id, platform_id)
+    VALUES (6, 1),
+           (9, 2),
+           (48, 2),
+           (167, 2),
+           (12, 3),
+           (49, 3),
+           (169, 3),
+           (130, 4);
