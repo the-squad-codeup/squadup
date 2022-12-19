@@ -8,4 +8,7 @@ $(function() {
     $("#emailSend").on('click', function(){
         alert("Your message ha been sent to HQ");
     });
+
+    // $("contactUs")
+
 });
