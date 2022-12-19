@@ -44,6 +44,8 @@ public class RecruitMatchingService {
     public void matchRecruits(User user, Set<User> allUsers) throws JsonProcessingException {
         for(User otherUser : allUsers) {
             if(
+                    user.getPreferences() != null &&
+                    otherUser.getPreferences() != null &&
                     user.getId() != otherUser.getId() &&
                     !areComrades(user, otherUser) &&
                     !alreadyRecruited(user, otherUser) &&
