@@ -121,6 +121,7 @@ $(function() {
             specialMet = Check.containsSpecialCharacter(value);
             specialMet ? Output.Text.revert($("#signupPasswordHelpSpecialCharacters")) : Output.Text.makeRed($("#signupPasswordHelpSpecialCharacters"));
         },
+        //Does this appear now!?
         submitButtonEnableDisable: () => {
             disabledAttribute = $("#signupPasswordSubmit").attr("disabled");
             if(!(Check.requirementsNotMet($("#signupPassword").val())) && Check.confirmMatchesPassword()) {
