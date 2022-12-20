@@ -1,3 +1,5 @@
+import { Utils } from "./utils";
+
 $(function () {
     console.log("Inside games.js");
 
@@ -7,7 +9,7 @@ $(function () {
             Events.initialize();
             // Fetch.Get.gameSearch("hollow knight");
         },
-        baseUrl: $("#base-url").text(),
+        baseUrl: Utils.url(),
         csrfToken: $("meta[name='_csrf']").attr("content")
     }
 
