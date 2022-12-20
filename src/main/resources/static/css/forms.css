@@ -1,3 +1,33 @@
+/*navbar edits*/
+.navbar{
+    display: flex;
+    align-items: center;
+}
+
+.navbar, a:hover {
+    color: #5CFD42;
+    border-top: var(--bs-gamergreen) solid 2px;
+    border-bottom: var(--bs-gamergreen) solid 2px;
+}
+
+.navbar, #site-bar-logout-link:hover {
+    color: purple;
+    border-top: purple solid 4px;
+    border-bottom: purple solid 4px;
+}
+
+
+#footer{
+    display: flex;
+    align-items: center;
+    width: auto;
+    height: 40px;
+}
+.foot-link {
+    text-decoration: none;
+    color: whitesmoke;
+    /*padding-bottom: 10px;*/
+}
 
 /*edits for about us page*/
 hr {
