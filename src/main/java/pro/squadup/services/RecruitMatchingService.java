@@ -8,7 +8,6 @@ import pro.squadup.repositories.ComradeRepository;
 import pro.squadup.repositories.GenreRepository;
 import pro.squadup.repositories.RecruitRepository;
 import pro.squadup.repositories.UserRepository;
-
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashSet;
