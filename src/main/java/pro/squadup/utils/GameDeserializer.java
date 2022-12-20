@@ -58,13 +58,15 @@ public class GameDeserializer extends StdDeserializer<Game> {
         System.out.println("igdbRatingId: " + igdbRatingId);
         Rating rating = new Rating(igdbRatingId);
         JsonNode genresNode = node.path("genres");
+        System.out.println("Genres node: ");
+        System.out.println(mapper.writeValueAsString(genresNode));
         Set<String> genreNames = new HashSet<>();
         if(genresNode.isArray()) {
             for(JsonNode genreNode : genresNode) {
                 String genreName = genreNode.get("name").asText();
                 genreNames.add(genreName);
             }
-        } else {
+        } else if(genresNode.get("name") != null) {
             String genreName = genresNode.get("name").asText();
             genreNames.add(genreName);
         }
