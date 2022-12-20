@@ -6,7 +6,7 @@ $(function() {
         $("#card").html('');
         for (let recruit of recruits) {
             $(`#card`).append(`
-                <div class="card col-6" data-recruit-id="${recruit.id}">
+                <div class="card col-4" data-recruit-id="${recruit.id}">
                     <img class="card-img-top" src="https://i.imgur.com/0Z0Z0Z0.jpg" alt="Card image">
                         <div class="card-body">
                             <h4 class="card-title">${recruit.userTwo.username}</h4>
@@ -20,10 +20,38 @@ $(function() {
     }
 
 
-    // addEventListener('click', function (e){
-    //     e.preventDefault();
-    //
-    // })
+    document.getElementById("card").addEventListener('click', function (e){
+        e.preventDefault();
+        if (e.target && e.target.classList.contains("squadup-link")){
+         let id = e.target.parentElement.parentElement.getAttribute("data-recruit-id");
+            $.ajax({
+                url: `/api/recruits/${user}`,
+                method: "PUT",
+                data: JSON.stringify({
+                    userOne: {
+                        id: 1
+                    },
+                    userTwo: {
+                        id: 2
+                    },
+                    userOneAccepted: true,
+                    userTwoAccepted: false
+                }),
+                dataType: "json",
+                contentType: "application/json",
+                success: function(data) {
+                    console.log(data);
+                }
+            })
+
+        }
+
+        if (e.target && e.target.classList.contains("squaddown-link")){
+            let link = e.target.parentElement.parentElement.getAttribute("data-recruit-id")
+            console.log(link);
+        }
+
+    })
 
     async function getAllRecruits(){
         let results = await fetch("http://localhost:8080/recruits/all");
@@ -33,6 +61,5 @@ $(function() {
     }
 
     printUserCards(getAllRecruits());
-
 });
 

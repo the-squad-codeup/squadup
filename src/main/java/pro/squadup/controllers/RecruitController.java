@@ -33,11 +33,23 @@ public class RecruitController {
         return new HashSet<>(recruitDao.findAllByUserOne(user));
     }
 
-//    @GetMapping("/recruits/{id}/accept")
+    @GetMapping("/recruits/{id}/accept")
+    public String acceptRecruit(@PathVariable Long id){
+        User user = userDao.findById(Utils.currentUserId()).get();
+        Recruit recruit = recruitDao.findById(id).get();
+        user.getRecruits().add(recruit);
+        recruit.setUserTwo(user);
+        recruitDao.save(recruit);
+        return "redirect:/recruits";
+    }
 
 
-
-//    @GetMapping("/recruit/{id}/reject")
-
+    @GetMapping("/recruit/{id}/reject")
+    public String rejectRecruit(@PathVariable Long id){
+        User user = userDao.findById(Utils.currentUserId()).get();
+        Recruit recruit = recruitDao.findById(id).get();
+        recruitDao.delete(recruit);
+        return "redirect:/recruits";
+    }
 
 }
