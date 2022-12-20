@@ -24,7 +24,7 @@ public class Preferences {
     @JoinColumn(name = "location_id")
     private Location location;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "preferences_language",
             joinColumns = {@JoinColumn(name = "preferences_id")},
@@ -59,7 +59,7 @@ public class Preferences {
     )
     private Set<Game> games;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "preferences_genre",
             joinColumns = {@JoinColumn(name = "preferences_id")},

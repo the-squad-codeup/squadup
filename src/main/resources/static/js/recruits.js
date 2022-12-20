@@ -1,4 +1,7 @@
 $(function() {
+
+    const csrfToken = $("meta[name='_csrf']").attr("content")
+
     console.log("Inside recruits.js");
     async function printUserCards(recruits) {
         recruits = await recruits;
@@ -25,8 +28,11 @@ $(function() {
         if (e.target && e.target.classList.contains("squadup-link")){
          let id = e.target.parentElement.parentElement.getAttribute("data-recruit-id");
             $.ajax({
-                url: `/api/recruits/${user}`,
-                method: "PUT",
+                url: `/api/recruits/${id}`,
+                method: "POST",
+                headers: {
+                  'X-CSRF-TOKEN': csrfToken
+                },
                 data: JSON.stringify({
                     userOne: {
                         id: 1
