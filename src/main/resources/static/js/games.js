@@ -1,4 +1,4 @@
-import { Utils } from "./utils";
+import { Utils } from "./utils.js";
 
 $(function () {
     console.log("Inside games.js");
