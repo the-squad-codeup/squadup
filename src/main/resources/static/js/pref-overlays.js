@@ -20,7 +20,7 @@ function hideOverlays() {
 
 function toggleOverlay(){
     hideOverlays();
-    var x = document.getElementById('timezones').value
+    var x = document.getElementById('spacetime').value
     if( x == 1) {
         document.getElementById('HAST').style.display = "block";
     } else if ( x == 2) {

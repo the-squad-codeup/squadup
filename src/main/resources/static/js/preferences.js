@@ -5,7 +5,7 @@ $(function() {
     const MyPreferences = {
         initialize() {
             Events.initialize();
-            Print.form();
+            // Print.form();
         },
         arrayIncludesLanguage(array, language) {
             for(let e of array) {
@@ -23,13 +23,21 @@ $(function() {
             }
             return false;
         },
-        packageLanguageOptions($div) {
+        packageLanguageOptions: function () {
             let options = [];
-            for(let child of $div.children()) {
-                if(child.selected) {
-                    options.push({language: child.value});
+            // for(let child of $div.children()) {
+            //     console.log(child);
+            //     if(child.children(".form-check-input").attr("checked")) {
+            //         options.push({language: child.value});
+            //     }
+            // }
+            $(".lang").each(function (i, el) {
+                if ($('.checkbox').prop('checked',true)) {
+                    options.push({language: el.value});
                 }
-            }
+            })
+
+            console.log(options);
             return options;
         },
         packagePlatformOptions($div) {
@@ -45,15 +53,20 @@ $(function() {
             const preferencesObject = {
                 bio: $("#bio").val(),
                 location: {
-                    timezone: $("#locations").find(":selected").text()
+                    timezone: $("#spacetime").find(":selected").value
+
                 },
-                languages: MyPreferences.packageLanguageOptions($("#languages")),
+                languages: MyPreferences.packageLanguageOptions(),
+
                 matureLanguage: $("#mature-language").is(":checked"),
+                // mature language is updating table
                 rating: {
                     rating: $("#game-ratings").find(":selected").text()
                 },
                 platforms: MyPreferences.packagePlatformOptions($("#platforms")),
+
                 gamertag: $("#gamertag").val()
+                // gamertag is updating the table
             };
             return preferencesObject;
         },
@@ -112,7 +125,7 @@ $(function() {
         },
         async locationSelectElement(user) {
             let locations = await Fetch.Get.all("location").then(res => res);
-            let $locations = $("#locations");
+            let $locations = $("#spacetime");
             $locations.empty();
             for(let location of locations) {
                 if(user.preferences.location != null && user.preferences.location.timezone === location.timezone) {
