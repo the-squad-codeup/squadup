@@ -3,6 +3,7 @@ package pro.squadup.controllers;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pro.squadup.models.Recruit;
 import pro.squadup.models.User;
@@ -33,5 +34,23 @@ public class RecruitController {
         return new HashSet<>(recruitDao.findAllByUserOne(user));
     }
 
+    @PostMapping("/recruits/{id}/accept")
+    public String acceptRecruit(@PathVariable Long id){
+        User user = userDao.findById(Utils.currentUserId()).get();
+        Recruit recruit = recruitDao.findById(id).get();
+        user.getRecruits().add(recruit);
+        recruit.setUserTwo(user);
+        recruitDao.save(recruit);
+        return "redirect:/recruits";
+    }
+
+
+    @PostMapping("/recruit/{id}/reject")
+    public String rejectRecruit(@PathVariable Long id){
+        User user = userDao.findById(Utils.currentUserId()).get();
+        Recruit recruit = recruitDao.findById(id).get();
+        recruitDao.delete(recruit);
+        return "redirect:/recruits";
+    }
 
 }
