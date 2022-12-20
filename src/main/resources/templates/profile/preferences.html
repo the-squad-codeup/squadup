@@ -4,7 +4,7 @@
 <head>
     <div th:replace="partials :: headFragment('Preferences Page')"></div>
     <link rel="stylesheet" th:href="@{/css/preferences.css}">
-    <script th:src="@{/js/pref-overlays.js}"></script>
+    <script th:src="@{/js/pref-v2.js}"></script>
 </head>
 <body th:onload="hideOverlays()" >
 <div th:replace="partials :: baseUrlFragment"></div>
@@ -31,13 +31,16 @@
                         <img th:src="@{/preferences-map/pref-pacific-overlay.png}" th:class="overlay" th:id="PT">
                     </div>
                 </p>
+
+
+
 <!--end of map and overlays div-->
 
 <!--timezone dropdown-->
                 <p>
                 <span>Pick your time Zone</span>
-                <select class="form-select form-select-sm mb-3" aria-label=".form-select-sm example" id="spacetime" onclick="toggleOverlay();">
-                    <option value="Unspecified Timezone" selected>(UTC ??:??) Unspecified</option>
+                <select class="location form-select form-select-sm mb-3" aria-label=".form-select-sm example" id="location" onclick="toggleOverlay();">
+                    <option value="Unspecified Time" selected>(UTC ??:??) Unspecified</option>
                     <option value="Hawaii-Aleutian Time">(UTC-10:00) Hawaii-Aleutian Standard Time</option>
                     <option value="Alaskan Time">(UTC-9:00) Alaskan Standard Time</option>
                     <option value="Pacific Time">(UTC-8:00) Pacific Standard Time</option>
@@ -208,6 +211,6 @@
 
 <nav th:replace="partials :: footer"></nav>
 <div th:replace="partials :: scripts"></div>
-<script th:src="@{/js/preferences.js}"></script>
+<!--<script th:src="@{/js/preferences.js}"></script>-->
 </body>
 </html>

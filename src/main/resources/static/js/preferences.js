@@ -1,4 +1,5 @@
 // this needs to be refactored
+//hardcoded html needs to get removed from the html page and then generated from js script
 
 $(function() {
 
@@ -25,17 +26,21 @@ $(function() {
         },
         packageLanguageOptions: function () {
             let options = [];
+            $(".lang").each(function (i, el) {
+                if ($(".lang").is(":checked") === true){
+                    options.push({language: el.value});
+                }
+                // if ($('.checkbox').prop('checked',true)) {
+                //     options.push({language: el.value});
+                // }
+            })
+
             // for(let child of $div.children()) {
             //     console.log(child);
             //     if(child.children(".form-check-input").attr("checked")) {
             //         options.push({language: child.value});
             //     }
             // }
-            $(".lang").each(function (i, el) {
-                if ($('.checkbox').prop('checked',true)) {
-                    options.push({language: el.value});
-                }
-            })
 
             console.log(options);
             return options;
@@ -52,8 +57,9 @@ $(function() {
         packagePreferencesObject() {
             const preferencesObject = {
                 bio: $("#bio").val(),
+                //bio is updating table and saving to page
                 location: {
-                    timezone: $("#spacetime").find(":selected").value
+                    timezone: $("#spacetime").find(":selected").val()
 
                 },
                 languages: MyPreferences.packageLanguageOptions(),
@@ -66,7 +72,7 @@ $(function() {
                 platforms: MyPreferences.packagePlatformOptions($("#platforms")),
 
                 gamertag: $("#gamertag").val()
-                // gamertag is updating the table
+                // gamertag is updating the table and saving to page
             };
             return preferencesObject;
         },
