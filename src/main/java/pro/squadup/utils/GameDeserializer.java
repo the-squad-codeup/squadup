@@ -44,7 +44,7 @@ public class GameDeserializer extends StdDeserializer<Game> {
         }
         System.out.println("title: " + title);
         String artworkId = "";
-        if(node.path("cover") != null){
+        if(node.path("cover").get("image_id") != null){
             artworkId = node.path("cover").get("image_id").asText();
         }
         System.out.println("artworkId: " + artworkId);
@@ -58,7 +58,7 @@ public class GameDeserializer extends StdDeserializer<Game> {
                     igdbRatingId = (Integer) ratingNode.get("rating").numberValue();
                 }
             }
-        } else if(ratingsNode.path("age_ratings") != null){
+        } else if(ratingsNode.path("age_ratings").get("category") != null){
             int ratingCategory = (Integer) ratingsNode.get("category").numberValue();
             if(ratingCategory == 1) {
                 igdbRatingId = (Integer) ratingsNode.get("rating").numberValue();

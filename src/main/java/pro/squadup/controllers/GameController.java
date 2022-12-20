@@ -109,6 +109,13 @@ public class GameController {
 
         Set<Game> userGames = currentUser.getPreferences().getGames();
         if(!userGames.contains(game)) {
+            Set<Genre> userGenres = currentUser.getPreferences().getGenres();
+            for(Genre genre : game.getGenres()) {
+                if(!userGenres.contains(genre)) {
+                    userGenres.add(genre);
+                }
+            }
+            currentUser.getPreferences().setGenres(userGenres);
             userGames.add(game);
             currentUser.getPreferences().setGames(userGames);
             preferencesDao.save(currentUser.getPreferences());
