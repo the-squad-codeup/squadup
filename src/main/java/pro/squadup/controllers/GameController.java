@@ -101,7 +101,12 @@ public class GameController {
             }
             game.setPlatforms(platforms);
 
-            Rating rating = ratingDao.findByIgdbId(game.getRating().getIgdbId());
+            Rating rating;
+            if(game.getRating() != null) {
+                rating = ratingDao.findByIgdbId(game.getRating().getIgdbId());
+            } else {
+                rating = ratingDao.findByIgdbId(6);
+            }
             game.setRating(rating);
 
             gameDao.save(game);

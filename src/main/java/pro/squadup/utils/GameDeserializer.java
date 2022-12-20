@@ -50,7 +50,7 @@ public class GameDeserializer extends StdDeserializer<Game> {
         System.out.println("artworkId: " + artworkId);
         String artwork = "https://images.igdb.com/igdb/image/upload/t_cover_big/" + artworkId + ".jpg";
         JsonNode ratingsNode = node.path("age_ratings");
-        int igdbRatingId = 0;
+        int igdbRatingId = 6;
         if(ratingsNode.isArray()) {
             for(JsonNode ratingNode : ratingsNode) {
                 int ratingCategory = (Integer) ratingNode.get("category").numberValue();
