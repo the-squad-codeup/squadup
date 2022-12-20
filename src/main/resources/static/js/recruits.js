@@ -16,8 +16,8 @@ $(function() {
                         <div class="card-body">
                             <h4 class="card-title">${recruit.userTwo.username}</h4>
                             <p class="card-text">${recruit.userTwo.username}'s Bio: ${recruit.userTwo.preferences.bio}</p>
-                            <a href="#"  class="btn btn-primary squadup-link">SquadUp</a>
-                            <a href="#" class="btn btn-primary squaddown-link">SquadDown</a>
+                            <a href="#"  class="btn btn-primary squadup-link">Accept</a>
+                            <a href="#" class="btn btn-primary squaddown-link">Reject</a>
                         </div>
                 </div>
             `);

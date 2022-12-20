@@ -38,6 +38,9 @@ public class RecruitController {
     @GetMapping("/recruits/all")
     public Set<Recruit> getAllByUser(){
         User user = userDao.findById(Utils.currentUserId()).get();
+        Set<Recruit> allRecruits;
+        Set<Recruit> trimmedRecruits = new HashSet<>();
+
         // Set<Recruit> allRecruits
         // Set<Recruit> trimmedRecruits = new HashSet<>();
 
