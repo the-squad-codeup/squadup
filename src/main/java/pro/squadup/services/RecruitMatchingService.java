@@ -50,7 +50,10 @@ public class RecruitMatchingService {
                     !areComrades(user, otherUser) &&
                     !alreadyRecruited(user, otherUser) &&
                     containsMatchingPlatform(user, otherUser) &&
-                    containsMatchingGames(user, otherUser)
+                    (
+                        containsMatchingGames(user, otherUser) ||
+                        containsMatchingGenres(user, otherUser)
+                    )
             ) {
                 addRecruits(user, otherUser);
             }
