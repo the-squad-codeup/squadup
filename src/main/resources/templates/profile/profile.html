@@ -4,10 +4,33 @@
 <head>
     <div th:replace="partials :: headFragment('My Profile')"></div>
 
+    <link rel="stylesheet" th:href="@{/css/profile.css}">
 </head>
 <body>
 <nav th:replace="partials :: siteBar"></nav>
-<div id="page-wrapper">
+<div id="page-wrapper" class="flexIt">
+    <div class="profile-container">
+        <div class="profile-image"></div>
+        <div class="bio-container"></div>
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </div>
 <nav th:replace="partials :: footer"></nav>
