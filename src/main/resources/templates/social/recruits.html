@@ -3,7 +3,7 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <div th:replace="partials :: headFragment('Recruits Page')"></div>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1">-->
 </head>
 <body>
 
@@ -15,13 +15,13 @@
     </div>
 
     <!-- Section with User cards -->
-    <section id="card" class=" row container">
+    <section id="card" class="row container">
     </section>
 
 </div>
 
 <nav th:replace="partials :: footer"></nav>
 <div th:replace="partials :: scripts"></div>
-<script th:src="@{/js/recruits.js}"></script>
+<script type="module" th:src="@{/js/recruits.js}"></script>
 </body>
 </html>

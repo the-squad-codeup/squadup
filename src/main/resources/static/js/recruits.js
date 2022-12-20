@@ -1,3 +1,5 @@
+import {Utils} from "./utils.js"
+
 $(function() {
 
     const csrfToken = $("meta[name='_csrf']").attr("content")
@@ -9,7 +11,7 @@ $(function() {
         $("#card").html('');
         for (let recruit of recruits) {
             $(`#card`).append(`
-                <div class="card col-4" data-recruit-id="${recruit.id}">
+                <div class="card col-3" data-recruit-id="${recruit.id}">
                     <img class="card-img-top" src="https://i.imgur.com/0Z0Z0Z0.jpg" alt="Card image">
                         <div class="card-body">
                             <h4 class="card-title">${recruit.userTwo.username}</h4>
@@ -23,40 +25,38 @@ $(function() {
     }
 
 
-    document.getElementById("card").addEventListener('click', function (e){
+    document.getElementById("card").addEventListener('click', async function (e) {
         e.preventDefault();
-        if (e.target && e.target.classList.contains("squadup-link")){
-         let id = e.target.parentElement.parentElement.getAttribute("data-recruit-id");
-            $.ajax({
-                url: `/api/recruits/${id}`,
-                method: "POST",
+        if (e.target && e.target.classList.contains("squadup-link")) {
+            let accept = e.target.parentElement.parentElement.getAttribute("data-recruit-id");
+            console.log(accept);
+            const fetchOptions = {
+                method: 'POST',
                 headers: {
-                  'X-CSRF-TOKEN': csrfToken
-                },
-                data: JSON.stringify({
-                    userOne: {
-                        id: 1
-                    },
-                    userTwo: {
-                        id: 2
-                    },
-                    userOneAccepted: true,
-                    userTwoAccepted: false
-                }),
-                dataType: "json",
-                contentType: "application/json",
-                success: function(data) {
-                    console.log(data);
+                    'X-CSRF-TOKEN' : csrfToken
                 }
-            })
-
+            }
+            let results = await fetch(`${Utils.url()}recruits/${accept}/accept`, fetchOptions);
+            let data = await results.json();
+            console.log(data);
+            e.target.parentElement.parentElement.remove();
         }
 
-        if (e.target && e.target.classList.contains("squaddown-link")){
-            let link = e.target.parentElement.parentElement.getAttribute("data-recruit-id")
-            console.log(link);
-        }
+        if (e.target && e.target.classList.contains("squaddown-link")) {
+            let reject = e.target.parentElement.parentElement.getAttribute("data-recruit-id");
+            console.log(reject);
+            const fetchOptions = {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN' : csrfToken
+                }
+            }
+            let results = await fetch(`${Utils.url()}recruits/${reject}/reject`, fetchOptions);
+            let data = await results.json();
+            console.log(data);
+            e.target.parentElement.parentElement.remove();
 
+        }
     })
 
     async function getAllRecruits(){
@@ -67,5 +67,6 @@ $(function() {
     }
 
     printUserCards(getAllRecruits());
+
 });
 
