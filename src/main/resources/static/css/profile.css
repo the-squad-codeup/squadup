@@ -23,7 +23,7 @@
     position: absolute;
 
 }
-.bio-container{
+.info-container{
     border: solid #5CFD42 .3vw;
     height: 20vw;
     width: 80vw;
@@ -32,3 +32,31 @@
     margin-left: 10vw;
     z-index: -3;
 }
+.gamertag{
+    color: #5CFD42;
+    font-size: 5vw;
+    position: absolute;
+    height: 5vw;
+    width: 50vw;
+    margin-top: 1vw;
+    margin-left: 10vw;
+    display: flex;
+    align-items: center;
+}
+.bio{
+    border: solid #5CFD42 .3vw;
+    position: absolute;
+    margin-top: 7vw;
+    margin-left: 10vw;
+    height: 12vw;
+    width: 50vw;
+}
+/*.genres{*/
+/*    border: solid #5CFD42 .3vw;*/
+/*    position: absolute;*/
+/*}*/
+
+
+
+
+
