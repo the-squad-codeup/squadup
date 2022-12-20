@@ -1,7 +1,6 @@
 package pro.squadup.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pro.squadup.models.*;
@@ -53,17 +52,12 @@ public class GameController {
 
     @PostMapping("/search")
     public List<Object> searchGames(@RequestBody String query) throws IOException {
-        System.out.println("Inside searchGames. Query string: ");
-        System.out.println(query);
         return gameApiService.searchGames(query);
     }
 
     @PostMapping("/{igdbId}/add")
     public Game addGame(@PathVariable long igdbId) throws JsonProcessingException {
         User currentUser = userDao.findById(Utils.currentUserId()).get();
-        ObjectMapper mapper = new ObjectMapper();
-        System.out.println("Inside addGame. Game ID: ");
-        System.out.println(igdbId);
         Game game;
         if(gameDao.existsByIgdbId(igdbId)) {
             game = gameDao.findByIgdbId(igdbId);
@@ -73,7 +67,6 @@ public class GameController {
             Set<Genre> genres = new HashSet<>();
             for (Genre genre : game.getGenres()) {
                 if (genreDao.existsByName(genre.getName())) {
-                    System.out.println("inside genre exists by name");
                     genres.add(genreDao.findByName(genre.getName()));
                 } else {
                     genres.add(genreDao.save(genre));
@@ -81,25 +74,15 @@ public class GameController {
             }
             game.setGenres(genres);
 
-            System.out.println("Setting platforms for game object.");
             Set<Platform> platforms = new HashSet<>();
             for (Platform platform : game.getPlatforms()) {
-                System.out.println("Platform in game.getPlatforms()");
-                System.out.println(mapper.writeValueAsString(platform));
                 Long mappingId = platform.getIgdbIds().stream().findFirst().get().getIgdbId();
-                System.out.println("mappingId: " + mappingId);
                 Platform platformToAdd = platformDao.findByIgdbIdsIgdbId(mappingId);
-                System.out.println("Platform to add:");
-                System.out.println(mapper.writeValueAsString(platformToAdd));
-                System.out.println("Platform mapping object exists by igdbId: " + platformMappingDao.existsByIgdbId(mappingId));
-                System.out.println("Platform object exists by the igdbIds igdbId: " + platformDao.existsByIgdbIdsIgdbId(mappingId));
-                System.out.println("Platforms set does not contain platform to add: " + !platforms.contains(platformToAdd));
                 if (
                         platformMappingDao.existsByIgdbId(mappingId) &&
                         platformDao.existsByIgdbIdsIgdbId(mappingId) &&
                         !platforms.contains(platformToAdd)
                 ) {
-                    System.out.println("inside if statement");
                     platforms.add(platformToAdd);
                 }
             }

@@ -59,7 +59,6 @@ public class UserController {
 
     @GetMapping("/user/get")
     public @ResponseBody User getCurrentUser() throws JsonProcessingException {
-        System.out.println("Inside getCurrentUser");
         User currentUser = userDao.findById(Utils.currentUserId()).get();
         ObjectMapper mapper = new ObjectMapper();
         mapper.writeValueAsString(currentUser);
