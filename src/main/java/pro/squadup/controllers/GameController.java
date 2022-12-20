@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import pro.squadup.models.*;
 import pro.squadup.repositories.*;
 import pro.squadup.services.GameApiService;
+import pro.squadup.services.RecruitMatchingService;
 import pro.squadup.utils.Utils;
 
 import java.io.IOException;
@@ -28,6 +29,9 @@ public class GameController {
 
     @Autowired
     private GameApiService gameApiService;
+
+    @Autowired
+    private RecruitMatchingService recruitMatchingService;
 
     public GameController
                         (
@@ -125,6 +129,7 @@ public class GameController {
             currentUser.getPreferences().setGames(userGames);
             preferencesDao.save(currentUser.getPreferences());
             userDao.save(currentUser);
+            recruitMatchingService.matchAllRecruits();
         }
         return game;
     }
