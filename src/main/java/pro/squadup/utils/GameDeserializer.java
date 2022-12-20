@@ -33,15 +33,24 @@ public class GameDeserializer extends StdDeserializer<Game> {
         JsonNode node = jp.getCodec().readTree(jp);
         node = node.get(0);
         System.out.println(mapper.writeValueAsString(node));
-        long igdbId = node.get("id").asLong();
+        long igdbId = 0;
+        if(node.get("id") != null) {
+            igdbId = node.get("id").asLong();
+        }
         System.out.println("igdbId: " + igdbId);
-        String title = node.get("name").asText();
+        String title = "";
+        if(node.get("name") != null) {
+            title = node.get("name").asText();
+        }
         System.out.println("title: " + title);
-        String artworkId = node.path("cover").get("image_id").asText();
+        String artworkId = "";
+        if(node.path("cover").get("image_id") != null){
+            artworkId = node.path("cover").get("image_id").asText();
+        }
         System.out.println("artworkId: " + artworkId);
         String artwork = "https://images.igdb.com/igdb/image/upload/t_cover_big/" + artworkId + ".jpg";
         JsonNode ratingsNode = node.path("age_ratings");
-        int igdbRatingId = 0;
+        int igdbRatingId = 6;
         if(ratingsNode.isArray()) {
             for(JsonNode ratingNode : ratingsNode) {
                 int ratingCategory = (Integer) ratingNode.get("category").numberValue();
@@ -49,7 +58,7 @@ public class GameDeserializer extends StdDeserializer<Game> {
                     igdbRatingId = (Integer) ratingNode.get("rating").numberValue();
                 }
             }
-        } else {
+        } else if(ratingsNode.path("age_ratings").get("category") != null){
             int ratingCategory = (Integer) ratingsNode.get("category").numberValue();
             if(ratingCategory == 1) {
                 igdbRatingId = (Integer) ratingsNode.get("rating").numberValue();
@@ -58,13 +67,15 @@ public class GameDeserializer extends StdDeserializer<Game> {
         System.out.println("igdbRatingId: " + igdbRatingId);
         Rating rating = new Rating(igdbRatingId);
         JsonNode genresNode = node.path("genres");
+        System.out.println("Genres node: ");
+        System.out.println(mapper.writeValueAsString(genresNode));
         Set<String> genreNames = new HashSet<>();
         if(genresNode.isArray()) {
             for(JsonNode genreNode : genresNode) {
                 String genreName = genreNode.get("name").asText();
                 genreNames.add(genreName);
             }
-        } else {
+        } else if(genresNode.get("name") != null) {
             String genreName = genresNode.get("name").asText();
             genreNames.add(genreName);
         }
@@ -81,7 +92,7 @@ public class GameDeserializer extends StdDeserializer<Game> {
                 long igdbPlatformId = platformNode.get("id").asLong();
                 igdbPlatformIds.add(igdbPlatformId);
             }
-        } else {
+        } else if (platformsNode.get("id") != null){
             long igdbPlatformId = platformsNode.get("id").asLong();
             igdbPlatformIds.add(igdbPlatformId);
         }

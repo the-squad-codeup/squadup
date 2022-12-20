@@ -56,7 +56,7 @@ public class GameApiService {
     public List<Object> searchGames(String query) throws JsonProcessingException {
         System.out.println("Inside searchGames. Query: " + query);
         String bodyString = (
-                "search `" + query + "`; fields name,cover.image_id,age_ratings.rating,age_ratings.category,genres.name,platforms.name; where category = 0;"
+                "search `" + query + "`; fields name,cover.image_id,age_ratings.rating,age_ratings.category,genres.name,platforms.name; where category = (0,2,8,9);"
         ).replace('`', '"');
         System.out.println("Body String: " + bodyString);
 

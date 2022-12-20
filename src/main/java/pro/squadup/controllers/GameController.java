@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import pro.squadup.models.*;
 import pro.squadup.repositories.*;
 import pro.squadup.services.GameApiService;
+import pro.squadup.services.RecruitMatchingService;
 import pro.squadup.utils.Utils;
 
 import java.io.IOException;
@@ -28,6 +29,9 @@ public class GameController {
 
     @Autowired
     private GameApiService gameApiService;
+
+    @Autowired
+    private RecruitMatchingService recruitMatchingService;
 
     public GameController
                         (
@@ -101,7 +105,12 @@ public class GameController {
             }
             game.setPlatforms(platforms);
 
-            Rating rating = ratingDao.findByIgdbId(game.getRating().getIgdbId());
+            Rating rating;
+            if(game.getRating() != null) {
+                rating = ratingDao.findByIgdbId(game.getRating().getIgdbId());
+            } else {
+                rating = ratingDao.findByIgdbId(6);
+            }
             game.setRating(rating);
 
             gameDao.save(game);
@@ -109,10 +118,18 @@ public class GameController {
 
         Set<Game> userGames = currentUser.getPreferences().getGames();
         if(!userGames.contains(game)) {
+            Set<Genre> userGenres = currentUser.getPreferences().getGenres();
+            for(Genre genre : game.getGenres()) {
+                if(!userGenres.contains(genre)) {
+                    userGenres.add(genre);
+                }
+            }
+            currentUser.getPreferences().setGenres(userGenres);
             userGames.add(game);
             currentUser.getPreferences().setGames(userGames);
             preferencesDao.save(currentUser.getPreferences());
             userDao.save(currentUser);
+            recruitMatchingService.matchAllRecruits();
         }
         return game;
     }
