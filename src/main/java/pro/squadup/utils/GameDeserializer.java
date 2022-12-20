@@ -33,11 +33,20 @@ public class GameDeserializer extends StdDeserializer<Game> {
         JsonNode node = jp.getCodec().readTree(jp);
         node = node.get(0);
         System.out.println(mapper.writeValueAsString(node));
-        long igdbId = node.get("id").asLong();
+        long igdbId = 0;
+        if(node.get("id") != null) {
+            igdbId = node.get("id").asLong();
+        }
         System.out.println("igdbId: " + igdbId);
-        String title = node.get("name").asText();
+        String title = "";
+        if(node.get("name") != null) {
+            title = node.get("name").asText();
+        }
         System.out.println("title: " + title);
-        String artworkId = node.path("cover").get("image_id").asText();
+        String artworkId = "";
+        if(node.path("cover") != null){
+            artworkId = node.path("cover").get("image_id").asText();
+        }
         System.out.println("artworkId: " + artworkId);
         String artwork = "https://images.igdb.com/igdb/image/upload/t_cover_big/" + artworkId + ".jpg";
         JsonNode ratingsNode = node.path("age_ratings");
@@ -49,7 +58,7 @@ public class GameDeserializer extends StdDeserializer<Game> {
                     igdbRatingId = (Integer) ratingNode.get("rating").numberValue();
                 }
             }
-        } else {
+        } else if(ratingsNode.path("age_ratings") != null){
             int ratingCategory = (Integer) ratingsNode.get("category").numberValue();
             if(ratingCategory == 1) {
                 igdbRatingId = (Integer) ratingsNode.get("rating").numberValue();
@@ -83,7 +92,7 @@ public class GameDeserializer extends StdDeserializer<Game> {
                 long igdbPlatformId = platformNode.get("id").asLong();
                 igdbPlatformIds.add(igdbPlatformId);
             }
-        } else {
+        } else if (platformsNode.get("id") != null){
             long igdbPlatformId = platformsNode.get("id").asLong();
             igdbPlatformIds.add(igdbPlatformId);
         }
