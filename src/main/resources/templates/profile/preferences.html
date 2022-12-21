@@ -39,16 +39,16 @@
 <!--timezone dropdown-->
                 <p>
                 <span>Pick your time Zone</span>
-                <select class="location form-select form-select-sm mb-3" aria-label=".form-select-sm example" id="location" onclick="toggleOverlay();">
-                    <option value="Unspecified Time" selected>(UTC ??:??) Unspecified</option>
-                    <option value="Hawaii-Aleutian Time">(UTC-10:00) Hawaii-Aleutian Standard Time</option>
-                    <option value="Alaskan Time">(UTC-9:00) Alaskan Standard Time</option>
-                    <option value="Pacific Time">(UTC-8:00) Pacific Standard Time</option>
-                    <option value="Mountain Time">(UTC-7:00) Mountain Standard Time</option>
-                    <option value="Arizona Time">(UTC-7:00) Mountain Standard Time (Arizona)</option>
-                    <option value="Central Time">(UTC-6:00) Central Standard Time</option>
-                    <option value="Eastern Time">(UTC-5:00) Eastern Standard Time</option>
-                    <option value="Atlantic Time ">(UTC-4:00) Atlantic Standard Time</option>
+                <select class="location form-select form-select-sm mb-3" aria-label=".form-select-sm example" id="location" name="location" onclick="toggleOverlay();">
+                    <option th:value="Unspecified Time Zone" selected>(UTC ??:??) Unspecified</option>
+                    <option th:value="Hawaii-Aleutian Time Zone">(UTC-10:00) Hawaii-Aleutian Standard Time</option>
+                    <option th:value="Alaskan Time Zone">(UTC-9:00) Alaskan Standard Time</option>
+                    <option th:value="Pacific Time Zone">(UTC-8:00) Pacific Standard Time</option>
+                    <option th:value="Mountain Time Zone">(UTC-7:00) Mountain Standard Time</option>
+                    <option th:value="Mountain Arizona Time Zone">(UTC-7:00) Mountain Standard Time (Arizona)</option>
+                    <option th:value="Central Time Zone">(UTC-6:00) Central Standard Time</option>
+                    <option th:value="Eastern Time Zone">(UTC-5:00) Eastern Standard Time</option>
+                    <option th:value="Atlantic Time Zone">(UTC-4:00) Atlantic Standard Time</option>
                 </select>
 
                 </p>
@@ -63,43 +63,49 @@
                 <br>
         <div id="languages">
             <div class="form-check form-switch">
-                <input class="lang form-check-input" type="checkbox" value="English" id="english" checked="true">
+                <input class="lang form-check-input" type="checkbox" th:value="English" id="english" checked="true">
                 <label class="form-check-label" for="english">English</label>
             </div>
             <div class="form-check form-switch">
-                <input class="lang form-check-input" type="checkbox" value="Spanish" id="spanish">
+                <input class="lang form-check-input" type="checkbox" th:value="Spanish" id="spanish">
                 <label class="form-check-label" for="spanish">Spanish</label>
             </div>
             <div class="form-check form-switch">
-                <input class="lang form-check-input" type="checkbox" value="Chinese" id="chinese">
+                <input class="lang form-check-input" type="checkbox" th:value="Chinese" id="chinese">
                 <label class="form-check-label" for="chinese">Chinese</label>
             </div>
             <div class="form-check form-switch">
-                <input class="lang form-check-input" type="checkbox" value="Japanese" id="japanese">
+                <input class="lang form-check-input" type="checkbox" th:value="Japanese" id="japanese">
                 <label class="form-check-label" for="japanese">Japanese</label>
             </div>
             <div class="form-check form-switch">
-                <input class="lang form-check-input" type="checkbox" value="Korean" id="korean">
+                <input class="lang form-check-input" type="checkbox" th:value="Korean" id="korean">
                 <label class="form-check-label" for="korean">Korean</label>
             </div>
             <div class="form-check form-switch">
-                <input class="lang form-check-input" type="checkbox" value="German" id="german">
+                <input class="lang form-check-input" type="checkbox" th:value="German" id="german">
                 <label class="form-check-label" for="german">German</label>
             </div>
             <div class="form-check form-switch">
-                <input class="lang form-check-input" type="checkbox" value="French" id="french">
+                <input class="lang form-check-input" type="checkbox" th:value="French" id="french">
                 <label class="form-check-label" for="french">French</label>
             </div>
             <div class="form-check form-switch">
-                <input class="lang form-check-input" type="checkbox" value="Italian" id="italian">
+                <input class="lang form-check-input" type="checkbox" th:value="Italian" id="italian">
                 <label class="form-check-label" for="italian">Italian</label>
             </div>
             <div class="form-check form-switch">
-                <input class="lang form-check-input" type="checkbox" value="Portuguese" id="portuguese">
+                <input class="lang form-check-input" type="checkbox" th:value="Portuguese" id="portuguese">
                 <label class="form-check-label" for="portuguese">Portuguese</label>
             </div>
                     </p>
-        </div>
+<!--original language select script below-->
+<!--        <label for="language">Pick your language</label>-->
+<!--        <select id="language" name="language">-->
+<!--            <option th:each="language : ${languages}" th:value="${language.language}" th:text="${language.language}" th:selected="${language.language==preferences.language}"></option>-->
+<!--        </select>-->
+
+    </div>
 <!--end of languages selection-->
 
 <!--ESRB Ratings-->
@@ -109,31 +115,31 @@
                 <br>
 
         <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" value="18" id="e" checked>
+            <input class="form-check-input" type="checkbox" th:value="6" id="e" checked>
             <label class="form-check-label" for="e">E - Everyone</label>
         </div>
         <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" value="19" id="e10">
+            <input class="form-check-input" type="checkbox" th:value="7" id="e10">
             <label class="form-check-label" for="e10">E10+ - Everyone (10 & up)</label>
         </div>
         <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" value="20" id="t">
+            <input class="form-check-input" type="checkbox" th:value="8" id="t">
             <label class="form-check-label" for="t">T - Teen (13 & up)</label>
         </div>
         <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" value="21" id="m">
+            <input class="form-check-input" type="checkbox" th:value="9" id="m">
             <label class="form-check-label" for="m">M - Mature (17 & up)</label>
         </div>
         <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" value="22" id="ao">
+            <input class="form-check-input" type="checkbox" th:value="10" id="ao">
             <label class="form-check-label" for="ao">AO - Adults Only (18 & up)</label>
         </div>
         <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" value="23" id="rp">
+            <input class="form-check-input" type="checkbox" th:value="11" id="rp">
             <label class="form-check-label" for="rp">RP - Rating Pending</label>
         </div>
         <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" value="24" id="rplm">
+            <input class="form-check-input" type="checkbox" th:value="12" id="rplm">
             <label class="form-check-label" for="rplm">RP - Rating Pending Likely Mature</label>
         </div>
 
@@ -145,7 +151,7 @@
                 <p>
                 <br>
                 <div class="form-check form-switch ">
-                    <input class="form-check-input" type="checkbox" value="25" id="matureLang">
+                    <input class="form-check-input" type="checkbox" id="matureLang">
                     <label class="form-check-label" for="matureLang">Mature Language OK?</label>
                 </div>
                 <br>
@@ -165,19 +171,19 @@
 <!--                </select>-->
 
                 <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" value="26" id="PC">
+                    <input class="form-check-input" type="checkbox" value="1" id="PC">
                     <label class="form-check-label" for="PC">PC</label>
                 </div>
                 <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" value="27" id="Playstation">
+                    <input class="form-check-input" type="checkbox" value="2" id="Playstation">
                     <label class="form-check-label" for="Playstation">Playstation</label>
                 </div>
                 <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" value="28" id="Xbox">
+                    <input class="form-check-input" type="checkbox" value="3" id="Xbox">
                     <label class="form-check-label" for="Xbox">Xbox</label>
                 </div>
                 <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" value="29" id="Nintendo">
+                    <input class="form-check-input" type="checkbox" value="4" id="Nintendo">
                     <label class="form-check-label" for="Nintendo">Nintendo</label>
                 </div>
 
