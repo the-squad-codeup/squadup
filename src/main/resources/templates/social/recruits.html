@@ -3,7 +3,7 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <div th:replace="partials :: headFragment('Recruits Page')"></div>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1">-->
 </head>
 <body>
 
@@ -13,62 +13,15 @@
     <div>
         <p>REVIEW YOUR RECRUITS!</p>
     </div>
-    <div id="recruits-list-wrapper" class="container">
-        <div id="recruitCarousel" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#recruitCarousel" data-bs-slide-to="0" class="active"></button>
-                <button type="button" data-bs-target="#recruitCarousel" data-bs-slide-to="1"></button>
-                <button type="button" data-bs-target="#recruitCarousel" data-bs-slide-to="2"></button>
-            </div>
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <div id="card" class="card mx-auto" style="width:400px">
-                        <img class="card-img-top" src="https://i.imgur.com/0Z0Z0Z0.jpg" alt="Card image">
-                        <div class="card-body">
-                            <h4 class="card-title">John Doe</h4>
-                            <p class="card-text">Some example text.</p>
-                            <a href="#" class="btn btn-primary">SquadUp</a>
-                            <a href="#" class="btn btn-primary ">SquadDown</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="card mx-auto" style="width:400px">
-                        <img class="card-img-top" src="https://i.imgur.com/0Z0Z0Z0.jpg" alt="Card image">
-                        <div class="card-body">
-                            <h4 class="card-title">John Doe</h4>
-                            <p class="card-text">Some example text.</p>
-                            <a href="#" class="btn btn-primary">SquadUp</a>
-                            <a href="#" class="btn btn-primary ">SquadDown</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="card mx-auto" style="width:400px">
-                        <img class="card-img-top" src="https://i.imgur.com/0Z0Z0Z0.jpg" alt="Card image">
-                        <div class="card-body">
-                            <h4 class="card-title">John Doe</h4>
-                            <p class="card-text">Some example text.</p>
-                            <a href="#" class="btn btn-primary">SquadUp</a>
-                            <a href="#" class="btn btn-primary ">SquadDown</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#recruitCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#recruitCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
-        </div>
-    </div>
+
+    <!-- Section with User cards -->
+    <section id="card" class="row container">
+    </section>
+
 </div>
 
 <nav th:replace="partials :: footer"></nav>
 <div th:replace="partials :: scripts"></div>
-<script th:src="@{/js/recruits.js}"></script>
+<script type="module" th:src="@{/js/recruits.js}"></script>
 </body>
 </html>

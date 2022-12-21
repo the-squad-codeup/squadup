@@ -12,7 +12,7 @@
             <div class="card rounded-3 p-5">
                 <h1 class="text-center text-success">Contact the SQUADUP support Team</h1>
                 <div class="container">
-                    <form class="card-con" id="contactUs" th:action="@{/contact}" method="post">
+                    <form class="card-con" id="contactUs" name="contactUs" th:action="@{/contact}" method="post">
                         <label for="fname"></label>
                         <input type="text" id="fname" name="fname" placeholder="First Name">
                         <label for="lname"></label>
@@ -23,7 +23,7 @@
                         <input type="text" id="phoneNumber" name="phoneNumber" placeholder="Phone Number">
                         <label for="body"></label>
                         <textarea id="body" name="body" placeholder="Talk to us here"></textarea>
-                        <button id="emailSend" type="submit">Send</button>
+                        <button id="emailSend" type="submit" disabled>Send</button>
                     </form>
                 </div>
 

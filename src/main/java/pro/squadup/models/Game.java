@@ -35,7 +35,7 @@ public class Game {
     @JsonIgnore
     private Set<Preferences> preferences;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "game_genre",
             joinColumns = {@JoinColumn(name = "game_id")},
@@ -43,7 +43,7 @@ public class Game {
     )
     private Set<Genre> genres;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "game_platform",
             joinColumns = {@JoinColumn(name = "game_id")},
