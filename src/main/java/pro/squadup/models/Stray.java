@@ -1,5 +1,7 @@
 package pro.squadup.models;
 
+import org.jetbrains.annotations.NotNull;
+
 import javax.persistence.*;
 
 @Entity
@@ -8,22 +10,23 @@ public class Stray {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "fname")
+    @Column
     private String fname;
 
-    @Column(name = "lname")
+    @Column
     private String lname;
 
-    @Column(name = "email")
+    @Column
+    @NotNull
     private String email;
 
-    @Column(name = "phoneNumber")
+    @Column
     private Long phoneNumber;
 
-    @Column(name = "body")
+    @Column
+    @NotNull
     private String body;
 
     public Long getId() {
