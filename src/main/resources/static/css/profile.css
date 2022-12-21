@@ -44,12 +44,14 @@
     align-items: center;
 }
 .bio{
-    border: solid #5CFD42 .3vw;
+    color: #5CFD42;
+    font-size: 1.5vw;
     position: absolute;
     margin-top: 7vw;
     margin-left: 10vw;
     height: 12vw;
     width: 50vw;
+
 }
 /*.genres{*/
 /*    border: solid #5CFD42 .3vw;*/
