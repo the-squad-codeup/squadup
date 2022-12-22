@@ -1,7 +1,6 @@
 package pro.squadup.utils;
 
 
-import com.fasterxml.jackson.core.JacksonException;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -23,26 +22,58 @@ public class GameDeserializer extends StdDeserializer<Game> {
         super(vc);
     }
 
+    // converts json string to Game object
+    // overrides default jackson deserializer
     @Override
-    public Game deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JacksonException {
-        // Mapper just to sout and check if sets are correct
-
+    public Game deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException {
         JsonNode node = jp.getCodec().readTree(jp);
         node = node.get(0);
+
+        // getting all game object properties from json object
+        long igdbId = igdbIdFromNode(node);
+        String title = titleFromNode(node);
+        String artwork = artworkUrlFromNode(node);
+        Rating rating = ratingFromNode(node);
+        Set<Genre> genres = genresFromNode(node);
+        Set<Platform> platforms = platformsFromNode(node);
+
+        return new Game(igdbId, title, artwork, rating, genres, platforms);
+    }
+
+    // returns igdbId from Json object
+    private long igdbIdFromNode(JsonNode node){
+        // default value if null
         long igdbId = 0;
         if(node.get("id") != null) {
             igdbId = node.get("id").asLong();
         }
+        return igdbId;
+    }
+
+    // returns title from Json object
+    private String titleFromNode(JsonNode node) {
+        // default value if null
         String title = "";
         if(node.get("name") != null) {
             title = node.get("name").asText();
         }
+        return title;
+    }
+
+    // returns artwork url from Json object
+    private String artworkUrlFromNode(JsonNode node) {
+        // default value if null
         String artworkId = "";
         if(node.path("cover").get("image_id") != null){
             artworkId = node.path("cover").get("image_id").asText();
         }
-        String artwork = "https://images.igdb.com/igdb/image/upload/t_cover_big/" + artworkId + ".jpg";
+        return "https://images.igdb.com/igdb/image/upload/t_cover_big/" + artworkId + ".jpg";
+    }
+
+    // returns Rating object from Json object
+    private Rating ratingFromNode(JsonNode node) {
         JsonNode ratingsNode = node.path("age_ratings");
+        // default value if null
         int igdbRatingId = 6;
         if(ratingsNode.isArray()) {
             for(JsonNode ratingNode : ratingsNode) {
@@ -57,7 +88,11 @@ public class GameDeserializer extends StdDeserializer<Game> {
                 igdbRatingId = (Integer) ratingsNode.get("rating").numberValue();
             }
         }
-        Rating rating = new Rating(igdbRatingId);
+        return new Rating(igdbRatingId);
+    }
+
+    // returns Genre Set from Json object
+    private Set<Genre> genresFromNode(JsonNode node) {
         JsonNode genresNode = node.path("genres");
         Set<String> genreNames = new HashSet<>();
         if(genresNode.isArray()) {
@@ -73,6 +108,11 @@ public class GameDeserializer extends StdDeserializer<Game> {
         for(String genreName : genreNames) {
             genres.add(new Genre(genreName));
         }
+        return genres;
+    }
+
+    // returns Platform Set from Json object
+    private Set<Platform> platformsFromNode(JsonNode node) {
         JsonNode platformsNode = node.path("platforms");
         Set<Long> igdbPlatformIds = new HashSet<>();
         if(platformsNode.isArray()) {
@@ -90,9 +130,7 @@ public class GameDeserializer extends StdDeserializer<Game> {
             igdbPlatforms.add(new PlatformMapping(igdbPlatformId));
             platforms.add(new Platform(igdbPlatforms));
         }
-
-        Game game = new Game(igdbId, title, artwork, rating, genres, platforms);
-
-        return game;
+        return platforms;
     }
+
 }
