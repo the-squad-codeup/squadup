@@ -40,16 +40,17 @@ public class RecruitController {
         User user = userDao.findById(Utils.currentUserId()).get();
         Set<Recruit> allRecruits;
         Set<Recruit> trimmedRecruits = new HashSet<>();
-
-        // Set<Recruit> allRecruits
-        // Set<Recruit> trimmedRecruits = new HashSet<>();
-
         // enhance for loop to check every single recruit in allRecruits
         // if recruit either isAccepted or isRejected, do nothing
         // if neither is true, add to trimmedRecruits
-
+      allRecruits = user.getRecruits();
+        for(Recruit recruit : allRecruits){
+            if(!recruit.isAccepted() || !recruit.isRejected()){
+                trimmedRecruits.add(recruit);
+            }
+        }
         // return trimmedRecruits
-        return new HashSet<>(recruitDao.findAllByUserOne(user));
+        return trimmedRecruits;
     }
 
     @PostMapping("/recruits/{id}/accept")
