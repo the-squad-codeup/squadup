@@ -53,10 +53,27 @@
     width: 50vw;
 
 }
-/*.genres{*/
-/*    border: solid #5CFD42 .3vw;*/
-/*    position: absolute;*/
-/*}*/
+.genres{
+    border: solid #5CFD42 .3vw;
+    height: 15vw;
+    width: 15vw;
+    margin-left: 62vw;
+    margin-top: 2vw;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+}
+.genres div{
+    font-size: 3vw;
+    color: #5CFD42;
+    position: absolute;
+}
+.genres ul{
+    font-size: 2vw;
+    color: #5CFD42;
+    position: absolute;
+    margin-top: 5vw;
+}
 
 
 
