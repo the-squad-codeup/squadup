@@ -1,0 +1,18 @@
+/** Rectangle 86 *!*/
+
+.rectangle {
+    position: absolute;
+    width: 669px;
+    height: 70px;
+    left: 548px;
+    top: 225px;
+    text-align: center;
+
+    background: #8F8F8F;
+    border: 8px solid #5CFD42;
+    backdrop-filter: blur(2px);
+}
+
+#card {
+
+}

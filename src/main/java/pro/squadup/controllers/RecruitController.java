@@ -45,7 +45,7 @@ public class RecruitController {
         // if neither is true, add to trimmedRecruits
       allRecruits = user.getRecruits();
         for(Recruit recruit : allRecruits){
-            if(!recruit.isAccepted() || !recruit.isRejected()){
+            if(!recruit.isAccepted() && !recruit.isRejected()){
                 trimmedRecruits.add(recruit);
             }
         }
