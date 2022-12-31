@@ -13,6 +13,24 @@
     backdrop-filter: blur(2px);
 }
 
+.arrow-left{
+    width: 15%;
+    height: 15%;
+    border-top: 60px solid transparent;
+    border-bottom: 60px solid transparent;
+
+    border-right: 60px solid #05FF00;
+}
+
+.arrow-right{
+    width: 0;
+    height: 0;
+    border-top: 60px solid transparent;
+    border-bottom: 60px solid transparent;
+
+    border-left: 60px solid #05FF00;
+}
+
 #card {
 
 }

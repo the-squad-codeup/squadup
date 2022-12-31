@@ -4,16 +4,20 @@
 <head>
     <div th:replace="partials :: headFragment('Recruits Page')"></div>
     <link rel="stylesheet" th:href="@{/css/social.css}">
-    <!--    <meta name="viewport" content="width=device-width, initial-scale=1">-->
 </head>
 <body>
 
 <div th:replace="partials :: baseUrlFragment"></div>
 <nav th:replace="partials :: siteBar"></nav>
 <div id="page-wrapper">
+
+    <div class="arrow-left"></div>
+
     <div class="rectangle">
         <p>REVIEW YOUR RECRUITS!</p>
     </div>
+
+    <div class="arrow-right"></div>
 
     <!-- Section with User cards -->
     <section id="card" class="row container">
