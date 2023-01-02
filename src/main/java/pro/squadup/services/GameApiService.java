@@ -39,6 +39,7 @@ public class GameApiService {
     }
 
     public List<Game> searchGames(String query) throws JsonProcessingException {
+        long startTime = System.currentTimeMillis();
         String bodyString = (
                 "search `" + query + "`; fields name,cover.image_id,age_ratings.rating,age_ratings.category,genres.name,platforms.name; where category = (0,2,8,9);"
         ).replace('`', '"');
@@ -63,12 +64,9 @@ public class GameApiService {
         ;
 
         // Waiting for async call to resolve to a POJO and return it
-
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.writeValueAsString(res.block());
-
         List<Game> games = res.block();
-        System.out.println(mapper.writeValueAsString(games));
+        long endTime = System.currentTimeMillis();
+        System.out.println("Time taken to do api search call: " + (endTime - startTime) + "ms.");
         return games;
     }
 
