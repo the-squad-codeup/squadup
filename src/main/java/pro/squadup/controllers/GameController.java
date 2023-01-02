@@ -1,6 +1,7 @@
 package pro.squadup.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pro.squadup.models.*;
@@ -53,61 +54,23 @@ public class GameController {
 
     @PostMapping("/search")
     public List<Game> searchGames(@RequestBody String query) throws IOException {
-        List<Game> allGames = gameApiService.searchGames(query);
+        ObjectMapper mapper = new ObjectMapper();
+        User user = userDao.findById(Utils.currentUserId()).get();
+        List<Game> allGames = scrapeGamesInfo(gameApiService.searchGames(query));
         List<Game> trimmedGames = new ArrayList<>();
         for(Game game : allGames) {
-
+            System.out.println(mapper.writeValueAsString(game));
+            trimmedGames.add(scrapeGameInfo(game.getIgdbId()));
         }
-        return gameApiService.searchGames(query);
+        return trimmedGames;
     }
 
     @PostMapping("/{igdbId}/add")
     public Game addGame(@PathVariable long igdbId) throws JsonProcessingException {
         User currentUser = userDao.findById(Utils.currentUserId()).get();
-        Game game;
+        Game game = scrapeGameInfo(igdbId);
 
-        // Sets game to existing game in database if it already exists, or creates new game
-        if(gameDao.existsByIgdbId(igdbId)) {
-            game = gameDao.findByIgdbId(igdbId);
-        } else {
-            game = gameApiService.addGame(igdbId);
-
-            // Checks current genres in database and adds any that are not present
-            Set<Genre> genres = new HashSet<>();
-            for (Genre genre : game.getGenres()) {
-                if (genreDao.existsByName(genre.getName())) {
-                    genres.add(genreDao.findByName(genre.getName()));
-                } else {
-                    genres.add(genreDao.save(genre));
-                }
-            }
-            game.setGenres(genres);
-
-            // Sets game platform based on the platforms in our database
-            Set<Platform> platforms = new HashSet<>();
-            for (Platform platform : game.getPlatforms()) {
-                Long mappingId = platform.getIgdbIds().stream().findFirst().get().getIgdbId();
-                Platform platformToAdd = platformDao.findByIgdbIdsIgdbId(mappingId);
-                if (
-                        platformMappingDao.existsByIgdbId(mappingId) &&
-                        platformDao.existsByIgdbIdsIgdbId(mappingId) &&
-                        !platforms.contains(platformToAdd)
-                ) {
-                    platforms.add(platformToAdd);
-                }
-            }
-            game.setPlatforms(platforms);
-
-            Rating rating;
-            if(game.getRating() != null) {
-                rating = ratingDao.findByIgdbId(game.getRating().getIgdbId());
-            } else {
-                rating = ratingDao.findByIgdbId(6);
-            }
-            game.setRating(rating);
-
-            gameDao.save(game);
-        }
+        gameDao.save(game);
 
         Set<Game> userGames = currentUser.getPreferences().getGames();
         if(!userGames.contains(game)) {
@@ -125,5 +88,73 @@ public class GameController {
             recruitMatchingService.matchAllRecruits();
         }
         return game;
+    }
+
+    private List<Game> scrapeGamesInfo(List<Game> igdbGames) throws JsonProcessingException {
+        List<Game> games = new ArrayList<>();
+        for(Game game : igdbGames) {
+            games.add(scrapeGameInfo(game.getIgdbId()));
+        }
+        return games;
+    }
+
+    private Game scrapeGameInfo(Long igdbId) throws JsonProcessingException {
+        Game game;
+        // Sets game to existing game in database if it already exists, or creates new game
+        if(gameDao.existsByIgdbId(igdbId)) {
+            game = gameDao.findByIgdbId(igdbId);
+        } else {
+            game = gameApiService.addGame(igdbId);
+            setGameGenres(game);
+            setGamePlatforms(game);
+            setGameRating(game);
+        }
+        return game;
+    }
+
+    private void setGameGenres(Game game) {
+        // Checks current genres in database and adds any that are not present
+        Set<Genre> genres = new HashSet<>();
+        for (Genre genre : game.getGenres()) {
+            if (genreDao.existsByName(genre.getName())) {
+                genres.add(genreDao.findByName(genre.getName()));
+            } else {
+                genres.add(genreDao.save(genre));
+            }
+        }
+        game.setGenres(genres);
+    }
+
+    private void setGamePlatforms(Game game) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        System.out.println("inside setGamePlatforms");
+        // Sets game platform based on the platforms in our database
+        Set<Platform> platforms = new HashSet<>();
+        for (Platform platform : game.getPlatforms()) {
+            System.out.println("Single platform in igdb style:");
+            System.out.println(mapper.writeValueAsString(platform));
+            Long mappingId = platform.getIgdbIds().stream().findFirst().get().getIgdbId();
+            Platform platformToAdd = platformDao.findByIgdbIdsIgdbId(mappingId);
+            if (
+                    platformMappingDao.existsByIgdbId(mappingId) &&
+                            platformDao.existsByIgdbIdsIgdbId(mappingId) &&
+                            !platforms.contains(platformToAdd)
+            ) {
+                platforms.add(platformToAdd);
+            }
+        }
+        System.out.println("All platforms in our style:");
+        System.out.println(mapper.writeValueAsString(platforms));
+        game.setPlatforms(platforms);
+    }
+
+    private void setGameRating(Game game) {
+        Rating rating;
+        if(game.getRating() != null) {
+            rating = ratingDao.findByIgdbId(game.getRating().getIgdbId());
+        } else {
+            rating = ratingDao.findByIgdbId(6);
+        }
+        game.setRating(rating);
     }
 }
