@@ -4,7 +4,6 @@ package pro.squadup.utils;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import pro.squadup.models.*;
 
@@ -28,21 +27,12 @@ public class GameDeserializer extends StdDeserializer<Game> {
     @Override
     public Game deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException {
 
-        ObjectMapper mapper = new ObjectMapper();
-        System.out.println("inside game deserializer");
-
         JsonNode node = jp.getCodec().readTree(jp);
 
-        System.out.println("Full JsonNode:");
-        System.out.println(mapper.writeValueAsString(node));
-
+        // if node currently an array of one object, adjusts node object accordingly
         if(node.get(0) != null) {
             node = node.get(0);
         }
-
-        System.out.println("First index of node:");
-        System.out.println(mapper.writeValueAsString(node));
-
 
         // getting all game object properties from json object
         long igdbId = igdbIdFromNode(node);
