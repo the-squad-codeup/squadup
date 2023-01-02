@@ -13,6 +13,10 @@ public class Platform {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @OneToMany(mappedBy = "platformId")
+    @JsonIgnore
+    private Set<PlatformMapping> igdbIds;
+
     @Column(nullable = false, length = 25)
     private String type;
 
@@ -29,6 +33,14 @@ public class Platform {
     }
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Set<PlatformMapping> getIgdbIds() {
+        return igdbIds;
+    }
+
+    public void setIgdbIds(Set<PlatformMapping> igdbIds) {
+        this.igdbIds = igdbIds;
     }
 
     public String getType() {
@@ -60,6 +72,10 @@ public class Platform {
 
     public Platform(String type) {
         this.type = type;
+    }
+
+    public Platform(Set<PlatformMapping> igdbIds) {
+        this.igdbIds = igdbIds;
     }
 
     public Platform(Long id, String type) {

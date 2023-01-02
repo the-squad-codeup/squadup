@@ -15,6 +15,9 @@ import pro.squadup.repositories.UserRepository;
 import pro.squadup.services.UrlService;
 import pro.squadup.utils.Utils;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
 public class UserController {
 
@@ -43,13 +46,15 @@ public class UserController {
 
     // Saves user to users table
     @PostMapping("/signup")
-    public String saveUser(@ModelAttribute User user) {
+    public String saveUser(@ModelAttribute User user, HttpServletRequest httpServletRequest) {
+        String plainPassword = user.getPassword();
         // Hashing password
         String hash = passwordEncoder.encode(user.getPassword());
         // Setting user password to the hash and saving user to table
         user.setPassword(hash);
         userDao.save(user);
-        return "redirect:/login?registered";
+        authWithHttpServletRequest(httpServletRequest, user.getUsername(), plainPassword);
+        return "redirect:/profile/preferences";
     }
 
     @GetMapping("/user/get")
@@ -60,4 +65,13 @@ public class UserController {
         mapper.writeValueAsString(currentUser);
         return currentUser;
     }
+
+    private void authWithHttpServletRequest(HttpServletRequest request, String username, String password) {
+        try {
+            request.login(username, password);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

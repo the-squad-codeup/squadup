@@ -21,6 +21,10 @@ public class Recruit {
     @Column(nullable = false)
     private boolean isRejected;
 
+    @Column(nullable = false)
+    private boolean isAccepted;
+
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User userOne;
@@ -28,6 +32,7 @@ public class Recruit {
     @ManyToOne
     @JoinColumn(name = "recruit_id")
     private User userTwo;
+
 
     public Long getId() {
         return id;
@@ -51,6 +56,14 @@ public class Recruit {
 
     public void setRejected(boolean rejected) {
         isRejected = rejected;
+    }
+
+    public boolean isAccepted() {
+        return isAccepted;
+    }
+
+    public void setAccepted(boolean accepted) {
+        isAccepted = accepted;
     }
 
     @JsonIgnore

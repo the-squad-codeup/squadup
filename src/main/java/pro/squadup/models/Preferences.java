@@ -24,7 +24,7 @@ public class Preferences {
     @JoinColumn(name = "location_id")
     private Location location;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "preferences_language",
             joinColumns = {@JoinColumn(name = "preferences_id")},
@@ -33,11 +33,11 @@ public class Preferences {
     private Set<Language> languages;
 
     @Column(nullable = false)
-    private boolean mature_language;
+    private boolean matureLanguage;
 
     @ManyToOne
     @JoinColumn(name = "rating_id")
-    private Rating game_age_rating;
+    private Rating rating;
 
     @OneToOne(mappedBy = "preferences")
     @JsonIgnore
@@ -59,7 +59,7 @@ public class Preferences {
     )
     private Set<Game> games;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "preferences_genre",
             joinColumns = {@JoinColumn(name = "preferences_id")},
@@ -99,21 +99,20 @@ public class Preferences {
         this.location = location;
     }
 
-
-    public boolean isMature_language() {
-        return mature_language;
+    public boolean isMatureLanguage() {
+        return matureLanguage;
     }
 
-    public void setMature_language(boolean mature_language) {
-        this.mature_language = mature_language;
+    public void setMatureLanguage(boolean matureLanguage) {
+        this.matureLanguage = matureLanguage;
     }
 
-    public Rating getGame_age_rating() {
-        return game_age_rating;
+    public Rating getRating() {
+        return rating;
     }
 
-    public void setGame_age_rating(Rating game_age_rating) {
-        this.game_age_rating = game_age_rating;
+    public void setRating(Rating rating) {
+        this.rating = rating;
     }
 
     public User getUser() {
@@ -161,25 +160,29 @@ public class Preferences {
         this.gamertag = "";
 //        this.location = "";
 //        this.language = "";
-        this.mature_language = false;
+        this.matureLanguage = false;
 //        this.game_age_rating = "";
     }
 
-    public Preferences(String bio, String gamertag, Location location, Set<Language> languages, boolean mature_language, Rating game_age_rating) {
+    public Preferences(String bio, String gamertag, Location location, Set<Language> languages, boolean matureLanguage, Rating rating) {
         this.bio = bio;
         this.gamertag = gamertag;
         this.location = location;
         this.languages = languages;
-        this.mature_language = mature_language;
-        this.game_age_rating = game_age_rating;
+        this.matureLanguage = matureLanguage;
+        this.rating = rating;
     }
 
-    public Preferences(Long id, Location location, Set<Language> languages, boolean mature_language, Rating game_age_rating) {
+    public Preferences(Long id, Location location, Set<Language> languages, boolean matureLanguage, Rating rating) {
         this.id = id;
         this.location = location;
         this.languages = languages;
-        this.mature_language = mature_language;
-        this.game_age_rating = game_age_rating;
+        this.matureLanguage = matureLanguage;
+        this.rating = rating;
+    }
+
+    public void addGame(Game game) {
+        this.games.add(game);
     }
 
 }

@@ -65,4 +65,12 @@ public class Comrade {
     public Comrade(Timestamp dateComraded) {
         this.dateComraded = dateComraded;
     }
+
+    public Comrade(Timestamp dateComraded, User userOne, User userTwo) {
+        this.dateComraded = dateComraded;
+        this.userOne = userOne;
+        this.userTwo = userTwo;
+    }
+
+
 }
