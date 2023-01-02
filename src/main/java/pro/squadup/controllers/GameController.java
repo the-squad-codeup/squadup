@@ -10,6 +10,7 @@ import pro.squadup.services.RecruitMatchingService;
 import pro.squadup.utils.Utils;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -52,6 +53,11 @@ public class GameController {
 
     @PostMapping("/search")
     public List<Game> searchGames(@RequestBody String query) throws IOException {
+        List<Game> allGames = gameApiService.searchGames(query);
+        List<Game> trimmedGames = new ArrayList<>();
+        for(Game game : allGames) {
+
+        }
         return gameApiService.searchGames(query);
     }
 
@@ -59,11 +65,14 @@ public class GameController {
     public Game addGame(@PathVariable long igdbId) throws JsonProcessingException {
         User currentUser = userDao.findById(Utils.currentUserId()).get();
         Game game;
+
+        // Sets game to existing game in database if it already exists, or creates new game
         if(gameDao.existsByIgdbId(igdbId)) {
             game = gameDao.findByIgdbId(igdbId);
         } else {
             game = gameApiService.addGame(igdbId);
 
+            // Checks current genres in database and adds any that are not present
             Set<Genre> genres = new HashSet<>();
             for (Genre genre : game.getGenres()) {
                 if (genreDao.existsByName(genre.getName())) {
@@ -74,6 +83,7 @@ public class GameController {
             }
             game.setGenres(genres);
 
+            // Sets game platform based on the platforms in our database
             Set<Platform> platforms = new HashSet<>();
             for (Platform platform : game.getPlatforms()) {
                 Long mappingId = platform.getIgdbIds().stream().findFirst().get().getIgdbId();
