@@ -59,8 +59,11 @@ public class GameController {
         List<Game> allGames = scrapeGamesInfo(gameApiService.searchGames(query));
         List<Game> trimmedGames = new ArrayList<>();
         for(Game game : allGames) {
-            System.out.println(mapper.writeValueAsString(game));
-            trimmedGames.add(scrapeGameInfo(game.getIgdbId()));
+            Game scrapedGame = scrapeGameInfo(game.getIgdbId());
+            System.out.println(mapper.writeValueAsString(scrapedGame));
+            if(gameMatchesUserPreferences(scrapedGame, user)) {
+                trimmedGames.add(scrapedGame);
+            }
         }
         return trimmedGames;
     }
@@ -156,5 +159,32 @@ public class GameController {
             rating = ratingDao.findByIgdbId(6);
         }
         game.setRating(rating);
+    }
+
+    private boolean gameMatchesUserPreferences(Game game, User user) {
+        boolean doesMatch = false;
+        if(
+                platformMatches(game, user) &&
+                ratingMatches(game, user)
+        ) {
+            doesMatch = true;
+        }
+        return doesMatch;
+    }
+
+    private boolean platformMatches(Game game, User user) {
+        for(Platform gamePlatform : game.getPlatforms()) {
+            if(user.getPreferences().getPlatforms().contains(gamePlatform)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean ratingMatches(Game game, User user) {
+        if(user.getPreferences().getRating().getId() >= game.getRating().getId()) {
+            return true;
+        }
+        return false;
     }
 }
