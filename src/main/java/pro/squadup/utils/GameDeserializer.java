@@ -36,7 +36,9 @@ public class GameDeserializer extends StdDeserializer<Game> {
         System.out.println("Full JsonNode:");
         System.out.println(mapper.writeValueAsString(node));
 
-        node = node.get(0);
+        if(node.get(0) != null) {
+            node = node.get(0);
+        }
 
         System.out.println("First index of node:");
         System.out.println(mapper.writeValueAsString(node));

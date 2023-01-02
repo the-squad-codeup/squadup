@@ -25,9 +25,9 @@ $(function () {
         async singleGame(data, div) {
             let game = await data;
             div.append(`
-                <div class="div-card col-3" data-game-igdb-id="${game.id}">
+                <div class="div-card col-3" data-game-igdb-id="${game.igdbId}">
                     <div class="card game-card border-0">
-                        <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/${game.cover.image_id}.jpg" class="card-img all-games-img">
+                        <img src="${game.artwork}" class="card-img all-games-img">
                     </div>
                 </div>
             `);
