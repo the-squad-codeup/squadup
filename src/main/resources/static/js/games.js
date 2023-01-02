@@ -11,7 +11,7 @@ $(function () {
         },
         baseUrl: Utils.url(),
         csrfToken: $("meta[name='_csrf']").attr("content")
-    }
+    };
 
     const Print = {
         async gameResults(data, div) {
@@ -33,7 +33,7 @@ $(function () {
             `);
 
         }
-    }
+    };
 
     const Fetch = {
         Get: {
@@ -93,7 +93,7 @@ $(function () {
                 return data;
             }
         }
-    }
+    };
 
     const Events = {
         initialize() {
@@ -116,7 +116,7 @@ $(function () {
                 })
             ;
         }
-    }
+    };
 
     MyGames.initialize();
 });

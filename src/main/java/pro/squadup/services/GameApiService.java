@@ -1,6 +1,7 @@
 package pro.squadup.services;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
@@ -54,12 +55,11 @@ public class GameApiService {
                 .header("Authorization", "Bearer " + IGDB_ACCESS_TOKEN)
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_PLAIN_VALUE)
                 .retrieve()
-                .bodyToMono(new ParameterizedTypeReference<List<Object>>() {});
+                .bodyToMono(new ParameterizedTypeReference<>() {
+                });
 
-        // Waiting for async call to resolve to a POJO
-        List<Object> objects = res.block();
-
-        return objects;
+        // Waiting for async call to resolve to a POJO and return it
+        return res.block();
     }
 
     public Game addGame(long igdbId) throws JsonProcessingException {
