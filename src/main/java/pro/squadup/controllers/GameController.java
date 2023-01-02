@@ -51,7 +51,7 @@ public class GameController {
 
 
     @PostMapping("/search")
-    public List<Object> searchGames(@RequestBody String query) throws IOException {
+    public List<Game> searchGames(@RequestBody String query) throws IOException {
         return gameApiService.searchGames(query);
     }
 

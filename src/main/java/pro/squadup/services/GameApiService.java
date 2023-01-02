@@ -14,6 +14,9 @@ import pro.squadup.models.Game;
 import reactor.core.publisher.Mono;
 import reactor.netty.http.client.HttpClient;
 
+import java.lang.reflect.ParameterizedType;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -35,7 +38,7 @@ public class GameApiService {
 
     }
 
-    public List<Object> searchGames(String query) throws JsonProcessingException {
+    public List<Game> searchGames(String query) throws JsonProcessingException {
         String bodyString = (
                 "search `" + query + "`; fields name,cover.image_id,age_ratings.rating,age_ratings.category,genres.name,platforms.name; where category = (0,2,8,9);"
         ).replace('`', '"');
@@ -47,7 +50,7 @@ public class GameApiService {
         WebClient client = apiService.buildWebClient(httpClient, bodyString);
 
         // Creating Async Mono object to hold list of objects returned from api call
-        Mono<List<Object>> res = client.post()
+        Mono<List<Game>> res = client.post()
                 .uri(IGDB_API_URL + "games")
                 .contentType(MediaType.TEXT_PLAIN)
                 .body(BodyInserters.fromValue(bodyString))
@@ -56,10 +59,17 @@ public class GameApiService {
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_PLAIN_VALUE)
                 .retrieve()
                 .bodyToMono(new ParameterizedTypeReference<>() {
-                });
+                })
+        ;
 
         // Waiting for async call to resolve to a POJO and return it
-        return res.block();
+
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.writeValueAsString(res.block());
+
+        List<Game> games = res.block();
+        System.out.println(mapper.writeValueAsString(games));
+        return games;
     }
 
     public Game addGame(long igdbId) throws JsonProcessingException {
