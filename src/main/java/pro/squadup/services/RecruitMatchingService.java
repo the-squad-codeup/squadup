@@ -1,7 +1,6 @@
 package pro.squadup.services;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 import pro.squadup.models.*;
 import pro.squadup.repositories.ComradeRepository;
@@ -41,18 +40,7 @@ public class RecruitMatchingService {
     }
 
     public void matchRecruits(User user, Set<User> allUsers) throws JsonProcessingException {
-        ObjectMapper mapper = new ObjectMapper();
-        System.out.println("inside matchRecruits");
         for(User otherUser : allUsers) {
-            System.out.println("inside for loop.");
-            System.out.println("user: ");
-            System.out.println(mapper.writeValueAsString(user));
-            System.out.println("otherUser: ");
-            System.out.println(mapper.writeValueAsString(otherUser));
-            System.out.println("user preferences NOT null: " + (user.getPreferences() != null));
-            System.out.println("otherUser preferences NOT null: " + (otherUser.getPreferences() != null));
-            System.out.println("user id != otherUser id: " + (user.getId() != otherUser.getId()));
-            System.out.println();
             if(
                     user.getPreferences() != null &&
                     otherUser.getPreferences() != null &&
@@ -79,11 +67,8 @@ public class RecruitMatchingService {
     }
 
     private boolean containsMatchingPlatform(User user1, User user2) throws JsonProcessingException {
-        ObjectMapper mapper = new ObjectMapper();
         Set<Platform> user1Platforms = user1.getPreferences().getPlatforms();
-        System.out.println(mapper.writeValueAsString(user1Platforms));
         Set<Platform> user2Platforms = user2.getPreferences().getPlatforms();
-        System.out.println(mapper.writeValueAsString(user2Platforms));
         for(Platform platform1 : user1Platforms) {
             if(user2Platforms.contains(platform1)) {
                 return true;
@@ -104,14 +89,8 @@ public class RecruitMatchingService {
     }
 
     private boolean containsMatchingGenres(User user1, User user2) throws JsonProcessingException {
-        ObjectMapper mapper = new ObjectMapper();
-        System.out.println("Inside matching service containsMatchingGenres");
         Set<Genre> user1Genres = extractUserGenres(user1);
-        System.out.println("User1 genres: ");
-        System.out.println(mapper.writeValueAsString(user1Genres));
         Set<Genre> user2Genres = extractUserGenres(user2);
-        System.out.println("User2 genres: ");
-        System.out.println(mapper.writeValueAsString(user2Genres));
         for(Genre genre1 : user1Genres) {
             for(Genre genre2 : user2Genres) {
                 if(genre1.getId() == genre2.getId()) {
