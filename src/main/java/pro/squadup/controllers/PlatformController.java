@@ -18,7 +18,6 @@ public class PlatformController {
 
     @GetMapping("/platform/all")
     public List<Platform> getAllPlatforms(){
-        System.out.println("Inside get all Platforms");
         return platformDao.findAll();
     }
 

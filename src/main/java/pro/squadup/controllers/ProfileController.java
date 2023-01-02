@@ -2,7 +2,6 @@ package pro.squadup.controllers;
 
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -92,8 +91,6 @@ public class ProfileController {
     public String editProfilePreferences(@PathVariable Long id, @RequestBody Preferences updatedPreferences) throws JsonProcessingException {
         User currentUser = userDao.findById(Utils.currentUserId()).get();
         Preferences userPreferences = currentUser.getPreferences();
-        ObjectMapper mapper = new ObjectMapper();
-        System.out.println(mapper.writeValueAsString(userPreferences));
         userPreferences.setBio(updatedPreferences.getBio());
         userPreferences.setLocation(locationDao.findByTimezone(updatedPreferences.getLocation().getTimezone()));
         Set<Language> updatedLanguages = new HashSet<>();
