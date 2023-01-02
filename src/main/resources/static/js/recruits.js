@@ -68,7 +68,7 @@ $(function() {
     })
 
     async function getAllRecruits(){
-        let results = await fetch("http://localhost:8080/recruits/all");
+        let results = await fetch(`${Utils.url}recruits/all`);
         let data = await results.json();
         console.log(data);
         return data;
