@@ -17,13 +17,15 @@ $(function() {
                             <h4 class="card-title">${recruit.userTwo.username}</h4>
                             <p class="card-text">${recruit.userTwo.username}'s Bio: ${recruit.userTwo.preferences.bio}</p>
                             `);
-            for (let userTwoGame of recruit.userTwo.userTwoGames) {
-                $(`#card .card[data-recruit-id="${recruit.id}"] .card-body div`).append(`
+        for (let userTwoGame of recruit.userTwo.userTwoGames) {
+            $(`#card .card[data-recruit-id="${recruit.id}"] .card-body div`).append(`
+                <div>
                     <img class="card-img-top" src="${userTwogame.game.image}" alt="${userTwogame.game.name} icon">
-                            <div>
-                                <a href="#"  class="btn btn-primary squadup-link">Accept</a>
-                                <a href="#" class="btn btn-primary squaddown-link">Reject</a>
-                            </div>
+                </div>
+                    <div>
+                        <a href="#"  class="btn btn-primary squadup-link">Accept</a>
+                        <a href="#" class="btn btn-primary squaddown-link">Reject</a>
+                    </div>
             `);
             }
         }
