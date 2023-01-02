@@ -59,7 +59,7 @@ public class GameController {
         List<Game> allGames = scrapeGamesInfo(gameApiService.searchGames(query));
         List<Game> trimmedGames = new ArrayList<>();
         for(Game game : allGames) {
-            Game scrapedGame = scrapeGameInfo(game.getIgdbId());
+            Game scrapedGame = scrapeGameInfo(game);
             System.out.println(mapper.writeValueAsString(scrapedGame));
             if(gameMatchesUserPreferences(scrapedGame, user)) {
                 trimmedGames.add(scrapedGame);
@@ -71,9 +71,7 @@ public class GameController {
     @PostMapping("/{igdbId}/add")
     public Game addGame(@PathVariable long igdbId) throws JsonProcessingException {
         User currentUser = userDao.findById(Utils.currentUserId()).get();
-        Game game = scrapeGameInfo(igdbId);
-
-        gameDao.save(game);
+        Game game = scrapeGameInfo(gameApiService.addGame(igdbId));
 
         Set<Game> userGames = currentUser.getPreferences().getGames();
         if(!userGames.contains(game)) {
@@ -94,20 +92,21 @@ public class GameController {
     }
 
     private List<Game> scrapeGamesInfo(List<Game> igdbGames) throws JsonProcessingException {
+        long startTime = System.currentTimeMillis();
         List<Game> games = new ArrayList<>();
         for(Game game : igdbGames) {
-            games.add(scrapeGameInfo(game.getIgdbId()));
+            games.add(scrapeGameInfo(game));
         }
+        long endTime = System.currentTimeMillis();
+        System.out.println("scrapeGamesInfo complete in " + (endTime - startTime) + "ms");
         return games;
     }
 
-    private Game scrapeGameInfo(Long igdbId) throws JsonProcessingException {
-        Game game;
+    private Game scrapeGameInfo(Game game) throws JsonProcessingException {
         // Sets game to existing game in database if it already exists, or creates new game
-        if(gameDao.existsByIgdbId(igdbId)) {
-            game = gameDao.findByIgdbId(igdbId);
+        if(gameDao.existsByIgdbId(game.getIgdbId())) {
+            game = gameDao.findByIgdbId(game.getIgdbId());
         } else {
-            game = gameApiService.addGame(igdbId);
             setGameGenres(game);
             setGamePlatforms(game);
             setGameRating(game);
