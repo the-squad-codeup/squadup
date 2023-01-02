@@ -11,7 +11,7 @@ $(function() {
         $("#card").html('');
         for (let recruit of recruits) {
             $(`#card`).append(`
-                <div class="card col-3" data-recruit-id="${recruit.id}">
+                <div class="card h-100 row-cols-1 row-cols-md-3 g-4" data-recruit-id="${recruit.id}">
                     <img class="card-img-top" src="https://i.imgur.com/0Z0Z0Z0.jpg" alt="Card image">
                         <div class="card-body">
                             <h4 class="card-title">${recruit.userTwo.username}</h4>

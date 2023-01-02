@@ -1,11 +1,18 @@
 /** Rectangle 86 *!*/
 
+.arrows-rectangle{
+    justify-content: space-around;
+    padding: 5em;
+}
+
+p{
+    font-size: large;
+    color: #000000;
+    -webkit-text-stroke: 1px #05FF00;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
 .rectangle {
-    position: absolute;
-    width: 669px;
-    height: 70px;
-    left: 548px;
-    top: 225px;
     text-align: center;
     padding: 15px 0;
 
@@ -15,21 +22,17 @@
 }
 
 .arrow-left{
-    width: 15%;
-    height: 15%;
-    border-top: 60px solid transparent;
-    border-bottom: 60px solid transparent;
+    border-top: 50px solid transparent;
+    border-bottom: 50px solid transparent;
 
-    border-right: 60px solid #05FF00;
+    border-right: 50px solid #05FF00;
 }
 
 .arrow-right{
-    width: 0;
-    height: 0;
-    border-top: 60px solid transparent;
-    border-bottom: 60px solid transparent;
+    border-top: 50px solid transparent;
+    border-bottom: 50px solid transparent;
 
-    border-left: 60px solid #05FF00;
+    border-left: 50px solid #05FF00;
 }
 
 #card {
