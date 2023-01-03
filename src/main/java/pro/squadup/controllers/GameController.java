@@ -73,7 +73,20 @@ public class GameController {
     @GetMapping("/favorite")
     public Game getFavoriteGame() {
         User user = userDao.findById(Utils.currentUserId()).get();
-        return user.getPreferences().getFavoriteGame();
+        Game favoriteGame = user.getPreferences().getFavoriteGame();
+        if(favoriteGame != null) {
+            return favoriteGame;
+        }
+        return new Game();
+    }
+
+    @PostMapping("/{gameId}/favorite")
+    public Game setFavoriteGame(@PathVariable Long gameId) {
+        User user = userDao.findById(Utils.currentUserId()).get();
+        Game gameToFavorite = gameDao.findById(gameId).get();
+        user.getPreferences().setFavoriteGame(gameToFavorite);
+        userDao.save(user);
+        return gameToFavorite;
     }
 
     @PostMapping("/{gameId}/add")

@@ -25,13 +25,15 @@ $(function () {
             console.log("Inside favorite games");
             let favoriteGame = await Fetch.Get.myFavoriteGame().then(res => res);
             console.log(favoriteGame);
-            MyGames.myFavoriteGameDiv.empty().append(`
-                <div class="div-card col-3" data-game-id="${favoriteGame.id}">
-                    <div class="card game-card border-0">
-                        <img src="${favoriteGame.artwork}" class="card-img all-games-img">
+            if(favoriteGame.id != null) {
+                MyGames.myFavoriteGameDiv.empty().append(`
+                    <div class="div-card col-3" data-game-id="${favoriteGame.id}">
+                        <div class="card game-card border-0">
+                            <img src="${favoriteGame.artwork}" class="card-img all-games-img">
+                        </div>
                     </div>
-                </div>
-            `);
+                `);
+            }
         },
         async myGames() {
             let userGames = await Fetch.Get.myGames().then(res => res);
@@ -43,7 +45,18 @@ $(function () {
             }
         },
         async singleMyGame(data, div) {
-
+            let game = await data;
+            div.prepend(`
+                <div class="div-card col-3" data-game-id="${game.id}">
+                    <div class="card game-card border-0">
+                        <img src="${game.artwork}" class="card-img all-games-img">
+                    </div>
+                    <div class="buttons-div d-flex justify-content-between">
+                        <button class="favorite-game-button">Favorite</button>
+                        <button class="remove-game-button">Remove</button>
+                    </div>
+                </div>
+            `);
         },
         async gameResults(data) {
             let games = MyGames.sortGamesByYear(await data);
@@ -59,6 +72,9 @@ $(function () {
                 <div class="div-card col-3" data-game-id="${game.id}">
                     <div class="card game-card border-0">
                         <img src="${game.artwork}" class="card-img all-games-img">
+                    </div>
+                    <div class="buttons-div d-flex justify-content-between">
+                        <button class="add-game-button">Add</button>
                     </div>
                 </div>
             `);
@@ -144,6 +160,19 @@ $(function () {
                 let data = await fetch(`${MyGames.baseUrl}game/${id}/remove`, fetchOptions).then(res => res.json());
                 console.log(data);
                 return data;
+            },
+            async favoriteGame(id) {
+                console.log("inside favoriteGame. Id: ");
+                console.log(id);
+                const fetchOptions = {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN' : MyGames.csrfToken
+                    }
+                };
+                let data = await fetch(`${MyGames.baseUrl}game/${id}/favorite`, fetchOptions).then(res => res.json());
+                console.log(data);
+                return data;
             }
         }
     };
@@ -163,15 +192,20 @@ $(function () {
                         $("#game-search-button").trigger("click");
                     }
                 })
-                .on("click", "#games-div .game-card", async function() {
-                    console.log("Add Game Card clicked");
-                    let addedGame = await Fetch.Post.addGame($(this).parent().attr("data-game-id"));
+                .on("click", ".add-game-button", async function() {
+                    console.log("Add Game Button clicked");
+                    let addedGame = await Fetch.Post.addGame($(this).parent().parent().attr("data-game-id"));
                     await Print.singleMyGame(addedGame, MyGames.myGamesDiv);
                 })
-                .on("click", "#my-games .game-card", async function() {
-                    console.log("Remove Game Card clicked");
-                    await Fetch.Post.removeGame($(this).parent().attr("data-game-id"));
+                .on("click", ".remove-game-button", async function() {
+                    console.log("Remove Game Button clicked");
+                    await Fetch.Post.removeGame($(this).parent().parent().attr("data-game-id"));
                     await Print.myGames();
+                })
+                .on("click", ".favorite-game-button", async function() {
+                    console.log("Favorite Game Button clicked");
+                    await Fetch.Post.favoriteGame($(this).parent().parent().attr("data-game-id"));
+                    await Print.myFavoriteGame(MyGames.myFavoriteGameDiv);
                 })
             ;
         }
