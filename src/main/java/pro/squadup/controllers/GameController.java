@@ -105,6 +105,7 @@ public class GameController {
             updatedGames.remove(gameToRemove);
         }
         currentUser.getPreferences().setGames(updatedGames);
+        userDao.save(currentUser);
         return gameToRemove;
     }
 
