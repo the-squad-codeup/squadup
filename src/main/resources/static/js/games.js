@@ -7,36 +7,53 @@ $(function () {
         initialize() {
             console.log("inside Games.initialize()");
             Events.initialize();
-            Print.myGames($("#my-games"));
+            Print.myFavoriteGame(this.myFavoriteGameDiv);
+            Print.myGames(this.myGamesDiv);
         },
         baseUrl: Utils.url(),
         csrfToken: $("meta[name='_csrf']").attr("content"),
         addGameDiv: $("#games-div"),
         myGamesDiv: $("#my-games"),
+        myFavoriteGameDiv: $("#my-favorite-game"),
         sortGamesByYear(games) {
             return games.sort((prev, current) => parseInt(prev.year) - parseInt(current.year));
         }
     };
 
     const Print = {
+        async myFavoriteGame(div) {
+            console.log("Inside favorite games");
+            let favoriteGame = await Fetch.Get.myFavoriteGame().then(res => res);
+            console.log(favoriteGame);
+            MyGames.myFavoriteGameDiv.empty().append(`
+                <div class="div-card col-3" data-game-id="${favoriteGame.id}">
+                    <div class="card game-card border-0">
+                        <img src="${favoriteGame.artwork}" class="card-img all-games-img">
+                    </div>
+                </div>
+            `);
+        },
         async myGames() {
             let userGames = await Fetch.Get.myGames().then(res => res);
             console.log("Inside Print.myGames(). userGames: ");
             console.log(userGames);
             MyGames.myGamesDiv.empty();
             for(let game of userGames) {
-                this.singleGame(game, MyGames.myGamesDiv);
+                this.singleMyGame(game, MyGames.myGamesDiv);
             }
+        },
+        async singleMyGame(data, div) {
+
         },
         async gameResults(data) {
             let games = MyGames.sortGamesByYear(await data);
             console.log(games);
             MyGames.addGameDiv.empty();
             for(let game of games) {
-                this.singleGame(game, MyGames.addGameDiv);
+                this.singleSearchedGame(game, MyGames.addGameDiv);
             }
         },
-        async singleGame(data, div) {
+        async singleSearchedGame(data, div) {
             let game = await data;
             div.prepend(`
                 <div class="div-card col-3" data-game-id="${game.id}">
@@ -55,27 +72,33 @@ $(function () {
                 let data = await results.json();
                 return data;
             },
-            async gameSearch(query) {
-                let keys = await this.keys();
-                console.log(keys);
-                let body = `search "${query}"; fields name,cover.image_id,age_ratings.rating,age_ratings.category,genres.name,platforms.name`;
-                const fetchOptions = {
-                    method: 'POST',
-                    headers: {
-                        'Client-ID' : keys.igdb_CLIENT_ID,
-                        'Authorization' : `Bearer ${keys.igdb_ACCESS_TOKEN}`,
-                        'x-api-key' : keys.igdb_PROXY_KEY
-                    },
-                    body: body
-                };
-                console.log(fetchOptions);
-                let results = await fetch(`${keys.igdb_PROXY_URL}games`, fetchOptions);
-                let data = await results.json();
-                console.log(data);
-            },
+            // async gameSearch(query) {
+            //     let keys = await this.keys();
+            //     console.log(keys);
+            //     let body = `search "${query}"; fields name,cover.image_id,age_ratings.rating,age_ratings.category,genres.name,platforms.name`;
+            //     const fetchOptions = {
+            //         method: 'POST',
+            //         headers: {
+            //             'Client-ID' : keys.igdb_CLIENT_ID,
+            //             'Authorization' : `Bearer ${keys.igdb_ACCESS_TOKEN}`,
+            //             'x-api-key' : keys.igdb_PROXY_KEY
+            //         },
+            //         body: body
+            //     };
+            //     console.log(fetchOptions);
+            //     let results = await fetch(`${keys.igdb_PROXY_URL}games`, fetchOptions);
+            //     let data = await results.json();
+            //     console.log(data);
+            // },
             async myGames() {
                 let data = await fetch(`${MyGames.baseUrl}game/user`).then(res => res.json());
                 console.log("Inside Fetch.Get.myGames(). Data returned:");
+                console.log(data);
+                return data;
+            },
+            async myFavoriteGame() {
+                let data = await fetch(`${MyGames.baseUrl}game/favorite`).then(res => res.json());
+                console.log("Inside Fetch.Get.myFavoriteGame(). Data returned:");
                 console.log(data);
                 return data;
             }
@@ -143,7 +166,7 @@ $(function () {
                 .on("click", "#games-div .game-card", async function() {
                     console.log("Add Game Card clicked");
                     let addedGame = await Fetch.Post.addGame($(this).parent().attr("data-game-id"));
-                    await Print.singleGame(addedGame, MyGames.myGamesDiv);
+                    await Print.singleMyGame(addedGame, MyGames.myGamesDiv);
                 })
                 .on("click", "#my-games .game-card", async function() {
                     console.log("Remove Game Card clicked");
