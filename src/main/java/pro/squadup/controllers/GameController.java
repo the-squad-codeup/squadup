@@ -11,6 +11,7 @@ import pro.squadup.services.RecruitMatchingService;
 import pro.squadup.utils.Utils;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -52,69 +53,25 @@ public class GameController {
 
 
     @PostMapping("/search")
-    public List<Object> searchGames(@RequestBody String query) throws IOException {
-        System.out.println("Inside searchGames. Query string: ");
-        System.out.println(query);
-        return gameApiService.searchGames(query);
+    public List<Game> searchGames(@RequestBody String query) throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        User user = userDao.findById(Utils.currentUserId()).get();
+        List<Game> allGames = scrapeGamesInfo(gameApiService.searchGames(query));
+        List<Game> trimmedGames = new ArrayList<>();
+        for(Game game : allGames) {
+            Game scrapedGame = scrapeGameInfo(game);
+            System.out.println(mapper.writeValueAsString(scrapedGame));
+            if(gameMatchesUserPreferences(scrapedGame, user)) {
+                trimmedGames.add(scrapedGame);
+            }
+        }
+        return trimmedGames;
     }
 
     @PostMapping("/{igdbId}/add")
     public Game addGame(@PathVariable long igdbId) throws JsonProcessingException {
         User currentUser = userDao.findById(Utils.currentUserId()).get();
-        ObjectMapper mapper = new ObjectMapper();
-        System.out.println("Inside addGame. Game ID: ");
-        System.out.println(igdbId);
-        Game game;
-        if(gameDao.existsByIgdbId(igdbId)) {
-            game = gameDao.findByIgdbId(igdbId);
-        } else {
-            game = gameApiService.addGame(igdbId);
-
-            Set<Genre> genres = new HashSet<>();
-            for (Genre genre : game.getGenres()) {
-                if (genreDao.existsByName(genre.getName())) {
-                    System.out.println("inside genre exists by name");
-                    genres.add(genreDao.findByName(genre.getName()));
-                } else {
-                    genres.add(genreDao.save(genre));
-                }
-            }
-            game.setGenres(genres);
-
-            System.out.println("Setting platforms for game object.");
-            Set<Platform> platforms = new HashSet<>();
-            for (Platform platform : game.getPlatforms()) {
-                System.out.println("Platform in game.getPlatforms()");
-                System.out.println(mapper.writeValueAsString(platform));
-                Long mappingId = platform.getIgdbIds().stream().findFirst().get().getIgdbId();
-                System.out.println("mappingId: " + mappingId);
-                Platform platformToAdd = platformDao.findByIgdbIdsIgdbId(mappingId);
-                System.out.println("Platform to add:");
-                System.out.println(mapper.writeValueAsString(platformToAdd));
-                System.out.println("Platform mapping object exists by igdbId: " + platformMappingDao.existsByIgdbId(mappingId));
-                System.out.println("Platform object exists by the igdbIds igdbId: " + platformDao.existsByIgdbIdsIgdbId(mappingId));
-                System.out.println("Platforms set does not contain platform to add: " + !platforms.contains(platformToAdd));
-                if (
-                        platformMappingDao.existsByIgdbId(mappingId) &&
-                        platformDao.existsByIgdbIdsIgdbId(mappingId) &&
-                        !platforms.contains(platformToAdd)
-                ) {
-                    System.out.println("inside if statement");
-                    platforms.add(platformToAdd);
-                }
-            }
-            game.setPlatforms(platforms);
-
-            Rating rating;
-            if(game.getRating() != null) {
-                rating = ratingDao.findByIgdbId(game.getRating().getIgdbId());
-            } else {
-                rating = ratingDao.findByIgdbId(6);
-            }
-            game.setRating(rating);
-
-            gameDao.save(game);
-        }
+        Game game = scrapeGameInfo(gameApiService.addGame(igdbId));
 
         Set<Game> userGames = currentUser.getPreferences().getGames();
         if(!userGames.contains(game)) {
@@ -132,5 +89,101 @@ public class GameController {
             recruitMatchingService.matchAllRecruits();
         }
         return game;
+    }
+
+    private List<Game> scrapeGamesInfo(List<Game> igdbGames) throws JsonProcessingException {
+        long startTime = System.currentTimeMillis();
+        List<Game> games = new ArrayList<>();
+        for(Game game : igdbGames) {
+            games.add(scrapeGameInfo(game));
+        }
+        long endTime = System.currentTimeMillis();
+        System.out.println("scrapeGamesInfo complete in " + (endTime - startTime) + "ms");
+        return games;
+    }
+
+    private Game scrapeGameInfo(Game game) throws JsonProcessingException {
+        // Sets game to existing game in database if it already exists, or creates new game
+        if(gameDao.existsByIgdbId(game.getIgdbId())) {
+            game = gameDao.findByIgdbId(game.getIgdbId());
+        } else {
+            setGameGenres(game);
+            setGamePlatforms(game);
+            setGameRating(game);
+        }
+        return game;
+    }
+
+    private void setGameGenres(Game game) {
+        // Checks current genres in database and adds any that are not present
+        Set<Genre> genres = new HashSet<>();
+        for (Genre genre : game.getGenres()) {
+            if (genreDao.existsByName(genre.getName())) {
+                genres.add(genreDao.findByName(genre.getName()));
+            } else {
+                genres.add(genreDao.save(genre));
+            }
+        }
+        game.setGenres(genres);
+    }
+
+    private void setGamePlatforms(Game game) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        System.out.println("inside setGamePlatforms");
+        // Sets game platform based on the platforms in our database
+        Set<Platform> platforms = new HashSet<>();
+        for (Platform platform : game.getPlatforms()) {
+            System.out.println("Single platform in igdb style:");
+            System.out.println(mapper.writeValueAsString(platform));
+            Long mappingId = platform.getIgdbIds().stream().findFirst().get().getIgdbId();
+            Platform platformToAdd = platformDao.findByIgdbIdsIgdbId(mappingId);
+            if (
+                    platformMappingDao.existsByIgdbId(mappingId) &&
+                            platformDao.existsByIgdbIdsIgdbId(mappingId) &&
+                            !platforms.contains(platformToAdd)
+            ) {
+                platforms.add(platformToAdd);
+            }
+        }
+        System.out.println("All platforms in our style:");
+        System.out.println(mapper.writeValueAsString(platforms));
+        game.setPlatforms(platforms);
+    }
+
+    private void setGameRating(Game game) {
+        Rating rating;
+        if(game.getRating() != null) {
+            rating = ratingDao.findByIgdbId(game.getRating().getIgdbId());
+        } else {
+            rating = ratingDao.findByIgdbId(6);
+        }
+        game.setRating(rating);
+    }
+
+    private boolean gameMatchesUserPreferences(Game game, User user) {
+        boolean doesMatch = false;
+        if(
+                platformMatches(game, user) &&
+                ratingMatches(game, user)
+        ) {
+            doesMatch = true;
+        }
+        return doesMatch;
+    }
+
+    private boolean platformMatches(Game game, User user) {
+        for(Platform gamePlatform : game.getPlatforms()) {
+            if(user.getPreferences().getPlatforms().contains(gamePlatform)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean ratingMatches(Game game, User user) {
+        if(user.getPreferences().getRating().getId() >= game.getRating().getId()) {
+            return true;
+        }
+        return false;
     }
 }
