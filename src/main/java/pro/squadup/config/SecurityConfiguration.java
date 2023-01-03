@@ -21,7 +21,7 @@ public class SecurityConfiguration {
                 // Login configuration
                 .formLogin()
                 .loginPage("/login")
-                .defaultSuccessUrl("/home")
+                .defaultSuccessUrl("/dashboard")
                 .permitAll()
                 // Logout configuration
                 .and()
@@ -31,7 +31,7 @@ public class SecurityConfiguration {
                 .and()
                 .authorizeRequests()
                 .antMatchers(
-                        "/home",
+                        "/dashboard",
                         "/comrades",
                         "/recruits",
                         "/profile",

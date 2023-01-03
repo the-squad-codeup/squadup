@@ -37,8 +37,8 @@ public class GeneralController {
         return "redirect:/";
     }
 
-    @GetMapping("/home")
+    @GetMapping("/dashboard")
     public String showHomePage() {
-        return "general/home";
+        return "general/dashboard";
     }
 }
