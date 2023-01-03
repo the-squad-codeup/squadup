@@ -1,4 +1,4 @@
-$(function (){
+
     function notEmptyFields() {
         document.addEventListener('keyup', function() {
             var blankEmail = document.contactUs.email.value;
@@ -20,6 +20,5 @@ $(function (){
         });
     }
     reDisable();
-});
 
 

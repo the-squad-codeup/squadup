@@ -2,8 +2,6 @@ package pro.squadup.controllers;
 
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +13,6 @@ import pro.squadup.models.Platform;
 import pro.squadup.models.Preferences;
 import pro.squadup.models.User;
 import pro.squadup.repositories.*;
-import pro.squadup.services.UrlService;
 import pro.squadup.utils.Utils;
 
 import java.util.HashSet;
@@ -30,9 +27,6 @@ public class ProfileController {
     private LanguageRepository languageDao;
     private LocationRepository locationDao;
     private RatingRepository ratingDao;
-
-    @Autowired
-    private UrlService url;
 
     public ProfileController(
             UserRepository userDao,
@@ -54,7 +48,6 @@ public class ProfileController {
     public String myProfilePage(Model model) {
         User user = userDao.findById(Utils.currentUserId()).get();
         model.addAttribute("user", user);
-        model.addAttribute("url", url);
         return "profile/myprofile";
     }
 
@@ -70,21 +63,18 @@ public class ProfileController {
             userDao.save(user);
             model.addAttribute("preferences", preferences);
         }
-        model.addAttribute("url", url);
         model.addAttribute("languages", languageDao.findAll());
         model.addAttribute("platforms", platformDao.findAll());
         return "profile/preferences";
     }
 
     @GetMapping("/build-profile")
-    public String buildProfilePage(Model model){
-        model.addAttribute("url", url);
+    public String buildProfilePage(){
         return "profile/build-profile";
     }
 
     @GetMapping("/games")
-    public String gamesPage(Model model){
-        model.addAttribute("url", url);
+    public String gamesPage(){
         return "profile/games";
     }
 
@@ -92,8 +82,6 @@ public class ProfileController {
     public String editProfilePreferences(@PathVariable Long id, @RequestBody Preferences updatedPreferences) throws JsonProcessingException {
         User currentUser = userDao.findById(Utils.currentUserId()).get();
         Preferences userPreferences = currentUser.getPreferences();
-        ObjectMapper mapper = new ObjectMapper();
-        System.out.println(mapper.writeValueAsString(userPreferences));
         userPreferences.setBio(updatedPreferences.getBio());
         userPreferences.setLocation(locationDao.findByTimezone(updatedPreferences.getLocation().getTimezone()));
         Set<Language> updatedLanguages = new HashSet<>();

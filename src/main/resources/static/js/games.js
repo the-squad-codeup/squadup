@@ -7,13 +7,22 @@ $(function () {
         initialize() {
             console.log("inside Games.initialize()");
             Events.initialize();
-            // Fetch.Get.gameSearch("hollow knight");
+            Print.myGames($("#my-games"));
         },
         baseUrl: Utils.url(),
         csrfToken: $("meta[name='_csrf']").attr("content")
-    }
+    };
 
     const Print = {
+        async myGames(div) {
+            let userGames = await Fetch.Get.myGames().then(res => res);
+            console.log("Inside Print.myGames(). userGames: ");
+            console.log(userGames);
+            div.empty();
+            for(let game of userGames) {
+                this.singleGame(game, div);
+            }
+        },
         async gameResults(data, div) {
             let games = await data;
             console.log(games);
@@ -25,15 +34,15 @@ $(function () {
         async singleGame(data, div) {
             let game = await data;
             div.append(`
-                <div class="div-card col-3" data-game-igdb-id="${game.id}">
+                <div class="div-card col-3" data-game-igdb-id="${game.igdbId}">
                     <div class="card game-card border-0">
-                        <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/${game.cover.image_id}.jpg" class="card-img all-games-img">
+                        <img src="${game.artwork}" class="card-img all-games-img">
                     </div>
                 </div>
             `);
 
         }
-    }
+    };
 
     const Fetch = {
         Get: {
@@ -60,10 +69,15 @@ $(function () {
                 let data = await results.json();
                 console.log(data);
             },
+            async myGames() {
+                let data = await fetch(`${MyGames.baseUrl}game/user`).then(res => res.json());
+                console.log("Inside Fetch.Get.myGames(). Data returned:");
+                console.log(data);
+                return data;
+            }
         },
         Post: {
             async backendGameSearch(query) {
-                // let keys = await this.keys();
                 console.log("Inside backendGameSearch. query: ");
                 console.log(query);
                 const fetchOptions = {
@@ -93,7 +107,7 @@ $(function () {
                 return data;
             }
         }
-    }
+    };
 
     const Events = {
         initialize() {
@@ -116,7 +130,7 @@ $(function () {
                 })
             ;
         }
-    }
+    };
 
     MyGames.initialize();
 });
