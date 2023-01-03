@@ -39,7 +39,7 @@ public class Preferences {
     @JoinColumn(name = "rating_id")
     private Rating rating;
 
-    @OneToOne(mappedBy = "preferences")
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "preferences")
     @JsonIgnore
     private User user;
 
