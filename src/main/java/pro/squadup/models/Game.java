@@ -38,6 +38,10 @@ public class Game {
     @JsonIgnore
     private Set<Preferences> preferences;
 
+    @OneToMany(mappedBy = "favoriteGame")
+    @JsonIgnore
+    private Set<Preferences> favorites;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "game_genre",
@@ -105,6 +109,14 @@ public class Game {
 
     public void setPreferences(Set<Preferences> preferences) {
         this.preferences = preferences;
+    }
+
+    public Set<Preferences> getFavorites() {
+        return favorites;
+    }
+
+    public void setFavorites(Set<Preferences> favorites) {
+        this.favorites = favorites;
     }
 
     public Set<Genre> getGenres() {

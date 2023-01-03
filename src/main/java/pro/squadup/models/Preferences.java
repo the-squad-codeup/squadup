@@ -59,6 +59,10 @@ public class Preferences {
     )
     private Set<Game> games;
 
+    @ManyToOne
+    @JoinColumn(name = "favorite_game_id")
+    private Game favoriteGame;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "preferences_genre",
@@ -137,6 +141,14 @@ public class Preferences {
 
     public void setGames(Set<Game> games) {
         this.games = games;
+    }
+
+    public Game getFavoriteGame() {
+        return favoriteGame;
+    }
+
+    public void setFavoriteGame(Game favoriteGame) {
+        this.favoriteGame = favoriteGame;
     }
 
     public Set<Genre> getGenres() {
