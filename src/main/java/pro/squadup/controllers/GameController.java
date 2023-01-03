@@ -51,6 +51,11 @@ public class GameController {
         this.preferencesDao = preferencesDao;
     }
 
+    @GetMapping("/user")
+    public Set<Game> userGames(){
+        User currentUser = userDao.findById(Utils.currentUserId()).get();
+        return currentUser.getPreferences().getGames();
+    }
 
     @PostMapping("/search")
     public List<Game> searchGames(@RequestBody String query) throws IOException {
@@ -71,7 +76,12 @@ public class GameController {
     @PostMapping("/{igdbId}/add")
     public Game addGame(@PathVariable long igdbId) throws JsonProcessingException {
         User currentUser = userDao.findById(Utils.currentUserId()).get();
-        Game game = scrapeGameInfo(gameApiService.addGame(igdbId));
+        Game game;
+        if(!gameDao.existsByIgdbId(igdbId)) {
+            game = scrapeGameInfo(gameApiService.addGame(igdbId));
+        } else {
+            game = gameDao.findByIgdbId(igdbId);
+        }
 
         Set<Game> userGames = currentUser.getPreferences().getGames();
         if(!userGames.contains(game)) {
@@ -89,6 +99,19 @@ public class GameController {
             recruitMatchingService.matchAllRecruits();
         }
         return game;
+    }
+
+    @PostMapping("/{gameId}/remove")
+    public Game removeGame(@PathVariable Long gameId) {
+        User currentUser = userDao.findById(Utils.currentUserId()).get();
+        Set<Game> updatedGames = currentUser.getPreferences().getGames();
+        Game gameToRemove = gameDao.findById(gameId).get();
+        if(currentUser.getPreferences().getGames().contains(gameToRemove)) {
+            updatedGames.remove(gameToRemove);
+        }
+        currentUser.getPreferences().setGames(updatedGames);
+        userDao.save(currentUser);
+        return gameToRemove;
     }
 
     private List<Game> scrapeGamesInfo(List<Game> igdbGames) throws JsonProcessingException {
@@ -110,6 +133,7 @@ public class GameController {
             setGameGenres(game);
             setGamePlatforms(game);
             setGameRating(game);
+            gameDao.save(game);
         }
         return game;
     }
