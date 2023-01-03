@@ -91,6 +91,18 @@ public class GameController {
         return game;
     }
 
+    @PostMapping("/{gameId}/remove")
+    public Game removeGame(@PathVariable Long gameId) {
+        User currentUser = userDao.findById(Utils.currentUserId()).get();
+        Set<Game> updatedGames = new HashSet<>(gameDao.findAllByUser(currentUser));
+        Game gameToRemove = gameDao.findById(gameId).get();
+        if(currentUser.getPreferences().getGames().contains(gameToRemove)) {
+            updatedGames.remove(gameToRemove);
+        }
+        currentUser.getPreferences().setGames(updatedGames);
+        return gameToRemove;
+    }
+
     private List<Game> scrapeGamesInfo(List<Game> igdbGames) throws JsonProcessingException {
         long startTime = System.currentTimeMillis();
         List<Game> games = new ArrayList<>();
