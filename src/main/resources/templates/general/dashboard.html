@@ -3,12 +3,18 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <div th:replace="partials :: headFragment('Home Page')"></div>
-
-
 </head>
 <body>
 <nav th:replace="partials :: siteBar"></nav>
 <div id="page-wrapper">
+<!--To display Current User logged in-->
+    <div class="editUser-info" sec:authorize="isAuthenticated()"><h5>Welcome back,
+        <span th:text="${#authentication.principal.username}"/>!</h5>
+
+        User ID: <span th:text="${#authentication.principal.id}"/><br>
+        Email: <span th:text="${#authentication.principal.email}"/>
+    </div>
+
 
 </div>
 <nav th:replace="partials :: footer"></nav>
