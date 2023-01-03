@@ -70,6 +70,12 @@ public class GameController {
         return trimmedGames;
     }
 
+    @GetMapping("/favorite")
+    public Game getFavoriteGame() {
+        User user = userDao.findById(Utils.currentUserId()).get();
+        return user.getPreferences().getFavoriteGame();
+    }
+
     @PostMapping("/{gameId}/add")
     public Game addGame(@PathVariable long gameId) throws JsonProcessingException {
         User currentUser = userDao.findById(Utils.currentUserId()).get();
