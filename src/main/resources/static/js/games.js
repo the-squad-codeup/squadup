@@ -7,13 +7,22 @@ $(function () {
         initialize() {
             console.log("inside Games.initialize()");
             Events.initialize();
-            // Fetch.Get.gameSearch("hollow knight");
+            Print.myGames($("#my-games"));
         },
         baseUrl: Utils.url(),
         csrfToken: $("meta[name='_csrf']").attr("content")
     };
 
     const Print = {
+        async myGames(div) {
+            let userGames = await Fetch.Get.myGames().then(res => res);
+            console.log("Inside Print.myGames(). userGames: ");
+            console.log(userGames);
+            div.empty();
+            for(let game of userGames) {
+                this.singleGame(game, div);
+            }
+        },
         async gameResults(data, div) {
             let games = await data;
             console.log(games);
@@ -60,10 +69,15 @@ $(function () {
                 let data = await results.json();
                 console.log(data);
             },
+            async myGames() {
+                let data = await fetch(`${MyGames.baseUrl}game/user`).then(res => res.json());
+                console.log("Inside Fetch.Get.myGames(). Data returned:");
+                console.log(data);
+                return data;
+            }
         },
         Post: {
             async backendGameSearch(query) {
-                // let keys = await this.keys();
                 console.log("Inside backendGameSearch. query: ");
                 console.log(query);
                 const fetchOptions = {
