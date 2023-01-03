@@ -123,10 +123,15 @@
 }
 .language{
     padding: 0vw 3vw;
-
 }
 .game-rating{}
 .mature-language{}
+.game{
+    color: white;
+    border:0.3vw solid #5cfd42;
+    height:5vw;
+    width: 5vw;
+}
 
 
 
