@@ -73,15 +73,10 @@ public class GameController {
         return trimmedGames;
     }
 
-    @PostMapping("/{igdbId}/add")
-    public Game addGame(@PathVariable long igdbId) throws JsonProcessingException {
+    @PostMapping("/{gameId}/add")
+    public Game addGame(@PathVariable long gameId) throws JsonProcessingException {
         User currentUser = userDao.findById(Utils.currentUserId()).get();
-        Game game;
-        if(!gameDao.existsByIgdbId(igdbId)) {
-            game = scrapeGameInfo(gameApiService.addGame(igdbId));
-        } else {
-            game = gameDao.findByIgdbId(igdbId);
-        }
+        Game game = gameDao.findById(gameId).get();
 
         Set<Game> userGames = currentUser.getPreferences().getGames();
         if(!userGames.contains(game)) {

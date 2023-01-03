@@ -10,37 +10,38 @@ $(function () {
             Print.myGames($("#my-games"));
         },
         baseUrl: Utils.url(),
-        csrfToken: $("meta[name='_csrf']").attr("content")
+        csrfToken: $("meta[name='_csrf']").attr("content"),
+        addGameDiv: $("#games-div"),
+        myGamesDiv: $("#my-games")
     };
 
     const Print = {
-        async myGames(div) {
+        async myGames() {
             let userGames = await Fetch.Get.myGames().then(res => res);
             console.log("Inside Print.myGames(). userGames: ");
             console.log(userGames);
-            div.empty();
+            MyGames.myGamesDiv.empty();
             for(let game of userGames) {
-                this.singleGame(game, div);
+                this.singleGame(game, MyGames.myGamesDiv);
             }
         },
-        async gameResults(data, div) {
+        async gameResults(data) {
             let games = await data;
             console.log(games);
-            div.empty();
+            MyGames.addGameDiv.empty();
             for(let game of games) {
-                this.singleGame(game, div);
+                this.singleGame(game, MyGames.addGameDiv);
             }
         },
         async singleGame(data, div) {
             let game = await data;
-            div.append(`
-                <div class="div-card col-3" data-game-igdb-id="${game.igdbId}">
+            div.prepend(`
+                <div class="div-card col-3" data-game-id="${game.id}">
                     <div class="card game-card border-0">
                         <img src="${game.artwork}" class="card-img all-games-img">
                     </div>
                 </div>
             `);
-
         }
     };
 
@@ -92,17 +93,29 @@ $(function () {
                 console.log(data);
                 return data;
             },
-            async addGame(igdbId) {
-                console.log("inside addGame. IgdbId: ");
-                console.log(igdbId);
+            async addGame(id) {
+                console.log("inside addGame. Id: ");
+                console.log(id);
                 const fetchOptions = {
                     method: 'POST',
                     headers: {
                         'X-CSRF-TOKEN' : MyGames.csrfToken
                     }
                 };
-                let results = await fetch(`${MyGames.baseUrl}game/${igdbId}/add`, fetchOptions);
-                let data = await results.json();
+                let data = await fetch(`${MyGames.baseUrl}game/${id}/add`, fetchOptions).then(res => res.json());
+                console.log(data);
+                return data;
+            },
+            async removeGame(id) {
+                console.log("inside removeGame. Id: ");
+                console.log(id);
+                const fetchOptions = {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN' : MyGames.csrfToken
+                    }
+                };
+                let data = await fetch(`${MyGames.baseUrl}game/${id}/remove`, fetchOptions).then(res => res.json());
                 console.log(data);
                 return data;
             }
@@ -124,9 +137,15 @@ $(function () {
                         $("#game-search-button").trigger("click");
                     }
                 })
-                .on("click", ".game-card", function() {
-                    console.log("Game Card clicked");
-                    Fetch.Post.addGame($(this).parent().attr("data-game-igdb-id"));
+                .on("click", "#games-div .game-card", async function() {
+                    console.log("Add Game Card clicked");
+                    let addedGame = await Fetch.Post.addGame($(this).parent().attr("data-game-id"));
+                    await Print.singleGame(addedGame, MyGames.myGamesDiv);
+                })
+                .on("click", "#my-games .game-card", async function() {
+                    console.log("Remove Game Card clicked");
+                    await Fetch.Post.removeGame($(this).parent().attr("data-game-id"));
+                    await Print.myGames();
                 })
             ;
         }
