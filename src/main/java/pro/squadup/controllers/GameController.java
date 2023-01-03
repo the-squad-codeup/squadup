@@ -51,6 +51,11 @@ public class GameController {
         this.preferencesDao = preferencesDao;
     }
 
+    @GetMapping("/user")
+    public Set<Game> userGames(){
+        User currentUser = userDao.findById(Utils.currentUserId()).get();
+        return currentUser.getPreferences().getGames();
+    }
 
     @PostMapping("/search")
     public List<Game> searchGames(@RequestBody String query) throws IOException {
