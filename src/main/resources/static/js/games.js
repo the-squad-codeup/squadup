@@ -12,7 +12,10 @@ $(function () {
         baseUrl: Utils.url(),
         csrfToken: $("meta[name='_csrf']").attr("content"),
         addGameDiv: $("#games-div"),
-        myGamesDiv: $("#my-games")
+        myGamesDiv: $("#my-games"),
+        sortGamesByYear(games) {
+            return games.sort((prev, current) => parseInt(prev.year) - parseInt(current.year));
+        }
     };
 
     const Print = {
@@ -26,7 +29,7 @@ $(function () {
             }
         },
         async gameResults(data) {
-            let games = await data;
+            let games = MyGames.sortGamesByYear(await data);
             console.log(games);
             MyGames.addGameDiv.empty();
             for(let game of games) {
