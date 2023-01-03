@@ -76,7 +76,12 @@ public class GameController {
     @PostMapping("/{igdbId}/add")
     public Game addGame(@PathVariable long igdbId) throws JsonProcessingException {
         User currentUser = userDao.findById(Utils.currentUserId()).get();
-        Game game = scrapeGameInfo(gameApiService.addGame(igdbId));
+        Game game;
+        if(!gameDao.existsByIgdbId(igdbId)) {
+            game = scrapeGameInfo(gameApiService.addGame(igdbId));
+        } else {
+            game = gameDao.findByIgdbId(igdbId);
+        }
 
         Set<Game> userGames = currentUser.getPreferences().getGames();
         if(!userGames.contains(game)) {
@@ -99,7 +104,7 @@ public class GameController {
     @PostMapping("/{gameId}/remove")
     public Game removeGame(@PathVariable Long gameId) {
         User currentUser = userDao.findById(Utils.currentUserId()).get();
-        Set<Game> updatedGames = new HashSet<>(gameDao.findAllByUser(currentUser));
+        Set<Game> updatedGames = currentUser.getPreferences().getGames();
         Game gameToRemove = gameDao.findById(gameId).get();
         if(currentUser.getPreferences().getGames().contains(gameToRemove)) {
             updatedGames.remove(gameToRemove);
@@ -128,6 +133,7 @@ public class GameController {
             setGameGenres(game);
             setGamePlatforms(game);
             setGameRating(game);
+            gameDao.save(game);
         }
         return game;
     }
