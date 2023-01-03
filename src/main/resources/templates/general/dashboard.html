@@ -3,6 +3,8 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <div th:replace="partials :: headFragment('Home Page')"></div>
+    <link rel="stylesheet" th:href="@{/css/games.css}">
+
 </head>
 <body>
 <nav th:replace="partials :: siteBar"></nav>
@@ -15,11 +17,12 @@
         Email: <span th:text="${#authentication.principal.email}"/>
     </div>
 <!--Display User Games-->
-
+    <h1>My Games</h1>
+    <div id="my-games"></div>
 
 </div>
-\
 <nav th:replace="partials :: footer"></nav>
 <div th:replace="partials :: scripts"></div>
+<script th:type="module" th:src="@{/js/games.js}"></script>
 </body>
 </html>
