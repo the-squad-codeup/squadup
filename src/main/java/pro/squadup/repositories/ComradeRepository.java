@@ -10,5 +10,6 @@ import pro.squadup.models.User;
 public interface ComradeRepository extends JpaRepository<Comrade, Long> {
     boolean existsByUserOneAndUserTwo(User userOne, User userTwo);
 
-    Recruit findByUserOneAndUserTwo(User userOne, User userTwo);
+    Comrade findByUserOneAndUserTwo(User userOne, User userTwo);
+
 }

@@ -28,13 +28,12 @@ $(function() {
     }
 
     async function getComrades(){
-        let results = await fetch(`${Utils.url}recruits/all`);
+        let results = await fetch(`${Utils.url}recruits/all`); //<< this will change once comrades controller is finished!!
         let data = await results.json();
         console.log(data);
         return date;
     }
 
     printUserCards(getComrades());
-//                                ^^^ask stephen about this: should it be recruits/{id}/accept^^^
 
 });
