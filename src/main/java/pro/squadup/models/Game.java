@@ -27,6 +27,9 @@ public class Game {
     @Column
     private String artwork;
 
+    @Column
+    private int year;
+
     @ManyToOne
     @JoinColumn(name = "rating_id")
     private Rating rating;
@@ -34,6 +37,10 @@ public class Game {
     @ManyToMany(mappedBy = "games")
     @JsonIgnore
     private Set<Preferences> preferences;
+
+    @OneToMany(mappedBy = "favoriteGame")
+    @JsonIgnore
+    private Set<Preferences> favorites;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -80,6 +87,14 @@ public class Game {
         this.artwork = artwork;
     }
 
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
     public Rating getRating() {
         return rating;
     }
@@ -94,6 +109,14 @@ public class Game {
 
     public void setPreferences(Set<Preferences> preferences) {
         this.preferences = preferences;
+    }
+
+    public Set<Preferences> getFavorites() {
+        return favorites;
+    }
+
+    public void setFavorites(Set<Preferences> favorites) {
+        this.favorites = favorites;
     }
 
     public Set<Genre> getGenres() {
@@ -115,23 +138,26 @@ public class Game {
     public Game(){
     }
 
-    public Game(String title, String artwork, Rating rating) {
+    public Game(String title, String artwork, int year, Rating rating) {
         this.title = title;
         this.artwork = artwork;
+        this.year = year;
         this.rating = rating;
     }
 
-    public Game(long id, String title, String artwork, Rating rating) {
+    public Game(long id, String title, String artwork, int year, Rating rating) {
         this.id = id;
         this.title = title;
         this.artwork = artwork;
+        this.year = year;
         this.rating = rating;
     }
 
-    public Game(Long igdbId, String title, String artwork, Rating rating, Set<Genre> genres, Set<Platform> platforms) {
+    public Game(Long igdbId, String title, String artwork, int year, Rating rating, Set<Genre> genres, Set<Platform> platforms) {
         this.igdbId = igdbId;
         this.title = title;
         this.artwork = artwork;
+        this.year = year;
         this.rating = rating;
         this.genres = genres;
         this.platforms = platforms;

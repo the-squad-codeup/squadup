@@ -2,8 +2,10 @@ package pro.squadup.utils;
 
 
 import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import pro.squadup.models.*;
 
@@ -38,11 +40,12 @@ public class GameDeserializer extends StdDeserializer<Game> {
         long igdbId = igdbIdFromNode(node);
         String title = titleFromNode(node);
         String artwork = artworkUrlFromNode(node);
+        int year = yearFromNode(node);
         Rating rating = ratingFromNode(node);
         Set<Genre> genres = genresFromNode(node);
         Set<Platform> platforms = platformsFromNode(node);
 
-        return new Game(igdbId, title, artwork, rating, genres, platforms);
+        return new Game(igdbId, title, artwork, year, rating, genres, platforms);
     }
 
     // returns igdbId from Json object
@@ -73,6 +76,15 @@ public class GameDeserializer extends StdDeserializer<Game> {
             artworkId = node.path("cover").get("image_id").asText();
         }
         return "https://images.igdb.com/igdb/image/upload/t_cover_big/" + artworkId + ".jpg";
+    }
+
+    // returns year int from Json object
+    private int yearFromNode(JsonNode node) {
+        int year = 0;
+        if(node.path("release_dates").get(0).get("y") != null) {
+            year = node.path("release_dates").get(0).get("y").asInt();
+        }
+        return year;
     }
 
     // returns Rating object from Json object

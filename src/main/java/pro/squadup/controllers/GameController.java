@@ -1,7 +1,6 @@
 package pro.squadup.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pro.squadup.models.*;
@@ -62,29 +61,41 @@ public class GameController {
 
     @PostMapping("/search")
     public List<Game> searchGames(@RequestBody String query) throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
         User user = userDao.findById(Utils.currentUserId()).get();
         List<Game> allGames = scrapeGamesInfo(gameApiService.searchGames(query));
         List<Game> trimmedGames = new ArrayList<>();
         for(Game game : allGames) {
             Game scrapedGame = scrapeGameInfo(game);
-            System.out.println(mapper.writeValueAsString(scrapedGame));
-            if(gameMatchesUserPreferences(scrapedGame, user)) {
+            if(gameMatchesUserPreferences(scrapedGame, user) && notGameEdition(scrapedGame)) {
                 trimmedGames.add(scrapedGame);
             }
         }
         return trimmedGames;
     }
 
-    @PostMapping("/{igdbId}/add")
-    public Game addGame(@PathVariable long igdbId) throws JsonProcessingException {
-        User currentUser = userDao.findById(Utils.currentUserId()).get();
-        Game game;
-        if(!gameDao.existsByIgdbId(igdbId)) {
-            game = scrapeGameInfo(gameApiService.addGame(igdbId));
-        } else {
-            game = gameDao.findByIgdbId(igdbId);
+    @GetMapping("/favorite")
+    public Game getFavoriteGame() {
+        User user = userDao.findById(Utils.currentUserId()).get();
+        Game favoriteGame = user.getPreferences().getFavoriteGame();
+        if(favoriteGame != null) {
+            return favoriteGame;
         }
+        return new Game();
+    }
+
+    @PostMapping("/{gameId}/favorite")
+    public Game setFavoriteGame(@PathVariable Long gameId) {
+        User user = userDao.findById(Utils.currentUserId()).get();
+        Game gameToFavorite = gameDao.findById(gameId).get();
+        user.getPreferences().setFavoriteGame(gameToFavorite);
+        userDao.save(user);
+        return gameToFavorite;
+    }
+
+    @PostMapping("/{gameId}/add")
+    public Game addGame(@PathVariable long gameId) throws JsonProcessingException {
+        User currentUser = userDao.findById(Utils.currentUserId()).get();
+        Game game = gameDao.findById(gameId).get();
 
         Set<Game> userGames = currentUser.getPreferences().getGames();
         if(!userGames.contains(game)) {
@@ -155,13 +166,9 @@ public class GameController {
     }
 
     private void setGamePlatforms(Game game) throws JsonProcessingException {
-        ObjectMapper mapper = new ObjectMapper();
-        System.out.println("inside setGamePlatforms");
         // Sets game platform based on the platforms in our database
         Set<Platform> platforms = new HashSet<>();
         for (Platform platform : game.getPlatforms()) {
-            System.out.println("Single platform in igdb style:");
-            System.out.println(mapper.writeValueAsString(platform));
             Long mappingId = platform.getIgdbIds().stream().findFirst().get().getIgdbId();
             Platform platformToAdd = platformDao.findByIgdbIdsIgdbId(mappingId);
             if (
@@ -172,8 +179,6 @@ public class GameController {
                 platforms.add(platformToAdd);
             }
         }
-        System.out.println("All platforms in our style:");
-        System.out.println(mapper.writeValueAsString(platforms));
         game.setPlatforms(platforms);
     }
 
@@ -188,14 +193,20 @@ public class GameController {
     }
 
     private boolean gameMatchesUserPreferences(Game game, User user) {
-        boolean doesMatch = false;
         if(
                 platformMatches(game, user) &&
                 ratingMatches(game, user)
         ) {
-            doesMatch = true;
+            return true;
         }
-        return doesMatch;
+        return false;
+    }
+
+    private boolean notGameEdition(Game game) {
+        if(game.getTitle().contains("Edition")) {
+            return false;
+        }
+        return true;
     }
 
     private boolean platformMatches(Game game, User user) {
