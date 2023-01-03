@@ -31,7 +31,7 @@ public class ComradesController {
         return user.getComrades();
     }
 
-    @PostMapping("/")
+    @PostMapping("/comrades/{id}/delete")
     public
 
 
