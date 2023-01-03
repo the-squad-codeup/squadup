@@ -37,7 +37,8 @@ public class SecurityConfiguration {
                         "/profile",
                         "/build-profile",
                         "/games",
-                        "/profile/*"
+                        "/profile/*",
+                        "/game/*"
                 )
                 .authenticated()
                 // Pages viewable without logging in
