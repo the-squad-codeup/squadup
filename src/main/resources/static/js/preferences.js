@@ -1,7 +1,7 @@
 // this needs to be refactored
 //hardcoded html needs to get removed from the html page and then generated from js script
 
-// $(function() {
+$(function() {
 
     const MyPreferences = {
         initialize() {
@@ -204,4 +204,4 @@
     MyPreferences.initialize();
 
 
-// });
+});

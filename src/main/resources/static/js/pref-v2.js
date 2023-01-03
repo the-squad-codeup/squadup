@@ -12,22 +12,22 @@ function hideOverlays() {
 
 function toggleOverlay(){
     hideOverlays();
-    var x = document.getElementById('spacetime').value
-    if( x == 1) {
+    var x = document.getElementById('location').value
+    if( x === 'Hawaii-Aleutian Time Zone') {
         document.getElementById('HAST').style.display = "block";
-    } else if ( x == 2) {
+    } else if ( x === 'Alaskan Time Zone') {
         document.getElementById('AK').style.display = "block";
-    } else if ( x == 3) {
+    } else if ( x === 'Pacific Time Zone') {
         document.getElementById('PT').style.display = "block";
-    } else if ( x == 4) {
+    } else if ( x === 'Mountain Time Zone') {
         document.getElementById('MT').style.display = "block";
-    } else if ( x == 5) {
+    } else if ( x === 'Mountain Arizona Time Zone') {
         document.getElementById('AZ').style.display = "block";
-    } else if ( x == 6) {
+    } else if ( x === 'Central Time Zone') {
         document.getElementById('CT').style.display = "block";
-    } else if ( x == 7) {
+    } else if ( x === 'Eastern Time Zone') {
         document.getElementById('ET').style.display = "block";
-    } else if ( x == 8) {
+    } else if ( x === 'Atlantic Time Zone') {
         document.getElementById('AST').style.display = "block";
     }
-};
+}
