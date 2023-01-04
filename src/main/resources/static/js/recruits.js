@@ -17,16 +17,16 @@ $(function() {
                         <h4 class="card-title">${recruit.userTwo.username}</h4>
                         <p class="card-text">${recruit.userTwo.username}'s Bio: ${recruit.userTwo.preferences.bio}</p>
                     </div>
+                    <div>
+                        <a href="#"  class="btn btn-primary squadup-link">Accept</a>
+                        <a href="#" class="btn btn-primary squaddown-link">Reject</a>
+                    </div>
                 </div>
             `);
             for (let userTwoGame of recruit.userTwo.preferences.games) {
                 $(`#card`).children(`[data-recruit-id="${recruit.id}"]`).children(".card-body").append(`
                     <div>
                         <img class="card-img-top" src="${userTwoGame.artwork}" alt="${userTwoGame.title} icon">
-                    </div>
-                    <div>
-                        <a href="#"  class="btn btn-primary squadup-link">Accept</a>
-                        <a href="#" class="btn btn-primary squaddown-link">Reject</a>
                     </div>
                 `);
             }
