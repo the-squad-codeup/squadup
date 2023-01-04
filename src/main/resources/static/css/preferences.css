@@ -1,5 +1,6 @@
 body {
-    color: chartreuse;
+    color: black;
+
 }
 
 .mapcontainer {
@@ -25,6 +26,6 @@ body {
     left: 0;
 }
 
-/*.languages {*/
-/*    width: 100%!important;*/
-/*}*/
+#gamertag, #bio {
+    width: 95%;
+}

@@ -198,15 +198,23 @@ $(function() {
                 window.location.replace(`${MyPreferences.baseUrl}`);
             });
             $(document).ready(function() {
+                $("#location").select2({
+                    placeholder: "select a timezone",
+                });
+            });
+            $(document).ready(function() {
                 $("#languages").select2({
-                    placeholder: "language",
-                    theme: "classic",
+                    placeholder: "select languages",
+                });
+            });
+            $(document).ready(function() {
+                $("#game-ratings").select2({
+                    placeholder: "select a rating",
                 });
             });
             $(document).ready(function() {
                 $("#platforms").select2({
-                    placeholder: "platform",
-                    theme: "classic",
+                    placeholder: "select platforms",
                 });
             });
         }
