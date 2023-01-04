@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <div th:replace="partials :: headFragment('Home Page')"></div>
+    <link rel="stylesheet" th:href="@{/css/games.css}">
+<<<<<<< HEAD
+    <link rel="stylesheet" th:href="@{/css/social.css}">
+=======
+
+>>>>>>> c78817112cdc4f3ae8f085f2529fa0eb2de910a8
+</head>
+<body>
+<nav th:replace="partials :: siteBar"></nav>
+<div id="page-wrapper">
+<!--ROUGH DRAFT:::: to display Current User logged in-->
+    <div class="user-info" sec:authorize="isAuthenticated()"><h5>Welcome back,
+        <span th:text="${#authentication.principal.username}"/>!</h5>
+
+        User ID: <span th:text="${#authentication.principal.id}"/><br>
+        Email: <span th:text="${#authentication.principal.email}"/>
+    </div>
+<!--ROUGH DRAFT::::Display User Games-->
+    <h1>My Games</h1>
+        <div id="my-games" class="row container"></div>
+
+<!--&lt;!&ndash;ROUGH DRAFT::::Displaying Comrades&ndash;&gt;-->
+<!--    <div class="card">-->
+<!--&lt;!&ndash;        <section id="comrade-card" class="row container">&ndash;&gt;-->
+<!--        </section>-->
+<!--    </div>-->
+<!--&lt;!&ndash;ROUGH DRAFT::::Displaying Squads&ndash;&gt;-->
+
+<!--&lt;!&ndash;ROUGH DRAFT::::Displaying New Recruits-->
+<!--May need to create new arrows or adjust sizing&ndash;&gt;-->
+    <div>
+        <section id="card" class="row container">
+        </section>
+    </div>
+</div>
+<nav th:replace="partials :: footer"></nav>
+<div th:replace="partials :: scripts"></div>
+<script th:type="module" th:src="@{/js/games.js}"></script>
+<script type="module" th:src="@{/js/recruits.js}"></script>
+</body>
+</html>
