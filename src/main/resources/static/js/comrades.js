@@ -28,7 +28,7 @@ $(function() {
     }
 
     async function getComrades(){
-        let results = await fetch(`${Utils.url}recruits/all`); //<< this will change once comrades controller is finished!!
+        let results = await fetch(`${Utils.url}/comrades/{id}/delete`);
         let data = await results.json();
         console.log(data);
         return date;

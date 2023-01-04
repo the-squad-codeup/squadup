@@ -2,6 +2,7 @@ package pro.squadup.controllers;
 
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pro.squadup.models.Comrade;
@@ -32,7 +33,14 @@ public class ComradesController {
     }
 
     @PostMapping("/comrades/{id}/delete")
-    public
+    public void deleteComrade(@PathVariable Long id){
+        User user = userDao.findById(Utils.currentUserId()).get();
+        Comrade comrade = comradeDao.findById(id).get();
+        User inverseUser = comrade.getUserTwo();
+        Comrade inverseComrade = comradeDao.findByUserOneAndUserTwo(inverseUser, user);
+        comradeDao.delete(comrade);
+        comradeDao.delete(inverseComrade);
+    }
 
 
 }
