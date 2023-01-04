@@ -61,13 +61,17 @@
     display: flex;
     justify-content: center;
 }
-.genres div{
-    font-size: 3vw;
+.genres h3{
+    font-size: 2vw;
     color: #5CFD42;
     position: absolute;
 }
-.genres span{
-    font-size: 2vw;
+.genres div{
+    margin-top: 3vw;
+
+}
+.genres  span{
+    font-size: 1.5vw;
     color: #000000;
     /*position: absolute;*/
     margin-left: .5vw;
@@ -110,6 +114,7 @@
     height: 3vw;
     margin-top: 3vw;
     margin-left: 18vw;
+    justify-content: space-evenly;
     position: absolute;
     display: flex;
 }

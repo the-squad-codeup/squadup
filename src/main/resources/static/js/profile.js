@@ -65,11 +65,20 @@ $(function (){
         `)
 
         // Genres
+        $('.genres').append(`
+                        <h3>GENRES</h3>
+                        <div></div>      
+        `)
         for(let genre of userInfo.preferences.genres){
             $('.genres div').append(`
-                 <span>${genre}</span>
+                 <span>${genre.name}</span>
             `)
         }
+
+        // location
+        $('.preferences').append(`
+                    <div class="location">${userInfo.preferences.location.timezone}</div>
+        `)
 
 
 
