@@ -27,6 +27,8 @@ $(function (){
 
     async function getUserInfo(){
         let userInfo = await fetch(`${Utils.url()}user/get`).then(res => res.json());
+
+        // Platforms
         $('.my-platforms').append(`
           My Games:
           `)
@@ -49,6 +51,29 @@ $(function (){
                 `)
             }
         }
+
+        // Bio
+        $('.bio').append(`
+            <div>${userInfo.preferences.bio}</div>
+        `)
+
+        // Gamertag
+        $('.info-container').append(`
+        <div class="gamertag">
+               ${userInfo.preferences.gamertag}
+        </div>
+        `)
+
+        // Genres
+        for(let genre of userInfo.preferences.genres){
+            $('.genres div').append(`
+                 <span>${genre}</span>
+            `)
+        }
+
+
+
+
         console.log("user info:")
         console.log(userInfo)
     }

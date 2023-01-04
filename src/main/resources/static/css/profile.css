@@ -41,7 +41,7 @@
     display: flex;
     align-items: center;
 }
-.bio{
+.bio div{
     color: #5CFD42;
     font-size: 1.5vw;
     position: absolute;
@@ -66,13 +66,12 @@
     color: #5CFD42;
     position: absolute;
 }
-.genres ul{
+.genres span{
     font-size: 2vw;
     color: #000000;
-    position: absolute;
-    margin-top: 5vw;
+    /*position: absolute;*/
+    margin-left: .5vw;
     -webkit-text-stroke: 0.1vw #5cfd42;
-    list-style: none;
 }
 .favorite-game{
     height: 24vw;
