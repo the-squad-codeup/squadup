@@ -176,8 +176,12 @@ $(function () {
                 })
                 .on("click", ".add-game-button", async function() {
                     console.log("Add Game Button clicked");
-                    let addedGame = await Fetch.Post.addGame($(this).parent().parent().attr("data-game-id"));
-                    await Print.singleMyGame(addedGame, MyGames.myGamesDiv);
+                    let gameId = $(this).parent().parent().attr("data-game-id");
+                    let addedGame = await Fetch.Post.addGame(gameId);
+                    let gameIds = [...MyGames.myGamesDiv.children()].map(game => parseInt(game.attributes[1].value));
+                    if(!gameIds.includes(parseInt(addedGame.id))){
+                        await Print.singleMyGame(addedGame, MyGames.myGamesDiv);
+                    }
                 })
                 .on("click", ".remove-game-button", async function() {
                     console.log("Remove Game Button clicked");
