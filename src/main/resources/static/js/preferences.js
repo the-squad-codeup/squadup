@@ -54,7 +54,13 @@ $(function() {
             }
             return options;
         },
-        packagePreferencesObject() {
+
+
+
+        // $('#mature-language').multiselect();
+
+
+    packagePreferencesObject() {
             const preferencesObject = {
                 bio: $("#bio").val(),
                 //bio is updating table and saving to page
@@ -66,9 +72,11 @@ $(function() {
 
                 matureLanguage: $("#mature-language").is(":checked"),
                 // mature language is updating table
+
+                // $("#game-ratings").multiselect();
                 rating: {
-                    // rating: $("#game-ratings").find(":selected").text()
-                    rating: $(".game-ratings").is(":checked")
+                    rating: $("#game-ratings").find(":selected").val()
+                    // rating: $("#game-ratings").is(":checked")
                 },
                 platforms: MyPreferences.packagePlatformOptions($("#platforms")),
 

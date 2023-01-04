@@ -107,50 +107,63 @@
 <!--end of languages selection-->
 
 <!--ESRB Ratings-->
-                <p>
+        <p>
+            <br>
+            <span>Preferred ESRB Rating</span>
+            <br>
+            <select class="game-ratings form-select form-select-sm mb-3" aria-label=".form-select-sm example"
+                    id="game-ratings" name="game-ratings" onclick="toggleOverlay();">
+                <option value="Rating Pending" selected>RP - Rating Pending</option>
+                <option value="Early Childhood">EC - Early Childhood</option>
+                <option value="Everyone">E - Everyone</option>
+                <option value="Everyone 10 & up">E10+ - Everyone (10 & up)</option>
+                <option value="Teen (13 & up)">T - Teen (13 & up)</option>
+                <option value="Mature (17 & up)">M - Mature (17 & up)</option>
+                <option value="Adults Only (18 & up)">AO - Adults Only (18 & up)</option>
+            </select>
                 <br>
-                <span>Preferred ESRB Rating</span>
-                <br>
-        <div class="form-check form-switch">
-            <input class="form-check-input game-ratings" type="checkbox" value="1" id="rp">
-            <label class="form-check-label" for="rp">RP - Rating Pending</label>
-        </div>
-        <div class="form-check form-switch">
-            <input class="form-check-input game-ratings" type="checkbox" value="2" id="ec">
-            <label class="form-check-label" for="rp">EC - Early Childhood</label>
-        </div>
-        <div class="form-check form-switch">
-            <input class="form-check-input game-ratings" type="checkbox" value="3" id="e" checked>
-            <label class="form-check-label" for="e">E - Everyone</label>
-        </div>
-        <div class="form-check form-switch">
-            <input class="form-check-input game-ratings" type="checkbox" value="4" id="e10">
-            <label class="form-check-label" for="e10">E10+ - Everyone (10 & up)</label>
-        </div>
-        <div class="form-check form-switch">
-            <input class="form-check-input game-ratings" type="checkbox" value="5" id="t">
-            <label class="form-check-label" for="t">T - Teen (13 & up)</label>
-        </div>
-        <div class="form-check form-switch">
-            <input class="form-check-input game-ratings" type="checkbox" value="6" id="m">
-            <label class="form-check-label" for="m">M - Mature (17 & up)</label>
-        </div>
-        <div class="form-check form-switch">
-            <input class="form-check-input game-ratings" type="checkbox" value="7" id="ao">
-            <label class="form-check-label" for="ao">AO - Adults Only (18 & up)</label>
-        </div>
 
+                <br>
+                <!--                <div class="form-check form-switch ">-->
+                <!--                    <input class="form-check-input" type="checkbox" id="matureLang">-->
+                <!--                    <label class="form-check-label" for="matureLang">Mature Language OK?</label>-->
+                <!--                </div>-->
         </p>
+
+<!--        <div class="form-check form-switch">-->
+<!--            <input class="form-check-input game-ratings" type="checkbox" value="1" id="rp">-->
+<!--            <label class="form-check-label" for="rp">RP - Rating Pending</label>-->
+<!--        </div>-->
+<!--        <div class="form-check form-switch">-->
+<!--            <input class="form-check-input game-ratings" type="checkbox" value="2" id="ec">-->
+<!--            <label class="form-check-label" for="rp">EC - Early Childhood</label>-->
+<!--        </div>-->
+<!--        <div class="form-check form-switch">-->
+<!--            <input class="form-check-input game-ratings" type="checkbox" value="3" id="e" checked>-->
+<!--            <label class="form-check-label" for="e">E - Everyone</label>-->
+<!--        </div>-->
+<!--        <div class="form-check form-switch">-->
+<!--            <input class="form-check-input game-ratings" type="checkbox" value="4" id="e10">-->
+<!--            <label class="form-check-label" for="e10">E10+ - Everyone (10 & up)</label>-->
+<!--        </div>-->
+<!--        <div class="form-check form-switch">-->
+<!--            <input class="form-check-input game-ratings" type="checkbox" value="5" id="t">-->
+<!--            <label class="form-check-label" for="t">T - Teen (13 & up)</label>-->
+<!--        </div>-->
+<!--        <div class="form-check form-switch">-->
+<!--            <input class="form-check-input game-ratings" type="checkbox" value="6" id="m">-->
+<!--            <label class="form-check-label" for="m">M - Mature (17 & up)</label>-->
+<!--        </div>-->
+<!--        <div class="form-check form-switch">-->
+<!--            <input class="form-check-input game-ratings" type="checkbox" value="7" id="ao">-->
+<!--            <label class="form-check-label" for="ao">AO - Adults Only (18 & up)</label>-->
+<!--        </div>-->
+
+
 <!--end of ESRB Ratings-->
 
 <!--Mature language toggle-->
-                <p>
-                <br>
-<!--                <div class="form-check form-switch ">-->
-<!--                    <input class="form-check-input" type="checkbox" id="matureLang">-->
-<!--                    <label class="form-check-label" for="matureLang">Mature Language OK?</label>-->
-<!--                </div>-->
-                <div class="form-check form-switch ">
+        <div class="form-check form-switch ">
                     <input class="form-check-input" type="checkbox" id="mature-language">
                     <label class="form-check-label" for="mature-language">Mature Language OK?</label>
                 </div>
