@@ -88,24 +88,6 @@ $(function () {
                 let data = await results.json();
                 return data;
             },
-            // async gameSearch(query) {
-            //     let keys = await this.keys();
-            //     console.log(keys);
-            //     let body = `search "${query}"; fields name,cover.image_id,age_ratings.rating,age_ratings.category,genres.name,platforms.name`;
-            //     const fetchOptions = {
-            //         method: 'POST',
-            //         headers: {
-            //             'Client-ID' : keys.igdb_CLIENT_ID,
-            //             'Authorization' : `Bearer ${keys.igdb_ACCESS_TOKEN}`,
-            //             'x-api-key' : keys.igdb_PROXY_KEY
-            //         },
-            //         body: body
-            //     };
-            //     console.log(fetchOptions);
-            //     let results = await fetch(`${keys.igdb_PROXY_URL}games`, fetchOptions);
-            //     let data = await results.json();
-            //     console.log(data);
-            // },
             async myGames() {
                 let data = await fetch(`${MyGames.baseUrl}game/user`).then(res => res.json());
                 console.log("Inside Fetch.Get.myGames(). Data returned:");
