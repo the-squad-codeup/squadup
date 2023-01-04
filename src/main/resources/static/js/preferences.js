@@ -6,7 +6,7 @@ $(function() {
     const MyPreferences = {
         initialize() {
             Events.initialize();
-            // Print.form();
+            //Print.form();
         },
         arrayIncludesLanguage(array, language) {
             for(let e of array) {
@@ -59,7 +59,7 @@ $(function() {
                 bio: $("#bio").val(),
                 //bio is updating table and saving to page
                 location: {
-                    timezone: $("#spacetime").find(":selected").val()
+                    timezone: $("#location").find(":selected").val()
 
                 },
                 languages: MyPreferences.packageLanguageOptions(),
@@ -67,7 +67,8 @@ $(function() {
                 matureLanguage: $("#mature-language").is(":checked"),
                 // mature language is updating table
                 rating: {
-                    rating: $("#game-ratings").find(":selected").text()
+                    // rating: $("#game-ratings").find(":selected").text()
+                    rating: $(".game-ratings").is(":checked")
                 },
                 platforms: MyPreferences.packagePlatformOptions($("#platforms")),
 
