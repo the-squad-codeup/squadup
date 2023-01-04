@@ -9,20 +9,36 @@
 <body>
 <nav th:replace="partials :: siteBar"></nav>
 <div id="page-wrapper">
-<!--To display Current User logged in-->
+<!--ROUGH DRAFT:::: to display Current User logged in-->
     <div class="user-info" sec:authorize="isAuthenticated()"><h5>Welcome back,
         <span th:text="${#authentication.principal.username}"/>!</h5>
 
         User ID: <span th:text="${#authentication.principal.id}"/><br>
         Email: <span th:text="${#authentication.principal.email}"/>
     </div>
-<!--Display User Games-->
-    <h1>My Games</h1>
-    <div id="my-games"></div>
+<!--ROUGH DRAFT::::Display User Games-->
+    <div class="card-pro">
+        <h1>My Games</h1>
+        <div class="card" id="my-games"></div>
+    </div>
 
+<!--ROUGH DRAFT::::Displaying Comrades-->
+    <div class="card">
+<!--        <section id="comrade-card" class="row container">-->
+        </section>
+    </div>
+<!--ROUGH DRAFT::::Displaying Squads-->
+
+<!--ROUGH DRAFT::::Displaying New Recruits
+May need to create new arrows or adjust sizing-->
+    <div>
+        <section id="card" class="row container">
+        </section>
+    </div>
 </div>
 <nav th:replace="partials :: footer"></nav>
 <div th:replace="partials :: scripts"></div>
 <script th:type="module" th:src="@{/js/games.js}"></script>
+<script type="module" th:src="@{/js/recruits.js}"></script>
 </body>
 </html>
