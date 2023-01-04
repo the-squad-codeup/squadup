@@ -21,7 +21,7 @@ $(function () {
     };
 
     const Print = {
-        async myFavoriteGame(div) {
+        async myFavoriteGame() {
             console.log("Inside favorite games");
             let favoriteGame = await Fetch.Get.myFavoriteGame().then(res => res);
             console.log(favoriteGame);
