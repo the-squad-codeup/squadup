@@ -4,7 +4,7 @@
 <head>
     <div th:replace="partials :: headFragment('Home Page')"></div>
     <link rel="stylesheet" th:href="@{/css/games.css}">
-
+    <link rel="stylesheet" th:href="@{/css/social.css}">
 </head>
 <body>
 <nav th:replace="partials :: siteBar"></nav>
@@ -18,21 +18,17 @@
     </div>
 <!--ROUGH DRAFT::::Display User Games-->
     <h1>My Games</h1>
-        <div class="card-body">
-            <div class="card" id="my-games"></div>
-        </div>
+        <div id="my-games" class="row container"></div>
 
+<!--&lt;!&ndash;ROUGH DRAFT::::Displaying Comrades&ndash;&gt;-->
+<!--    <div class="card">-->
+<!--&lt;!&ndash;        <section id="comrade-card" class="row container">&ndash;&gt;-->
+<!--        </section>-->
+<!--    </div>-->
+<!--&lt;!&ndash;ROUGH DRAFT::::Displaying Squads&ndash;&gt;-->
 
-
-<!--ROUGH DRAFT::::Displaying Comrades-->
-    <div class="card">
-<!--        <section id="comrade-card" class="row container">-->
-        </section>
-    </div>
-<!--ROUGH DRAFT::::Displaying Squads-->
-
-<!--ROUGH DRAFT::::Displaying New Recruits
-May need to create new arrows or adjust sizing-->
+<!--&lt;!&ndash;ROUGH DRAFT::::Displaying New Recruits-->
+<!--May need to create new arrows or adjust sizing&ndash;&gt;-->
     <div>
         <section id="card" class="row container">
         </section>
