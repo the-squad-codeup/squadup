@@ -17,24 +17,7 @@
 
     <h1 class="text-center pt-5 my-5 outlined">Let's fill out your preferences</h1>
     <div hidden th:text="${preferences.id}" id="hidden-preferences-id"></div>
-
-<!--map and overlays div-->
     <div class="container bg-dark rounded-3 p-5"> <!--the dark gray bubble area -->
-        <p>
-            <div class="mapcontainer">
-                <img src="/preferences-map/pref-map.jpg" class="map">
-                <img src="/preferences-map/pref-alaska-overlay.png" class="overlay" id="AK">
-                <img src="/preferences-map/pref-arizona-overlay.png" class="overlay" id="AZ">
-                <img src="/preferences-map/pref-atlantic-overlay.png" class="overlay" id="AST">
-                <img src="/preferences-map/pref-central-overlay.png" class="overlay" id="CT">
-                <img src="/preferences-map/pref-eastern-overlay.png" class="overlay" id="ET">
-                <img src="/preferences-map/pref-hawaii-overlay.png" class="overlay" id="HAST">
-                <img src="/preferences-map/pref-mountain-overlay.png" class="overlay" id="MT">
-                <img src="/preferences-map/pref-pacific-overlay.png" class="overlay" id="PT">
-            </div>
-        </p>
-        <!--end of map and overlays div-->
-
 <!--timezone dropdown-->
         <p>
             <span>Pick your time Zone</span>
@@ -53,11 +36,28 @@
 <!--Puerto Rico, Virgin Islands,Hawaii and Arizona do not observe Daylight Savings Time, the Aleutian islands do though-->
 <!--end of timezone dropdown-->
 
+<!--Map and Overlays div-->
 
-<!--languages selection-->
+        <p>
+        <div class="mapcontainer">
+            <img src="/preferences-map/pref-map.jpg" class="map">
+            <img src="/preferences-map/pref-alaska-overlay.png" class="overlay" id="AK">
+            <img src="/preferences-map/pref-arizona-overlay.png" class="overlay" id="AZ">
+            <img src="/preferences-map/pref-atlantic-overlay.png" class="overlay" id="AST">
+            <img src="/preferences-map/pref-central-overlay.png" class="overlay" id="CT">
+            <img src="/preferences-map/pref-eastern-overlay.png" class="overlay" id="ET">
+            <img src="/preferences-map/pref-hawaii-overlay.png" class="overlay" id="HAST">
+            <img src="/preferences-map/pref-mountain-overlay.png" class="overlay" id="MT">
+            <img src="/preferences-map/pref-pacific-overlay.png" class="overlay" id="PT">
+        </div>
+        </p>
+<!--end of Map and Overlays div-->
+
+<!--Languages Selection-->
         <p>
             <span>Languages</span>
-            <select class="languages form-select form-select-sm mb-3" aria-label=".form-select-sm example" id="languages" name="languages" multiple="multiple">
+            <br>
+            <select class="languages form-select form-select-sm mb-3" aria-label=".form-select-sm example" id="languages" name="languages" multiple="multiple" style="width: 100%">
                 <option value=""></option>
                 <option value="English" >English</option>
                 <option value="Spanish">Spanish</option>
@@ -70,7 +70,7 @@
                 <option value="Portuguese">Portuguese</option>
             </select>
         </p>
-<!--end of languages selection-->
+<!--end of Languages Selection-->
 
 <!--ESRB Ratings-->
         <p>
@@ -103,7 +103,7 @@
         <p>
             <span>Platforms</span>
             <br>
-            <select class="platforms form-select form-select-sm mb-3" id="platforms" size="4" aria-label=".form-select-sm example" multiple="multiple">
+            <select class="platforms form-select form-select-sm mb-3" id="platforms" size="4" aria-label=".form-select-sm example" multiple="multiple" style="width: 100%">
                 <option value="PC">PC</option>
                 <option value="Playstation">Playstation</option>
                 <option value="Xbox">Xbox</option>
@@ -112,23 +112,23 @@
         </p>
 <!--end of Platforms selection-->
 
-<!--gamertag-->
+<!--Gamertag-->
         <p>
             <label for="gamertag">Enter your gamertag:</label>
             <br>
             <textarea type="text" class="form-control" id="gamertag" name="gamertag" rows="1"></textarea>
             <br>
         </p>
-<!--end of gamertag-->
+<!--end of Gamertag-->
 
-<!--biography-->
+<!--Biography-->
         <p>
             <label for="bio">Tell us a little about you:</label>
             <br>
             <textarea type="text" class="form-control" id="bio" name="bio" rows="3"></textarea>
             <br>
         </p>
-<!--end of biography-->
+<!--end of Biography-->
         <div class="text-center">
             <button id="edit-preferences-submit-button" type="button" class="btn btn-info btn-lg">Submit</button>
         </div>
