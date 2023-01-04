@@ -18,7 +18,7 @@ $(function() {
                         <p class="card-text">${comrade.userTwo.username}'s Bio: ${comrade.userTwo.preferences.bio}</p>
                     </div>
                     <div>
-                        <a href="#" class="btn btn-primary unfriend-link">Remove Recruit</a>
+                        <a href="#" class="btn btn-primary unfriend-link">Remove Comrade</a>
                     </div>
                 </div>
             `);
