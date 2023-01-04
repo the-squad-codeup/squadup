@@ -24,23 +24,14 @@ $(function() {
             }
             return false;
         },
-        packageLanguageOptions: function () {
+        packageLanguageOptions: function ($div) {
             let options = [];
-            $(".lang").each(function (i, el) {
-                if ($(".lang").is(":checked") === true){
-                    options.push({language: el.value});
+            for(let child of $div.children()) {
+                console.log(child);
+                if(child.selected) {
+                    options.push({language: child.value});
                 }
-                // if ($('.checkbox').prop('checked',true)) {
-                //     options.push({language: el.value});
-                // }
-            })
-
-            // for(let child of $div.children()) {
-            //     console.log(child);
-            //     if(child.children(".form-check-input").attr("checked")) {
-            //         options.push({language: child.value});
-            //     }
-            // }
+            }
 
             console.log(options);
             return options;
@@ -68,7 +59,7 @@ $(function() {
                     timezone: $("#location").find(":selected").val()
 
                 },
-                languages: MyPreferences.packageLanguageOptions(),
+                languages: MyPreferences.packageLanguageOptions($("#languages")),
 
                 matureLanguage: $("#mature-language").is(":checked"),
                 // mature language is updating table
@@ -206,6 +197,16 @@ $(function() {
             $(document).on("click", "#edit-preferences-submit-button", async function() {
                 await Fetch.Post.updatedPreferences(MyPreferences.packagePreferencesObject());
                 window.location.replace(`${MyPreferences.baseUrl}`);
+            });
+            $(document).ready(function() {
+                $("#languages").select2({
+                    placeholder: "language"
+                });
+            });
+            $(document).ready(function() {
+                $("#platforms").select2({
+                    placeholder: "platform"
+                });
             });
         }
     }
