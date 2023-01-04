@@ -12,13 +12,6 @@ INSERT INTO locations (timezone)
            ('Eastern Time Zone'),
            ('Atlantic Time Zone');
 
-#           ('Eastern Time Zone'),
-#            ('Central Time Zone'),
-#            ('Mountain Time Zone'),
-#            ('Pacific Time Zone'),
-#            ('Alaska Time Zone'),
-#            ('Hawaii-Aleutian Time Zone');
-
 # TRUNCATE languages;
 INSERT INTO languages (language)
     VALUES ('English'),
