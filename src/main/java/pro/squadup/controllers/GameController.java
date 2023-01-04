@@ -59,6 +59,7 @@ public class GameController {
         return currentUser.getPreferences().getGames();
     }
 
+
     @PostMapping("/search")
     public List<Game> searchGames(@RequestBody String query) throws IOException {
         User user = userDao.findById(Utils.currentUserId()).get();

@@ -4,10 +4,8 @@
     border: solid #5CFD42 .5vw;
     margin: auto;
 }
-.flexIt{
+#page-wrapper{
     display: flex;
-    align-items: center;
-    justify-content: center;
 }
 .profile-image{
     height: 15vw;
@@ -77,13 +75,13 @@
     list-style: none;
 }
 .favorite-game{
-    background-image: url("https://assets1.ignimgs.com/2018/03/06/fortnite---button-1520296499714.jpg");
     height: 24vw;
     width: 18vw;
     background-size: cover;
     background-position: center;
-    margin-top: 20vw;
-    margin-left: 1vw;
+    margin-top: 20.5vw;
+    margin-left: 4vw;
+    position: absolute;
     border: solid #5CFD42 0.3vw;
 }
 .my-platforms{
@@ -126,11 +124,24 @@
 }
 .game-rating{}
 .mature-language{}
-.game{
+.my-games{
     color: white;
-    border:0.3vw solid #5cfd42;
-    height:5vw;
-    width: 5vw;
+    border: 0.3vw solid #5cfd42;
+    height: 15vw;
+    width: 70vw;
+    margin-top: 29vw;
+    margin-left: 20vw;
+    position: absolute;
+    display: flex;
+    overflow: auto;
+}
+.game{
+    border: 0.3vw solid #5cfd42;
+    margin-right: 0.5vw;
+    background-size: cover;
+    background-position: center;
+    height: 100%;
+    width: 11vw;
 }
 
 
