@@ -1,11 +1,12 @@
 // this needs to be refactored
+//hardcoded html needs to get removed from the html page and then generated from js script
 
 $(function() {
 
     const MyPreferences = {
         initialize() {
             Events.initialize();
-            Print.form();
+            //Print.form();
         },
         arrayIncludesLanguage(array, language) {
             for(let e of array) {
@@ -23,13 +24,16 @@ $(function() {
             }
             return false;
         },
-        packageLanguageOptions($div) {
+        packageLanguageOptions: function ($div) {
             let options = [];
             for(let child of $div.children()) {
+                console.log(child);
                 if(child.selected) {
                     options.push({language: child.value});
                 }
             }
+
+            console.log(options);
             return options;
         },
         packagePlatformOptions($div) {
@@ -41,19 +45,34 @@ $(function() {
             }
             return options;
         },
-        packagePreferencesObject() {
+
+
+
+        // $('#mature-language').multiselect();
+
+
+    packagePreferencesObject() {
             const preferencesObject = {
                 bio: $("#bio").val(),
+                //bio is updating table and saving to page
                 location: {
-                    timezone: $("#locations").find(":selected").text()
+                    timezone: $("#location").find(":selected").val()
+
                 },
                 languages: MyPreferences.packageLanguageOptions($("#languages")),
+
                 matureLanguage: $("#mature-language").is(":checked"),
+                // mature language is updating table
+
+                // $("#game-ratings").multiselect();
                 rating: {
-                    rating: $("#game-ratings").find(":selected").text()
+                    rating: $("#game-ratings").find(":selected").val()
+                    // rating: $("#game-ratings").is(":checked")
                 },
                 platforms: MyPreferences.packagePlatformOptions($("#platforms")),
+
                 gamertag: $("#gamertag").val()
+                // gamertag is updating the table and saving to page
             };
             return preferencesObject;
         },
@@ -112,7 +131,7 @@ $(function() {
         },
         async locationSelectElement(user) {
             let locations = await Fetch.Get.all("location").then(res => res);
-            let $locations = $("#locations");
+            let $locations = $("#spacetime");
             $locations.empty();
             for(let location of locations) {
                 if(user.preferences.location != null && user.preferences.location.timezone === location.timezone) {
@@ -178,6 +197,16 @@ $(function() {
             $(document).on("click", "#edit-preferences-submit-button", async function() {
                 await Fetch.Post.updatedPreferences(MyPreferences.packagePreferencesObject());
                 window.location.replace(`${MyPreferences.baseUrl}`);
+            });
+            $(document).ready(function() {
+                $("#languages").select2({
+                    placeholder: "language"
+                });
+            });
+            $(document).ready(function() {
+                $("#platforms").select2({
+                    placeholder: "platform"
+                });
             });
         }
     }
