@@ -22,10 +22,35 @@ $(function() {
                 <div>
                     <img class="card-img-top" src="${userTwogame.game.image}" alt="${userTwogame.game.name} icon">
                 </div>
+                    <div>
+                        <a href="#"  class="btn btn-primary unfriend-link">Remove Recruit</a>
+                    </div>
             `);
             }
         }
     }
+
+
+    document.getElementById("card").addEventListener('click', async function(e){
+        e.preventDefault();
+        if (e.target && e.target.classList.contains("unfriend-link")) {
+            let unfriend = e.target.parentElement.parentElement.getAttribute("data-recruit-id");
+            console.log(unfriend);
+            const fetchOptions = {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN' : csrfToken
+                }
+            }
+            let results = await fetch(`${Utils.url()}comrades/${unfriend}/delete`, fetchOptions);
+            let data = await results.json();
+            console.log(data);
+            e.target.parentElement.parentElement.remove();
+        }
+
+
+
+    })
 
     async function getComrades(){
         let results = await fetch(`${Utils.url}/comrades/{id}/delete`);
