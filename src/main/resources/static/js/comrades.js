@@ -48,9 +48,6 @@ $(function() {
             await fetch(`${Utils.url()}comrades/${unfriend}/delete`, fetchOptions);
             document.querySelector(`[data-comrade-id="${unfriend}"]`).remove();
         }
-
-
-
     })
 
     async function getComrades(){

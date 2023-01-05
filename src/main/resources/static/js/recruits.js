@@ -65,7 +65,6 @@ $(function() {
             let data = await results.json();
             console.log(data);
             e.target.parentElement.parentElement.remove();
-
         }
     })
 
