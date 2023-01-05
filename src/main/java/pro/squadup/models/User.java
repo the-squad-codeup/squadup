@@ -34,10 +34,10 @@ public class User {
     private Set<Recruit> recruitsMatchedWithUser;
 
     @OneToMany(mappedBy = "userOne")
-    private Set<Recruit> comrades;
+    private Set<Comrade> comrades;
 
     @OneToMany(mappedBy = "userTwo")
-    private Set<Recruit> comradesOfUser;
+    private Set<Comrade> comradesOfUser;
 
     public Long getId() {
         return id;
@@ -99,20 +99,20 @@ public class User {
     }
 
     @JsonIgnore
-    public Set<Recruit> getComrades() {
+    public Set<Comrade> getComrades() {
         return comrades;
     }
 
-    public void setComrades(Set<Recruit> comrades) {
+    public void setComrades(Set<Comrade> comrades) {
         this.comrades = comrades;
     }
 
     @JsonIgnore
-    public Set<Recruit> getComradesOfUser() {
+    public Set<Comrade> getComradesOfUser() {
         return comradesOfUser;
     }
 
-    public void setComradesOfUser(Set<Recruit> comradesOfUser) {
+    public void setComradesOfUser(Set<Comrade> comradesOfUser) {
         this.comradesOfUser = comradesOfUser;
     }
 
