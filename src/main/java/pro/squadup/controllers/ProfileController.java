@@ -48,7 +48,7 @@ public class ProfileController {
     public String myProfilePage(Model model) {
         User user = userDao.findById(Utils.currentUserId()).get();
         model.addAttribute("user", user);
-        return "profile/myprofile";
+        return "profile/profile";
     }
 
     @GetMapping("/profile/preferences")
