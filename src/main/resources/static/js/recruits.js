@@ -7,6 +7,7 @@ $(function() {
     console.log("Inside recruits.js");
     async function printUserCards(recruits) {
         recruits = await recruits;
+        recruits = recruits.sort((prev, current) => (new Date(prev.dateRecruited)) - (new Date(current.dateRecruited)))
         console.log(recruits);
         $("#card").html('');
         for (let recruit of recruits) {
