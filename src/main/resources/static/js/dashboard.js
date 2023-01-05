@@ -8,11 +8,14 @@ $(function() {
 
     console.log("Inside comrades.js");
 
-    async function printUserCards(comrades) {
+    async function printComCards(comrades) {
+
         comrades = await comrades;
         console.log(comrades);
         $("#card-com").html('');
         for (let comrade of comrades) {
+            console.log("printing individual comrade: ");
+            console.log(comrade);
             $(`#card-com`).append(`
                  <div class="card h-100 row-cols-3" data-comrade-id="${comrade.id}">
                     <img class="card-img-top" src="https://i.imgur.com/0Z0Z0Z0.jpg" alt="user profile picture">
@@ -61,13 +64,13 @@ $(function() {
         return data;
     }
 
-    printUserCards(getComrades());
+    printComCards(getComrades());
 
 //    ============================RECRUITS FUNCTION===================================
 //     const csrfTokenRec = $("meta[name='_csrf']").attr("content")
 
     console.log("Inside recruits.js");
-    async function printUserCards(recruits) {
+    async function printRecCards(recruits) {
         recruits = await recruits;
         console.log(recruits);
         $("#card-rec").html('');
@@ -138,6 +141,6 @@ $(function() {
         return data;
     }
 
-    printUserCards(getAllRecruits());
+    printRecCards(getAllRecruits());
 
 });

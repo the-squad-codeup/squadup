@@ -3,42 +3,59 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <div th:replace="partials :: headFragment('Home Page')"></div>
-    <link rel="stylesheet" th:href="@{/css/games.css}">
+    <link rel="stylesheet" th:href="@{/css/forms.css}">
 </head>
 <body>
 <nav th:replace="partials :: siteBar"></nav>
-<div id="page-wrapper">
-<!--ROUGH DRAFT:::: to display Current User logged in-->
-    <div class="user-info" sec:authorize="isAuthenticated()"><h5>Welcome back,
-        <span th:text="${#authentication.principal.username}"/>!</h5>
+    <div id="page-wrapper">
+        <div id="dashrow" class="row">
+            <div class="card-body column">Box 1</div>
+            <div class="card-body column">Box 2</div>
 
-        User ID: <span th:text="${#authentication.principal.id}"/><br>
-        Email: <span th:text="${#authentication.principal.email}"/>
+            <div class="card-body">Box 3</div>
+            <div class="card-body">Box 4</div>
     </div>
-<!--ROUGH DRAFT::::Display User Games-->
-    <h1>My Games</h1>
-        <div id="my-games" class="row container"></div>
-
-<!--ROUGH DRAFT::::Displaying Comrades-->
-    <h1>My Comrades</h1>
-    <div>
-        <section id="card-com" class="row container">
-        </section>
-    </div>
-
-<!--ROUGH DRAFT::::Displaying Squads -->
-
-<!--ROUGH DRAFT::::Displaying New Recruits-->
-<!--May need to create new arrows or adjust sizing-->
-    <h1>My Recruits</h1>
-    <div>
-        <section id="card-rec" class="row container">
-        </section>
-    </div>
-</div>
 <nav th:replace="partials :: footer"></nav>
 <div th:replace="partials :: scripts"></div>
-<script th:type="module" th:src="@{/js/games.js}"></script>
-<script type="module" th:src="@{/js/dashboard.js}"></script>
 </body>
 </html>
+<!--    <link rel="stylesheet" th:href="@{/css/games.css}">-->
+<!--</head>-->
+<!--<body>-->
+<!--<nav th:replace="partials :: siteBar"></nav>-->
+<!--<div id="page-wrapper">-->
+<!--&lt;!&ndash;ROUGH DRAFT:::: to display Current User logged in&ndash;&gt;-->
+<!--    <div class="user-info" sec:authorize="isAuthenticated()"><h5>Welcome back,-->
+<!--        <span th:text="${#authentication.principal.username}"/>!</h5>-->
+
+<!--        User ID: <span th:text="${#authentication.principal.id}"/><br>-->
+<!--        Email: <span th:text="${#authentication.principal.email}"/>-->
+<!--    </div>-->
+<!--&lt;!&ndash;ROUGH DRAFT::::Display User Games&ndash;&gt;-->
+<!--    <h1>My Games</h1>-->
+<!--        <div id="my-games" class="row container"></div>-->
+
+<!--&lt;!&ndash;ROUGH DRAFT::::Displaying Comrades&ndash;&gt;-->
+<!--    <h1>My Comrades</h1>-->
+<!--    <div>-->
+<!--        <section id="card-com" class="row container">-->
+<!--        </section>-->
+<!--    </div>-->
+
+<!--&lt;!&ndash;ROUGH DRAFT::::Displaying Squads &ndash;&gt;-->
+
+<!--&lt;!&ndash;ROUGH DRAFT::::Displaying New Recruits&ndash;&gt;-->
+<!--&lt;!&ndash;May need to create new arrows or adjust sizing&ndash;&gt;-->
+<!--    <h1>My Recruits</h1>-->
+<!--    <div>-->
+<!--        <section id="card-rec" class="row container">-->
+<!--        </section>-->
+<!--    </div>-->
+<!--</div>-->
+<!--<nav th:replace="partials :: footer"></nav>-->
+<!--<div th:replace="partials :: scripts"></div>-->
+<!--<script th:type="module" th:src="@{/js/games.js}"></script>-->
+<!--<script type="module" th:src="@{/js/dashboard.js}"></script>-->
+<!--</body>-->
+<!--</html>-->
+
