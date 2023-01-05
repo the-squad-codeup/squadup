@@ -1,0 +1,10 @@
+.new-wrapper {
+    /*display: flex;*/
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.new-wrapper>* {
+    flex: 2 2 250px;
+}
+
