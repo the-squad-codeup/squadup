@@ -199,3 +199,20 @@ $(function () {
 
     MyGames.initialize();
 });
+
+//
+// let song = {
+//     title: spotifyName.name,
+//     artist: {
+//         artistName: spotifyArtist.name
+//         genres: genreObjects
+//     }
+// }
+//
+// let postOptions = {
+//     method: 'POST',
+//     headers: {
+//
+//     },
+//     body: JSON.stringify(song)
+// }

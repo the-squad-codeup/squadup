@@ -83,7 +83,7 @@ public class GameDeserializer extends StdDeserializer<Game> {
         ObjectMapper mapper = new ObjectMapper();
         System.out.println(mapper.writeValueAsString(node));
         int year = 0;
-        if(node.path("release_dates").get(0) != null) {
+        if(node.path("release_dates").get(0) != null && node.path("release_dates").get(0).get("y") != null) {
             year = node.path("release_dates").get(0).get("y").asInt();
         }
         return year;

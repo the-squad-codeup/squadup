@@ -41,7 +41,7 @@ public class GameApiService {
     public List<Game> searchGames(String query) throws JsonProcessingException {
         long startTime = System.currentTimeMillis();
         String bodyString = (
-                "search `" + query + "`; fields name,cover.image_id,age_ratings.rating,age_ratings.category,genres.name,platforms.name,release_dates.y; where category = (0,2,8,9);"
+                "search `" + query + "`; fields name,cover.image_id,age_ratings.rating,age_ratings.category,genres.name,platforms.name,release_dates.y; limit 500; where category = (0,2,8,9);"
         ).replace('`', '"');
 
         // Creating httpclient object with timeout parameters
