@@ -101,12 +101,6 @@
     margin-right: 0.5vw;
     border: solid #5CFD42 0.2vw;
 }
-/*.bi::before{*/
-/*    position: absolute;*/
-/*    margin-left: 18vw;*/
-/*    margin-top: 2vw;*/
-/*    color: #5cfd42;*/
-/*}*/
 .preferences{
     border: 0.3vw solid ;
     color: #5cfd42;
@@ -114,19 +108,17 @@
     height: 3vw;
     margin-top: 3vw;
     margin-left: 18vw;
+    /*padding: 0vw 0.5vw;*/
     justify-content: space-evenly;
     position: absolute;
     display: flex;
 }
 .location{
 }
-.languages{
-    display: flex;
-}
 .language{
     padding: 0vw 3vw;
 }
-.game-rating{}
+/*.game-rating{}*/
 .mature-language{}
 .my-games{
     color: white;
