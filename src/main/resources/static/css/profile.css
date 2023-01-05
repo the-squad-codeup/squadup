@@ -102,19 +102,18 @@
     border: solid #5CFD42 0.2vw;
 }
 .preferences{
+    font-size: 1.5vw;
     border: 0.3vw solid ;
     color: #5cfd42;
     width: 72vw;
     height: 3vw;
     margin-top: 3vw;
     margin-left: 18vw;
-    /*padding: 0vw 0.5vw;*/
     justify-content: space-evenly;
     position: absolute;
     display: flex;
 }
-.location{
-}
+
 .language{
     padding: 0vw 3vw;
 }

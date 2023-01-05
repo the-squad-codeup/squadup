@@ -77,7 +77,7 @@ $(function (){
 
         // location
         $('.preferences').append(`
-                    <div class="location">${userInfo.preferences.location.timezone}</div>
+                    <div class="location">${userInfo.preferences.location.timezone} | </div>
         `)
 
         // Languages
@@ -89,11 +89,11 @@ $(function (){
         // Profanity
         if(userInfo.preferences.matureLanguage === true){
             $('.preferences').append(`
-            <div class="mature-language">Profanity: On</div>
+            <div class="mature-language"> | Profanity: On | </div>
         `)
         }else{
             $('.preferences').append(`
-            <div class="mature-language">Profanity: Off</div>
+            <div class="mature-language"> | Profanity: Off | </div>
             `)
         }
 
