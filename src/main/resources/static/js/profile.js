@@ -71,7 +71,7 @@ $(function (){
         `)
         for(let genre of userInfo.preferences.genres){
             $('.genres div').append(`
-                 <span>${genre.name}</span>
+                 <span>${genre.name} | </span>
             `)
         }
 
@@ -80,6 +80,27 @@ $(function (){
                     <div class="location">${userInfo.preferences.location.timezone}</div>
         `)
 
+        // Languages
+        for(let language of userInfo.preferences.languages){
+            $('.preferences').append(`
+            <div>${language.language}</div>
+        `)
+        }
+        // Profanity
+        if(userInfo.preferences.matureLanguage === true){
+            $('.preferences').append(`
+            <div class="mature-language">Profanity: On</div>
+        `)
+        }else{
+            $('.preferences').append(`
+            <div class="mature-language">Profanity: Off</div>
+            `)
+        }
+
+        // Game rating
+        $('.preferences').append(`
+            <div>${userInfo.preferences.rating.rating}</div>
+        `)
 
 
 
