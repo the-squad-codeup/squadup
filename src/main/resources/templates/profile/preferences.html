@@ -5,7 +5,7 @@
     <div th:replace="partials :: headFragment('Preferences Page')"></div>
     <link rel="stylesheet" th:href="@{/css/preferences.css}">
     <link rel="stylesheet" th:href="@{/css/select2.css}">
-    <script th:src="@{/js/pref-v2.js}"></script>
+    <script th:src="@{/js/pref-overlays.js}"></script>
     <script th:src="@{/js/preferences.js}"></script>
     <script th:src="@{/js/select2.full.min.js}"></script>
 </head>
@@ -17,50 +17,53 @@
 
     <h1 class="text-center pt-5 my-5 outlined">Let's fill out your preferences</h1>
     <div hidden th:text="${preferences.id}" id="hidden-preferences-id"></div>
-
-<!--map and overlays div-->
-    <div class="container bg-dark rounded-3 p-5">
-                <p>
-                    <div class="mapcontainer">
-                        <img src="/preferences-map/pref-map.jpg" class="map">
-                        <img src="/preferences-map/pref-alaska-overlay.png" class="overlay" id="AK">
-                        <img src="/preferences-map/pref-arizona-overlay.png" class="overlay" id="AZ">
-                        <img src="/preferences-map/pref-atlantic-overlay.png" class="overlay" id="AST">
-                        <img src="/preferences-map/pref-central-overlay.png" class="overlay" id="CT">
-                        <img src="/preferences-map/pref-eastern-overlay.png" class="overlay" id="ET">
-                        <img src="/preferences-map/pref-hawaii-overlay.png" class="overlay" id="HAST">
-                        <img src="/preferences-map/pref-mountain-overlay.png" class="overlay" id="MT">
-                        <img src="/preferences-map/pref-pacific-overlay.png" class="overlay" id="PT">
-                    </div>
-                </p>
-
-        <!--end of map and overlays div-->
+    <div class="container bg-dark rounded-3 p-5"> <!--the dark gray bubble area -->
+<!--        <div>-->
+<!--            <a th:href="@{|/}|}">-->
+<!--            test: <span th:text="${user.preferences.location.timezone}"></span>-->
+<!--        </div>-->
 
 <!--timezone dropdown-->
-                <p>
-                <span>Pick your time Zone</span>
-                <select class="location form-select form-select-sm mb-3" aria-label=".form-select-sm example" id="location" name="location" onclick="toggleOverlay();">
-                    <option value="Unspecified Time Zone" selected>(UTC ??:??) Unspecified</option>
-                    <option value="Hawaii-Aleutian Time Zone">(UTC-10:00) Hawaii-Aleutian Standard Time</option>
-                    <option value="Alaskan Time Zone">(UTC-9:00) Alaskan Standard Time</option>
-                    <option value="Pacific Time Zone">(UTC-8:00) Pacific Standard Time</option>
-                    <option value="Mountain Time Zone">(UTC-7:00) Mountain Standard Time</option>
-                    <option value="Mountain Arizona Time Zone">(UTC-7:00) Mountain Standard Time (Arizona)</option>
-                    <option value="Central Time Zone">(UTC-6:00) Central Standard Time</option>
-                    <option value="Eastern Time Zone">(UTC-5:00) Eastern Standard Time</option>
-                    <option value="Atlantic Time Zone">(UTC-4:00) Atlantic Standard Time</option>
-                </select>
-
-                </p>
+        <p>
+            <span>Pick your time Zone</span>
+            <select class="location form-select form-select-sm mb-3" aria-label=".form-select-sm example" id="location" name="location" style="width: 100%" onchange="toggleOverlay()">
+                <option value=""></option>
+                <option value="Unspecified Time Zone">(UTC ??:??) Unspecified</option>
+                <option value="Hawaii-Aleutian Time Zone">(UTC-10:00) Hawaii-Aleutian Standard Time</option>
+                <option value="Alaskan Time Zone">(UTC-9:00) Alaskan Standard Time</option>
+                <option value="Pacific Time Zone">(UTC-8:00) Pacific Standard Time</option>
+                <option value="Mountain Time Zone">(UTC-7:00) Mountain Standard Time</option>
+                <option value="Mountain Arizona Time Zone">(UTC-7:00) Mountain Standard Time (Arizona)</option>
+                <option value="Central Time Zone">(UTC-6:00) Central Standard Time</option>
+                <option value="Eastern Time Zone">(UTC-5:00) Eastern Standard Time</option>
+                <option value="Atlantic Time Zone">(UTC-4:00) Atlantic Standard Time</option>
+            </select>
+        </p>
 <!--Puerto Rico, Virgin Islands,Hawaii and Arizona do not observe Daylight Savings Time, the Aleutian islands do though-->
 <!--end of timezone dropdown-->
 
-
-<!--languages selection-->
+<!--Map and Overlays div-->
 
         <p>
-            <span>Primary Language</span>
-            <select class="languages form-select form-select-sm mb-3" aria-label=".form-select-sm example" id="languages" name="languages" multiple="multiple">
+        <div class="mapcontainer">
+            <img src="/preferences-map/pref-map.jpg" class="map">
+            <img src="/preferences-map/pref-alaska-overlay.png" class="overlay" id="AK">
+            <img src="/preferences-map/pref-arizona-overlay.png" class="overlay" id="AZ">
+            <img src="/preferences-map/pref-atlantic-overlay.png" class="overlay" id="AST">
+            <img src="/preferences-map/pref-central-overlay.png" class="overlay" id="CT">
+            <img src="/preferences-map/pref-eastern-overlay.png" class="overlay" id="ET">
+            <img src="/preferences-map/pref-hawaii-overlay.png" class="overlay" id="HAST">
+            <img src="/preferences-map/pref-mountain-overlay.png" class="overlay" id="MT">
+            <img src="/preferences-map/pref-pacific-overlay.png" class="overlay" id="PT">
+        </div>
+        </p>
+<!--end of Map and Overlays div-->
+
+<!--Languages Selection-->
+        <p>
+            <span>Languages</span>
+            <br>
+            <select class="languages form-select form-select-sm mb-3" aria-label=".form-select-sm example" id="languages" name="languages" multiple="multiple" style="width: 100%">
                 <option value=""></option>
                 <option value="English" >English</option>
                 <option value="Spanish">Spanish</option>
@@ -72,69 +75,17 @@
                 <option value="Italian">Italian</option>
                 <option value="Portuguese">Portuguese</option>
             </select>
-
         </p>
-
-<!--            <p>-->
-<!--            <span>Preferred Language</span>-->
-<!--                <br>-->
-<!--        <div id="languages">-->
-<!--            <div class="form-check form-switch">-->
-<!--                <input class="lang form-check-input" type="checkbox" value="1" id="1" checked="true">-->
-<!--                <label class="form-check-label" for="1">English</label>-->
-<!--            </div>-->
-<!--            <div class="form-check form-switch">-->
-<!--                <input class="lang form-check-input" type="checkbox" value="2" id="2">-->
-<!--                <label class="form-check-label" for="2">Spanish</label>-->
-<!--            </div>-->
-<!--            <div class="form-check form-switch">-->
-<!--                <input class="lang form-check-input" type="checkbox" value="3" id="3">-->
-<!--                <label class="form-check-label" for="3">Chinese</label>-->
-<!--            </div>-->
-<!--            <div class="form-check form-switch">-->
-<!--                <input class="lang form-check-input" type="checkbox" value="4" id="4">-->
-<!--                <label class="form-check-label" for="4">Japanese</label>-->
-<!--            </div>-->
-<!--            <div class="form-check form-switch">-->
-<!--                <input class="lang form-check-input" type="checkbox" value="5" id="5">-->
-<!--                <label class="form-check-label" for="5">Korean</label>-->
-<!--            </div>-->
-<!--            <div class="form-check form-switch">-->
-<!--                <input class="lang form-check-input" type="checkbox" value="6" id="6">-->
-<!--                <label class="form-check-label" for="6">German</label>-->
-<!--            </div>-->
-<!--            <div class="form-check form-switch">-->
-<!--                <input class="lang form-check-input" type="checkbox" value="7" id="7">-->
-<!--                <label class="form-check-label" for="7">French</label>-->
-<!--            </div>-->
-<!--            <div class="form-check form-switch">-->
-<!--                <input class="lang form-check-input" type="checkbox" value="8" id="8">-->
-<!--                <label class="form-check-label" for="8">Italian</label>-->
-<!--            </div>-->
-<!--            <div class="form-check form-switch">-->
-<!--                <input class="lang form-check-input" type="checkbox" value="9" id="9">-->
-<!--                <label class="form-check-label" for="9">Portuguese</label>-->
-<!--            </div>-->
-<!--                    </p>-->
-
-
-<!--original language select script below-->
-<!--        <label for="language">Pick your language</label>-->
-<!--        <select id="language" name="language">-->
-<!--            <option th:each="language : ${languages}" th:value="${language.language}" th:text="${language.language}" th:selected="${language.language==preferences.language}"></option>-->
-<!--        </select>-->
-
-
-<!--end of languages selection-->
+<!--end of Languages Selection-->
 
 <!--ESRB Ratings-->
         <p>
             <br>
             <span>Preferred ESRB Rating</span>
             <br>
-            <select class="game-ratings form-select form-select-sm mb-3" aria-label=".form-select-sm example"
-                    id="game-ratings" name="game-ratings" onclick="toggleOverlay();">
-                <option value="Rating Pending" selected>RP - Rating Pending</option>
+            <select class="game-ratings form-select form-select-sm mb-3" aria-label=".form-select-sm example" id="game-ratings" name="game-ratings" style="width: 100%">
+                <option value=""></option>
+                <option value="Rating Pending">RP - Rating Pending</option>
                 <option value="Early Childhood">EC - Early Childhood</option>
                 <option value="Everyone">E - Everyone</option>
                 <option value="Everyone 10 & up">E10+ - Everyone (10 & up)</option>
@@ -142,111 +93,54 @@
                 <option value="Mature (17 & up)">M - Mature (17 & up)</option>
                 <option value="Adults Only (18 & up)">AO - Adults Only (18 & up)</option>
             </select>
-                <br>
-
-                <br>
-                <!--                <div class="form-check form-switch ">-->
-                <!--                    <input class="form-check-input" type="checkbox" id="matureLang">-->
-                <!--                    <label class="form-check-label" for="matureLang">Mature Language OK?</label>-->
-                <!--                </div>-->
+            <br>
         </p>
-
-<!--        <div class="form-check form-switch">-->
-<!--            <input class="form-check-input game-ratings" type="checkbox" value="1" id="rp">-->
-<!--            <label class="form-check-label" for="rp">RP - Rating Pending</label>-->
-<!--        </div>-->
-<!--        <div class="form-check form-switch">-->
-<!--            <input class="form-check-input game-ratings" type="checkbox" value="2" id="ec">-->
-<!--            <label class="form-check-label" for="rp">EC - Early Childhood</label>-->
-<!--        </div>-->
-<!--        <div class="form-check form-switch">-->
-<!--            <input class="form-check-input game-ratings" type="checkbox" value="3" id="e" checked>-->
-<!--            <label class="form-check-label" for="e">E - Everyone</label>-->
-<!--        </div>-->
-<!--        <div class="form-check form-switch">-->
-<!--            <input class="form-check-input game-ratings" type="checkbox" value="4" id="e10">-->
-<!--            <label class="form-check-label" for="e10">E10+ - Everyone (10 & up)</label>-->
-<!--        </div>-->
-<!--        <div class="form-check form-switch">-->
-<!--            <input class="form-check-input game-ratings" type="checkbox" value="5" id="t">-->
-<!--            <label class="form-check-label" for="t">T - Teen (13 & up)</label>-->
-<!--        </div>-->
-<!--        <div class="form-check form-switch">-->
-<!--            <input class="form-check-input game-ratings" type="checkbox" value="6" id="m">-->
-<!--            <label class="form-check-label" for="m">M - Mature (17 & up)</label>-->
-<!--        </div>-->
-<!--        <div class="form-check form-switch">-->
-<!--            <input class="form-check-input game-ratings" type="checkbox" value="7" id="ao">-->
-<!--            <label class="form-check-label" for="ao">AO - Adults Only (18 & up)</label>-->
-<!--        </div>-->
-
-
 <!--end of ESRB Ratings-->
 
 <!--Mature language toggle-->
         <div class="form-check form-switch ">
-                    <input class="form-check-input" type="checkbox" id="mature-language">
-                    <label class="form-check-label" for="mature-language">Mature Language OK?</label>
-                </div>
-                <br>
-                </p>
+            <input class="form-check-input" type="checkbox" id="mature-language">
+            <label class="form-check-label" for="mature-language">Mature Language OK?</label>
+        </div>
+        <br>
+        </p>
 <!--end of Mature language toggle-->
 
 <!--Platforms selection-->
-                <p>
-                <span>Platforms</span>
-                <br>
-                <select class="platforms form-select form-select-sm mb-3" id="platforms" size="4" aria-label=".form-select-sm example" multiple="multiple">
-                    <option value="PC">PC</option>
-                    <option value="Playstation">Playstation</option>
-                    <option value="Xbox">Xbox</option>
-                    <option value="Nintendo">Nintendo</option>
-                </select>
-
-<!--                <div class="form-check form-switch">-->
-<!--                    <input class="form-check-input" type="checkbox" value="1" id="PC">-->
-<!--                    <label class="form-check-label" for="PC">PC</label>-->
-<!--                </div>-->
-<!--                <div class="form-check form-switch">-->
-<!--                    <input class="form-check-input" type="checkbox" value="2" id="Playstation">-->
-<!--                    <label class="form-check-label" for="Playstation">Playstation</label>-->
-<!--                </div>-->
-<!--                <div class="form-check form-switch">-->
-<!--                    <input class="form-check-input" type="checkbox" value="3" id="Xbox">-->
-<!--                    <label class="form-check-label" for="Xbox">Xbox</label>-->
-<!--                </div>-->
-<!--                <div class="form-check form-switch">-->
-<!--                    <input class="form-check-input" type="checkbox" value="4" id="Nintendo">-->
-<!--                    <label class="form-check-label" for="Nintendo">Nintendo</label>-->
-<!--                </div>-->
-
-                </p>
+        <p>
+            <span>Platforms</span>
+            <br>
+            <select class="platforms form-select form-select-sm mb-3" id="platforms" size="4" aria-label=".form-select-sm example" multiple="multiple" style="width: 100%">
+                <option value="PC">PC</option>
+                <option value="Playstation">Playstation</option>
+                <option value="Xbox">Xbox</option>
+                <option value="Nintendo">Nintendo</option>
+            </select>
+        </p>
 <!--end of Platforms selection-->
 
-<!--gamertag-->
-            <p>
-                <label for="gamertag">Enter your gamertag:</label>
-                <br>
-<!--                <input type="text" id="gamertag" name="gamertag">-->
-                <textarea type="text" class="form-control" id="gamertag" name="gamertag" rows="1"></textarea>
-                <br>
-            </p>
-<!--end of gamertag-->
+<!--Gamertag-->
+        <p>
+            <label for="gamertag">Enter your gamertag:</label>
+            <br>
+            <textarea type="text" class="form-control" id="gamertag" name="gamertag" rows="1"></textarea>
+            <br>
+        </p>
+<!--end of Gamertag-->
 
-<!--biography-->
-            <p>
+<!--Biography-->
+        <p>
             <label for="bio">Tell us a little about you:</label>
-                <br>
+            <br>
             <textarea type="text" class="form-control" id="bio" name="bio" rows="3"></textarea>
-                <br>
-            </p>
-<!--end of biography-->
-
+            <br>
+        </p>
+<!--end of Biography-->
         <div class="text-center">
             <button id="edit-preferences-submit-button" type="button" class="btn btn-info btn-lg">Submit</button>
         </div>
-    </div>
-</div><!--Page Wrapper-->
+    </div> <!--end of the dark gray bubble area -->
+</div><!--end of Page Wrapper-->
 
 <nav th:replace="partials :: footer"></nav>
 <div th:replace="partials :: scripts"></div>

@@ -1,12 +1,11 @@
-// this needs to be refactored
-//hardcoded html needs to get removed from the html page and then generated from js script
+//print form not working
 
 $(function() {
 
     const MyPreferences = {
         initialize() {
             Events.initialize();
-            //Print.form();
+            // Print.form();
         },
         arrayIncludesLanguage(array, language) {
             for(let e of array) {
@@ -199,13 +198,23 @@ $(function() {
                 window.location.replace(`${MyPreferences.baseUrl}`);
             });
             $(document).ready(function() {
+                $("#location").select2({
+                    placeholder: "select a timezone",
+                });
+            });
+            $(document).ready(function() {
                 $("#languages").select2({
-                    placeholder: "language"
+                    placeholder: "select languages",
+                });
+            });
+            $(document).ready(function() {
+                $("#game-ratings").select2({
+                    placeholder: "select a rating",
                 });
             });
             $(document).ready(function() {
                 $("#platforms").select2({
-                    placeholder: "platform"
+                    placeholder: "select platforms",
                 });
             });
         }
