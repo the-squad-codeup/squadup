@@ -3,8 +3,7 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <div th:replace="partials :: headFragment('Login')"></div>
-
-
+    <link rel="stylesheet" th:href="@{/css/forms.css}">
 </head>
 <body>
 
@@ -47,6 +46,9 @@
                     </form>
                     <p id="notAUserToggle" class="text-light mt-5" style="cursor: pointer;">
                         Not a user? Click here to signup
+                    </p>
+                    <p id="forgot-password-link" class="text-light mt-5" style="cursor: pointer;">
+                        Forgot your password? Click here to reset password.
                     </p>
                 </div>
             </div>

@@ -1,12 +1,13 @@
-// this needs to be refactored
-//hardcoded html needs to get removed from the html page and then generated from js script
+//print form not working
+import { Utils } from "./utils.js";
+import { toggleOverlay } from "./pref-overlays.js";
 
 $(function() {
 
     const MyPreferences = {
         initialize() {
             Events.initialize();
-            //Print.form();
+            Print.form();
         },
         arrayIncludesLanguage(array, language) {
             for(let e of array) {
@@ -82,12 +83,12 @@ $(function() {
     const Fetch = {
         Get: {
             async all(type) {
-                let res = await fetch(`${MyPreferences.baseUrl}${type}/all`).then(res => res);
+                let res = await fetch(`${Utils.url()}${type}/all`).then(res => res);
                 let data = await res.json();
                 return data;
             },
             async currentUser() {
-                let res = await fetch(`${MyPreferences.baseUrl}user/get`).then(res => res);
+                let res = await fetch(`${Utils.url()}user/get`).then(res => res);
                 let data = await res.json();
                 return data;
             }
@@ -110,6 +111,7 @@ $(function() {
     const Print = {
         async form() {
             let user = await Fetch.Get.currentUser().then(res => res);
+            console.log(user);
             await this.locationSelectElement(user);
             await this.languageSelectElement(user);
             await this.gameRatingSelectElement(user);
@@ -127,12 +129,14 @@ $(function() {
             $("#gamertag").val(`${user.preferences.gamertag}`);
         },
         async bioElement(user) {
-            $("#bio").text(`${user.preferences.bio}`);
+            $("#bio").val(`${user.preferences.bio}`);
         },
         async locationSelectElement(user) {
             let locations = await Fetch.Get.all("location").then(res => res);
-            let $locations = $("#spacetime");
+            let $locations = $("#location");
             $locations.empty();
+            $locations.append(`<option value=""></option>`);
+
             for(let location of locations) {
                 if(user.preferences.location != null && user.preferences.location.timezone === location.timezone) {
                     $locations.append(`
@@ -144,10 +148,13 @@ $(function() {
                     `);
                 }
             }
+            toggleOverlay();
         },
         async languageSelectElement(user) {
             let languages = await Fetch.Get.all("language").then(res => res);
             let $languages = $("#languages");
+            $languages.empty();
+            $languages.append(`<option value=""></option>`);
             for(let language of languages) {
                 if(user.preferences.languages != null && MyPreferences.arrayIncludesLanguage(user.preferences.languages, language)) {
                     $languages.append(`
@@ -163,6 +170,8 @@ $(function() {
         async gameRatingSelectElement(user) {
             let gameRatings = await Fetch.Get.all("rating").then(res => res);
             let $gameRatings = $("#game-ratings");
+            $gameRatings.empty();
+            $gameRatings.append(`<option value=""></option>`);
             for(let gameRating of gameRatings) {
                 if(user.preferences.rating != null && user.preferences.rating.rating === gameRating.rating) {
                     $gameRatings.append(`
@@ -178,6 +187,8 @@ $(function() {
         async platformSelectElement(user) {
             let platforms = await Fetch.Get.all("platform").then(res => res);
             let $platforms = $("#platforms");
+            $platforms.empty();
+            $platforms.append(`<option value=""></option>`);
             for(let platform of platforms) {
                 if(user.preferences.platforms != null && MyPreferences.arrayIncludesPlatform(user.preferences.platforms, platform)) {
                     $platforms.append(`
@@ -196,16 +207,26 @@ $(function() {
         initialize() {
             $(document).on("click", "#edit-preferences-submit-button", async function() {
                 await Fetch.Post.updatedPreferences(MyPreferences.packagePreferencesObject());
-                window.location.replace(`${MyPreferences.baseUrl}`);
+                window.location.replace(`${Utils.url()}`);
+            });
+            $(document).ready(function() {
+                $("#location").select2({
+                    placeholder: "select a timezone",
+                });
             });
             $(document).ready(function() {
                 $("#languages").select2({
-                    placeholder: "language"
+                    placeholder: "select languages",
+                });
+            });
+            $(document).ready(function() {
+                $("#game-ratings").select2({
+                    placeholder: "select a rating",
                 });
             });
             $(document).ready(function() {
                 $("#platforms").select2({
-                    placeholder: "platform"
+                    placeholder: "select platforms",
                 });
             });
         }

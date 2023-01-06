@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import pro.squadup.models.ProfilePicture;
 import pro.squadup.models.User;
 import pro.squadup.repositories.UserRepository;
 import pro.squadup.utils.Utils;
@@ -45,6 +46,16 @@ public class UserController {
         String hash = passwordEncoder.encode(user.getPassword());
         // Setting user password to the hash and saving user to table
         user.setPassword(hash);
+        user.setProfilePicture(new ProfilePicture(
+                "default.png",
+                "dynXYf9AS26ImuqTgUPj",
+                "image/png",
+                47871,
+                "local_file_system",
+                "Stored",
+                "4IRT98MxlthTjGsm",
+                "https://cdn.filestackcontent.com/dynXYf9AS26ImuqTgUPj"
+        ));
         userDao.save(user);
         authWithHttpServletRequest(httpServletRequest, user.getUsername(), plainPassword);
         return "redirect:/profile/preferences";

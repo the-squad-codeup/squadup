@@ -27,6 +27,9 @@ public class User {
     @JoinColumn(name = "preferences_id")
     private Preferences preferences;
 
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
+    private ProfilePicture profilePicture;
+
     @OneToMany(mappedBy = "userOne")
     private Set<Recruit> recruits;
 
@@ -77,6 +80,14 @@ public class User {
 
     public void setPreferences(Preferences preferences) {
         this.preferences = preferences;
+    }
+
+    public ProfilePicture getProfilePicture() {
+        return profilePicture;
+    }
+
+    public void setProfilePicture(ProfilePicture profilePicture) {
+        this.profilePicture = profilePicture;
     }
 
     @JsonIgnore

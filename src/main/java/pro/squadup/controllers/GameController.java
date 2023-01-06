@@ -62,6 +62,7 @@ public class GameController {
 
     @PostMapping("/search")
     public List<Game> searchGames(@RequestBody String query) throws IOException {
+        long startTime = System.currentTimeMillis();
         User user = userDao.findById(Utils.currentUserId()).get();
         List<Game> allGames = scrapeGamesInfo(gameApiService.searchGames(query));
         List<Game> trimmedGames = new ArrayList<>();
@@ -71,6 +72,8 @@ public class GameController {
                 trimmedGames.add(scrapedGame);
             }
         }
+        long endTime = System.currentTimeMillis();
+        System.out.println("Time taken for searchGames: " + (endTime - startTime) + "ms.");
         return trimmedGames;
     }
 
