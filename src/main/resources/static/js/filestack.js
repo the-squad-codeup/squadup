@@ -8,8 +8,10 @@ $(async function() {
     const Fetch = {
         Get: {
             async filestackKey() {
+                console.log("Inside get filestackKey. Key: ");
                 let keys = await fetch(`${Utils.url()}keys`).then(res => res.json());
-                return keys.fileStackKey;
+                console.log(keys);
+                return keys.filestack_KEY;
             }
         },
         Post: {
@@ -70,6 +72,6 @@ $(async function() {
         }
     }
 
-    await FileStack.initialize();
+    FileStack.initialize();
 
 });
