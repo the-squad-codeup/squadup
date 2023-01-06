@@ -31,3 +31,7 @@ function toggleOverlay(){
         document.getElementById('AST').style.display = "block";
     }
 }
+
+function loadProfile(){
+
+}
