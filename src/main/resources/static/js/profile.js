@@ -5,11 +5,17 @@ $(function (){
         console.log("Array of user's games")
         console.log(userGames)
         for(let game of userGames){
-            $('.my-games').append(`
-                <div class="game" style="background-image: url(${game.artwork});">
-                </div>
-            `)
+            // $('.my-games').append(`
+            //     <div class="game" style="background-image: url(${game.artwork});">
+            //     </div>
+            // `)
+            $('.track').append(`
+<!--                <div class="card-container">-->
+                    <div class="card" style="background-image: url(${game.artwork});"></div>
+<!--                </div>-->
+             `)
         }
+
     }
     getUserGames()
 
@@ -110,3 +116,40 @@ $(function (){
     getUserInfo()
 
 })
+
+
+
+
+
+
+
+
+
+/*<!--        Stroke inducing carousel -->*/
+
+const prev = document.querySelector(".prev");
+const next = document.querySelector(".next");
+const carousel = document.querySelector(".my-games");
+const track = document.querySelector(".track");
+let width = carousel.offsetWidth;
+let index = 0;
+window.addEventListener("resize", function () {
+    width = carousel.offsetWidth;
+});
+next.addEventListener("click", function (e) {
+    e.preventDefault();
+    index = index + 1;
+    prev.classList.add("show");
+    track.style.transform = "translateX(" + index * -70 + "vw)";
+    if (track.offsetWidth - index * width < index * width) {
+        next.classList.add("hide");
+    }
+});
+prev.addEventListener("click", function () {
+    index = index - 1;
+    next.classList.remove("hide");
+    if (index === 0) {
+        prev.classList.remove("show");
+    }
+    track.style.transform = "translateX(" + index * -70 + "vw)";
+});

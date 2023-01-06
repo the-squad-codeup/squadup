@@ -11,6 +11,7 @@
 <div id="page-wrapper">
     <div class="profile-container">
         <div class="profile-image"></div>
+        <div id="upload-profile-picture"></div>
         <div class="preferences">
 <!--            Location -->
 <!--            Languages -->
@@ -23,6 +24,39 @@
         </div>
         <div class="my-platforms"></div>
         <div class="my-games">
+            <div class="inner-carousel">
+                <div class="track">
+                    <!--                    stuff goes here-->
+                </div>
+                <div class="nav">
+                    <button class="prev"><i class="fas fa-arrow-left fa-2x"></i></button>
+                    <button class="next"><i class="fas fa-arrow-right fa-2x"></i></button>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+<!--        Stroke inducing carousel -->
+
+        <div class="carousel-container">
+<!--            <div class="inner-carousel">-->
+<!--                <div class="track">-->
+<!--&lt;!&ndash;                    stuff goes here&ndash;&gt;-->
+<!--                </div>-->
+<!--                <div class="nav">-->
+<!--                    <button class="prev"><i class="fas fa-arrow-left fa-2x"></i></button>-->
+<!--                    <button class="next"><i class="fas fa-arrow-right fa-2x"></i></button>-->
+<!--                </div>-->
+<!--            </div>-->
         </div>
     </div>
 
@@ -45,6 +79,8 @@
 </div>
 <nav th:replace="partials :: footer"></nav>
 <div th:replace="partials :: scripts"></div>
+<script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
+<script th:type="module" th:src="@{/js/filestack.js}"></script>
 <script th:type="module" th:src="@{/js/profile.js}"></script>
 </body>
 </html>
