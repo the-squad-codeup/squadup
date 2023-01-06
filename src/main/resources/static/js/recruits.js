@@ -42,13 +42,28 @@ $(function() {
         }
     }
 
+    // function scrollUserCards(){
+    //     const cards = document.getElementsByTagName('section');
+    //     cards.scrollLeft += 30;
+    // }
+    //
+    // const arrowRight = document.getElementsByClassName('arrow-right');
+    // arrowRight.addEventListener('click', scrollUserCards);
+
+    document.getElementById('arrowsRect').addEventListener('click', async function(e){
+        e.preventDefault();
+        if (e.target && e.target.classList.contains("arrow-right")) {
+            const cards = document.getElementById('card');
+            cards.scrollLeft += 90;
+        }
+    })
 
 
     document.getElementById("card").addEventListener('click', async function (e) {
         e.preventDefault();
         if (e.target && e.target.classList.contains("squadup-link")) {
             let accept = e.target.parentElement.parentElement.getAttribute("data-recruit-id");
-            console.log(accept);
+            // console.log(accept);
             const fetchOptions = {
                 method: 'POST',
                 headers: {
@@ -63,7 +78,7 @@ $(function() {
 
         if (e.target && e.target.classList.contains("squaddown-link")) {
             let reject = e.target.parentElement.parentElement.getAttribute("data-recruit-id");
-            console.log(reject);
+            // console.log(reject);
             const fetchOptions = {
                 method: 'POST',
                 headers: {
@@ -71,8 +86,8 @@ $(function() {
                 }
             }
             let results = await fetch(`${Utils.url()}recruits/${reject}/reject`, fetchOptions);
-            let data = await results.json();
-            console.log(data);
+            // let data = await results.json();
+            // console.log(data);
             e.target.parentElement.parentElement.remove();
         }
     })
