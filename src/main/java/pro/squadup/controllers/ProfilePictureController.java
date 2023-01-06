@@ -1,15 +1,12 @@
 package pro.squadup.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import org.springframework.web.bind.annotation.*;
 import pro.squadup.models.ProfilePicture;
 import pro.squadup.models.User;
 import pro.squadup.repositories.ProfilePictureRepository;
 import pro.squadup.repositories.UserRepository;
 import pro.squadup.utils.Utils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class ProfilePictureController {
@@ -24,9 +21,9 @@ public class ProfilePictureController {
     }
 
     @GetMapping("/user/picture")
-    public ProfilePicture getProfilePicture() throws JsonProcessingException {
+    public ProfilePicture getMyProfilePicture() throws JsonProcessingException {
         if(Utils.currentUserId() == null) {
-            return new ProfilePicture(-1L);
+            return new ProfilePicture(-1L, "https://cdn.filestackcontent.com/dynXYf9AS26ImuqTgUPj");
         } else {
             return profilePictureDao.findByUser(userDao.findById(Utils.currentUserId()).get());
         }
@@ -42,5 +39,14 @@ public class ProfilePictureController {
         picture.setUser(user);
         profilePictureDao.save(picture);
         return picture;
+    }
+
+    @GetMapping("/user/{userId}/picture")
+    public ProfilePicture getProfilePicture(@PathVariable Long userId) {
+        User user = userDao.findById(userId).get();
+        if(profilePictureDao.existsByUser(user)) {
+            return profilePictureDao.findByUser(user);
+        }
+        return new ProfilePicture(1L, "https://cdn.filestackcontent.com/dynXYf9AS26ImuqTgUPj");
     }
 }

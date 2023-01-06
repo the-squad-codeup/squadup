@@ -45,6 +45,11 @@ public class ProfilePicture {
         this.id = id;
     }
 
+    public ProfilePicture(Long id, String url) {
+        this.id = id;
+        this.url = url;
+    }
+
     public ProfilePicture(String filename, String handle, String mimetype, long size, String source, String status, String uploadId, String url) {
         this.filename = filename;
         this.handle = handle;
