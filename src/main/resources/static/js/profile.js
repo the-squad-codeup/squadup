@@ -108,6 +108,8 @@ $(function (){
             <div>${userInfo.preferences.rating.rating}</div>
         `)
 
+        $('.profile-image').css('background-image', `url("${userInfo.profilePicture.url}")`)
+
 
 
         console.log("user info:")
