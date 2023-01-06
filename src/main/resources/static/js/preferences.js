@@ -1,6 +1,7 @@
-//print form not working
 import { Utils } from "./utils.js";
-import { toggleOverlay } from "./pref-overlays.js";
+import { Overlays } from "./pref-overlays.js";
+
+//print form not working
 
 $(function() {
 
@@ -148,7 +149,7 @@ $(function() {
                     `);
                 }
             }
-            toggleOverlay();
+            Overlays.toggleOverlay();
         },
         async languageSelectElement(user) {
             let languages = await Fetch.Get.all("language").then(res => res);
