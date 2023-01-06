@@ -19,7 +19,7 @@ $(function() {
                             <h4 class="card-title">${comrade.userTwo.username}</h4>
                         </div>
                         <div class="su-card-col">
-                            <p class="card-text">${comrade.userTwo.username}'s Bio: ${comrade.userTwo.preferences.bio}</p>
+                            <p class="card-text">${comrade.userTwo.preferences.bio}</p>
                         </div>
                     </div>
                     <div class="su-card-middle">

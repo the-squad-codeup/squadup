@@ -19,7 +19,7 @@ $(function() {
                             <h4 class="card-title">${recruit.userTwo.username}</h4>
                         </div>
                         <div class="su-card-col">
-                            <p class="card-text">${recruit.userTwo.username}'s Bio: ${recruit.userTwo.preferences.bio}</p>
+                            <p class="card-text">${recruit.userTwo.preferences.bio}</p>
                         </div>
                     </div>
                     <div class="su-card-middle">
