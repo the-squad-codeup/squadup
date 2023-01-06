@@ -1,5 +1,7 @@
 package pro.squadup.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -39,10 +41,6 @@ public class ProfilePicture {
     private User user;
 
     public ProfilePicture() {
-    }
-
-    public ProfilePicture(Long id) {
-        this.id = id;
     }
 
     public ProfilePicture(Long id, String url) {
@@ -133,6 +131,7 @@ public class ProfilePicture {
         this.url = url;
     }
 
+    @JsonIgnore
     public User getUser() {
         return user;
     }
