@@ -195,6 +195,7 @@ $(function() {
         initialize() {
             $(document).on("click", "#edit-preferences-submit-button", async function() {
                 await Fetch.Post.updatedPreferences(MyPreferences.packagePreferencesObject());
+                // window.location.replace(`${MyPreferences.baseUrl}`);
                 window.location.replace(`${MyPreferences.baseUrl}`);
             });
             $(document).ready(function() {

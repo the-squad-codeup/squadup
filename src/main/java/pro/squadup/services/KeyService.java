@@ -12,6 +12,9 @@ public class KeyService {
     @Value("${igdb.access.token}")
     private String IGDB_ACCESS_TOKEN;
 
+    @Value("${filestack.key}")
+    private String FILESTACK_KEY;
+
 
 
     public KeyService() {
@@ -33,4 +36,11 @@ public class KeyService {
         this.IGDB_ACCESS_TOKEN = IGDB_ACCESS_TOKEN;
     }
 
+    public String getFILESTACK_KEY() {
+        return FILESTACK_KEY;
+    }
+
+    public void setFILESTACK_KEY(String FILESTACK_KEY) {
+        this.FILESTACK_KEY = FILESTACK_KEY;
+    }
 }
