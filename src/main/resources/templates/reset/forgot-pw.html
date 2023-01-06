@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <div th:replace="partials :: headFragment('Reset Password')"></div>
+
+</head>
+<body>
+<div id="page-wrapper">
+    <nav th:replace="partials :: siteBar" />
+
+
+
+
+    <div class="container pt-5 my-5">
+        <div class="row g-5">
+            <div class="col-12 col-lg-5">
+                <div class="container bg-dark rounded-3 p-5">
+                    <h1 class="text-center text-light">Forgot Password</h1>
+                    <div th:if="${param.invalid}" class="text-light">
+                        Reset Password token is invalid. Please enter your email to send new reset password email.
+                    </div>
+                    <div th:if="${param.expired}" class="text-light">
+                        Reset Password link has expired. Please enter your email to send new reset password email.
+                    </div>
+                    <form id="reset-password-form" th:action="@{/pwreset}" th:method="post">
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Enter your email to send reset password link</label>
+                            <input type="text" class="form-control" id="email" name="email" autocomplete="off">
+                        </div>
+                        <button id="reset-password-submit" type="submit" class="btn btn-primary">Send Reset Email</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div th:replace="partials :: scripts" />
+
+<script th:src="@{/js/signup-form.js}" />
+
+</body>
+</html>
