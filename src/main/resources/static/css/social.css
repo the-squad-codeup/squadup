@@ -1,5 +1,7 @@
+/* STYLESHEET FOR BOTH RECRUITS AND COMRADES */
 
 
+/* STYLING FOR CONTENTS OF ARROWS AND RECTANGLE (RECRUITS/COMRADES) */
 .arrows-rectangle{
     padding: 3em;
     display: flex;
@@ -39,6 +41,8 @@
 
     border-left: 60px solid #05FF00;
 }
+
+/* STYLES FOR CARD AND CARD CONTENTS: */
 
 #card {
     display:flex;
