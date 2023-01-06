@@ -1,10 +1,46 @@
-.new-wrapper {
-    /*display: flex;*/
+#new-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+
+    padding: 20px;
+}
+
+.card-body{
+    display: flex;
     flex-wrap: wrap;
     flex-direction: row;
+    justify-content: center;
+    border: ridge 12px;
+    /*border: outset 12px;*/
+    border-color: var(--bs-gamergreen) !important;
+    /*background: rgba(33, 37, 41, .3);*/
+
+
+    margin: 20px;
+    width: 360px;
+}
+/*GAMES SECTION*/
+.dash-cam{
+    overflow: hidden;
+    width: 90%;
+    text-align: center;
 }
 
-.new-wrapper>* {
-    flex: 2 2 250px;
+.card-head {
+
 }
 
+.add-game-button, .favorite-game-button, .remove-game-button  {
+    /*TAKEN FROM FROMS.CSS MAKE IT SIMPLE ONCE CLEAN============*/
+    margin: 2%;
+    border: var(--bs-gamergreen) ridge 5px;
+    border-radius: 8px;
+    background-color: dimgray;
+}
+
+button:active {
+    box-shadow: 0 5px black;
+    transform: translateY(4px);
+}
+
+/*END OF GAME SECTION*/

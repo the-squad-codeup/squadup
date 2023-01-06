@@ -1,6 +1,6 @@
 
 :root {
-    --bs-gamergreen: rgb(140, 250, 98);
+    --bs-gamergreen: rgba(92, 253, 66, 1);
     --bs-gamerpurp: rgb(63, 5, 79);
     --bs-lighterpurp: #800080FF;
 }

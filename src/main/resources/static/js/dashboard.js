@@ -17,7 +17,7 @@ $(function() {
             console.log("printing individual comrade: ");
             console.log(comrade);
             $(`#card-com`).append(`
-                 <div class="card h-100 row-cols-3" data-comrade-id="${comrade.id}">
+                 <div class="card row-cols-3" data-comrade-id="${comrade.id}">
                     <img class="card-img-top" src="https://i.imgur.com/0Z0Z0Z0.jpg" alt="user profile picture">
                     <div class="card-body">
                         <h4 class="card-title">${comrade.userTwo.username}</h4>
@@ -76,7 +76,7 @@ $(function() {
         $("#card-rec").html('');
         for (let recruit of recruits) {
             $(`#card-rec`).append(`
-                <div class="card h-100 row-cols-3" data-recruit-id="${recruit.id}">
+                <div class="card row-cols-3" data-recruit-id="${recruit.id}">
                     <img class="card-img-top" src="https://i.imgur.com/0Z0Z0Z0.jpg" alt="user profile picture">
                     <div class="card-body">
                         <h4 class="card-title">${recruit.userTwo.username}</h4>
