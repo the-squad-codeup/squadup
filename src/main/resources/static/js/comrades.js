@@ -15,11 +15,11 @@ $(function() {
                  <div class="su-card" data-comrade-id="${comrade.id}">
                     <div class="su-card-top"> 
                         <div class="su-card-col su-card-col-shrink">
-                            <img class="card-img-top" src="https://i.imgur.com/0Z0Z0Z0.jpg" alt="user profile picture">
+                            <img class="card-img-top" src="${comrade.userTwo.profilePicture.url}" alt="user profile picture">
                             <h4 class="card-title">${comrade.userTwo.username}</h4>
                         </div>
                         <div class="su-card-col">
-                            <p class="card-text">${comrade.userTwo.username}'s Bio: ${comrade.userTwo.preferences.bio}</p>
+                            <p class="card-text">${comrade.userTwo.preferences.bio}</p>
                         </div>
                     </div>
                     <div class="su-card-middle">
@@ -40,6 +40,43 @@ $(function() {
             }
         }
     }
+
+
+    document.getElementById('arrowsRect').addEventListener('click', async function(e){
+        e.preventDefault();
+        if (e.target && e.target.classList.contains("arrow-right")) {
+            let cardList = document.getElementById('card');
+            // get the current data-left value of the card list
+            let currentLeft = cardList.dataset.left;
+            // count the amount of cards in the card list
+            let cardCount = cardList.childElementCount;
+            let maxClicks = cardCount - 2;
+            // if the current data-left value is less than the (maxClicks * 460), decrease the data-left value by 460
+            if (currentLeft == -(maxClicks * 460)) {
+                //do nothing
+            }
+            else {
+                // set the cardList to have a css left value of 460px less than the current left value
+                cardList.style.left = `${parseInt(currentLeft) - 460}px`;
+                // set the data-left value of the card list to the new left value
+                cardList.dataset.left = `${parseInt(currentLeft) - 460}`;
+            }
+        }
+        if (e.target && e.target.classList.contains("arrow-left")){
+            let cardList = document.getElementById('card');
+            // get the current data-left value of the card list
+            let currentLeft = cardList.dataset.left;
+            if (currentLeft == "0") {
+                //do nothing
+            }
+            else {
+                // set the cardList to have a css left value of 460px less than the current left value
+                cardList.style.left = `${parseInt(currentLeft) + 460}px`;
+                // set the data-left value of the card list to the new left value
+                cardList.dataset.left = `${parseInt(currentLeft) + 460}`;
+            }
+        }
+    })
 
 
 

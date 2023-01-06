@@ -10,7 +10,7 @@ function hideOverlays() {
     document.getElementById('AST').style.display = "none";
 }
 
-function toggleOverlay(){
+export function toggleOverlay(){
     hideOverlays();
     var x = document.getElementById('location').value
     if( x === 'Hawaii-Aleutian Time Zone') {
@@ -32,6 +32,3 @@ function toggleOverlay(){
     }
 }
 
-function loadProfile(){
-
-}

@@ -1,5 +1,7 @@
+/* STYLESHEET FOR BOTH RECRUITS AND COMRADES */
 
 
+/* STYLING FOR CONTENTS OF ARROWS AND RECTANGLE (RECRUITS/COMRADES) */
 .arrows-rectangle{
     padding: 3em;
     display: flex;
@@ -7,7 +9,7 @@
     align-items: center;
 }
 
-p{
+.banner-text{
     padding-top: .5em;
     font-size: 200%;
     font-weight: 500;
@@ -40,9 +42,18 @@ p{
     border-left: 60px solid #05FF00;
 }
 
+/* STYLES FOR CARD AND CARD CONTENTS: */
+.card-slider-mask {
+    margin: 0 20px;
+    max-width: calc(100% - 40px);
+    overflow:hidden;
+}
 #card {
     display:flex;
+    flex-wrap: nowrap;
     column-gap: 25px;
+    position: relative;
+    transition: all ease .3s;
 }
 
 .su-card {
@@ -54,6 +65,11 @@ p{
     border-radius: 3px;
     padding: 15px;
 }
+
+p.card-text{
+    color: #03ff00;
+}
+
 .su-card-top, .su-card-middle, .su-card-bottom {
     display: flex;
 }
@@ -67,6 +83,7 @@ p{
     display: flex;
     column-gap: 10px;
 }
+
 .su-card-games-list {
     display: flex;
     column-gap: 10px;
@@ -74,25 +91,31 @@ p{
     height: 100%;
     align-items: center;
 }
+
 .su-card-game {
     width: 117px;
 }
+
 .su-card-bottom {
     align-items: center;
     justify-content: center;
     column-gap: 20PX;
 }
+
 img.card-img-top {
     height: 125px;
     width: 125px;
     border-radius: 59px;
 }
+
 .su-card-col {
     flex: 1 0 0;
 }
+
 .su-card-col-shrink {
-    flex: 0 1 0;
+    flex: none;
 }
+
 .su-card-top {
     column-gap: 20px;
 }
