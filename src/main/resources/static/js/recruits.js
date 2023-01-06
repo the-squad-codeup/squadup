@@ -15,7 +15,7 @@ $(function() {
                 <div class="su-card" data-recruit-id="${recruit.id}">
                     <div class="su-card-top">
                         <div class="su-card-col su-card-col-shrink">
-                            <img class="card-img-top" src="https://i.imgur.com/0Z0Z0Z0.jpg" alt="user profile picture">
+                            <img class="card-img-top" src="${recruit.userTwo.profilePicture.url}" alt="user profile picture">
                             <h4 class="card-title">${recruit.userTwo.username}</h4>
                         </div>
                         <div class="su-card-col">
