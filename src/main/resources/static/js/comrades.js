@@ -42,6 +42,20 @@ $(function() {
     }
 
 
+    document.getElementById('arrowsRect').addEventListener('click', async function(e){
+        e.preventDefault();
+        if (e.target && e.target.classList.contains("arrow-right")) {
+            let cards = document.getElementById('card');
+            cards.scrollLeft += 460;
+        }
+        if (e.target && e.target.classList.contains("arrow-left")){
+            console.log("Inside arrow left click");
+            let cards = document.getElementById('card');
+            cards.scrollLeft -= 460;
+        }
+    })
+
+
 
     document.getElementById("card").addEventListener('click', async function(e){
         e.preventDefault();
