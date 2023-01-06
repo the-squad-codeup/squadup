@@ -51,4 +51,8 @@ body {
     /*color: white; this can't be here because it will make the unordered list in the footer dots visible*/
 }
 
+img {
+    max-width: 100%;
+}
+
 /**/

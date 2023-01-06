@@ -21,7 +21,7 @@ $(function () {
     };
 
     const Print = {
-        async myFavoriteGame(div) {
+        async myFavoriteGame() {
             console.log("Inside favorite games");
             let favoriteGame = await Fetch.Get.myFavoriteGame().then(res => res);
             console.log(favoriteGame);
@@ -88,24 +88,6 @@ $(function () {
                 let data = await results.json();
                 return data;
             },
-            // async gameSearch(query) {
-            //     let keys = await this.keys();
-            //     console.log(keys);
-            //     let body = `search "${query}"; fields name,cover.image_id,age_ratings.rating,age_ratings.category,genres.name,platforms.name`;
-            //     const fetchOptions = {
-            //         method: 'POST',
-            //         headers: {
-            //             'Client-ID' : keys.igdb_CLIENT_ID,
-            //             'Authorization' : `Bearer ${keys.igdb_ACCESS_TOKEN}`,
-            //             'x-api-key' : keys.igdb_PROXY_KEY
-            //         },
-            //         body: body
-            //     };
-            //     console.log(fetchOptions);
-            //     let results = await fetch(`${keys.igdb_PROXY_URL}games`, fetchOptions);
-            //     let data = await results.json();
-            //     console.log(data);
-            // },
             async myGames() {
                 let data = await fetch(`${MyGames.baseUrl}game/user`).then(res => res.json());
                 console.log("Inside Fetch.Get.myGames(). Data returned:");
@@ -194,8 +176,12 @@ $(function () {
                 })
                 .on("click", ".add-game-button", async function() {
                     console.log("Add Game Button clicked");
-                    let addedGame = await Fetch.Post.addGame($(this).parent().parent().attr("data-game-id"));
-                    await Print.singleMyGame(addedGame, MyGames.myGamesDiv);
+                    let gameId = $(this).parent().parent().attr("data-game-id");
+                    let addedGame = await Fetch.Post.addGame(gameId);
+                    let gameIds = [...MyGames.myGamesDiv.children()].map(game => parseInt(game.attributes[1].value));
+                    if(!gameIds.includes(parseInt(addedGame.id))){
+                        await Print.singleMyGame(addedGame, MyGames.myGamesDiv);
+                    }
                 })
                 .on("click", ".remove-game-button", async function() {
                     console.log("Remove Game Button clicked");
@@ -213,3 +199,20 @@ $(function () {
 
     MyGames.initialize();
 });
+
+//
+// let song = {
+//     title: spotifyName.name,
+//     artist: {
+//         artistName: spotifyArtist.name
+//         genres: genreObjects
+//     }
+// }
+//
+// let postOptions = {
+//     method: 'POST',
+//     headers: {
+//
+//     },
+//     body: JSON.stringify(song)
+// }

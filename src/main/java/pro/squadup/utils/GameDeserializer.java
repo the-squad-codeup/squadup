@@ -79,9 +79,11 @@ public class GameDeserializer extends StdDeserializer<Game> {
     }
 
     // returns year int from Json object
-    private int yearFromNode(JsonNode node) {
+    private int yearFromNode(JsonNode node) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        System.out.println(mapper.writeValueAsString(node));
         int year = 0;
-        if(node.path("release_dates").get(0).get("y") != null) {
+        if(node.path("release_dates").get(0) != null && node.path("release_dates").get(0).get("y") != null) {
             year = node.path("release_dates").get(0).get("y").asInt();
         }
         return year;

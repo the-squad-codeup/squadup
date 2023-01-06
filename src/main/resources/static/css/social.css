@@ -41,5 +41,58 @@ p{
 }
 
 #card {
+    display:flex;
+    column-gap: 25px;
+}
 
+.su-card {
+    height: 450px;
+    width: 450px;
+    display: flex;
+    flex-direction: column;
+    border: 3px solid #03ff00;
+    border-radius: 3px;
+    padding: 15px;
+}
+.su-card-top, .su-card-middle, .su-card-bottom {
+    display: flex;
+}
+
+.su-card-middle {
+    flex: 1 0 auto;
+    overflow: hidden;
+}
+
+.su-card-games-list {
+    display: flex;
+    column-gap: 10px;
+}
+.su-card-games-list {
+    display: flex;
+    column-gap: 10px;
+    flex: none;
+    height: 100%;
+    align-items: center;
+}
+.su-card-game {
+    width: 117px;
+}
+.su-card-bottom {
+    align-items: center;
+    justify-content: center;
+    column-gap: 20PX;
+}
+img.card-img-top {
+    height: 125px;
+    width: 125px;
+    border-radius: 59px;
+}
+.su-card-col {
+    flex: 1 0 0;
+}
+.su-card-col-shrink {
+    flex: 0 1 0;
+}
+.su-card-top {
+    column-gap: 20px;
 }
