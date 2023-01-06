@@ -160,19 +160,6 @@
 
 
 /*<!--        Stroke inducing carousel -->*/
-.carousel-container {
-    width: 1100px;
-    margin: 50px auto;
-    position: relative;
-    border-left-width: 4px;
-    border-left-style: solid;
-    border-left-color: #aaa;
-}
-/*@media (max-width: 768px) {*/
-/*    .carousel-container {*/
-/*        width: 95%;*/
-/*    }*/
-/*}*/
 .inner-carousel {
     overflow: hidden;
 }
@@ -182,11 +169,6 @@
     transition: transform 0.2s ease-in-out;
 }
 
-/*@media (max-width: 768px) {*/
-/*    .card-container {*/
-/*        width: 184px;*/
-/*    }*/
-/*}*/
 .card {
     border: 0.2vw solid #5cfd42;
     margin-right: 0.667vw;
@@ -201,22 +183,22 @@
     position: absolute;
     top: 50%;
     transform: translatey(-50%);
-    width: 5vw;
-    height: 5vw;
+    width: 2vw;
+    height: 2vw;
     border-radius: 50%;
     outline: none;
     border: 1px solid #000;
     cursor: pointer;
 }
 .nav .prev {
-    left: -30px;
+    left: -1vw;
     display: none;
 }
 .nav .prev.show {
     display: block;
 }
 .nav .next {
-    right: -30px;
+    right: -0.443vw;
 }
 .nav .next.hide {
     display: none;
