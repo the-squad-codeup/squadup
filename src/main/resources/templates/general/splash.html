@@ -57,7 +57,7 @@
         </div>
         <p>Create an account to experience all of SquadUp’s features!</p>
         <hr>
-        <a th:href="@{/signup}">Click here to sign up!</a>
+        <a sec:authorize="isAnonymous()" th:href="@{/signup}">Click here to sign up!</a>
     </div>
 </div>
 

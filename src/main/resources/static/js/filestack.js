@@ -47,17 +47,18 @@ $(async function() {
                 rotate: false,
                 force: true
             },
-            imageMax: [240, 240],
+            imageMax: [480, 480],
             onFileUploadFinished: async function(file) {
                 console.log(file);
                 let uploadedPicture = await Fetch.Post.profilePicture(file, FileStack.csrfToken).then(res => res);
                 console.log(uploadedPicture);
-                $("#pic-div").append(`
-                    <img src="${uploadedPicture.url}">
-                `);
-                $("#navbar-profile-image").parent().empty().append(`
-                    <img id="navbar-profile-image" src="${uploadedPicture.url}" style="max-height: 1.75em; max-width: 1.75em;">
-                `);
+                $('.profile-image').css('background-image', `url("${userInfo.profilePicture.url}")`)
+                // $("#pic-div").append(`
+                //     <img src="${uploadedPicture.url}">
+                // `);
+                // $("#navbar-profile-image").parent().empty().append(`
+                //     <img id="navbar-profile-image" src="${uploadedPicture.url}" style="max-height: 1.75em; max-width: 1.75em;">
+                // `);
             }
         },
         filestackKey: await Fetch.Get.filestackKey().then(res => res),
