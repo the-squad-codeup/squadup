@@ -7,23 +7,27 @@
 </head>
 <body>
 <nav th:replace="partials :: siteBar"></nav>
-<div id="page-wrapper">
-    <div class="arrows-rectangle">
 
-        <div class="arrow-left"></div>
+        <!--  DIV CONTAINING BANNER AND ARROWS  -->
 
-        <div class="rectangle">
-            <p>COMRADES</p>
+    <div id="page-wrapper">
+        <div id="arrowsRect" class="arrows-rectangle">
+
+            <div class="arrow-left"></div>
+
+            <div class="rectangle">
+                <p class="banner-text">COMRADES</p>
+            </div>
+
+            <div class="arrow-right"></div>
         </div>
 
-        <div class="arrow-right"></div>
+            <!--  Section with User cards  -->
+        <section class="card-slider-mask">
+            <section id="card" class="row container" data-left="0" style="left:0px;"></section>
+        </section>
     </div>
-    
-        <!--  Section with User cards  -->
-    <section id="card" class="row container">
-    </section>
 
-</div>
 <nav th:replace="partials :: footer"></nav>
 <div th:replace="partials :: scripts"></div>
 <script type="module" th:src="@{/js/comrades.js}"></script>

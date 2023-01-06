@@ -5,11 +5,17 @@ $(function (){
         console.log("Array of user's games")
         console.log(userGames)
         for(let game of userGames){
-            $('.my-games').append(`
-                <div class="game" style="background-image: url(${game.artwork});">
-                </div>
-            `)
+            // $('.my-games').append(`
+            //     <div class="game" style="background-image: url(${game.artwork});">
+            //     </div>
+            // `)
+            $('.track').append(`
+<!--                <div class="card-container">-->
+                    <div class="card" style="background-image: url(${game.artwork});"></div>
+<!--                </div>-->
+             `)
         }
+
     }
     getUserGames()
 
@@ -77,7 +83,7 @@ $(function (){
 
         // location
         $('.preferences').append(`
-                    <div class="location">${userInfo.preferences.location.timezone}</div>
+                    <div class="location">${userInfo.preferences.location.timezone} | </div>
         `)
 
         // Languages
@@ -89,11 +95,11 @@ $(function (){
         // Profanity
         if(userInfo.preferences.matureLanguage === true){
             $('.preferences').append(`
-            <div class="mature-language">Profanity: On</div>
+            <div class="mature-language"> | Profanity: On | </div>
         `)
         }else{
             $('.preferences').append(`
-            <div class="mature-language">Profanity: Off</div>
+            <div class="mature-language"> | Profanity: Off | </div>
             `)
         }
 
@@ -101,6 +107,8 @@ $(function (){
         $('.preferences').append(`
             <div>${userInfo.preferences.rating.rating}</div>
         `)
+
+        $('.profile-image').css('background-image', `url("${userInfo.profilePicture.url}")`)
 
 
 
@@ -110,3 +118,40 @@ $(function (){
     getUserInfo()
 
 })
+
+
+
+
+
+
+
+
+
+/*<!--        Stroke inducing carousel -->*/
+
+const prev = document.querySelector(".prev");
+const next = document.querySelector(".next");
+const carousel = document.querySelector(".my-games");
+const track = document.querySelector(".track");
+let width = carousel.offsetWidth;
+let index = 0;
+window.addEventListener("resize", function () {
+    width = carousel.offsetWidth;
+});
+next.addEventListener("click", function (e) {
+    e.preventDefault();
+    index = index + 1;
+    prev.classList.add("show");
+    track.style.transform = "translateX(" + index * -70 + "vw)";
+    if (track.offsetWidth - index * width < index * width) {
+        next.classList.add("hide");
+    }
+});
+prev.addEventListener("click", function () {
+    index = index - 1;
+    next.classList.remove("hide");
+    if (index === 0) {
+        prev.classList.remove("show");
+    }
+    track.style.transform = "translateX(" + index * -70 + "vw)";
+});
