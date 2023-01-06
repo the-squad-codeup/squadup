@@ -25,16 +25,16 @@ public class ProfilePictureController {
 
     @GetMapping("/user/picture")
     public ProfilePicture getProfilePicture() throws JsonProcessingException {
-        if(Utils.currentUser() == null) {
+        if(Utils.currentUserId() == null) {
             return new ProfilePicture(-1L);
         } else {
-            return profilePictureDao.findByUser(userDao.findById(Utils.currentUser().getId()).get());
+            return profilePictureDao.findByUser(userDao.findById(Utils.currentUserId()).get());
         }
     }
 
     @PostMapping("/user/picture")
     public ProfilePicture setProfilePicture(@RequestBody ProfilePicture picture) throws JsonProcessingException {
-        User user = userDao.findById(Utils.currentUser().getId()).get();
+        User user = userDao.findById(Utils.currentUserId()).get();
         ProfilePicture currentPicture = profilePictureDao.findByUser(user);
         if(currentPicture != null) {
             profilePictureDao.delete(currentPicture);
