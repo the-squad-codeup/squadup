@@ -4,41 +4,58 @@
 <head>
     <div th:replace="partials :: headFragment('Home Page')"></div>
     <link rel="stylesheet" th:href="@{/css/games.css}">
+    <link rel="stylesheet" th:href="@{/css/dashboard.css}">
+
 </head>
 <body>
-<nav th:replace="partials :: siteBar"></nav>
-<div id="page-wrapper">
-<!--ROUGH DRAFT:::: to display Current User logged in-->
-    <div class="user-info" sec:authorize="isAuthenticated()"><h5>Welcome back,
-        <span th:text="${#authentication.principal.username}"/>!</h5>
+    <nav th:replace="partials :: siteBar"></nav>
+    <div id="page-wrapper" class="card-head">
+        <!--ROUGH DRAFT:::: to display Current User logged in-->
+        <div class="dash-cam">
+            <div class="user-info" sec:authorize="isAuthenticated()"><h5>Welcome back to HeadQuarters,
+                <span th:text="${#authentication.principal.username}"/>!</h5>
 
-        User ID: <span th:text="${#authentication.principal.id}"/><br>
-        Email: <span th:text="${#authentication.principal.email}"/>
+                User ID: <span th:text="${#authentication.principal.id}"/><br>
+                Email: <span th:text="${#authentication.principal.email}"/>
+            </div>
+        </div>
+        <div id="new-wrapper">
+            <div class="card-body">
+                <!--ROUGH DRAFT::::Display User Games-->
+                <div class="dash-cam">
+                    <h1>My Games</h1>
+                    <div id="my-games" class="row container"></div>
+                </div>
+            </div>
+            <div class="card-body">
+                <!--ROUGH DRAFT::::Displaying Comrades-->
+                <div class="dash-cam">
+                    <h1>My Comrades</h1>
+                    <div>
+                        <section id="card-com" class="row container">
+                        </section>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="dash-cam">
+                    <!--ROUGH DRAFT::::Displaying New Recruits-->
+                    <h1>My Recruits</h1>
+                    <section id="card-rec" class="row container">
+                    </section>
+                </div>
+            </div>
+
+            <!--ROUGH DRAFT::::Displaying Squads -->
+
+
+
+        </div>
     </div>
-<!--ROUGH DRAFT::::Display User Games-->
-    <h1>My Games</h1>
-        <div id="my-games" class="row container"></div>
-
-<!--ROUGH DRAFT::::Displaying Comrades-->
-    <h1>My Comrades</h1>
-    <div>
-        <section id="card-com" class="row container">
-        </section>
-    </div>
-
-<!--ROUGH DRAFT::::Displaying Squads -->
-
-<!--ROUGH DRAFT::::Displaying New Recruits-->
-<!--May need to create new arrows or adjust sizing-->
-    <h1>My Recruits</h1>
-    <div>
-        <section id="card-rec" class="row container">
-        </section>
-    </div>
-</div>
 <nav th:replace="partials :: footer"></nav>
 <div th:replace="partials :: scripts"></div>
 <script th:type="module" th:src="@{/js/games.js}"></script>
 <script type="module" th:src="@{/js/dashboard.js}"></script>
 </body>
 </html>
+
