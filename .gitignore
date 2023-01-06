@@ -39,4 +39,4 @@ application.properties
 *.iml
 .DS_Store
 keys.js
-squadup_db_dump.sql
+scripts/squadup_db_dump.sql
