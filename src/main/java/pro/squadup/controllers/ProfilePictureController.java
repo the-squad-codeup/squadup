@@ -1,6 +1,7 @@
 package pro.squadup.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.web.bind.annotation.*;
 import pro.squadup.models.ProfilePicture;
 import pro.squadup.models.User;
@@ -31,10 +32,25 @@ public class ProfilePictureController {
 
     @PostMapping("/user/picture")
     public ProfilePicture setProfilePicture(@RequestBody ProfilePicture picture) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        System.out.println("inside setProfilePicture. picture to add: ");
+        System.out.println(mapper.writeValueAsString(picture));
         User user = userDao.findById(Utils.currentUserId()).get();
+        System.out.println("Current user:");
+        System.out.println(mapper.writeValueAsString(user));
         ProfilePicture currentPicture = profilePictureDao.findByUser(user);
+        System.out.println("Current user's profile picture");
+        System.out.println(mapper.writeValueAsString(currentPicture));
+//        picture.setUser(user);
+//        userDao.save(user);
+//        profilePictureDao.save(picture);
+//        if(currentPicture != null) {
+//            System.out.println("Inside conditional, currentPicture is not null. Deleting currentPicture");
+//            profilePictureDao.deleteById(currentPicture.getId());
+//        }
         if(currentPicture != null) {
-            profilePictureDao.delete(currentPicture);
+            System.out.println("Inside conditional, currentPicture is not null. Deleting currentPicture");
+            profilePictureDao.deleteById(currentPicture.getId());
         }
         picture.setUser(user);
         profilePictureDao.save(picture);
