@@ -16,7 +16,10 @@ $(function () {
         myGamesDiv: $("#my-games"),
         myFavoriteGameDiv: $("#my-favorite-game"),
         sortGamesByYear(games) {
-            return games.sort((prev, current) => parseInt(prev.year) - parseInt(current.year));
+            if(Array.isArray(games)) {
+                games = games.sort((prev, current) => parseInt(prev.year) - parseInt(current.year));
+            }
+            return games;
         }
     };
 
@@ -59,10 +62,7 @@ $(function () {
             `);
         },
         async gameResults(data) {
-            let games = await data;
-            console.log(games);
-            console.log(typeof games);
-            games = MyGames.sortGamesByYear(games);
+            let games = MyGames.sortGamesByYear(await data);
             MyGames.addGameDiv.empty();
             for(let game of games) {
                 this.singleSearchedGame(game, MyGames.addGameDiv);
