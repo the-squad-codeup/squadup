@@ -59,8 +59,10 @@ $(function () {
             `);
         },
         async gameResults(data) {
-            let games = MyGames.sortGamesByYear(await data);
+            let games = await data;
             console.log(games);
+            console.log(typeof games);
+            games = MyGames.sortGamesByYear(games);
             MyGames.addGameDiv.empty();
             for(let game of games) {
                 this.singleSearchedGame(game, MyGames.addGameDiv);
