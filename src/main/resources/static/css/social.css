@@ -1,6 +1,5 @@
 /* STYLESHEET FOR BOTH RECRUITS AND COMRADES */
 
-
 /* STYLING FOR CONTENTS OF ARROWS AND RECTANGLE (RECRUITS/COMRADES) */
 .arrows-rectangle{
     padding: 3em;
@@ -42,6 +41,11 @@
     border-left: 60px solid #05FF00;
 }
 
+.arrow-left, .arrow-right:hover{
+    cursor: pointer;
+
+}
+
 /* STYLES FOR CARD AND CARD CONTENTS: */
 .card-slider-mask {
     margin: 0 20px;
@@ -66,7 +70,7 @@
     padding: 15px;
 }
 
-p.card-text{
+p.card-text, h4{
     color: #03ff00;
 }
 
@@ -102,6 +106,14 @@ p.card-text{
     column-gap: 20PX;
 }
 
+#accept, #reject, #remove  {
+    /*TAKEN FROM FROMS.CSS MAKE IT SIMPLE ONCE CLEAN============*/
+    margin: 2%;
+    border: var(--bs-gamergreen) ridge 5px;
+    border-radius: 8px;
+    background-color: dimgray;
+}
+
 img.card-img-top {
     height: 125px;
     width: 125px;
@@ -118,4 +130,12 @@ img.card-img-top {
 
 .su-card-top {
     column-gap: 20px;
+}
+
+#accept:hover{
+    color: #03ff00;
+}
+
+#remove, #reject:hover{
+    color: #FF0000;
 }
