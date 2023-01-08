@@ -14,7 +14,7 @@
     font-weight: 500;
     color: #000000;
     -webkit-text-stroke: .5px #05FF00;
-    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .rectangle {
@@ -46,7 +46,30 @@
 
 }
 
-/* STYLES FOR CARD AND CARD CONTENTS: */
+/* STYLES FOR CARDS AND CARDS CONTENTS: */
+
+.LeftGradientDiv{
+    /*make this div be gradient from right to left over the card*/
+    background: linear-gradient(90deg, #333333 0%, #000000 100%);
+    width: 350px;
+    height: 450px;
+    position: absolute;
+    z-index: 1;
+    opacity: 0.8;
+}
+
+.RightGradientDiv {
+    /*/make this div be gradient from right to left over the card/*/
+    background: linear-gradient(90deg, #000000 100%, #333333 0%);
+    width: 350px;
+    height: 450px;
+    position: absolute;
+    right: 0;
+    z-index: 1;
+    opacity: 0.8;
+}
+
+
 .card-slider-mask {
     margin: 0 20px;
     max-width: calc(100% - 40px);
@@ -136,6 +159,6 @@ img.card-img-top {
     color: #03ff00;
 }
 
-#remove, #reject:hover{
+#remove:hover, #reject:hover{
     color: #FF0000;
 }
