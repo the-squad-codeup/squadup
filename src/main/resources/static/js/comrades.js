@@ -50,16 +50,16 @@ $(function() {
             let currentLeft = cardList.dataset.left;
             // count the amount of cards in the card list
             let cardCount = cardList.childElementCount;
-            let maxClicks = cardCount - 2;
+            let maxClicks = cardCount - 1;
             // if the current data-left value is less than the (maxClicks * 460), decrease the data-left value by 460
-            if (currentLeft == -(maxClicks * 460)) {
+            if (currentLeft == -(maxClicks * 450)) {
                 //do nothing
             }
             else {
                 // set the cardList to have a css left value of 460px less than the current left value
-                cardList.style.left = `${parseInt(currentLeft) - 460}px`;
+                cardList.style.left = `${parseInt(currentLeft) - 450}px`;
                 // set the data-left value of the card list to the new left value
-                cardList.dataset.left = `${parseInt(currentLeft) - 460}`;
+                cardList.dataset.left = `${parseInt(currentLeft) - 450}`;
             }
         }
         if (e.target && e.target.classList.contains("arrow-left")){
@@ -67,13 +67,14 @@ $(function() {
             // get the current data-left value of the card list
             let currentLeft = cardList.dataset.left;
             if (currentLeft == "0") {
-                //do nothing
+                // set the cardList to have a css left value of 460px less than the current left value
+                cardList.style.left = `${parseInt(currentLeft) + 450}px`;
             }
             else {
                 // set the cardList to have a css left value of 460px less than the current left value
-                cardList.style.left = `${parseInt(currentLeft) + 460}px`;
+                cardList.style.left = `${parseInt(currentLeft) + 450}px`;
                 // set the data-left value of the card list to the new left value
-                cardList.dataset.left = `${parseInt(currentLeft) + 460}`;
+                cardList.dataset.left = `${parseInt(currentLeft) + 450}`;
             }
         }
     })
