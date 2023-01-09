@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <div th:replace="partials :: headFragment('Squad Chat')"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js" integrity="sha512-1QvjE7BtotQjkq8PxLeF6P46gEpBRXuskzIVgjFpekzFVF4yjRgrQvTG1MTOJ3yQgvTteKAcO7DSZI92+u/yZw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js" integrity="sha512-iKDtgDyTHjAitUDdLljGhenhPwrbBfqTKWO1mkhSFH3A7blITC9MhYon6SjnMhp4o0rADGw9yAC6EW4t5a4K3g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+<nav th:replace="partials :: siteBar"></nav>
+<br><br><br><br>
+<h1 id="squad-title" th:data-squad-id="${squad.id}" th:text="${squad.name}"></h1>
+<br>
+<h3>Invite Users:</h3>
+<div id="invite-users-div">
+    <select id="invite-users-select">
+    </select>
+    <button id="invite-users-button">Invite</button>
+</div>
+
+<h3>Current Users:</h3>
+<div id="squad-users-div"></div>
+
+<h3>Chat</h3>
+<div id="chat-messages-div"></div>
+<input id="chat-text-input" type="text" autocomplete="off">
+<button id="chat-send-button">Send Message</button>
+
+
+
+
+
+<nav th:replace="partials :: footer"></nav>
+<div th:replace="partials :: scripts"></div>
+<script type="module" th:src="@{/js/chat.js}"></script>
+<script type="module" th:src="@{/js/squad-chat.js}"></script>
+</body>
+</html>

@@ -44,7 +44,7 @@
                     <a id="nav-comrades-link" class="nav-link" th:href="@{/comrades}">Comrades</a>
                 </li>
                 <li sec:authorize="isAuthenticated()" class="nav-item">
-                    <a id="nav-preferences-link" class="nav-link" th:href="@{/profile}">My Profile</a>
+                    <a id="nav-squads-link" class="nav-link" th:href="@{/squads}">Squads</a>
                 </li>
                 <li sec:authorize="isAuthenticated()" class="nav-item">
                     <a id="nav-games-link" class="nav-link" th:href="@{/games}">Games</a>
@@ -62,6 +62,9 @@
         <!-- Links on Right -->
         <div class="navbar-collapse collapse w-100 order-3 collapse-portion">
             <ul class="navbar-nav ms-auto">
+                <li sec:authorize="isAuthenticated()" class="nav-item">
+                    <a id="nav-preferences-link" class="nav-link" th:href="@{/profile}">My Profile</a>
+                </li>
                 <li sec:authorize="isAuthenticated()" class="nav-item">
                     <a class="nav-link" th:href="@{/profile/preferences}">Edit Preferences</a>
                 </li>

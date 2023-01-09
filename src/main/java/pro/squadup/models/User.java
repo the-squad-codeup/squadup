@@ -42,6 +42,24 @@ public class User {
     @OneToMany(mappedBy = "userTwo")
     private Set<Comrade> comradesOfUser;
 
+    @OneToMany(mappedBy = "owner")
+    private Set<Squad> squadsOwned;
+
+    @ManyToMany(mappedBy = "members")
+    private Set<Squad> squads;
+
+    @OneToMany(mappedBy = "sender")
+    private Set<SquadChatMessage> messages;
+
+    @OneToMany(mappedBy = "user")
+    private Set<LastSeenMessage> lastSeenMessages;
+
+    @OneToMany(mappedBy = "sender")
+    private Set<SquadInvite> squadInvitesSent;
+
+    @OneToMany(mappedBy = "recipient")
+    private Set<SquadInvite> squadInvitesReceived;
+
     public Long getId() {
         return id;
     }
@@ -125,6 +143,58 @@ public class User {
 
     public void setComradesOfUser(Set<Comrade> comradesOfUser) {
         this.comradesOfUser = comradesOfUser;
+    }
+
+    @JsonIgnore
+    public Set<Squad> getSquadsOwned() {
+        return squadsOwned;
+    }
+
+    public void setSquadsOwned(Set<Squad> squadsOwned) {
+        this.squadsOwned = squadsOwned;
+    }
+
+    @JsonIgnore
+    public Set<Squad> getSquads() {
+        return squads;
+    }
+
+    public void setSquads(Set<Squad> squads) {
+        this.squads = squads;
+    }
+
+    public Set<SquadChatMessage> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(Set<SquadChatMessage> messages) {
+        this.messages = messages;
+    }
+
+    public Set<LastSeenMessage> getLastSeenMessages() {
+        return lastSeenMessages;
+    }
+
+    public void setLastSeenMessages(Set<LastSeenMessage> lastSeenMessages) {
+        this.lastSeenMessages = lastSeenMessages;
+    }
+
+    @JsonIgnore
+    public Set<SquadInvite> getSquadInvitesSent() {
+        return squadInvitesSent;
+    }
+
+    public void setSquadInvitesSent(Set<SquadInvite> squadInvitesSent) {
+        this.squadInvitesSent = squadInvitesSent;
+    }
+
+    @JsonIgnore
+    public Set<SquadInvite> getSquadInvitesReceived() {
+        return squadInvitesReceived;
+    }
+
+    public void setSquadInvitesReceived(Set<SquadInvite> squadInvitesReceived) {
+        this.squadInvitesReceived = squadInvitesReceived;
     }
 
     public User() {
