@@ -9,5 +9,12 @@
     overflow: hidden;
 }
 
+.games-container{
+    /*height: 46vw;*/
+    width: 95%;
+    border: solid #5CFD42 .5vw;
+    margin: auto;
+}
+
 .all-games-img {
 }

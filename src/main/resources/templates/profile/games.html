@@ -10,13 +10,16 @@
 <nav th:replace="partials :: siteBar"></nav>
 <div id="page-wrapper">
 
-    <h1>My Favorite Game</h1>
+    <div class="games-container"> <!-- fav game and saved games area -->
 
-    <div id="my-favorite-game"></div>
+        <h1>My Favorite Game</h1>
+        <div id="my-favorite-game" class=" p-5"></div>
 
-    <h1>My Games</h1>
 
-    <div id="my-games" class="row container"></div>
+        <h1>My Games</h1>
+        <div id="my-games" class="row container p-5"></div>
+
+    </div> <!-- end of fav game and saved games area -->
 
     <div class="container bg-dark rounded-3 p-5"><!--dark gray bubble area -->
         <h1>Add Games</h1>
@@ -25,7 +28,7 @@
         <button id="game-search-button">Search</button>
     </div><!--end of dark gray bubble area -->
 
-    <div id="games-div" class="row container">
+    <div id="games-div" class="row container p-5">
         <!--this is where the search results populate -->
     </div>
 
