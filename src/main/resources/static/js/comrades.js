@@ -27,7 +27,7 @@ $(function() {
                         </div>
                     </div>
                     <div class="su-card-bottom">
-                        <a href="#" id="remove" class="btn btn-primary unfriend-link">Remove Comrade</a>
+                        <button id="remove" class="btn unfriend-link">Remove Comrade</button>
                     </div>
                 </div>
             `);

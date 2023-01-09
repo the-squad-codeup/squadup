@@ -28,7 +28,7 @@ $(function() {
                         </div>
                     </div>
                     <div class="su-card-bottom">
-                        <a href="#" class="btn btn-primary unfriend-link">Remove Comrade</a>
+                        <button id="remove" class="btn unfriend-link">Remove Comrade</a>
                     </div>
                 </div>
             `);
@@ -95,8 +95,8 @@ async function printRecCards(recruits) {
                         </div>
                     </div>
                     <div class="su-card-bottom">
-                        <a href="#"  class="btn btn-primary squadup-link">Accept</a>
-                        <a href="#" class="btn btn-primary squaddown-link">Reject</a>
+                        <button id="accept" class="btn squadup-link">Accept</button>
+                        <button id="reject" class="btn squaddown-link">Reject</button>
                     </div>
                 </div>
             `);
@@ -153,6 +153,8 @@ async function getAllRecruits(){
 }
 
 printRecCards(getAllRecruits());
+
+
 
 });
 
