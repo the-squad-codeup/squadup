@@ -51,7 +51,7 @@ $(function() {
         },
         // Checks if input contains a special character
         containsSpecialCharacter: input => {
-            let specials = "!@#$%^&*()-=_+"
+            let specials = "!@#$%^&*()-=_+{}[]|;:'\",./?><"
             for(let i = 0; i < input.length; i++) {
                 for(let j = 0; j < specials.length; j++) {
                     if(input.charAt(i) === specials.charAt(j)) {
