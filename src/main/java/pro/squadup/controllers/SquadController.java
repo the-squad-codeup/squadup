@@ -14,6 +14,9 @@ import pro.squadup.repositories.SquadRepository;
 import pro.squadup.repositories.UserRepository;
 import pro.squadup.utils.Utils;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Controller
 public class SquadController {
 
@@ -31,35 +34,49 @@ public class SquadController {
 
     @GetMapping("/squads")
     public String showSquadsPage(Model model) {
+        User currentUser = userDao.findById(Utils.currentUserId()).get();
+        Set<Squad> userSquads = squadDao.findAllByMembers(currentUser);
+        model.addAttribute("userSquads", userSquads);
         model.addAttribute("squad", new Squad());
         return "squad/main";
     }
 
     @PostMapping("/squads/create")
     public String createSquad(Model model, @ModelAttribute Squad squad) throws JsonProcessingException {
-        // saving squad to give it an id in database
-        squadDao.save(squad);
+        ObjectMapper mapper = new ObjectMapper();
+
+        System.out.println("Inside create squad");
+        System.out.printf("Squad passed in: %s%n", mapper.writeValueAsString(squad));
 
         // getting user, default squadPicture, empty Chat to set in squad
         User currentUser = userDao.findById(Utils.currentUserId()).get();
         SquadPicture squadPicture = Utils.defaultSquadPicture();
         SquadChat chat = new SquadChat();
+        Set<User> members = new HashSet<>();
 
         // setting user, picture, chat
         squad.setOwner(currentUser);
-        squad.setSquadPicture(squadPicture);
-        squad.setChat(chat);
+        members.add(currentUser);
+        squad.setMembers(members);
 
         // saving new entities
         squadPictureDao.save(squadPicture);
         squadChatDao.save(chat);
 
+//        squadDao.save(squad);
+
+        squad.setSquadPicture(squadPicture);
+        squad.setChat(chat);
+//        squadPicture.setSquad(squad);
+//        chat.setSquad(squad);
+
+
         // saving changes to squad
         squadDao.save(squad);
 
+
         model.addAttribute("squad", squad);
 
-        ObjectMapper mapper = new ObjectMapper();
         System.out.printf("Squad created: %n%s%n", mapper.writeValueAsString(squad));
         return "squad/chat";
     }

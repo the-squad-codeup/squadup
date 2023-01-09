@@ -10,6 +10,7 @@
 <nav th:replace="partials :: siteBar"></nav>
 <br><br><br><br>
 <h1 th:text="${squad.name}"></h1>
+<div th:data-chat-id="${squad.chat.id}">Chat ID is <span th:text="${squad.chat.id}"></span></div>
 
 
 

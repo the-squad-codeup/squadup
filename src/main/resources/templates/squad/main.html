@@ -8,7 +8,12 @@
 <nav th:replace="partials :: siteBar"></nav>
 <br><br><br><br>
 <h1>Active Squads</h1>
-<div id="active-squads-div"></div>
+<div id="active-squads-div">
+    <ul th:each="userSquad : ${userSquads}">
+        <li th:text="${userSquad.name}"></li>
+<!--        <img th:src="${userSquad.squadPicture.url}">-->
+    </ul>
+</div>
 
 <h1>Create Squad</h1>
 <div id="create-squad-div">

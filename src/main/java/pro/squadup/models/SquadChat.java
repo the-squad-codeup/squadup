@@ -11,7 +11,7 @@ public class SquadChat {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(mappedBy = "chat")
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "chat")
     private Squad squad;
 
     @OneToMany(mappedBy = "chat")

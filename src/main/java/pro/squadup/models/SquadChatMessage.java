@@ -1,7 +1,10 @@
 package pro.squadup.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Set;
 
 @Entity
 @Table(name = "squad_chat_messages")
@@ -34,6 +37,9 @@ public class SquadChatMessage {
     @ManyToOne
     @JoinColumn(name = "chat_id")
     private SquadChat chat;
+
+    @OneToMany(mappedBy = "squadChatMessage")
+    private Set<LastSeenMessage> lastSeenMessages;
 
     public SquadChatMessage() {
 
@@ -99,5 +105,14 @@ public class SquadChatMessage {
 
     public void setChat(SquadChat chat) {
         this.chat = chat;
+    }
+
+    @JsonIgnore
+    public Set<LastSeenMessage> getLastSeenMessages() {
+        return lastSeenMessages;
+    }
+
+    public void setLastSeenMessages(Set<LastSeenMessage> lastSeenMessages) {
+        this.lastSeenMessages = lastSeenMessages;
     }
 }

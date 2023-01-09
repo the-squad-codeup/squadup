@@ -51,6 +51,9 @@ public class User {
     @OneToMany(mappedBy = "sender")
     private Set<SquadChatMessage> messages;
 
+    @OneToMany(mappedBy = "user")
+    private Set<LastSeenMessage> lastSeenMessages;
+
     public Long getId() {
         return id;
     }
@@ -160,6 +163,14 @@ public class User {
 
     public void setMessages(Set<SquadChatMessage> messages) {
         this.messages = messages;
+    }
+
+    public Set<LastSeenMessage> getLastSeenMessages() {
+        return lastSeenMessages;
+    }
+
+    public void setLastSeenMessages(Set<LastSeenMessage> lastSeenMessages) {
+        this.lastSeenMessages = lastSeenMessages;
     }
 
     public User() {

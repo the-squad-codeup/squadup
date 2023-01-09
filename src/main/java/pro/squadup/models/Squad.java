@@ -1,5 +1,7 @@
 package pro.squadup.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -14,7 +16,8 @@ public class Squad {
     @Column(nullable = false)
     private String name;
 
-    @OneToOne(mappedBy = "squad")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "squad_picture_id")
     private SquadPicture squadPicture;
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -32,6 +35,9 @@ public class Squad {
             inverseJoinColumns = {@JoinColumn(name = "member_id")}
     )
     private Set<User> members;
+
+    @OneToMany(mappedBy = "squad")
+    private Set<LastSeenMessage> lastSeenMessages;
 
     public Squad() {
 
@@ -87,5 +93,14 @@ public class Squad {
 
     public void setMembers(Set<User> members) {
         this.members = members;
+    }
+
+    @JsonIgnore
+    public Set<LastSeenMessage> getLastSeenMessages() {
+        return lastSeenMessages;
+    }
+
+    public void setLastSeenMessages(Set<LastSeenMessage> lastSeenMessages) {
+        this.lastSeenMessages = lastSeenMessages;
     }
 }

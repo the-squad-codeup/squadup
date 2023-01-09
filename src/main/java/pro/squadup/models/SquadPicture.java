@@ -36,8 +36,7 @@ public class SquadPicture {
     @Column(nullable = false)
     private String url;
 
-    @OneToOne
-    @JoinColumn(name = "squad_id")
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "squadPicture")
     private Squad squad;
 
     public SquadPicture() {
