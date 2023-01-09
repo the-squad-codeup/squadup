@@ -192,7 +192,8 @@ $(function () {
                 .on("click", ".remove-game-button", async function() {
                     console.log("Remove Game Button clicked");
                     await Fetch.Post.removeGame($(this).parent().parent().attr("data-game-id"));
-                    await Print.myGames();
+                    // await Print.myGames();
+                    $(this).parent().parent().remove();
                 })
                 .on("click", ".favorite-game-button", async function() {
                     console.log("Favorite Game Button clicked");
@@ -235,7 +236,7 @@ async function getUserGames() {
         // `)
         $('.track').append(`
 <!--                <div class="card-container">-->
-                    <div class="card" style="background-image: url(${game.artwork});">
+                    <div class="card" data-game-id="${game.id}" style="background-image: url(${game.artwork});">
                         <div class="buttons-div d-flex justify-content-between">
                             <button class="favorite-game-button btn btn-outline-success btn-sm">Favorite</button>
                             <button class="remove-game-button btn btn-outline-danger btn-sm">Remove</button>
