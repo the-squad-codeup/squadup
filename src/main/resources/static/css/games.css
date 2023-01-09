@@ -5,9 +5,13 @@
 .game-card {
     height: 352px;
     width: 264px;
-    border-radius: 2em;
+    /*border-radius: 2em;*/
     overflow: hidden;
+    border: solid #5CFD42 0.3vw;
 }
+ h4 {
+     color: #5CFD42;
+ }
 
 .games-container{
     /*height: 46vw;*/
@@ -15,6 +19,26 @@
     border: solid #5CFD42 .5vw;
     margin: auto;
 }
+
+#favorite-icon{
+    width: 10vw;
+    height: 10vw;
+    position: absolute;
+    margin-top: -2.3vw;
+    margin-left: 10.8vw;
+    transform: rotate(45deg);
+}
+
+/*.my-favorite-game{*/
+/*    height: 24vw;*/
+/*    width: 18vw;*/
+/*    background-size: cover;*/
+/*    background-position: center;*/
+/*    !*margin-top: 20.5vw;*!*/
+/*    !*margin-left: 4vw;*!*/
+/*    !*position: absolute;*!*/
+/*    border: solid #5CFD42 0.3vw;*/
+/*}*/
 
 .all-games-img {
 }

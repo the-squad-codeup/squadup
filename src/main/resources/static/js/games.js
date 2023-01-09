@@ -31,9 +31,12 @@ $(function () {
             if(favoriteGame.id != null) {
                 MyGames.myFavoriteGameDiv.empty().append(`
                     <div class="div-card col-3" data-game-id="${favoriteGame.id}">
-                        <div class="card game-card border-0">
+                        <div class="card game-card">
                             <img src="${favoriteGame.artwork}" class="card-img all-games-img">
+                            <img src="/Icons/favorite.png" alt="" id="favorite-icon">
+                        
                         </div>
+                        
                     </div>
                 `);
             }
@@ -51,7 +54,7 @@ $(function () {
             let game = await data;
             div.prepend(`
                 <div class="div-card col-3" data-game-id="${game.id}">
-                    <div class="card game-card border-0">
+                    <div class="card game-card">
                         <img src="${game.artwork}" class="card-img all-games-img">
                     </div>
                     <div class="buttons-div d-flex justify-content-between">
