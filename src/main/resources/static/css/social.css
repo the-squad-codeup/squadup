@@ -132,10 +132,10 @@ p.card-text, h4{
 }
 
 #accept, #reject, #remove  {
-    margin: 2%;
-    border: var(--bs-gamergreen) ridge 5px;
-    border-radius: 8px;
-    background-color: dimgray;
+    /*margin: 2%;*/
+    /*border: var(--bs-gamergreen) ridge 5px;*/
+    /*border-radius: 8px;*/
+    /*background-color: dimgray;*/
 }
 
 img.card-img-top {
@@ -156,13 +156,13 @@ img.card-img-top {
     column-gap: 20px;
 }
 
-#accept:hover{
-    color: #03ff00;
-}
+/*#accept:hover{*/
+/*    color: #03ff00;*/
+/*}*/
 
-#remove:hover, #reject:hover{
-    color: #FF0000;
-}
+/*#remove:hover, #reject:hover{*/
+/*    color: #FF0000;*/
+/*}*/
 
         /*   STYLING FOR MOBILE VIEWS   */
 
