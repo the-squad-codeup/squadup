@@ -10,7 +10,18 @@
 <nav th:replace="partials :: siteBar"></nav>
 <br><br><br><br>
 <h1 th:text="${squad.name}"></h1>
-<div th:data-chat-id="${squad.chat.id}">Chat ID is <span th:text="${squad.chat.id}"></span></div>
+<br>
+<h3>Invite Users:</h3>
+<div id="invite-users-div"></div>
+
+<h3>Current Users:</h3>
+<div id="squad-users-div"></div>
+
+<h3>Chat</h3>
+<div id="chat-messages-div"></div>
+<input id="chat-text-input" type="text" autocomplete="off">
+<button id="chat-send-button">Send Message</button>
+
 
 
 
