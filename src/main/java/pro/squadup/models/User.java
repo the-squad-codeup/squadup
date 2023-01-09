@@ -42,6 +42,12 @@ public class User {
     @OneToMany(mappedBy = "userTwo")
     private Set<Comrade> comradesOfUser;
 
+    @OneToMany(mappedBy = "owner")
+    private Set<Squad> squadsOwned;
+
+    @ManyToMany(mappedBy = "members")
+    private Set<Squad> squads;
+
     public Long getId() {
         return id;
     }
@@ -125,6 +131,24 @@ public class User {
 
     public void setComradesOfUser(Set<Comrade> comradesOfUser) {
         this.comradesOfUser = comradesOfUser;
+    }
+
+    @JsonIgnore
+    public Set<Squad> getSquadsOwned() {
+        return squadsOwned;
+    }
+
+    public void setSquadsOwned(Set<Squad> squadsOwned) {
+        this.squadsOwned = squadsOwned;
+    }
+
+    @JsonIgnore
+    public Set<Squad> getSquads() {
+        return squads;
+    }
+
+    public void setSquads(Set<Squad> squads) {
+        this.squads = squads;
     }
 
     public User() {
