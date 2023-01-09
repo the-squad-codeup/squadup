@@ -18,18 +18,23 @@ $(function() {
 
     const Print = {
         async inviteOptions() {
-            console.log("inside print inviteOptions");
-            let squadMembers = await Fetch.Get.squadMembers();
-            let squadInvites = await Fetch.Get.currentInvitees();
+            let squadMemberIds = (await Fetch.Get.squadMembers()).map(member => member.id);
+            let squadInviteIds = (await Fetch.Get.currentInvitees()).map(invitee => invitee.id);
             let usersToInvite = await Fetch.Get.possibleInvitees();
-            console.log("usersToInvite:");
-            console.log(usersToInvite);
             for(let user of usersToInvite) {
-                if(!squadMembers.includes(user) || !squadInvites.includes(user)) {
+                if(!(squadMemberIds.includes(user.id) || squadInviteIds.includes(user.id))) {
                     $("#invite-users-select").append(`
                         <option data-user-id="${user.id}">${user.username}</option>
                     `);
                 }
+            }
+        },
+        async currentSquadMembers() {
+            let squadMembers = await Fetch.Get.squadMembers();
+            for(let member of squadMembers) {
+                $("#squad-users-div").append(`
+                    <h2>${member.username}</h2>
+                `);
             }
         },
         removeUserFromInviteList(user) {
@@ -64,7 +69,10 @@ $(function() {
 
     const Events = {
         initialize() {
-            $(window).ready(Print.inviteOptions);
+            $(window).ready(function() {
+                Print.inviteOptions();
+                Print.currentSquadMembers();
+            });
             $(document)
                 .on("click", "#invite-users-button", SquadChat.inviteUser)
             ;
