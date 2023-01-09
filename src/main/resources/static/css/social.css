@@ -1,5 +1,6 @@
 /* STYLESHEET FOR BOTH RECRUITS AND COMRADES */
 
+
 /* STYLING FOR CONTENTS OF ARROWS AND RECTANGLE (RECRUITS/COMRADES) */
 .arrows-rectangle{
     padding: 3em;
@@ -23,7 +24,7 @@
     width: 50%;
 
     background: #8F8F8F;
-    border: 8px solid #5CFD42;
+    border: 8px solid #05FF00;
     backdrop-filter: blur(2px);
 }
 
@@ -49,7 +50,7 @@
 /* STYLES FOR CARDS AND CARDS CONTENTS: */
 
 .LeftGradientDiv{
-    background: linear-gradient(90deg, #333333 0%, #000000 100%);
+    background-image: linear-gradient(90deg, black, transparent);
     width: 350px;
     height: 450px;
     position: absolute;
@@ -58,7 +59,7 @@
 }
 
 .RightGradientDiv {
-    background: linear-gradient(90deg, #000000 100%, #333333 0%);
+    background-image: linear-gradient(-90deg, black, transparent);
     width: 350px;
     height: 450px;
     position: absolute;
@@ -67,12 +68,12 @@
     opacity: 0.8;
 }
 
-
 .card-slider-mask {
     margin: 0 20px;
     max-width: calc(100% - 40px);
     overflow:hidden;
 }
+
 #card {
     display:flex;
     flex-wrap: nowrap;
