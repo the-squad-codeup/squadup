@@ -7,9 +7,16 @@ import java.sql.Timestamp;
 @Table(name = "squad_chat_messages")
 public class SquadChatMessage {
 
+    public enum MessageType {
+        CHAT, JOIN, LEAVE
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Enumerated(EnumType.ORDINAL)
+    private MessageType messageType;
 
     @Column
     private String content;
@@ -44,6 +51,14 @@ public class SquadChatMessage {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public MessageType getMessageType() {
+        return messageType;
+    }
+
+    public void setMessageType(MessageType messageType) {
+        this.messageType = messageType;
     }
 
     public String getContent() {
