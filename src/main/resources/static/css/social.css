@@ -49,7 +49,6 @@
 /* STYLES FOR CARDS AND CARDS CONTENTS: */
 
 .LeftGradientDiv{
-    /*make this div be gradient from right to left over the card*/
     background: linear-gradient(90deg, #333333 0%, #000000 100%);
     width: 350px;
     height: 450px;
@@ -59,7 +58,6 @@
 }
 
 .RightGradientDiv {
-    /*/make this div be gradient from right to left over the card/*/
     background: linear-gradient(90deg, #000000 100%, #333333 0%);
     width: 350px;
     height: 450px;
@@ -130,7 +128,6 @@ p.card-text, h4{
 }
 
 #accept, #reject, #remove  {
-    /*TAKEN FROM FROMS.CSS MAKE IT SIMPLE ONCE CLEAN============*/
     margin: 2%;
     border: var(--bs-gamergreen) ridge 5px;
     border-radius: 8px;
