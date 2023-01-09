@@ -14,6 +14,9 @@ public class Squad {
     @Column(nullable = false)
     private String name;
 
+    @OneToOne(mappedBy = "squad")
+    private SquadPicture squadPicture;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "squad_chat_id")
     private SquadChat chat;
@@ -52,6 +55,14 @@ public class Squad {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public SquadPicture getSquadPicture() {
+        return squadPicture;
+    }
+
+    public void setSquadPicture(SquadPicture squadPicture) {
+        this.squadPicture = squadPicture;
     }
 
     public SquadChat getChat() {
