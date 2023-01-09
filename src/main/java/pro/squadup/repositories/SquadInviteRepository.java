@@ -12,4 +12,5 @@ import java.util.Set;
 public interface SquadInviteRepository extends JpaRepository<SquadInvite, Long> {
     Set<SquadInvite> findAllBySender(User sender);
     Set<SquadInvite> findAllByRecipient(User recipient);
+    Set<SquadInvite> findAllBySquad(Squad squad);
 }

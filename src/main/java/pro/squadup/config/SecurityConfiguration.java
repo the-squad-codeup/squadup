@@ -42,6 +42,7 @@ public class SecurityConfiguration {
                         "/squad/*",
                         "/squads",
                         "/squads/*",
+                        "/squads/*/*",
                         "/invites",
                         "/invites/*",
                         "/invites/*/*"

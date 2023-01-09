@@ -4,14 +4,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import pro.squadup.models.*;
-import pro.squadup.repositories.SquadChatRepository;
-import pro.squadup.repositories.SquadPictureRepository;
-import pro.squadup.repositories.SquadRepository;
-import pro.squadup.repositories.UserRepository;
+import pro.squadup.repositories.*;
 import pro.squadup.utils.Utils;
 
 import java.util.HashSet;
@@ -24,12 +19,14 @@ public class SquadController {
     private final SquadRepository squadDao;
     private final SquadPictureRepository squadPictureDao;
     private final SquadChatRepository squadChatDao;
+    private final SquadInviteRepository squadInviteDao;
 
-    public SquadController(UserRepository userDao, SquadRepository squadDao, SquadPictureRepository squadPictureDao, SquadChatRepository squadChatDao) {
+    public SquadController(UserRepository userDao, SquadRepository squadDao, SquadPictureRepository squadPictureDao, SquadChatRepository squadChatDao, SquadInviteRepository squadInviteDao) {
         this.userDao = userDao;
         this.squadDao = squadDao;
         this.squadPictureDao = squadPictureDao;
         this.squadChatDao = squadChatDao;
+        this.squadInviteDao = squadInviteDao;
     }
 
     @GetMapping("/squads")
@@ -79,5 +76,34 @@ public class SquadController {
 
         System.out.printf("Squad created: %n%s%n", mapper.writeValueAsString(squad));
         return "squad/chat";
+    }
+
+    @GetMapping("/squads/{squadId}/chat")
+    public String showSquadPage(Model model, @PathVariable Long squadId) {
+        Squad squad = squadDao.findById(squadId).get();
+        model.addAttribute("squad", squad);
+        return "squad/chat";
+    }
+
+    @GetMapping("/squads/{squadId}/members")
+    public @ResponseBody Set<User> getSquadMembers(@PathVariable Long squadId) {
+        Squad squad = squadDao.findById(squadId).get();
+        return squad.getMembers();
+    }
+
+    @PostMapping("/squads/{squadId}/invite/{userId}")
+    public @ResponseBody User inviteUser(@PathVariable Long squadId, @PathVariable Long userId) {
+        Squad squad = squadDao.findById(squadId).get();
+        User currentUser = userDao.findById(Utils.currentUserId()).get();
+        User invitee = userDao.findById(userId).get();
+        SquadInvite invite = new SquadInvite();
+
+        invite.setSquad(squad);
+        invite.setSender(currentUser);
+        invite.setRecipient(invitee);
+
+        squadInviteDao.save(invite);
+
+        return invitee;
     }
 }

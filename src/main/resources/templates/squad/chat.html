@@ -9,7 +9,7 @@
 <body>
 <nav th:replace="partials :: siteBar"></nav>
 <br><br><br><br>
-<h1 th:text="${squad.name}"></h1>
+<h1 id="squad-title" th:data-squad-id="${squad.id}" th:text="${squad.name}"></h1>
 <br>
 <h3>Invite Users:</h3>
 <div id="invite-users-div">

@@ -10,7 +10,9 @@
 <h1>Active Squads</h1>
 <div id="active-squads-div">
     <ul th:each="userSquad : ${userSquads}">
-        <li th:text="${userSquad.name}"></li>
+        <li class="squad-list-item" th:data-squad-id="${userSquad.id}">
+            <a th:href="@{|/squads/${userSquad.id}/chat|}" th:text="${userSquad.name}"></a>
+        </li>
 <!--        <img th:src="${userSquad.squadPicture.url}">-->
     </ul>
 </div>

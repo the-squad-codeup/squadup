@@ -39,6 +39,9 @@ public class Squad {
     @OneToMany(mappedBy = "squad")
     private Set<LastSeenMessage> lastSeenMessages;
 
+    @OneToMany(mappedBy = "squad")
+    private Set<SquadInvite> invites;
+
     public Squad() {
 
     }
@@ -102,5 +105,13 @@ public class Squad {
 
     public void setLastSeenMessages(Set<LastSeenMessage> lastSeenMessages) {
         this.lastSeenMessages = lastSeenMessages;
+    }
+
+    public Set<SquadInvite> getInvites() {
+        return invites;
+    }
+
+    public void setInvites(Set<SquadInvite> invites) {
+        this.invites = invites;
     }
 }

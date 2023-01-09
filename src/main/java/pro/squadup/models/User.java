@@ -54,6 +54,12 @@ public class User {
     @OneToMany(mappedBy = "user")
     private Set<LastSeenMessage> lastSeenMessages;
 
+    @OneToMany(mappedBy = "sender")
+    private Set<SquadInvite> squadInvitesSent;
+
+    @OneToMany(mappedBy = "recipient")
+    private Set<SquadInvite> squadInvitesReceived;
+
     public Long getId() {
         return id;
     }
@@ -171,6 +177,24 @@ public class User {
 
     public void setLastSeenMessages(Set<LastSeenMessage> lastSeenMessages) {
         this.lastSeenMessages = lastSeenMessages;
+    }
+
+    @JsonIgnore
+    public Set<SquadInvite> getSquadInvitesSent() {
+        return squadInvitesSent;
+    }
+
+    public void setSquadInvitesSent(Set<SquadInvite> squadInvitesSent) {
+        this.squadInvitesSent = squadInvitesSent;
+    }
+
+    @JsonIgnore
+    public Set<SquadInvite> getSquadInvitesReceived() {
+        return squadInvitesReceived;
+    }
+
+    public void setSquadInvitesReceived(Set<SquadInvite> squadInvitesReceived) {
+        this.squadInvitesReceived = squadInvitesReceived;
     }
 
     public User() {
