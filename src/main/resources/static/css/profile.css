@@ -21,9 +21,10 @@
 
 }
 #upload-profile-picture{
-    background-color:chartreuse;
+
+    background-image: url('public/Icons/edit.png');
     width: 2vw;
-    height:1vw;
+    height:2vw;
     position: absolute;
     margin-top: 10vw;
     margin-left: 5vw;

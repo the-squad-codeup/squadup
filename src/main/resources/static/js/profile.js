@@ -117,6 +117,11 @@ $(function (){
     }
     getUserInfo()
 
+    $(window).ready(function() {
+        $("#upload-profile-picture").css("background-image", `url('${Utils.url()}edit-icon')`)
+
+    })
+
 })
 
 
