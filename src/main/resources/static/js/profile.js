@@ -26,6 +26,7 @@ $(function (){
         console.log(favoriteGame)
             $('#page-wrapper').append(`
                 <div class="favorite-game" style="background-image: url(${favoriteGame.artwork});">
+                    <img src="/Icons/favorite.png" alt="" id="favorite-icon">
                 </div>
             `)
     }
@@ -116,11 +117,6 @@ $(function (){
         console.log(userInfo)
     }
     getUserInfo()
-
-    $(window).ready(function() {
-        $("#upload-profile-picture").css("background-image", `url('${Utils.url()}edit-icon')`)
-
-    })
 
 })
 

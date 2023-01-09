@@ -20,15 +20,7 @@
     position: absolute;
 
 }
-#upload-profile-picture{
 
-    background-image: url('public/Icons/edit.png');
-    width: 2vw;
-    height:2vw;
-    position: absolute;
-    margin-top: 10vw;
-    margin-left: 5vw;
-}
 
 .info-container{
     border: solid #5CFD42 .3vw;
@@ -126,11 +118,8 @@
 .language{
     padding: 0vw 3vw;
 }
-/*.game-rating{}*/
-.mature-language{}
 .my-games{
-    /*color: white;*/
-    /*border: 0.3vw solid #5cfd42;*/
+
     height: 15vw;
     width: 70vw;
     margin-top: 29vw;
@@ -138,7 +127,6 @@
     position: absolute;
 
     display: flex;
-    /*overflow: auto;*/
 }
 .game{
     border: 0.3vw solid #5cfd42;
@@ -149,18 +137,31 @@
     width: 16.67vw;
 }
 
+/* Icons */
+#upload-profile-picture{
+    width: 3.5vw;
+    height: 3.5vw;
+    position: absolute;
+    margin-top: 14vw;
+    margin-left: 15.5vw;
+}
+#favorite-icon{
+    width: 10vw;
+    height: 10vw;
+    position: absolute;
+    margin-top: -2.3vw;
+    margin-left: 9.8vw;
+    transform: rotate(45deg);
+}
+#location-icon{
+    width: 3vw;
+    margin-top: -0.25vw;
+    margin-right: 69vw;
+    height: 3vw;
+    position: absolute;
+}
 
-
-
-
-
-
-
-
-
-
-
-/*<!--        Stroke inducing carousel -->*/
+/* Stroke inducing carousel */
 .inner-carousel {
     overflow: hidden;
 }
@@ -189,17 +190,36 @@
     border-radius: 50%;
     outline: none;
     border: 1px solid #000;
+    background-color: #000;
     cursor: pointer;
 }
 .nav .prev {
     left: -1vw;
     display: none;
 }
+.nav .prev img{
+    height: 4vw;
+    width: 4vw;
+    position: absolute;
+    margin-left: -2vw;
+    margin-top: -2vw;
+    max-width: none;
+    transform: rotate(180deg);
+}
 .nav .prev.show {
     display: block;
 }
 .nav .next {
     right: -0.443vw;
+    /*background-image: url('/public/Icons/next.png');*/
+}
+.nav .next img{
+    height: 4vw;
+    width: 4vw;
+    position: absolute;
+    margin-left: -2vw;
+    margin-top: -2vw;
+    max-width: none;
 }
 .nav .next.hide {
     display: none;
