@@ -20,11 +20,12 @@ $(function() {
         async inviteOptions() {
             console.log("inside print inviteOptions");
             let squadMembers = await Fetch.Get.squadMembers();
+            let squadInvites = await Fetch.Get.currentInvitees();
             let usersToInvite = await Fetch.Get.possibleInvitees();
             console.log("usersToInvite:");
             console.log(usersToInvite);
             for(let user of usersToInvite) {
-                if(!squadMembers.includes(user)) {
+                if(!squadMembers.includes(user) || !squadInvites.includes(user)) {
                     $("#invite-users-select").append(`
                         <option data-user-id="${user.id}">${user.username}</option>
                     `);
@@ -32,8 +33,7 @@ $(function() {
             }
         },
         removeUserFromInviteList(user) {
-            console.log("Inside removeUserFromInviteList. User to be removed:");
-            console.log(user);
+            $("#invite-users-select").children(`[data-user-id="${user.id}"]`).remove();
         }
     };
 
@@ -44,6 +44,9 @@ $(function() {
             },
             async possibleInvitees() {
                 return await fetch(`${Utils.url()}invites/${SquadChat.squadId}/possible`).then(res => res.json());
+            },
+            async currentInvitees() {
+                return await fetch(`${Utils.url()}invites/${SquadChat.squadId}/current`).then(res => res.json());
             }
         },
         Post: {

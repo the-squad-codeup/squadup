@@ -51,7 +51,6 @@ public class SquadInvite {
         this.recipient = recipient;
     }
 
-    @JsonIgnore
     public Squad getSquad() {
         return squad;
     }

@@ -3,18 +3,14 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <div th:replace="partials :: headFragment('Squads')"></div>
+    <link rel="stylesheet" th:href="@{/css/squad-main.css}">
 </head>
 <body>
 <nav th:replace="partials :: siteBar"></nav>
 <br><br><br><br>
 <h1>Active Squads</h1>
 <div id="active-squads-div">
-    <ul th:each="userSquad : ${userSquads}">
-        <li class="squad-list-item" th:data-squad-id="${userSquad.id}">
-            <a th:href="@{|/squads/${userSquad.id}/chat|}" th:text="${userSquad.name}"></a>
-        </li>
-<!--        <img th:src="${userSquad.squadPicture.url}">-->
-    </ul>
+
 </div>
 
 <h1>Create Squad</h1>

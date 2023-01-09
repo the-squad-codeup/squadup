@@ -10,13 +10,16 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import pro.squadup.models.ProfilePicture;
+import pro.squadup.models.Squad;
 import pro.squadup.models.User;
 import pro.squadup.repositories.ProfilePictureRepository;
+import pro.squadup.repositories.SquadRepository;
 import pro.squadup.repositories.UserRepository;
 import pro.squadup.utils.Utils;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import java.util.Set;
 
 @Controller
 public class UserController {
@@ -25,12 +28,14 @@ public class UserController {
     private final UserRepository userDao;
     private final PasswordEncoder passwordEncoder;
     private final ProfilePictureRepository profilePictureDao;
+    private final SquadRepository squadDao;
 
     // Constructor
-    public UserController(UserRepository userDao, PasswordEncoder passwordEncoder, ProfilePictureRepository profilePictureDao) {
+    public UserController(UserRepository userDao, PasswordEncoder passwordEncoder, ProfilePictureRepository profilePictureDao, SquadRepository squadDao) {
         this.userDao = userDao;
         this.passwordEncoder = passwordEncoder;
         this.profilePictureDao = profilePictureDao;
+        this.squadDao = squadDao;
     }
 
     // Shows form to sign up as a user
@@ -74,6 +79,12 @@ public class UserController {
         ObjectMapper mapper = new ObjectMapper();
         mapper.writeValueAsString(currentUser);
         return currentUser;
+    }
+
+    @GetMapping("/user/squads")
+    public @ResponseBody Set<Squad> getAllSquads() {
+        User currentUser = userDao.findById(Utils.currentUserId()).get();
+        return squadDao.findAllByMembers(currentUser);
     }
 
     private void authWithHttpServletRequest(HttpServletRequest request, String username, String password) {

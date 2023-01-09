@@ -1,5 +1,7 @@
 package pro.squadup.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -29,6 +31,7 @@ public class SquadChat {
         this.id = id;
     }
 
+    @JsonIgnore
     public Squad getSquad() {
         return squad;
     }

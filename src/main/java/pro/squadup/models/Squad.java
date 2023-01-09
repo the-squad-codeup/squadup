@@ -107,6 +107,7 @@ public class Squad {
         this.lastSeenMessages = lastSeenMessages;
     }
 
+    @JsonIgnore
     public Set<SquadInvite> getInvites() {
         return invites;
     }
