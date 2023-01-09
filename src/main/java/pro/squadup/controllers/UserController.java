@@ -61,8 +61,8 @@ public class UserController {
                     "https://cdn.filestackcontent.com/dynXYf9AS26ImuqTgUPj"
                 )
         ;
-        profilePictureDao.save(defaultProfilePicture);
         user.setProfilePicture(defaultProfilePicture);
+        profilePictureDao.save(defaultProfilePicture);
         userDao.save(user);
         authWithHttpServletRequest(httpServletRequest, user.getUsername(), plainPassword);
         return "redirect:/profile/preferences";

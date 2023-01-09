@@ -12,7 +12,7 @@
 
 <h1>Create Squad</h1>
 <div id="create-squad-div">
-    <form method="POST" th:action="@{/squad/create}" th:object="${squad}">
+    <form method="POST" th:action="@{/squads/create}" th:object="${squad}">
         <input id="create-squad-name" type="text" th:field="*{name}" placeholder="Squad Name" autocomplete="off">
         <button type="submit">Create</button>
     </form>
