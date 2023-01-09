@@ -10,20 +10,40 @@
 <nav th:replace="partials :: siteBar"></nav>
 <div id="page-wrapper">
 
-    <h1>My Favorite Game</h1>
+    <div class="games-container"> <!-- fav game and saved games area -->
 
-    <div id="my-favorite-game"></div>
+        <h4 class="m-3">Favorite Game</h4>
+        <div id="my-favorite-game" class="p-3"></div>
 
-    <h1>My Games</h1>
 
-    <div id="my-games" class="row container"></div>
+<!--        <h4 class="m-3">My Games</h4>-->
+<!--        <div id="my-games" class="row container p-5"></div>-->
 
-    <h1>Add Games</h1>
 
-    <input id="game-search-input" type="text">
-    <button id="game-search-button">Search</button>
-    <div id="games-div" class="row container">
+        <div class="my-games">
 
+            <div class="inner-carousel">
+                <div class="track">
+                    <!--                    games populate here-->
+                </div>
+                <div class="nav">
+                    <button class="prev"><img th:src="@{/Icons/next.png}"></button>
+                    <button class="next"><img th:src="@{/Icons/next.png}"></button>
+                </div>
+            </div>
+        </div>
+    </div> <!-- end of fav game and saved games area -->
+
+
+    <div class="container bg-dark rounded-3 p-5"><!--dark gray bubble area -->
+        <h1>Add Games</h1>
+
+        <input id="game-search-input" type="text">
+        <button id="game-search-button">Search</button>
+    </div><!--end of dark gray bubble area -->
+
+    <div id="games-div" class="row container p-5">
+        <!--this is where the search results populate -->
     </div>
 
 </div>
