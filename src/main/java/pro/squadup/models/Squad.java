@@ -14,6 +14,10 @@ public class Squad {
     @Column(nullable = false)
     private String name;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "squad_chat_id")
+    private SquadChat chat;
+
     @ManyToOne
     @JoinColumn(name = "owner_id")
     private User owner;
@@ -48,6 +52,14 @@ public class Squad {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public SquadChat getChat() {
+        return chat;
+    }
+
+    public void setChat(SquadChat chat) {
+        this.chat = chat;
     }
 
     public User getOwner() {
