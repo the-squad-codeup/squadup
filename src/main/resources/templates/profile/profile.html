@@ -10,9 +10,10 @@
 <nav th:replace="partials :: siteBar"></nav>
 <div id="page-wrapper">
     <div class="profile-container">
-        <div class="profile-image" ></div>
-        <div id="upload-profile-picture"></div>
+        <div class="profile-image"></div>
+             <img id="upload-profile-picture" th:src="@{/Icons/edit.png}" alt="">
         <div class="preferences">
+            <img id="location-icon" th:src="@{/Icons/location.png}" alt="">
 <!--            Location -->
 <!--            Languages -->
 <!--            Game Rating -->
@@ -26,11 +27,11 @@
         <div class="my-games">
             <div class="inner-carousel">
                 <div class="track">
-                    <!--                    stuff goes here-->
+                    <!--                    games populate here-->
                 </div>
                 <div class="nav">
-                    <button class="prev"><i class="fas fa-arrow-left fa-2x"></i></button>
-                    <button class="next"><i class="fas fa-arrow-right fa-2x"></i></button>
+                    <button class="prev"><img th:src="@{/Icons/next.png}"></button>
+                    <button class="next"><img th:src="@{/Icons/next.png}"></button>
                 </div>
             </div>
         </div>

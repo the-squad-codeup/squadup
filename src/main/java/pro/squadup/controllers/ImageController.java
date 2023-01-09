@@ -16,8 +16,17 @@ public class ImageController {
             value = "/background-image",
             produces = MediaType.IMAGE_JPEG_VALUE
     )
-    public @ResponseBody byte[] getImageWithMediaType() throws IOException {
+    public @ResponseBody byte[] getBackgroundImageWithMediaType() throws IOException {
         InputStream in = getClass().getResourceAsStream("/images/gitsquares6.png");
+        return IOUtils.toByteArray(in);
+    }
+
+    @GetMapping(
+            value = "/edit-icon",
+            produces = MediaType.IMAGE_JPEG_VALUE
+    )
+    public @ResponseBody byte[] getEditIconImageWithMediaType() throws IOException {
+        InputStream in = getClass().getResourceAsStream("/public/Icons/edit.png");
         return IOUtils.toByteArray(in);
     }
 }

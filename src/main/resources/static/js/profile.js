@@ -26,6 +26,7 @@ $(function (){
         console.log(favoriteGame)
             $('#page-wrapper').append(`
                 <div class="favorite-game" style="background-image: url(${favoriteGame.artwork});">
+                    <img src="/Icons/favorite.png" alt="" id="favorite-icon">
                 </div>
             `)
     }
