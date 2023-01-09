@@ -48,6 +48,9 @@ public class User {
     @ManyToMany(mappedBy = "members")
     private Set<Squad> squads;
 
+    @OneToMany(mappedBy = "sender")
+    private Set<SquadChatMessage> messages;
+
     public Long getId() {
         return id;
     }
@@ -149,6 +152,14 @@ public class User {
 
     public void setSquads(Set<Squad> squads) {
         this.squads = squads;
+    }
+
+    public Set<SquadChatMessage> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(Set<SquadChatMessage> messages) {
+        this.messages = messages;
     }
 
     public User() {
