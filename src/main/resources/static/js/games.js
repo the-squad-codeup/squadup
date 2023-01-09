@@ -34,34 +34,35 @@ $(function () {
                         <div class="card game-card">
                             <img src="${favoriteGame.artwork}" class="card-img all-games-img">
                             <img src="/Icons/favorite.png" alt="" id="favorite-icon">
-                        
-                        </div>
-                        
+                        </div>  
                     </div>
                 `);
             }
         },
-        async myGames() {
-            let userGames = await Fetch.Get.myGames().then(res => res);
-            console.log("Inside Print.myGames(). userGames: ");
-            console.log(userGames);
-            MyGames.myGamesDiv.empty();
-            for(let game of userGames) {
-                this.singleMyGame(game, MyGames.myGamesDiv);
-            }
-        },
+        // async myGames() {
+        //     let userGames = await Fetch.Get.myGames().then(res => res);
+        //     console.log("Inside Print.myGames(). userGames: ");
+        //     console.log(userGames);
+        //     MyGames.myGamesDiv.empty();
+        //     for(let game of userGames) {
+        //         this.singleMyGame(game, MyGames.myGamesDiv);
+        //     }
+        // },
+
+
+
         async singleMyGame(data, div) {
             let game = await data;
             div.prepend(`
-                <div class="div-card col-3" data-game-id="${game.id}">
-                    <div class="card game-card">
-                        <img src="${game.artwork}" class="card-img all-games-img">
+                    <div class="div-card col-3" data-game-id="${game.id}">
+                        <div class="card game-card">
+                            <img src="${game.artwork}" class="card-img all-games-img">
+                            <div class="buttons-div d-flex justify-content-between">
+                            <button class="favorite-game-button">Favorite</button>
+                            <button class="remove-game-button">Remove</button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="buttons-div d-flex justify-content-between">
-                        <button class="favorite-game-button">Favorite</button>
-                        <button class="remove-game-button">Remove</button>
-                    </div>
-                </div>
             `);
         },
         async gameResults(data) {
@@ -221,3 +222,56 @@ $(function () {
 //     },
 //     body: JSON.stringify(song)
 // }
+/*<!--        Stroke inducing carousel -->*/
+
+async function getUserGames() {
+    let userGames = await fetch(`${Utils.url()}game/user`).then(res => res.json());
+    console.log("Array of user's games")
+    console.log(userGames)
+    for(let game of userGames){
+        // $('.my-games').append(`
+        //     <div class="game" style="background-image: url(${game.artwork});">
+        //     </div>
+        // `)
+        $('.track').append(`
+<!--                <div class="card-container">-->
+                    <div class="card" style="background-image: url(${game.artwork});">
+                        <div class="buttons-div d-flex justify-content-between">
+                            <button class="favorite-game-button btn btn-outline-success btn-sm">Favorite</button>
+                            <button class="remove-game-button btn btn-outline-danger btn-sm">Remove</button>
+                        </div>
+                    </div>
+                    
+<!--                </div>-->
+             `)
+    }
+
+}
+getUserGames()
+
+const prev = document.querySelector(".prev");
+const next = document.querySelector(".next");
+const carousel = document.querySelector(".my-games");
+const track = document.querySelector(".track");
+let width = carousel.offsetWidth;
+let index = 0;
+window.addEventListener("resize", function () {
+    width = carousel.offsetWidth;
+});
+next.addEventListener("click", function (e) {
+    e.preventDefault();
+    index = index + 1;
+    prev.classList.add("show");
+    track.style.transform = "translateX(" + index * -70 + "vw)";
+    if (track.offsetWidth - index * width < index * width) {
+        next.classList.add("hide");
+    }
+});
+prev.addEventListener("click", function () {
+    index = index - 1;
+    next.classList.remove("hide");
+    if (index === 0) {
+        prev.classList.remove("show");
+    }
+    track.style.transform = "translateX(" + index * -70 + "vw)";
+});
