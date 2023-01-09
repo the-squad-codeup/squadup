@@ -27,7 +27,7 @@ public class User {
     @JoinColumn(name = "preferences_id")
     private Preferences preferences;
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToOne(mappedBy = "user")
     private ProfilePicture profilePicture;
 
     @OneToMany(mappedBy = "userOne")

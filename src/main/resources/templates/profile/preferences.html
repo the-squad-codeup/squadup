@@ -5,11 +5,10 @@
     <div th:replace="partials :: headFragment('Preferences Page')"></div>
     <link rel="stylesheet" th:href="@{/css/preferences.css}">
     <link rel="stylesheet" th:href="@{/css/select2.css}">
-    <script th:src="@{/js/pref-overlays.js}"></script>
     <script type="module" th:src="@{/js/preferences.js}"></script>
     <script th:src="@{/js/select2.full.min.js}"></script>
 </head>
-<body th:onload="hideOverlays()" >
+<body>
 <nav th:replace="partials :: siteBar"></nav>
 <div id="page-wrapper">
 
@@ -25,7 +24,7 @@
 <!--timezone dropdown-->
         <p>
             <span>Pick your time Zone</span>
-            <select class="location form-select form-select-sm mb-3" aria-label=".form-select-sm example" id="location" name="location" style="width: 100%" onchange="toggleOverlay()">
+            <select class="location form-select form-select-sm mb-3" aria-label=".form-select-sm example" id="location" name="location" style="width: 100%">
                 <option value=""></option>
                 <option value="Unspecified Time Zone">(UTC ??:??) Unspecified</option>
                 <option value="Hawaii-Aleutian Time Zone">(UTC-10:00) Hawaii-Aleutian Standard Time</option>

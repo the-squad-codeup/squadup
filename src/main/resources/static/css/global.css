@@ -1,6 +1,6 @@
 
 :root {
-    --bs-gamergreen: rgb(140, 250, 98);
+    --bs-gamergreen: rgba(92, 253, 66, 1);
     --bs-gamerpurp: rgb(63, 5, 79);
     --bs-lighterpurp: #800080FF;
 }
@@ -9,24 +9,39 @@
 .navbar{
     display: flex;
     align-items: center;
+    height: 60px;
 }
 
 .text-success {
     color: var(--bs-gamergreen) !important;
 }
 
-.navbar, a:hover {
+
+/*all buttons are affected see if i want all buttons like this*/
+.navbar, .nav-item:hover, .nav-link:hover{
     color: #5CFD42;
     border-top: var(--bs-gamergreen) solid 2px;
     border-bottom: var(--bs-gamergreen) solid 2px;
 }
 
-.navbar, #site-bar-logout-link:hover {
-    color: purple;
-    border-top: purple solid 4px;
-    border-bottom: purple solid 4px;
+.navbar, .foot-link:hover{
+    color: #5CFD42;
 }
 
+.navbar, #site-bar-logout-link:hover {
+    color: red;
+    border-top: purple solid 4px;
+    border-bottom: purple solid 4px;
+    background-color: purple;
+}
+
+#nav-but {
+
+    position: absolute;
+    top: 8px;
+    right: 16px;
+    font-size: 18px;
+}
 
 #footer{
     display: flex;
@@ -47,6 +62,7 @@
 }
 
 body {
+    cursor: crosshair;
     font-family: Chakra Petch, sans-serif;
     /*color: white; this can't be here because it will make the unordered list in the footer dots visible*/
 }
