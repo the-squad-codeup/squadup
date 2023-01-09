@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import pro.squadup.models.ProfilePicture;
 import pro.squadup.models.User;
+import pro.squadup.repositories.ProfilePictureRepository;
 import pro.squadup.repositories.UserRepository;
 import pro.squadup.utils.Utils;
 
@@ -23,11 +24,13 @@ public class UserController {
     // Repositories and Services
     private final UserRepository userDao;
     private final PasswordEncoder passwordEncoder;
+    private final ProfilePictureRepository profilePictureDao;
 
     // Constructor
-    public UserController(UserRepository userDao, PasswordEncoder passwordEncoder) {
+    public UserController(UserRepository userDao, PasswordEncoder passwordEncoder, ProfilePictureRepository profilePictureDao) {
         this.userDao = userDao;
         this.passwordEncoder = passwordEncoder;
+        this.profilePictureDao = profilePictureDao;
     }
 
     // Shows form to sign up as a user
@@ -46,16 +49,20 @@ public class UserController {
         String hash = passwordEncoder.encode(user.getPassword());
         // Setting user password to the hash and saving user to table
         user.setPassword(hash);
-        user.setProfilePicture(new ProfilePicture(
-                "default.png",
-                "dynXYf9AS26ImuqTgUPj",
-                "image/png",
-                47871,
-                "local_file_system",
-                "Stored",
-                "4IRT98MxlthTjGsm",
-                "https://cdn.filestackcontent.com/dynXYf9AS26ImuqTgUPj"
-        ));
+        ProfilePicture defaultProfilePicture = new ProfilePicture
+                (
+                    "default.png",
+                    "dynXYf9AS26ImuqTgUPj",
+                    "image/png",
+                    47871,
+                    "local_file_system",
+                    "Stored",
+                    "4IRT98MxlthTjGsm",
+                    "https://cdn.filestackcontent.com/dynXYf9AS26ImuqTgUPj"
+                )
+        ;
+        profilePictureDao.save(defaultProfilePicture);
+        user.setProfilePicture(defaultProfilePicture);
         userDao.save(user);
         authWithHttpServletRequest(httpServletRequest, user.getUsername(), plainPassword);
         return "redirect:/profile/preferences";

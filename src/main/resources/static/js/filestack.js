@@ -52,7 +52,7 @@ $(async function() {
                 console.log(file);
                 let uploadedPicture = await Fetch.Post.profilePicture(file, FileStack.csrfToken).then(res => res);
                 console.log(uploadedPicture);
-                $('.profile-image').css('background-image', `url("${userInfo.profilePicture.url}")`)
+                $('.profile-image').css('background-image', `url("${uploadedPicture.url}")`)
                 // $("#pic-div").append(`
                 //     <img src="${uploadedPicture.url}">
                 // `);
