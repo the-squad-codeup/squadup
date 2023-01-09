@@ -12,7 +12,11 @@
 <h1 th:text="${squad.name}"></h1>
 <br>
 <h3>Invite Users:</h3>
-<div id="invite-users-div"></div>
+<div id="invite-users-div">
+    <select id="invite-users-select">
+    </select>
+    <button id="invite-users-button">Invite</button>
+</div>
 
 <h3>Current Users:</h3>
 <div id="squad-users-div"></div>
@@ -29,5 +33,6 @@
 <nav th:replace="partials :: footer"></nav>
 <div th:replace="partials :: scripts"></div>
 <script type="module" th:src="@{/js/chat.js}"></script>
+<script type="module" th:src="@{/js/squad-chat.js}"></script>
 </body>
 </html>
