@@ -20,7 +20,7 @@
 <!--        <div id="my-games" class="row container p-5"></div>-->
 
 
-        <div class="my-games">
+        <div class="my-games" id="my-games">
 
             <div class="inner-carousel">
                 <div class="track">
@@ -35,16 +35,29 @@
     </div> <!-- end of fav game and saved games area -->
 
 
-    <div class="container bg-dark rounded-3 p-5"><!--dark gray bubble area -->
-        <h1>Add Games</h1>
+    <div id="add-games-container"><!--dark gray bubble area -->
+        <div id="search-bar">
+            <input id="game-search-input" type="text" placeholder="Add a game">
+            <img id="game-search-button" th:src="@{/Icons/search.png}">
+        </div>
+        <h6>* Search results are filtered based on user preferences *</h6>
+        <div id="games-div">
 
-        <input id="game-search-input" type="text">
-        <button id="game-search-button">Search</button>
+            <div class="inner-carousel">
+                <div class="track">
+                    <!--                    games populate here-->
+                </div>
+                <div class="nav">
+                    <button class="prev"><img th:src="@{/Icons/next.png}"></button>
+                    <button class="next"><img th:src="@{/Icons/next.png}"></button>
+                </div>
+            </div>
+        </div>
     </div><!--end of dark gray bubble area -->
 
-    <div id="games-div" class="row container p-5">
-        <!--this is where the search results populate -->
-    </div>
+<!--    <div id="games-div" class="row container p-5">-->
+<!--        &lt;!&ndash;this is where the search results populate &ndash;&gt;-->
+<!--    </div>-->
 
 </div>
 <nav th:replace="partials :: footer"></nav>

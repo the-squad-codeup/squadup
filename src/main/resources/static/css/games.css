@@ -1,3 +1,4 @@
+
 #games-div {
     color: white;
 }
@@ -136,4 +137,32 @@
 .buttons-div{
     margin-top: 14.5vw;
 
+}
+#add-games-container{
+    padding: 2vw;
+    width: 90vw;
+    height: 40vw;
+    margin: 2vw auto;
+    border: solid #5cfd42 0.3vw;
+    display: flex;
+    justify-content: center;
+}
+#add-games-container h6{
+    position: absolute;
+    margin-top: 4vw;
+}
+#search-bar{
+    border: solid #5cfd42 0.3vw;
+    height: 3.5vw;
+}
+#game-search-input{
+    width: 40vw;
+    height: 3vw;
+    background-color: #333333;
+    color: #5cfd42;
+
+}
+#game-search-button{
+    width: 3vw;
+    height: 3vw;
 }

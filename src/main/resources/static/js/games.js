@@ -8,11 +8,11 @@ $(function () {
             console.log("inside Games.initialize()");
             Events.initialize();
             Print.myFavoriteGame(this.myFavoriteGameDiv);
-            Print.myGames(this.myGamesDiv);
+            // Print.myGames(this.myGamesDiv);
         },
         baseUrl: Utils.url(),
         csrfToken: $("meta[name='_csrf']").attr("content"),
-        addGameDiv: $("#games-div"),
+        addGameDiv: $("#games-div").find(".track"),
         myGamesDiv: $("#my-games"),
         myFavoriteGameDiv: $("#my-favorite-game"),
         sortGamesByYear(games) {
@@ -234,7 +234,7 @@ async function getUserGames() {
         //     <div class="game" style="background-image: url(${game.artwork});">
         //     </div>
         // `)
-        $('.track').append(`
+        $('#my-games').find(".track").append(`
 <!--                <div class="card-container">-->
                     <div class="card" data-game-id="${game.id}" style="background-image: url(${game.artwork});">
                         <div class="buttons-div d-flex justify-content-between">
