@@ -1,6 +1,5 @@
 /* STYLESHEET FOR BOTH RECRUITS AND COMRADES */
 
-
 /* STYLING FOR CONTENTS OF ARROWS AND RECTANGLE (RECRUITS/COMRADES) */
 .arrows-rectangle{
     padding: 3em;
@@ -15,7 +14,7 @@
     font-weight: 500;
     color: #000000;
     -webkit-text-stroke: .5px #05FF00;
-    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .rectangle {
@@ -42,7 +41,33 @@
     border-left: 60px solid #05FF00;
 }
 
-/* STYLES FOR CARD AND CARD CONTENTS: */
+.arrow-left, .arrow-right:hover{
+    cursor: pointer;
+
+}
+
+/* STYLES FOR CARDS AND CARDS CONTENTS: */
+
+.LeftGradientDiv{
+    background: linear-gradient(90deg, #333333 0%, #000000 100%);
+    width: 350px;
+    height: 450px;
+    position: absolute;
+    z-index: 1;
+    opacity: 0.8;
+}
+
+.RightGradientDiv {
+    background: linear-gradient(90deg, #000000 100%, #333333 0%);
+    width: 350px;
+    height: 450px;
+    position: absolute;
+    right: 0;
+    z-index: 1;
+    opacity: 0.8;
+}
+
+
 .card-slider-mask {
     margin: 0 20px;
     max-width: calc(100% - 40px);
@@ -66,7 +91,7 @@
     padding: 15px;
 }
 
-p.card-text{
+p.card-text, h4{
     color: #03ff00;
 }
 
@@ -102,6 +127,13 @@ p.card-text{
     column-gap: 20PX;
 }
 
+#accept, #reject, #remove  {
+    margin: 2%;
+    border: var(--bs-gamergreen) ridge 5px;
+    border-radius: 8px;
+    background-color: dimgray;
+}
+
 img.card-img-top {
     height: 125px;
     width: 125px;
@@ -118,4 +150,12 @@ img.card-img-top {
 
 .su-card-top {
     column-gap: 20px;
+}
+
+#accept:hover{
+    color: #03ff00;
+}
+
+#remove:hover, #reject:hover{
+    color: #FF0000;
 }

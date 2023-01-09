@@ -1,6 +1,7 @@
-//print form not working
 import { Utils } from "./utils.js";
-import { toggleOverlay } from "./pref-overlays.js";
+import { Overlays } from "./pref-overlays.js";
+
+//print form not working
 
 $(function() {
 
@@ -148,7 +149,7 @@ $(function() {
                     `);
                 }
             }
-            toggleOverlay();
+            Overlays.toggleOverlay();
         },
         async languageSelectElement(user) {
             let languages = await Fetch.Get.all("language").then(res => res);
@@ -205,29 +206,29 @@ $(function() {
 
     const Events = {
         initialize() {
-            $(document).on("click", "#edit-preferences-submit-button", async function() {
-                await Fetch.Post.updatedPreferences(MyPreferences.packagePreferencesObject());
-                window.location.replace(`${Utils.url()}`);
-            });
+            $(document)
+                .on("click", "#edit-preferences-submit-button", async function() {
+                    await Fetch.Post.updatedPreferences(MyPreferences.packagePreferencesObject());
+                    window.location.replace(`${Utils.url()}`);
+                })
+                .on("change", "#location", function() {
+                    Overlays.toggleOverlay();
+                })
+            ;
             $(document).ready(function() {
                 $("#location").select2({
                     placeholder: "select a timezone",
                 });
-            });
-            $(document).ready(function() {
                 $("#languages").select2({
                     placeholder: "select languages",
                 });
-            });
-            $(document).ready(function() {
                 $("#game-ratings").select2({
                     placeholder: "select a rating",
                 });
-            });
-            $(document).ready(function() {
                 $("#platforms").select2({
                     placeholder: "select platforms",
                 });
+                Overlays.hideOverlays();
             });
         }
     }
