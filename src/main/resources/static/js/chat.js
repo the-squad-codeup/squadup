@@ -11,6 +11,9 @@ $(function() {
         initialize() {
             Events.initialize();
             Print.messageHistory();
+        },
+        scrollToBottom() {
+            document.getElementById("chat-messages-div-wrapper").scrollTo(0, document.getElementById("chat-messages-div").scrollHeight);
         }
     };
 
@@ -84,6 +87,7 @@ $(function() {
                     </div>
                 </div>
             `);
+            SquadChat.scrollToBottom();
         },
         messageHistory() {
 

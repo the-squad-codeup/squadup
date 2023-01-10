@@ -14,6 +14,9 @@ $(function() {
             let userId = $("#invite-users-select").find(":selected").attr("data-user-id");
             let invitedUser = await Fetch.Post.sendInvite(userId);
             Print.removeUserFromInviteList(invitedUser);
+        },
+        scrollToBottom() {
+            document.getElementById("chat-messages-div-wrapper").scrollTo(0, document.getElementById("chat-messages-div").scrollHeight);
         }
     };
 
@@ -34,7 +37,10 @@ $(function() {
             let squadMembers = await Fetch.Get.squadMembers();
             for(let member of squadMembers) {
                 $("#squad-users-div").append(`
-                    <h2>${member.username}</h2>
+                    <div class="squad-member-wrapper">
+                        <img class="squad-member-img" src="${member.profilePicture.url}">
+                        <div class="squad-member-name">${member.username}</div>
+                    </div>
                 `);
             }
         },
@@ -48,6 +54,7 @@ $(function() {
                     this.singleMessage(message);
                 }
             }
+            SquadChat.scrollToBottom();
         },
         singleMessage(message) {
             SquadChat.messageBoxDiv.append(`
