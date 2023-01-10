@@ -7,25 +7,31 @@
 </head>
 <body>
 <nav th:replace="partials :: siteBar"></nav>
-<br><br><br><br>
-<h1>Active Squads</h1>
-<div id="active-squads-div">
+<div id="page-wrapper">
+
+    <div class="card-body">
+        <h1>Active Squads</h1>
+        <div id="active-squads-div"></div>
+    </div>
+
+    <div class="card-pro">
+        <h1>Create Squad</h1>
+        <div id="create-squad-div">
+            <form method="POST" th:action="@{/squads/create}" th:object="${squad}">
+                <input id="create-squad-name" type="text" th:field="*{name}" placeholder="Squad Name" autocomplete="off">
+                <button type="submit">Create</button>
+            </form>
+        </div>
+
+        <h1>Squad Invites</h1>
+        <div id="squad-invites-div"></div>
+    </div>
+
+
+    <nav th:replace="partials :: footer"></nav>
+    <div th:replace="partials :: scripts"></div>
+    <script type="module" th:src="@{/js/squad-main.js}"></script>
 
 </div>
-
-<h1>Create Squad</h1>
-<div id="create-squad-div">
-    <form method="POST" th:action="@{/squads/create}" th:object="${squad}">
-        <input id="create-squad-name" type="text" th:field="*{name}" placeholder="Squad Name" autocomplete="off">
-        <button type="submit">Create</button>
-    </form>
-</div>
-
-<h1>Squad Invites</h1>
-<div id="squad-invites-div"></div>
-
-<nav th:replace="partials :: footer"></nav>
-<div th:replace="partials :: scripts"></div>
-<script type="module" th:src="@{/js/squad-main.js}"></script>
 </body>
 </html>
