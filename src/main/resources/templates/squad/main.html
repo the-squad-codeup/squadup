@@ -8,11 +8,22 @@
 <body>
 <nav th:replace="partials :: siteBar"></nav>
 <div id="page-wrapper">
-    <div class="squads-container">
+    <div class="green-container">
 
-        <div class="active-squads">
+        <div class="green-card">
             <h1>Active Squads</h1>
-            <div id="active-squads-div"></div>
+
+            <div id="active-squads-div">
+                <div th:each="squad : ${userSquads}">
+                    <div class="purple-card">
+                        <h3 th:text="${squad.name}"></h3>
+                        <div th:each="member : ${squad.members}">
+                            <p th:text="${member.username}"></p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="create-squad">
