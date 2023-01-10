@@ -40,6 +40,7 @@ public class SquadChat {
         this.squad = squad;
     }
 
+    @JsonIgnore
     public Set<SquadChatMessage> getMessages() {
         return messages;
     }

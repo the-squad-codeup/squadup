@@ -13,11 +13,11 @@ public class WebSocketConfiguration extends AbstractWebSocketMessageBrokerConfig
     @Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
         config.enableSimpleBroker("/secured/squad-room");
-        config.setApplicationDestinationPrefixes("/secured/app");
+        config.setApplicationDestinationPrefixes("/secured/squad-app");
     }
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/secured/sock").withSockJS();
+        registry.addEndpoint("/secured/squad-sock").withSockJS();
     }
 }
