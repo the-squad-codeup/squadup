@@ -8,11 +8,11 @@ $(function () {
             console.log("inside Games.initialize()");
             Events.initialize();
             Print.myFavoriteGame(this.myFavoriteGameDiv);
-            Print.myGames(this.myGamesDiv);
+            // Print.myGames();
         },
         baseUrl: Utils.url(),
         csrfToken: $("meta[name='_csrf']").attr("content"),
-        addGameDiv: $("#games-div"),
+        addGameDiv: $("#games-div").find(".track"),
         myGamesDiv: $("#my-games"),
         myFavoriteGameDiv: $("#my-favorite-game"),
         sortGamesByYear(games) {
@@ -30,8 +30,8 @@ $(function () {
             console.log(favoriteGame);
             if(favoriteGame.id != null) {
                 MyGames.myFavoriteGameDiv.empty().append(`
-                    <div class="div-card col-3" data-game-id="${favoriteGame.id}">
-                        <div class="card game-card">
+                    <div class="div-card col-3 m-3" data-game-id="${favoriteGame.id}">
+                        <div class="card game-card rainbow">
                             <img src="${favoriteGame.artwork}" class="card-img all-games-img">
                             <img src="/Icons/favorite.png" alt="" id="favorite-icon">
                         </div>  
@@ -45,7 +45,7 @@ $(function () {
         //     console.log(userGames);
         //     MyGames.myGamesDiv.empty();
         //     for(let game of userGames) {
-        //         this.singleMyGame(game, MyGames.myGamesDiv);
+        //         this.singleMyGame(game, MyGames.myGamesDiv.find(".track"));
         //     }
         // },
 
@@ -54,13 +54,10 @@ $(function () {
         async singleMyGame(data, div) {
             let game = await data;
             div.prepend(`
-                    <div class="div-card col-3" data-game-id="${game.id}">
-                        <div class="card game-card">
-                            <img src="${game.artwork}" class="card-img all-games-img">
-                            <div class="buttons-div d-flex justify-content-between">
-                            <button class="favorite-game-button">Favorite</button>
-                            <button class="remove-game-button">Remove</button>
-                            </div>
+                    <div class="card" data-game-id="${game.id}" style="background-image: url(${game.artwork});">
+                        <div class="buttons-div d-flex justify-content-between">
+                            <img class="favorite-game-button" src="Icons/favorite.png">
+                            <img class="remove-game-button" src="/Icons/trash.png">
                         </div>
                     </div>
             `);
@@ -75,14 +72,11 @@ $(function () {
         async singleSearchedGame(data, div) {
             let game = await data;
             div.prepend(`
-                <div class="div-card col-3" data-game-id="${game.id}">
-                    <div class="card game-card border-0">
-                        <img src="${game.artwork}" class="card-img all-games-img">
+                <div class="card" data-game-id="${game.id}" style="background-image: url(${game.artwork});">
+                        <div class="buttons-div d-flex justify-content-between">
+                            <img class="add-game-button" src="/Icons/add.png">
+                        </div>
                     </div>
-                    <div class="buttons-div d-flex justify-content-between">
-                        <button class="add-game-button">Add</button>
-                    </div>
-                </div>
             `);
         }
     };
@@ -184,9 +178,10 @@ $(function () {
                     console.log("Add Game Button clicked");
                     let gameId = $(this).parent().parent().attr("data-game-id");
                     let addedGame = await Fetch.Post.addGame(gameId);
-                    let gameIds = [...MyGames.myGamesDiv.children()].map(game => parseInt(game.attributes[1].value));
+                    let gameIds = [...MyGames.myGamesDiv.find(".card")].map(game => parseInt(game.attributes[1].value));
+
                     if(!gameIds.includes(parseInt(addedGame.id))){
-                        await Print.singleMyGame(addedGame, MyGames.myGamesDiv);
+                        await Print.singleMyGame(addedGame, MyGames.myGamesDiv.find(".track"));
                     }
                 })
                 .on("click", ".remove-game-button", async function() {
@@ -234,15 +229,15 @@ async function getUserGames() {
         //     <div class="game" style="background-image: url(${game.artwork});">
         //     </div>
         // `)
-        $('.track').append(`
+        $('#my-games').find(".track").append(`
 <!--                <div class="card-container">-->
                     <div class="card" data-game-id="${game.id}" style="background-image: url(${game.artwork});">
                         <div class="buttons-div d-flex justify-content-between">
-                            <button class="favorite-game-button btn btn-outline-success btn-sm">Favorite</button>
-                            <button class="remove-game-button btn btn-outline-danger btn-sm">Remove</button>
+                            <img class="favorite-game-button" src="Icons/favorite.png">
+                            <img class="remove-game-button" src="/Icons/trash.png">
                         </div>
                     </div>
-                    
+
 <!--                </div>-->
              `)
     }
@@ -252,14 +247,20 @@ getUserGames()
 
 const prev = document.querySelector(".prev");
 const next = document.querySelector(".next");
-const carousel = document.querySelector(".my-games");
+const prev2 = document.querySelector(".prev2");
+const next2 = document.querySelector(".next2");
+const carousel = document.querySelector(".game-carousel");
 const track = document.querySelector(".track");
+const searchTrack = document.querySelector(".search-track");
+
 let width = carousel.offsetWidth;
 let index = 0;
+let index2 = 0;
 window.addEventListener("resize", function () {
     width = carousel.offsetWidth;
 });
 next.addEventListener("click", function (e) {
+    console.log("inside event listener for next button click");
     e.preventDefault();
     index = index + 1;
     prev.classList.add("show");
@@ -275,4 +276,22 @@ prev.addEventListener("click", function () {
         prev.classList.remove("show");
     }
     track.style.transform = "translateX(" + index * -70 + "vw)";
+});
+next2.addEventListener("click", function (e) {
+    console.log("inside event listener for next button click");
+    e.preventDefault();
+    index2 = index2 + 1;
+    prev2.classList.add("show");
+    searchTrack.style.transform = "translateX(" + index2 * -70 + "vw)";
+    if (searchTrack.offsetWidth - index2 * width < index2 * width) {
+        next2.classList.add("hide");
+    }
+});
+prev2.addEventListener("click", function () {
+    index2 = index2 - 1;
+    next2.classList.remove("hide");
+    if (index2 === 0) {
+        prev2.classList.remove("show");
+    }
+    searchTrack.style.transform = "translateX(" + index2 * -70 + "vw)";
 });
