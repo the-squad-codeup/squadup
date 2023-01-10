@@ -4,11 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
-import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import pro.squadup.models.SquadChatMessage;
 import pro.squadup.models.User;
 import pro.squadup.repositories.SquadChatMessageRepository;
@@ -18,7 +16,6 @@ import pro.squadup.utils.Utils;
 
 import java.sql.Timestamp;
 import java.util.Date;
-import java.util.Set;
 
 import static java.lang.String.format;
 
@@ -68,7 +65,7 @@ public class SquadChatController {
 
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////// Unsure if needed/////////////////////////////////////////////////////
+    ////////////////////////////////////////////// Unsure if needed ////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 //    @MessageMapping("/chat")
