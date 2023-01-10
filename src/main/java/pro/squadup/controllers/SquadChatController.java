@@ -7,6 +7,7 @@ import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.stereotype.Controller;
+import pro.squadup.models.Squad;
 import pro.squadup.models.SquadChatMessage;
 import pro.squadup.models.User;
 import pro.squadup.repositories.SquadChatMessageRepository;
@@ -36,16 +37,11 @@ public class SquadChatController {
 
     @MessageMapping("/squad-chat/{squadId}/add-user")
     public void addUser(@DestinationVariable Long squadId, @Payload SquadChatMessage chatMessage, SimpMessageHeaderAccessor headerAccessor) {
-        Timestamp messageTime = new Timestamp(new Date().getTime());
-        User currentUser = userDao.findById(Utils.currentUserId()).get();
-        chatMessage.setSender(currentUser);
-        chatMessage.setTimestamp(messageTime);
+        initializeMessage(chatMessage, squadId);
+        squadChatDao.save(chatMessage);
         Long currentSquadId = (Long) headerAccessor.getSessionAttributes().put("squad_id", squadId);
         if(currentSquadId != null) {
-            SquadChatMessage leaveMessage = new SquadChatMessage();
-            leaveMessage.setMessageType(SquadChatMessage.MessageType.LEAVE);
-            leaveMessage.setSender(currentUser);
-            leaveMessage.setTimestamp(messageTime);
+            SquadChatMessage leaveMessage = initializeMessage(new SquadChatMessage(), squadId);
             squadChatDao.save(leaveMessage);
             messagingTemplate.convertAndSend(format("/secured/squad-room/%s", currentSquadId), leaveMessage);
         }
@@ -53,14 +49,26 @@ public class SquadChatController {
         messagingTemplate.convertAndSend(format("/secured/squad-room/%s", squadId), chatMessage);
     }
 
+    @MessageMapping("/squad-chat/{squadId}/remove-user")
+    public void removeUser(@DestinationVariable Long squadId, @Payload SquadChatMessage chatMessage, SimpMessageHeaderAccessor headerAccessor) {
+        initializeMessage(chatMessage, squadId);
+    }
+
     @MessageMapping("/squad-chat/{squadId}/send")
     public void sendMessage(@DestinationVariable Long squadId, @Payload SquadChatMessage chatMessage) {
-        Timestamp messageTime = new Timestamp(new Date().getTime());
-        User currentUser = userDao.findById(Utils.currentUserId()).get();
-        chatMessage.setSender(currentUser);
-        chatMessage.setTimestamp(messageTime);
+        initializeMessage(chatMessage, squadId);
         squadChatDao.save(chatMessage);
         messagingTemplate.convertAndSend(format("/secured/squad-room/%s", squadId), chatMessage);
+    }
+
+    private SquadChatMessage initializeMessage(SquadChatMessage message, Long squadId) {
+        Timestamp messageTime = new Timestamp(new Date().getTime());
+        User currentUser = userDao.findById(Utils.currentUserId()).get();
+        Squad squad = squadDao.findById(squadId).get();
+        message.setSender(currentUser);
+        message.setTimestamp(messageTime);
+        message.setChat(squad.getChat());
+        return message;
     }
 
 

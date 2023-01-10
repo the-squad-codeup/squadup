@@ -20,7 +20,6 @@ public class User {
     private String email;
 
     @Column(nullable = false)
-    @JsonIgnore
     private String password;
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -76,6 +75,7 @@ public class User {
         this.username = username;
     }
 
+    @JsonIgnore
     public String getEmail() {
         return email;
     }
@@ -84,6 +84,7 @@ public class User {
         this.email = email;
     }
 
+    @JsonIgnore
     public String getPassword() {
         return password;
     }
@@ -163,6 +164,7 @@ public class User {
         this.squads = squads;
     }
 
+    @JsonIgnore
     public Set<SquadChatMessage> getMessages() {
         return messages;
     }
@@ -171,6 +173,7 @@ public class User {
         this.messages = messages;
     }
 
+    @JsonIgnore
     public Set<LastSeenMessage> getLastSeenMessages() {
         return lastSeenMessages;
     }

@@ -10,6 +10,7 @@ $(function() {
         squadChatMessagesBox: $("#chat-messages-div"),
         initialize() {
             Events.initialize();
+            Print.messageHistory();
         }
     };
 
@@ -30,6 +31,11 @@ $(function() {
             SquadChat.topic = `/secured/squad-app/squad-chat/${squadId}`;
             SquadChat.currentSubscription = SquadChat.stompClient.subscribe(`/secured/squad-room/${squadId}`, this.onMessageReceived);
             SquadChat.stompClient.send(`${SquadChat.topic}/add-user`, {}, JSON.stringify({messageType: 'JOIN'}));
+        },
+        leaveSquad(squadId) {
+            SquadChat.topic = `/secured/squad-app/squad-chat/${squadId}`;
+            SquadChat.stompClient.send(`${SquadChat.topic}add-user`, {}, JSON.stringify({messageType: 'LEAVE'}));
+            SquadChat.currentSubscription = SquadChat.stompClient.unsubscribe();
         },
         sendMessage() {
             let messageContent = SquadChat.messageTextBox.val();
@@ -57,10 +63,10 @@ $(function() {
 
     const Print = {
         joinMessage(message) {
-            // update members list to show message.sender (User object) is currently online
+            console.log(`${message.sender.username} has joined the chat!`);
         },
         leaveMessage(message) {
-            // update members list to show message.sender (User object) is currently offline
+            console.log(`${message.sender.username} left :(`);
         },
         chatMessage(message) {
             SquadChat.squadChatMessagesBox.append(`
@@ -70,7 +76,7 @@ $(function() {
                     </div>
                     <div class="single-message-content-wrapper">
                         <div class="single-message-timestamp">
-                            ${message.timeStamp}
+                            ${message.timestamp}
                         </div>
                         <div class="single-message-content">
                             ${message.content}
@@ -78,6 +84,9 @@ $(function() {
                     </div>
                 </div>
             `);
+        },
+        messageHistory() {
+
         }
     };
 
@@ -87,6 +96,9 @@ $(function() {
             $(document)
                 .on("click", "#chat-send-button", Socket.sendMessage)
             ;
+            window.onbeforeunload = function() {
+                Socket.leaveSquad(SquadChat.squadId);
+            }
         }
     }
 

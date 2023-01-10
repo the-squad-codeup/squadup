@@ -9,5 +9,5 @@ import java.util.Set;
 
 @Repository
 public interface SquadChatMessageRepository extends JpaRepository<SquadChatMessage, Long> {
-    Set<SquadChatMessage> findAllBySquad(Squad squad);
+    Set<SquadChatMessage> findAllByChat(Squad chat);
 }
