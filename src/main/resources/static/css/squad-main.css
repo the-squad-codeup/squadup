@@ -1,21 +1,32 @@
-.invite-buttons {
+.squads-container{
     display: flex;
-    justify-content: space-between;
+    flex-direction: row;
+    border: solid #5CFD42 .5vw;
+    margin: auto;
+    width: 95vw;
+    height: 100vh;
 }
 
-.card-body{
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
+
+.active-squads {
+    align-items: center;
     justify-content: center;
     border: ridge 12px;
     border-color: var(--bs-gamergreen) !important;
     background: rgba(33, 37, 41, .3);
 }
 
-.card-pro {
+.create-squad {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
     border: ridge 12px;
     border-color: var(--bs-lighterpurp) !important;
     margin-top: 5%;
+}
 
+.invite-buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
