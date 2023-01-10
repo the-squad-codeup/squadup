@@ -123,6 +123,8 @@ p.card-text, h4{
 
 .su-card-game {
     width: 117px;
+    overflow-x: hidden;
+    overflow-y: scroll;
 }
 
 .su-card-bottom {
