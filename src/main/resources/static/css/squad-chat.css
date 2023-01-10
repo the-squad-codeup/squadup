@@ -1,0 +1,11 @@
+#page-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#squad-chat-wrapper {
+    width: 95vw;
+    height: calc(95vh - 120px);
+    border: solid #5CFD42 .5vw;
+}
