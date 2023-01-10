@@ -7,12 +7,13 @@
 }
 
 h2 {
+    margin-bottom: -36vw;
     text-align: center;
-    color: var(--bs-gamergreen);
 }
 
 .card-body {
     display: flex;
+    /*nowrap for slider*/
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: center;
@@ -22,9 +23,26 @@ h2 {
     /*background: rgba(33, 37, 41, .3);*/
     padding: 40px;
     margin: 20px;
-    margin-top: 5px;
+    margin-top: 50px;
     /*width: 360px;*/
 }
+
+
+/*GAMES SECTION*/
+/*.card-body{*/
+/*    overflow: hidden;*/
+/*    !*width: 100%;*!*/
+/*    text-align: center;*/
+/*    display: flex;*/
+/*    flex-wrap:nowrap;*/
+/*    !*flex-wrap: wrap;*!*/
+/*    !*align-items:center;*!*/
+/*    !*flex-direction: column;*!*/
+/*    !*justify-content: center;*!*/
+/*    border: ridge 12px;*/
+/*    border-color: var(--bs-lighterpurp) !important;*/
+/*    transition: all ease .3s;*/
+/*}*/
 
 .card-pro {
     border: ridge 12px;
@@ -68,21 +86,6 @@ h2 {
 
 }
 
-/*GAMES SECTION*/
-.card-body{
-    overflow: hidden;
-    /*width: 100%;*/
-    text-align: center;
-    display: flex;
-    flex-wrap:nowrap;
-    /*flex-wrap: wrap;*/
-    /*align-items:center;*/
-    /*flex-direction: column;*/
-    /*justify-content: center;*/
-    border: ridge 12px;
-    border-color: var(--bs-lighterpurp) !important;
-    transition: all ease .3s;
-}
 
 .add-game-button, .favorite-game-button, .remove-game-button, #remove {
     /*TAKEN FROM FROMS.CSS MAKE IT SIMPLE ONCE CLEAN============*/
