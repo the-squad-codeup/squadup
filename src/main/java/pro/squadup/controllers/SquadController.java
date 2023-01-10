@@ -110,8 +110,9 @@ public class SquadController {
     }
 
     @GetMapping("/squads/{squadId}/messages")
-    public Set<SquadChatMessage> getAllSquadChatMessages(@PathVariable Long squadId) {
+    public @ResponseBody Set<SquadChatMessage> getAllSquadChatMessages(@PathVariable Long squadId) {
+        System.out.println("Inside getAllSquadChatMessages");
         Squad squad = squadDao.findById(squadId).get();
-        return squadChatMessageDao.findAllByChat(squad);
+        return squadChatMessageDao.findAllByChat(squad.getChat());
     }
 }

@@ -21,7 +21,7 @@ public class SquadChatMessage {
     @Enumerated(EnumType.ORDINAL)
     private MessageType messageType;
 
-    @Column
+    @Column(columnDefinition = "TEXT")
     private String content;
 
     @Column(nullable = false)
