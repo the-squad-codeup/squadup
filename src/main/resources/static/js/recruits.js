@@ -27,8 +27,8 @@ $(function() {
                         </div>
                     </div>
                     <div class="su-card-bottom">
-                        <a href="#" id="accept" class="btn btn-primary squadup-link">Accept</a>
-                        <a href="#" id="reject" class="btn btn-primary squaddown-link">Reject</a>
+                        <a href="#" id="accept" class="btn btn-outline-success squadup-link">Accept</a>
+                        <a href="#" id="reject" class="btn btn-outline-danger squaddown-link">Reject</a>
                     </div>
                 </div>
             `);
