@@ -19,13 +19,15 @@ public class SquadController {
     private final SquadRepository squadDao;
     private final SquadPictureRepository squadPictureDao;
     private final SquadChatRepository squadChatDao;
+    private final SquadChatMessageRepository squadChatMessageDao;
     private final SquadInviteRepository squadInviteDao;
 
-    public SquadController(UserRepository userDao, SquadRepository squadDao, SquadPictureRepository squadPictureDao, SquadChatRepository squadChatDao, SquadInviteRepository squadInviteDao) {
+    public SquadController(UserRepository userDao, SquadRepository squadDao, SquadPictureRepository squadPictureDao, SquadChatRepository squadChatDao, SquadChatMessageRepository squadChatMessageDao, SquadInviteRepository squadInviteDao) {
         this.userDao = userDao;
         this.squadDao = squadDao;
         this.squadPictureDao = squadPictureDao;
         this.squadChatDao = squadChatDao;
+        this.squadChatMessageDao = squadChatMessageDao;
         this.squadInviteDao = squadInviteDao;
     }
 
@@ -105,5 +107,11 @@ public class SquadController {
         squadInviteDao.save(invite);
 
         return invitee;
+    }
+
+    @GetMapping("/squads/{squadId}/messages")
+    public Set<SquadChatMessage> getAllSquadChatMessages(@PathVariable Long squadId) {
+        Squad squad = squadDao.findById(squadId).get();
+        return squadChatMessageDao.findAllBySquad(squad);
     }
 }
