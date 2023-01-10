@@ -11,6 +11,9 @@ $(function() {
         initialize() {
             Events.initialize();
             Print.messageHistory();
+        },
+        scrollToBottom() {
+            document.getElementById("chat-messages-div-wrapper").scrollTo(0, document.getElementById("chat-messages-div").scrollHeight);
         }
     };
 
@@ -84,6 +87,7 @@ $(function() {
                     </div>
                 </div>
             `);
+            SquadChat.scrollToBottom();
         },
         messageHistory() {
 
@@ -95,6 +99,11 @@ $(function() {
             await Socket.connect();
             $(document)
                 .on("click", "#chat-send-button", Socket.sendMessage)
+                .on("keyup", function(e) {
+                    if($("#chat-text-input").is(":focus") && e.key === "Enter") {
+                        $("#chat-send-button").trigger("click");
+                    }
+                })
             ;
             window.onbeforeunload = function() {
                 Socket.leaveSquad(SquadChat.squadId);
