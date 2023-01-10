@@ -10,9 +10,8 @@
 <nav th:replace="partials :: siteBar"></nav>
 <div id="page-wrapper">
 
-    <div class="games-container"> <!-- fav game and saved games area -->
+    <div class="games-container rainbow"> <!-- fav game and saved games area -->
 
-        <h4 class="m-3">Favorite Game</h4>
         <div id="my-favorite-game" class="p-3"></div>
 
 
@@ -35,12 +34,12 @@
     </div> <!-- end of fav game and saved games area -->
 
 
-    <div id="add-games-container"><!--dark gray bubble area -->
+    <div id="add-games-container" class="rainbow"><!--dark gray bubble area -->
         <div id="search-bar">
             <input id="game-search-input" type="text" placeholder="Add a game">
             <img id="game-search-button" th:src="@{/Icons/search.png}">
         </div>
-        <h6>* Search results are filtered based on user preferences *</h6>
+        <p class="filter-words">* Search results are filtered based on user preferences *</p>
 
             <div id="games-div" class=" game-carousel">
 

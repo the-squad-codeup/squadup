@@ -30,8 +30,8 @@ $(function () {
             console.log(favoriteGame);
             if(favoriteGame.id != null) {
                 MyGames.myFavoriteGameDiv.empty().append(`
-                    <div class="div-card col-3" data-game-id="${favoriteGame.id}">
-                        <div class="card game-card">
+                    <div class="div-card col-3 m-3" data-game-id="${favoriteGame.id}">
+                        <div class="card game-card rainbow">
                             <img src="${favoriteGame.artwork}" class="card-img all-games-img">
                             <img src="/Icons/favorite.png" alt="" id="favorite-icon">
                         </div>  
@@ -56,8 +56,8 @@ $(function () {
             div.prepend(`
                     <div class="card" data-game-id="${game.id}" style="background-image: url(${game.artwork});">
                         <div class="buttons-div d-flex justify-content-between">
-                            <button class="favorite-game-button btn btn-outline-success btn-sm">Favorite</button>
-                            <button class="remove-game-button btn btn-outline-danger btn-sm">Remove</button>
+                            <img class="favorite-game-button" src="Icons/favorite.png">
+                            <img class="remove-game-button" src="/Icons/trash.png">
                         </div>
                     </div>
             `);
@@ -74,7 +74,7 @@ $(function () {
             div.prepend(`
                 <div class="card" data-game-id="${game.id}" style="background-image: url(${game.artwork});">
                         <div class="buttons-div d-flex justify-content-between">
-                            <button class="add-game-button btn btn-outline-info btn-sm">Add</button>
+                            <img class="add-game-button" src="/Icons/add.png">
                         </div>
                     </div>
             `);
@@ -233,7 +233,7 @@ async function getUserGames() {
 <!--                <div class="card-container">-->
                     <div class="card" data-game-id="${game.id}" style="background-image: url(${game.artwork});">
                         <div class="buttons-div d-flex justify-content-between">
-                            <button class="favorite-game-button btn btn-outline-success btn-sm">Favorite</button>
+                            <img class="favorite-game-button" src="Icons/favorite.png">
                             <img class="remove-game-button" src="/Icons/trash.png">
                         </div>
                     </div>
