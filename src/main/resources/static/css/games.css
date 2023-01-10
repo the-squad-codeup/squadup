@@ -1,6 +1,12 @@
 
 #games-div {
     color: white;
+    height: 17vw;
+    width: 70vw;
+    margin-top: 7vw;
+    position: absolute;
+
+    display: flex;
 }
 
 .game-card {
@@ -33,17 +39,11 @@
     margin-left: 4.2vw;
     transform: rotate(225deg);
 }
-
-/*.my-favorite-game{*/
-/*    height: 24vw;*/
-/*    width: 18vw;*/
-/*    background-size: cover;*/
-/*    background-position: center;*/
-/*    !*margin-top: 20.5vw;*!*/
-/*    !*margin-left: 4vw;*!*/
-/*    !*position: absolute;*!*/
-/*    border: solid #5CFD42 0.3vw;*/
-/*}*/
+.remove-game-button{
+    height: 4vw;
+    width: 4vw;
+    margin-top: -.75vw;
+}
 
 .all-games-img {
 }
@@ -53,7 +53,7 @@
 }
 .track {
     display: inline-flex;
-    height: 17vw;
+    height: 16vw;
     transition: transform 0.2s ease-in-out;
 }
 
@@ -82,11 +82,12 @@
     background-color: #000;
     cursor: pointer;
 }
-.nav .prev {
+.nav .prev, .nav .prev2{
     left: -1vw;
     display: none;
 }
-.nav .prev img{
+
+.nav .prev img, .nav .prev2 img{
     height: 4vw;
     width: 4vw;
     position: absolute;
@@ -95,14 +96,14 @@
     max-width: none;
     transform: rotate(180deg);
 }
-.nav .prev.show {
+.nav .prev.show, .nav .prev2.show{
     display: block;
 }
-.nav .next {
+.nav .next, .nav .next2 {
     right: -0.443vw;
     /*background-image: url('/public/Icons/next.png');*/
 }
-.nav .next img{
+.nav .next img, .nav .next2 img {
     height: 4vw;
     width: 4vw;
     position: absolute;
@@ -110,8 +111,8 @@
     margin-top: -2vw;
     max-width: none;
 }
-.nav .next.hide {
-    display: none;
+.nav .next.hide, .nav .next2.hide {
+    visibility: hidden;
 }
 .my-games{
 
@@ -154,6 +155,7 @@
 #search-bar{
     border: solid #5cfd42 0.3vw;
     height: 3.5vw;
+    position: absolute;
 }
 #game-search-input{
     width: 40vw;
@@ -165,4 +167,14 @@
 #game-search-button{
     width: 3vw;
     height: 3vw;
+}
+.my-games2{
+
+    height: 17vw;
+    width: 70vw;
+    margin-top: 0vw;
+    margin-left: 20vw;
+    position: absolute;
+
+    display: flex;
 }

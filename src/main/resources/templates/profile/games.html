@@ -20,10 +20,10 @@
 <!--        <div id="my-games" class="row container p-5"></div>-->
 
 
-        <div class="my-games" id="my-games">
+        <div class="my-games game-carousel" id="my-games">
 
             <div class="inner-carousel">
-                <div class="track">
+                <div class="track user-track">
                     <!--                    games populate here-->
                 </div>
                 <div class="nav">
@@ -41,18 +41,20 @@
             <img id="game-search-button" th:src="@{/Icons/search.png}">
         </div>
         <h6>* Search results are filtered based on user preferences *</h6>
-        <div id="games-div">
 
-            <div class="inner-carousel">
-                <div class="track">
-                    <!--                    games populate here-->
-                </div>
-                <div class="nav">
-                    <button class="prev"><img th:src="@{/Icons/next.png}"></button>
-                    <button class="next"><img th:src="@{/Icons/next.png}"></button>
+            <div id="games-div" class=" game-carousel">
+
+                <div class="inner-carousel">
+                    <div class="track search-track">
+                        <!--                    games populate here-->
+                    </div>
+                    <div class="nav">
+                        <button class="prev2"><img th:src="@{/Icons/next.png}"></button>
+                        <button class="next2"><img th:src="@{/Icons/next.png}"></button>
+                    </div>
                 </div>
             </div>
-        </div>
+
     </div><!--end of dark gray bubble area -->
 
 <!--    <div id="games-div" class="row container p-5">-->
