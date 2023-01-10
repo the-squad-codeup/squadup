@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <div th:replace="partials :: headFragment('Squads')"></div>
+    <link rel="stylesheet" th:href="@{/css/squad-main.css}">
+</head>
+<body>
+<nav th:replace="partials :: siteBar"></nav>
+<br><br><br><br>
+<h1>Active Squads</h1>
+<div id="active-squads-div">
+
+</div>
+
+<h1>Create Squad</h1>
+<div id="create-squad-div">
+    <form method="POST" th:action="@{/squads/create}" th:object="${squad}">
+        <input id="create-squad-name" type="text" th:field="*{name}" placeholder="Squad Name" autocomplete="off">
+        <button type="submit">Create</button>
+    </form>
+</div>
+
+<h1>Squad Invites</h1>
+<div id="squad-invites-div"></div>
+
+<nav th:replace="partials :: footer"></nav>
+<div th:replace="partials :: scripts"></div>
+<script type="module" th:src="@{/js/squad-main.js}"></script>
+</body>
+</html>

@@ -10,9 +10,8 @@
 <nav th:replace="partials :: siteBar"></nav>
 <div id="page-wrapper">
 
-    <div class="games-container"> <!-- fav game and saved games area -->
+    <div class="games-container rainbow"> <!-- fav game and saved games area -->
 
-        <h4 class="m-3">Favorite Game</h4>
         <div id="my-favorite-game" class="p-3"></div>
 
 
@@ -20,10 +19,10 @@
 <!--        <div id="my-games" class="row container p-5"></div>-->
 
 
-        <div class="my-games">
+        <div class="my-games game-carousel" id="my-games">
 
             <div class="inner-carousel">
-                <div class="track">
+                <div class="track user-track">
                     <!--                    games populate here-->
                 </div>
                 <div class="nav">
@@ -35,16 +34,31 @@
     </div> <!-- end of fav game and saved games area -->
 
 
-    <div class="container bg-dark rounded-3 p-5"><!--dark gray bubble area -->
-        <h1>Add Games</h1>
+    <div id="add-games-container" class="rainbow"><!--dark gray bubble area -->
+        <div id="search-bar">
+            <input id="game-search-input" type="text" placeholder="Add a game">
+            <img id="game-search-button" th:src="@{/Icons/search.png}">
+        </div>
+        <p class="filter-words">* Search results are filtered based on user preferences *</p>
 
-        <input id="game-search-input" type="text">
-        <button id="game-search-button">Search</button>
+            <div id="games-div" class=" game-carousel">
+
+                <div class="inner-carousel">
+                    <div class="track search-track">
+                        <!--                    games populate here-->
+                    </div>
+                    <div class="nav">
+                        <button class="prev2"><img th:src="@{/Icons/next.png}"></button>
+                        <button class="next2"><img th:src="@{/Icons/next.png}"></button>
+                    </div>
+                </div>
+            </div>
+
     </div><!--end of dark gray bubble area -->
 
-    <div id="games-div" class="row container p-5">
-        <!--this is where the search results populate -->
-    </div>
+<!--    <div id="games-div" class="row container p-5">-->
+<!--        &lt;!&ndash;this is where the search results populate &ndash;&gt;-->
+<!--    </div>-->
 
 </div>
 <nav th:replace="partials :: footer"></nav>
