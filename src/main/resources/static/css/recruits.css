@@ -1,36 +1,4 @@
-body {
-    color: black;
-
-}
-
-.mapcontainer {
-    position: relative;
-    top: 0;
-    left: 20%;
-}
-
-/*make this at 100% for mobile view*/
-.map {
-    height: 60%;
-    width: 60%;
-    position: relative;
-    top: 0;
-    left: 0;
-}
-
-.overlay {
-    height: 100%;
-    width: 60%;
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-
-#gamertag, #bio {
-    width: 100%;
-}
-
-.preferences {
+.recruits {
     /*font-size: 80px;*/
     color: #fff;
     /*text-align: center;*/
