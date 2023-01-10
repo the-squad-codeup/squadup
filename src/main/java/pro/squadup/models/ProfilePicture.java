@@ -36,7 +36,7 @@ public class ProfilePicture {
     @Column(nullable = false)
     private String url;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private User user;
 
