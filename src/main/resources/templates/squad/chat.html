@@ -11,22 +11,32 @@
 <nav th:replace="partials :: siteBar"></nav>
 <div id="page-wrapper">
     <div id="squad-chat-wrapper">
-        <h1 id="squad-title" th:data-squad-id="${squad.id}" th:text="${squad.name}"></h1>
-        <br>
-        <h3>Invite Users:</h3>
-        <div id="invite-users-div">
-            <select id="invite-users-select">
-            </select>
-            <button id="invite-users-button">Invite</button>
+        <div id="squad-title-wrapper">
+            <div id="squad-title" th:data-squad-id="${squad.id}" th:text="${squad.name}"></div>
         </div>
+        <div id="chat-body-wrapper">
+            <div id="chat-messages-div">
+                <!-- All chat messages -->
+            </div>
+            <div id="chat-sidebar-wrapper">
+                <div id="invite-users-div">
+                    <select id="invite-users-select">
+                    </select>
+                    <button id="invite-users-button">Invite</button>
+                </div>
+                <div id="current-users-wrapper">
+                    <h3>Members</h3>
+                    <div id="squad-users-div"></div>
+                </div>
+            </div>
 
-        <h3>Current Users:</h3>
-        <div id="squad-users-div"></div>
-
-        <h3>Chat</h3>
-        <div id="chat-messages-div"></div>
-        <input id="chat-text-input" type="text" autocomplete="off">
-        <button id="chat-send-button">Send Message</button>
+        </div>
+        <div id="text-input-wrapper">
+            <input id="chat-text-input" type="text" autocomplete="off">
+            <div id="chat-button-container">
+                <div id="chat-send-button" class="btn btn-outline-success">Send Message</div>
+            </div>
+        </div>
 
     </div>
 </div>

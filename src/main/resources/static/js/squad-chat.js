@@ -6,6 +6,7 @@ $(function() {
     const SquadChat = {
         csrfToken: $("meta[name='_csrf']").attr("content"),
         squadId: $("#squad-title").attr("data-squad-id"),
+        messageBoxDiv: $("#chat-messages-div"),
         initialize() {
             Events.initialize();
         },
@@ -39,6 +40,31 @@ $(function() {
         },
         removeUserFromInviteList(user) {
             $("#invite-users-select").children(`[data-user-id="${user.id}"]`).remove();
+        },
+        async messageHistory() {
+            let messages = await Fetch.Get.squadMessages();
+            for(let message of messages) {
+                if(message.content != null){
+                    this.singleMessage(message);
+                }
+            }
+        },
+        singleMessage(message) {
+            SquadChat.messageBoxDiv.append(`
+                <div class="single-message-wrapper">
+                    <div class="message-sender-img-wrapper">
+                        <img class="message-sender-img" src="${message.sender.profilePicture.url}">
+                    </div>
+                    <div class="single-message-content-wrapper">
+                        <div class="single-message-timestamp">
+                            ${message.timestamp}
+                        </div>
+                        <div class="single-message-content">
+                            ${message.content}
+                        </div>
+                    </div>
+                </div>
+            `);
         }
     };
 
@@ -52,6 +78,9 @@ $(function() {
             },
             async currentInvitees() {
                 return await fetch(`${Utils.url()}invites/${SquadChat.squadId}/current`).then(res => res.json());
+            },
+            async squadMessages() {
+                return await fetch(`${Utils.url()}squads/${SquadChat.squadId}/messages`).then(res => res.json());
             }
         },
         Post: {
@@ -72,6 +101,7 @@ $(function() {
             $(window).ready(function() {
                 Print.inviteOptions();
                 Print.currentSquadMembers();
+                Print.messageHistory();
             });
             $(document)
                 .on("click", "#invite-users-button", SquadChat.inviteUser)
