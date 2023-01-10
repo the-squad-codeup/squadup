@@ -98,16 +98,18 @@ $(function() {
 
     const Events = {
         initialize() {
-            $(window).ready(function() {
-                Print.inviteOptions();
-                Print.currentSquadMembers();
-                Print.messageHistory();
-            });
+            $(window)
+                .ready(function() {
+                    Print.inviteOptions();
+                    Print.currentSquadMembers();
+                    Print.messageHistory();
+                })
+            ;
             $(document)
                 .on("click", "#invite-users-button", SquadChat.inviteUser)
             ;
         }
-    }
+    };
 
     SquadChat.initialize();
 });
