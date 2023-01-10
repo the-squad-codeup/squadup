@@ -1,12 +1,19 @@
 #new-wrapper {
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
 
     padding: 20px;
 }
 
-.card-body{
+h2 {
+    margin-bottom: -36vw;
+    text-align: center;
+}
+
+.card-body {
     display: flex;
+    /*nowrap for slider*/
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: center;
@@ -14,24 +21,73 @@
     /*border: outset 12px;*/
     border-color: var(--bs-gamergreen) !important;
     /*background: rgba(33, 37, 41, .3);*/
-
-
+    padding: 40px;
     margin: 20px;
-    width: 360px;
+    margin-top: 50px;
+    /*width: 360px;*/
 }
+
+
 /*GAMES SECTION*/
-.dash-cam{
-    justify-content: center;
-    overflow: hidden;
-    width: 100%;
-    text-align: center;
+/*.card-body{*/
+/*    overflow: hidden;*/
+/*    !*width: 100%;*!*/
+/*    text-align: center;*/
+/*    display: flex;*/
+/*    flex-wrap:nowrap;*/
+/*    !*flex-wrap: wrap;*!*/
+/*    !*align-items:center;*!*/
+/*    !*flex-direction: column;*!*/
+/*    !*justify-content: center;*!*/
+/*    border: ridge 12px;*/
+/*    border-color: var(--bs-lighterpurp) !important;*/
+/*    transition: all ease .3s;*/
+/*}*/
+
+.card-pro {
+    border: ridge 12px;
+    border-color: var(--bs-lighterpurp) !important;
 }
 
-.card-head {
+.card-slider-mask {
+    margin: 0 20px;
+    max-width: calc(100% - 40px);
+    overflow:hidden;
+}
+.arrow-left{
+    display: flex;
+    align-self: center;
+    width: 0;
+    height: 0;
+    border-top: 40px solid transparent;
+    border-bottom: 40px solid transparent;
+    border-right: 40px solid #00fff7;
+    opacity: 60%;
+    position: absolute;
+    margin-right: 90vw;
+}
+
+.arrow-right{
+    display: flex;
+    align-self: center;
+    width: 0;
+    height: 0;
+    border-top: 40px solid transparent;
+    border-bottom: 40px solid transparent;
+    border-left: 40px solid #00fff7;
+    opacity: 60%;
+    position: absolute;
+    margin-left: 90vw;
+}
+
+.arrow-left, .arrow-right:hover{
+    cursor: pointer;
+    color: #5CFD42;
 
 }
 
-.add-game-button, .favorite-game-button, .remove-game-button  {
+
+.add-game-button, .favorite-game-button, .remove-game-button, #remove {
     /*TAKEN FROM FROMS.CSS MAKE IT SIMPLE ONCE CLEAN============*/
     margin: 2%;
     border: var(--bs-gamergreen) ridge 5px;
@@ -41,8 +97,17 @@
 
 button:active {
     box-shadow: 0 5px black;
-    transform: translateY(4px);
+    transform: translate(4px);
 }
+
+#accept:hover{
+    color: #03ff00;
+}
+
+#remove:hover, #reject:hover{
+    color: #FF0000;
+}
+
 
 /*END OF GAME SECTION*/
 
@@ -50,20 +115,26 @@ button:active {
 
 
 #card-com, #card-rec{
-    display:flex;
-    column-gap: 25px;
+    display: contents;
+    margin: auto;
+    /*column-gap: 25px;*/
 }
 
 .su-card {
-    height: 450px;
-    width: 450px;
+    height: 35vw;
+    width: 35vw;
     display: flex;
     flex-direction: column;
-    border: 3px solid #03ff00;
+    border: 5px ridge #03ff00;
     border-radius: 3px;
     padding: 15px;
-    margin: 10.5%;
+    margin: 30px;
 }
+
+.su-card:nth-child(odd) {
+    border: purple ridge 5px;
+}
+
 .su-card-top, .su-card-middle, .su-card-bottom {
     display: flex;
 }
@@ -107,6 +178,7 @@ img.card-img-top {
     column-gap: 20px;
 }
 
+<<<<<<< HEAD
 .dashboard {
     /*font-size: 80px;*/
     color: #fff;
@@ -143,3 +215,10 @@ img.card-img-top {
         text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #ff0000, 0 0 40px #ff0000, 0 0 50px #ff0000, 0 0 60px #ff0000, 0 0 70px #ff0000;
     }
 }
+=======
+
+
+
+
+
+>>>>>>> main

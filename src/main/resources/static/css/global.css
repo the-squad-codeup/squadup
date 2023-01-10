@@ -44,6 +44,19 @@
     right: 16px;
     font-size: 18px;
 }
+/*Other BTNS*/
+#emailSend, #signupPasswordSubmit, #loginPasswordSubmit, .squadup-link, .squaddown-link {
+    margin: 2%;
+    border: var(--bs-gamergreen) ridge 5px;
+    border-radius: 8px;
+    background-color: dimgray;
+}
+
+button:active {
+    box-shadow: 0 5px black;
+    transform: translateY(4px);
+}
+
 
 #footer{
     display: flex;
