@@ -66,3 +66,33 @@ body {
         text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #ff0000, 0 0 40px #ff0000, 0 0 50px #ff0000, 0 0 60px #ff0000, 0 0 70px #ff0000;
     }
 }
+
+/* Input field */
+.select2-selection__rendered {
+    color: #000000;
+}
+
+/* Around the search field */
+.select2-search {
+    color: #000000;
+}
+
+/* Search field */
+.select2-search input {
+    color: #000000;
+}
+
+/* Each result */
+.select2-results {
+    color: #000000;
+}
+
+/* Higlighted (hover) result */
+.select2-results__option--highlighted {
+    color: #000000;
+}
+
+/* Selected option */
+.select2-results__option[aria-selected=true] {
+    color: #000000;
+}

@@ -2,7 +2,6 @@ import { Utils } from "./utils.js";
 
 $(function () {
     console.log("Inside games.js");
-
     const MyGames = {
         initialize() {
             console.log("inside Games.initialize()");
@@ -31,7 +30,7 @@ $(function () {
             if(favoriteGame.id != null) {
                 MyGames.myFavoriteGameDiv.empty().append(`
                     <div class="div-card col-3 m-3" data-game-id="${favoriteGame.id}">
-                        <div class="card game-card rainbow">
+                        <div class="card game-card">
                             <img src="${favoriteGame.artwork}" class="card-img all-games-img">
                             <img src="/Icons/favorite.png" alt="" id="favorite-icon">
                         </div>  
@@ -40,7 +39,7 @@ $(function () {
             } else{
                 MyGames.myFavoriteGameDiv.empty().append(`
                     <div class="div-card col-3 m-3" data-game-id="${favoriteGame.id}">
-                        <div class="card game-card rainbow">
+                        <div class="card game-card">
                             <img src="/Icons/favDefault.jpg" class="card-img all-games-img">
                             <img src="/Icons/favorite.png" alt="" id="favorite-icon">
                         </div>  
@@ -172,10 +171,13 @@ $(function () {
         initialize() {
             console.log("Inside Events.initialize()");
             $(document)
-                .on("click", "#game-search-button", function() {
+                .on("click", "#game-search-button", async function() {
                     console.log("button has been clicked. Value in input: ");
                     console.log($("#game-search-input").val());
-                    Print.gameResults(Fetch.Post.backendGameSearch($("#game-search-input").val()), $("#games-div"));
+                    loading.classList.add("block");
+                    await Print.gameResults(Fetch.Post.backendGameSearch($("#game-search-input").val()), $("#games-div"));
+                    loading.classList.remove("block");
+
                     // Fetch.Get.gameSearch($("#game-search-input").val());
                 })
                 .on("keyup", function(e) {
@@ -303,4 +305,9 @@ prev2.addEventListener("click", function () {
         prev2.classList.remove("show");
     }
     searchTrack.style.transform = "translateX(" + index2 * -70 + "vw)";
+});
+
+const loading = document.querySelector(".load-gif");
+$(window).on("load", function () {
+    loading.classList.add("none");
 });
