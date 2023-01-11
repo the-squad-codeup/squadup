@@ -66,7 +66,7 @@
                     <a id="nav-preferences-link" class="nav-link profile" th:href="@{/profile}">My Profile</a>
                 </li>
                 <li sec:authorize="isAuthenticated()" class="nav-item">
-                    <a class="nav-link preferences" th:href="@{/profile/preferences}">Edit Preferences</a>
+                    <a class="nav-link pref" th:href="@{/profile/preferences}">Edit Preferences</a>
                 </li>
                 <li sec:authorize="isAuthenticated()">
                     <form id="site-bar-logout-form" th:action="@{/logout}" th:method="post">
