@@ -207,10 +207,12 @@ $(function() {
             }
         },
         async editMessage(message) {
+            $("#chat-messages-div").find(`[data-message-id="${message.id}"]`).find(".single-message-content span").remove();
             $("#chat-messages-div").find(`[data-message-id="${message.id}"]`).find(".single-message-content").text(message.content);
             SquadChat.messageOutputBox.find(`[data-message-id="${message.id}"]`).find(".single-message-content").append(`
                     <span class="was-edited">(edited)</span>
-                `);
+                `)
+            ;
         },
         async deleteMessage(message) {
             console.log("inside Print.deleteMessage. message:")

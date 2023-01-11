@@ -73,6 +73,7 @@ public class SquadChatController {
         User currentUser = userDao.findById(Utils.currentUserId()).get();
         if(messageToEdit.getSender().getId() == currentUser.getId()) {
             messageToEdit.setContent(editMessage.getContent());
+            messageToEdit.setMessageType(editMessage.getMessageType());
             messageToEdit.setEdited(true);
             squadChatDao.save(messageToEdit);
             messagingTemplate.convertAndSend(format("/secured/squad-room/%s", squadId), messageToEdit);
@@ -88,16 +89,6 @@ public class SquadChatController {
             squadChatDao.delete(messageToDelete);
             messagingTemplate.convertAndSend(format("/secured/squad-room/%s", squadId), messageToDelete);
         }
-    }
-
-    @PostMapping("/messages/{messageId}/delete")
-    public @ResponseBody SquadChatMessage deleteMessage(@PathVariable Long messageId) {
-        SquadChatMessage messageToDelete = squadChatDao.findById(messageId).get();
-        User currentUser = userDao.findById(Utils.currentUserId()).get();
-        if(messageToDelete.getSender().equals(currentUser)) {
-            squadChatDao.delete(messageToDelete);
-        }
-        return messageToDelete;
     }
 
     private SquadChatMessage initializeMessage(SquadChatMessage message, Long squadId) {
