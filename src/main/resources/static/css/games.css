@@ -332,3 +332,16 @@
     color: #5cfd42;
     font-size: 1.5vw;
 }
+
+.load-gif {
+    position: absolute;
+    margin-top: -20vw;
+    margin-left: 36vw;
+}
+
+.none {
+    display: none;
+}
+.block {
+    display: block;
+}
