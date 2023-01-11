@@ -11,7 +11,7 @@ import java.util.Set;
 public class SquadChatMessage {
 
     public enum MessageType {
-        CHAT, JOIN, LEAVE
+        CHAT, JOIN, LEAVE, EDIT, DELETE
     }
 
     @Id

@@ -11,13 +11,17 @@
     <div class="green-container">
 
         <div class="green-card">
-        <h1>Active Squads</h1>
-            <div th:each="squad : ${userSquads}">
-                <div class="purple-card">
-                    <h3 th:text="${squad.name}"></h3>
-                    <div id="active-squads-div"> <!--Links to messages-->
-                    <div th:each="member : ${squad.members}">
-                        <p th:text="${member.username}"></p>
+
+                <h1>Active Squads</h1>
+            <div>
+                <div th:each="squad : ${userSquads}">
+                    <div class="purple-card" th:data-squad-id="${squad.id}">
+                        <a class="squad-title" th:text="${squad.name}" th:href="@{/squads/${squad.id}/chat}"></a>
+                        <div th:each="member : ${squad.members}">
+                            <p th:text="${member.username}"></p>
+                        </div>
+                        <button class="disband-squad-button">Disband Squad</button>
+
                     </div>
                         </div>
                 </div>
