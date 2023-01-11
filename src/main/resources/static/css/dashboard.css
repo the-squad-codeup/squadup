@@ -6,25 +6,20 @@
     padding: 20px;
 }
 
-h2 {
-    margin-bottom: -36vw;
+h1 {
     text-align: center;
 }
 
 .card-body {
     display: flex;
-    /*nowrap for slider*/
     flex-wrap: wrap;
-    flex-direction: row;
+    /*flex-direction: column;*/
+    /*align-items: center;*/
     justify-content: center;
     border: ridge 12px;
-    /*border: outset 12px;*/
     border-color: var(--bs-gamergreen) !important;
-    /*background: rgba(33, 37, 41, .3);*/
-    padding: 40px;
-    margin: 20px;
-    margin-top: 50px;
-    /*width: 360px;*/
+    padding: 15px;
+    margin: 15px;
 }
 
 
@@ -49,42 +44,42 @@ h2 {
     border-color: var(--bs-lighterpurp) !important;
 }
 
-.card-slider-mask {
-    margin: 0 20px;
-    max-width: calc(100% - 40px);
-    overflow:hidden;
-}
-.arrow-left{
-    display: flex;
-    align-self: center;
-    width: 0;
-    height: 0;
-    border-top: 40px solid transparent;
-    border-bottom: 40px solid transparent;
-    border-right: 40px solid #00fff7;
-    opacity: 60%;
-    position: absolute;
-    margin-right: 90vw;
-}
+/*.card-slider-mask {*/
+/*    margin: 0 20px;*/
+/*    max-width: calc(100% - 40px);*/
+/*    overflow:hidden;*/
+/*}*/
+/*.arrow-left{*/
+/*    display: flex;*/
+/*    align-self: center;*/
+/*    width: 0;*/
+/*    height: 0;*/
+/*    border-top: 40px solid transparent;*/
+/*    border-bottom: 40px solid transparent;*/
+/*    border-right: 40px solid #00fff7;*/
+/*    opacity: 60%;*/
+/*    position: absolute;*/
+/*    margin-right: 90vw;*/
+/*}*/
 
-.arrow-right{
-    display: flex;
-    align-self: center;
-    width: 0;
-    height: 0;
-    border-top: 40px solid transparent;
-    border-bottom: 40px solid transparent;
-    border-left: 40px solid #00fff7;
-    opacity: 60%;
-    position: absolute;
-    margin-left: 90vw;
-}
+/*.arrow-right{*/
+/*    display: flex;*/
+/*    align-self: center;*/
+/*    width: 0;*/
+/*    height: 0;*/
+/*    border-top: 40px solid transparent;*/
+/*    border-bottom: 40px solid transparent;*/
+/*    border-left: 40px solid #00fff7;*/
+/*    opacity: 60%;*/
+/*    position: absolute;*/
+/*    margin-left: 90vw;*/
+/*}*/
 
-.arrow-left, .arrow-right:hover{
-    cursor: pointer;
-    color: #5CFD42;
+/*.arrow-left, .arrow-right:hover{*/
+/*    cursor: pointer;*/
+/*    color: #5CFD42;*/
 
-}
+/*}*/
 
 
 .add-game-button, .favorite-game-button, .remove-game-button, #remove {
@@ -120,12 +115,32 @@ button:active {
     /*column-gap: 25px;*/
 }
 
-.su-card {
-    height: 35vw;
+.su-card{
+    height: 45vh;
     width: 35vw;
+    border: 5px ridge #5CFD42;
+}
+
+.empty-card{
+    color: black;
+    /*text-align: center;*/
+    width: 35vw;
+    border: 5px ridge gold;
+    background-color: gold;
+    opacity: 50%;
+}
+
+.title-card {
+    width: 79vw;
+    height: 10vh;
+    border: 5px ridge black;
+    background-color: black;
+    opacity: 70%;
+}
+
+.su-card, .empty-card, .title-card {
     display: flex;
     flex-direction: column;
-    border: 5px ridge #03ff00;
     border-radius: 3px;
     padding: 15px;
     margin: 30px;
@@ -215,10 +230,13 @@ img.card-img-top {
         text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #ff0000, 0 0 40px #ff0000, 0 0 50px #ff0000, 0 0 60px #ff0000, 0 0 70px #ff0000;
     }
 }
-/*=======*/
+
+.rainbowDash {
+    animation: colorRotate 20s linear 0s infinite !important;
+}
 
 
 
 
 
->>>>>>> main
+
