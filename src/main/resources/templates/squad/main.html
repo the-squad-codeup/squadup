@@ -15,7 +15,7 @@
             <div>
                 <div th:each="squad : ${userSquads}">
                     <div class="purple-card" th:data-squad-id="${squad.id}">
-                        <a class="squad-title" th:text="${squad.name}" th:href="@{/squads/${squad.id}/chat}"></a>
+                        <a class="squad-title" th:text="${squad.name}" th:href="@{|/squads/${squad.id}/chat|}"></a>
                         <div th:each="member : ${squad.members}">
                             <p th:text="${member.username}"></p>
                         </div>
