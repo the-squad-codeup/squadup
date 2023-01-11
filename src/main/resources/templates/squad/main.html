@@ -14,12 +14,12 @@
                 <h1>Active Squads</h1>
             <div>
                 <div th:each="squad : ${userSquads}">
-                    <div class="purple-card">
+                    <div class="purple-card" th:data-squad-id="${squad.id}">
                         <a class="squad-title" th:text="${squad.name}" th:href="@{/squads/${squad.id}/chat}"></a>
                         <div th:each="member : ${squad.members}">
                             <p th:text="${member.username}"></p>
                         </div>
-                        <button type="submit">Disband Squad</button>
+                        <button class="disband-squad-button">Disband Squad</button>
                     </div>
                 </div>
             </div>
