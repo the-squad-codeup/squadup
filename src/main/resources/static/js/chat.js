@@ -73,7 +73,7 @@ $(function() {
         },
         chatMessage(message) {
             SquadChat.squadChatMessagesBox.append(`
-                <div class="single-message-wrapper">
+                <div class="single-message-wrapper" data-user-id="${message.sender.id}">
                     <div class="message-sender-img-wrapper">
                         <img class="message-sender-img" src="${message.sender.profilePicture.url}">
                     </div>
@@ -84,6 +84,10 @@ $(function() {
                         <div class="single-message-content">
                             ${message.content}
                         </div>
+                    </div>
+                    <div class="message-options hidden">
+                        <img class="message-button edit-message-button" src="/Icons/edit.png" alt="">
+                        <img class="message-button delete-message-button" src="/Icons/trash.png" alt="">
                     </div>
                 </div>
             `);

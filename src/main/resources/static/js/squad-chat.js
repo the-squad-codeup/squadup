@@ -58,7 +58,7 @@ $(function() {
         },
         singleMessage(message) {
             SquadChat.messageBoxDiv.append(`
-                <div class="single-message-wrapper">
+                <div class="single-message-wrapper" data-user-id="${message.sender.id}">
                     <div class="message-sender-img-wrapper">
                         <img class="message-sender-img" src="${message.sender.profilePicture.url}">
                     </div>
@@ -70,12 +70,33 @@ $(function() {
                             ${message.content}
                         </div>
                     </div>
+                    <div class="message-options hidden">
+                        <img class="message-button edit-message-button" src="/Icons/edit.png" alt="">
+                        <img class="message-button delete-message-button" src="/Icons/trash.png" alt="">
+                    </div>
                 </div>
             `);
         },
         async squadPicture() {
             let squadPicture = await Fetch.Get.squadPicture();
             $('.squad-image').css('background-image', `url("${squadPicture.url}")`);
+        },
+        async squadUserDetails() {
+            let squadOwner = await Fetch.Get.squadOwner();
+            let currentUser = await Fetch.Get.currentUser();
+            let isOwner = squadOwner.id === currentUser.id
+            // await $("head").append(`
+            //     <script type="text/javascript">
+            //         const squadUser = {
+            //             id: ${currentUser.id},
+            //             username: ${currentUser.username},
+            //             isOwner: ${isOwner}
+            //         };
+            //     </script>
+            // `);
+            $("body").prepend(`
+                <div hidden id="user-details-div" data-user-id="${currentUser.id}" data-is-owner="${isOwner}">
+            `);
         }
     };
 
@@ -95,6 +116,12 @@ $(function() {
             },
             async squadPicture() {
                 return await fetch(`${Utils.url()}squads/${SquadChat.squadId}/picture`).then(res => res.json());
+            },
+            async squadOwner() {
+                return await fetch(`${Utils.url()}squads/${SquadChat.squadId}/owner`).then(res => res.json());
+            },
+            async currentUser() {
+                return await fetch(`${Utils.url()}user/get`).then(res => res.json());
             }
         },
         Post: {
@@ -111,17 +138,34 @@ $(function() {
     }
 
     const Events = {
-        initialize() {
-            $(window)
-                .ready(function() {
+        async initialize() {
+            await $(window)
+                .ready(async function() {
                     Print.inviteOptions();
                     Print.currentSquadMembers();
                     Print.messageHistory();
                     Print.squadPicture();
+                    await Print.squadUserDetails();
                 })
             ;
             $(document)
                 .on("click", "#invite-users-button", SquadChat.inviteUser)
+                .on("mouseenter", ".single-message-wrapper", function() {
+                    if($("#user-details-div").attr("data-user-id") === $(this).attr("data-user-id")) {
+                        $(this).find(".message-options").removeClass("hidden");
+                    }
+                })
+                .on("mouseleave", ".single-message-wrapper", function () {
+                    if($("#user-details-div").attr("data-user-id") === $(this).attr("data-user-id")) {
+                        $(this).find(".message-options").addClass("hidden");
+                    }
+                })
+                .on("click", ".edit-message-button", function() {
+
+                })
+                .on("click", ".delete-message-button", function() {
+
+                })
             ;
         }
     };
