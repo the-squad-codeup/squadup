@@ -85,6 +85,7 @@
     background-position: center;
     margin-top: 20.5vw;
     margin-left: 4vw;
+    overflow: hidden;
     position: absolute;
     border: solid #5CFD42 0.3vw;
 }
@@ -144,13 +145,14 @@
     position: absolute;
     margin-top: 14vw;
     margin-left: 15.5vw;
+    cursor: pointer;
 }
 #favorite-icon{
-    width: 10vw;
-    height: 10vw;
+    width: 12vw;
+    height: 12vw;
     position: absolute;
-    margin-top: -3.3vw;
-    margin-left: 10.7vw;
+    margin-top: -4.2vw;
+    margin-left: 9.5vw;
     transform: rotate(225deg);
 }
 #location-icon{
