@@ -16,7 +16,7 @@ public class SquadChat {
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "chat")
     private Squad squad;
 
-    @OneToMany(mappedBy = "chat")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "chat")
     private Set<SquadChatMessage> messages;
 
     public SquadChat() {

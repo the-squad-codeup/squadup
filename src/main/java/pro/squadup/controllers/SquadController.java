@@ -115,4 +115,13 @@ public class SquadController {
         Squad squad = squadDao.findById(squadId).get();
         return squadChatMessageDao.findAllByChat(squad.getChat());
     }
+
+    @PostMapping("/squads/{squadId}/delete")
+    public @ResponseBody void deleteSquad(@PathVariable Long squadId) {
+        User currentUser = userDao.findById(Utils.currentUserId()).get();
+        Squad squadToDelete = squadDao.findById(squadId).get();
+        if(squadToDelete.getOwner().equals(currentUser)) {
+            squadDao.delete(squadToDelete);
+        }
+    }
 }
