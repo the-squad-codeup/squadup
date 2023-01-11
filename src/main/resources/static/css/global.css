@@ -69,8 +69,8 @@ button:active {
 }
 
 
-#page-wrapper {
-    margin: 60px 0px;
+#page-wrapper, .page-wrapper {
+    margin: 60px 0;
     color: white;
 }
 

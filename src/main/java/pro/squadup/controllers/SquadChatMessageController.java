@@ -20,26 +20,4 @@ public class SquadChatMessageController {
         this.userDao = userDao;
         this.squadChatMessageDao = squadChatMessageDao;
     }
-
-    @PostMapping("/messages/{messageId}/edit")
-    public SquadChatMessage editMessage(@PathVariable Long messageId, @RequestBody SquadChatMessage message) {
-        SquadChatMessage messageToEdit = squadChatMessageDao.findById(messageId).get();
-        User currentUser = userDao.findById(Utils.currentUserId()).get();
-        if(message.getSender().equals(currentUser) && messageToEdit.getSender().equals(currentUser) && message.getId() == messageToEdit.getId()) {
-            messageToEdit.setContent(message.getContent());
-            messageToEdit.setEdited(true);
-            squadChatMessageDao.save(messageToEdit);
-        }
-        return messageToEdit;
-    }
-
-    @PostMapping("/messages/{messageId}/delete")
-    public SquadChatMessage deleteMessage(@PathVariable Long messageId) {
-        SquadChatMessage messageToDelete = squadChatMessageDao.findById(messageId).get();
-        User currentUser = userDao.findById(Utils.currentUserId()).get();
-        if(messageToDelete.getSender().equals(currentUser)) {
-            squadChatMessageDao.delete(messageToDelete);
-        }
-        return messageToDelete;
-    }
 }

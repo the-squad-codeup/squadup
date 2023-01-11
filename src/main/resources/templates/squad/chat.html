@@ -10,11 +10,11 @@
 <body>
 <nav th:replace="partials :: siteBar"></nav>
 <div id="page-wrapper">
+    <div id="squad-img-wrapper">
+        <div class="squad-image"></div>
+        <img id="upload-squad-picture" class="hidden" th:src="@{/Icons/edit.png}" alt="">
+    </div>
     <div id="squad-chat-wrapper">
-        <div id="squad-img-wrapper">
-            <div class="squad-image"></div>
-            <img id="upload-squad-picture" class="hidden" th:src="@{/Icons/edit.png}" alt="">
-        </div>
         <div id="squad-title-wrapper">
             <div id="squad-title" th:data-squad-id="${squad.id}" th:text="${squad.name}"></div>
         </div>

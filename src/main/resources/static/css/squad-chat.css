@@ -115,6 +115,18 @@
     justify-content: center;
 }
 
+.message-edit-button-wrapper {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+.was-edited {
+    margin-left: 1em;
+    font-size: x-small;
+    filter: brightness(60%);
+}
+
 .message-button {
     width: 2em;
     height: 2em;
