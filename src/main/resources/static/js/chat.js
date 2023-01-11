@@ -71,15 +71,19 @@ $(function() {
         leaveMessage(message) {
             console.log(`${message.sender.username} left :(`);
         },
-        chatMessage(message) {
-            SquadChat.squadChatMessagesBox.append(`
+        SquadChat.squadChatMessagesBox.append(`
                 <div class="single-message-wrapper" data-user-id="${message.sender.id}">
                     <div class="message-sender-img-wrapper">
                         <img class="message-sender-img" src="${message.sender.profilePicture.url}">
                     </div>
                     <div class="single-message-content-wrapper">
-                        <div class="single-message-timestamp">
-                            ${message.timestamp}
+                        <div class="single-message-top-wrapper">
+                            <div class="single-message-username">
+                                ${message.sender.username}
+                            </div>
+                            <div class="single-message-timestamp">
+                                ${message.timestamp}
+                            </div>
                         </div>
                         <div class="single-message-content">
                             ${message.content}
@@ -91,6 +95,7 @@ $(function() {
                     </div>
                 </div>
             `);
+        chatMessage(message) {
             SquadChat.scrollToBottom();
         },
         messageHistory() {

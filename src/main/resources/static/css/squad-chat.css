@@ -82,13 +82,34 @@
     position: relative;
     width: 100%;
     display: flex;
+    margin: .5em 0;
+}
+
+.single-message-content-wrapper {
+    width: 100%;
+}
+
+.single-message-top-wrapper {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.single-message-timestamp {
+    font-size: x-small;
+    filter: brightness(60%);
+    margin-left: 1em;
+}
+
+.single-message-content {
     padding-right: 4em;
 }
 
 .message-options {
     position: absolute;
     right: 0;
-    top: 0;
+    bottom: 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -106,6 +127,7 @@
 
 .message-sender-img-wrapper {
     width: 3em;
+    margin-right: .5em;
 }
 
 #chat-sidebar-wrapper {
