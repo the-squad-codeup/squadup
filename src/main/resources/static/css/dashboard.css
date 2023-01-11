@@ -6,25 +6,20 @@
     padding: 20px;
 }
 
-h2 {
-    margin-bottom: -36vw;
+h1 {
     text-align: center;
 }
 
 .card-body {
     display: flex;
-    /*nowrap for slider*/
     flex-wrap: wrap;
-    flex-direction: row;
+    /*flex-direction: column;*/
+    /*align-items: center;*/
     justify-content: center;
     border: ridge 12px;
-    /*border: outset 12px;*/
     border-color: var(--bs-gamergreen) !important;
-    /*background: rgba(33, 37, 41, .3);*/
-    padding: 40px;
-    margin: 20px;
-    margin-top: 50px;
-    /*width: 360px;*/
+    padding: 15px;
+    margin: 15px;
 }
 
 
@@ -120,12 +115,33 @@ button:active {
     /*column-gap: 25px;*/
 }
 
-.su-card {
-    height: 35vw;
+.su-card{
+    height: 45vh;
     width: 35vw;
+    border: 5px ridge #5CFD42;
+}
+
+.empty-card{
+    color: black;
+    /*text-align: center;*/
+    width: 35vw;
+    border: 5px ridge gold;
+    background-color: gold;
+    opacity: 50%;
+}
+
+.title-card {
+    color: black;
+    width: 79vw;
+    height: 10vh;
+    border: 5px ridge white;
+    background-color: white;
+    opacity: 70%;
+}
+
+.su-card, .empty-card, .title-card {
     display: flex;
     flex-direction: column;
-    border: 5px ridge #03ff00;
     border-radius: 3px;
     padding: 15px;
     margin: 30px;

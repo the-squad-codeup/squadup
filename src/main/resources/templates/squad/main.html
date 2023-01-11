@@ -11,6 +11,7 @@
     <div class="green-container">
 
         <div class="green-card">
+
                 <h1>Active Squads</h1>
             <div>
                 <div th:each="squad : ${userSquads}">
@@ -20,7 +21,9 @@
                             <p th:text="${member.username}"></p>
                         </div>
                         <button class="disband-squad-button">Disband Squad</button>
+
                     </div>
+                        </div>
                 </div>
             </div>
         </div>
