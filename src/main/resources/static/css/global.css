@@ -71,8 +71,8 @@ button:active {
 }
 
 
-#page-wrapper {
-    margin: 60px 0px;
+#page-wrapper, .page-wrapper {
+    margin: 60px 0;
     color: white;
 }
 
@@ -132,6 +132,43 @@ img {
         box-shadow: 0px 0px 20px 10px #ff0000;
     }
 }
+
+.rgb {
+    animation: rgb 20s linear 0s infinite;
+}
+
+@keyframes rgb {
+    from {
+        border-color: #ff0000;
+    }
+    12.5% {
+        /*border-color: #0099ff;*/
+        border-color: #ff8000;
+    }
+    25% {
+        /*border-color: #0099ff;*/
+        border-color: #ffea00;
+    }
+    37.5% {
+        border-color: #37ff00;
+    }
+    50% {
+        border-color: #00fff7;
+    }
+    65.5% {
+        border-color: #0077ff;
+    }
+    75% {
+        border-color: #8251ff;
+    }
+    87.5% {
+        border-color: #e600ff;
+    }
+    100% {
+        border-color: #ff0000;
+    }
+}
+
 .glow-text {
     color: #fff;
     animation: glow-text 20s linear 0s infinite;

@@ -10,6 +10,9 @@ $(function() {
         },
         async acceptSquadInvite(squadId) {
             return await Fetch.Post.acceptSquadInvite(squadId);
+        },
+        async deleteSquad(squadId) {
+            Fetch.Post.deleteSquad(squadId);
         }
     };
 
@@ -31,6 +34,15 @@ $(function() {
                     }
                 };
                 return await fetch(`${Utils.url()}invites/${squadId}/accept`, fetchOptions).then(res => res.json());
+            },
+            async deleteSquad(squadId) {
+                let fetchOptions = {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN' : SquadMain.csrfToken
+                    }
+                };
+                return await fetch(`${Utils.url()}squads/${squadId}/delete`, fetchOptions).then(res => res.json());
             }
         }
     };
@@ -42,14 +54,14 @@ $(function() {
                 this.singleSquad(squad);
             }
         },
-        singleSquad(squad) {
-            $("#active-squads-div").append(`
-                <div data-squad-id="${squad.id}">
-                    <br>
-                    <a href="/squads/${squad.id}/chat">${squad.name}</a>
-                </div>
-            `);
-        },
+        // singleSquad(squad) {
+        //     $("#active-squads-div").append(`
+        //         <div data-squad-id="${squad.id}">
+        //             <br>
+        //             <a href="/squads/${squad.id}/chat">${squad.name}</a>
+        //         </div>
+        //     `);
+        // },
         async currentInvites() {
             console.log("Inside currentInvites. currentInvites: ");
             let invitesDiv = $("#squad-invites-div");
@@ -85,6 +97,12 @@ $(function() {
                     console.log(acceptedSquad);
                     Print.singleSquad(acceptedSquad);
                 })
+                .on("click", ".disband-squad-button", async function() {
+                    let squadId = $(this).parent().attr("data-squad-id");
+                    await SquadMain.deleteSquad(squadId);
+                    $(this).parent().remove();
+                })
+            ;
         }
     };
 
