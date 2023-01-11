@@ -1,12 +1,15 @@
 import { Utils } from "./utils.js";
 
 $(function() {
-    console.log("Inside squad-chat.js");
 
     const SquadChat = {
         csrfToken: $("meta[name='_csrf']").attr("content"),
         squadId: $("#squad-title").attr("data-squad-id"),
-        messageBoxDiv: $("#chat-messages-div"),
+        stompClient: null,
+        topic: null,
+        currentSubscription: null,
+        messageInputBox: $("#chat-text-input"),
+        messageOutputBox: $("#chat-messages-div"),
         initialize() {
             Events.initialize();
         },
@@ -17,10 +20,69 @@ $(function() {
         },
         scrollToBottom() {
             document.getElementById("chat-messages-div-wrapper").scrollTo(0, document.getElementById("chat-messages-div").scrollHeight);
+        },
+        recentMessage(message) {
+            let lastMessage = SquadChat.messageOutputBox.children().last();
+            if(lastMessage[0].previousElementSibling != null && lastMessage[0].attributes[1].nodeValue === lastMessage[0].previousElementSibling.attributes[1].nodeValue) {
+                let prevMessageTime = Utils.dateStringToJSDate(lastMessage.prev().find(".single-message-timestamp").text().trim()).getTime();
+                let thisMessageTime = Utils.dateStringToJSDate(message.timestamp).getTime();
+                return thisMessageTime - prevMessageTime < 60000;
+            }
+            return false;
+        }
+    };
+
+    const Socket = {
+        connect() {
+            let socket = new SockJS("/secured/squad-sock");
+            SquadChat.stompClient = Stomp.over(socket);
+            SquadChat.stompClient.connect({'X-CSRF-TOKEN': $("meta[name='_csrf']").attr("content")}, this.onConnected, this.onError);
+        },
+        onConnected() {
+            Socket.enterSquad(SquadChat.squadId);
+        },
+        onError(error) {
+        },
+        enterSquad(squadId) {
+            SquadChat.topic = `/secured/squad-app/squad-chat/${squadId}`;
+            SquadChat.currentSubscription = SquadChat.stompClient.subscribe(`/secured/squad-room/${squadId}`, this.onMessageReceived);
+            SquadChat.stompClient.send(`${SquadChat.topic}/add-user`, {}, JSON.stringify({messageType: 'JOIN'}));
+        },
+        leaveSquad(squadId) {
+            SquadChat.topic = `/secured/squad-app/squad-chat/${squadId}`;
+            SquadChat.stompClient.send(`${SquadChat.topic}add-user`, {}, JSON.stringify({messageType: 'LEAVE'}));
+            SquadChat.currentSubscription = SquadChat.stompClient.unsubscribe();
+        },
+        sendMessage() {
+            let messageContent = SquadChat.messageInputBox.val();
+            SquadChat.topic = `/secured/squad-app/squad-chat/${SquadChat.squadId}`;
+            if(messageContent && SquadChat.stompClient) {
+                let chatMessage = {
+                    content: messageContent,
+                    messageType: 'CHAT'
+                };
+                SquadChat.stompClient.send(`${SquadChat.topic}/send`, {}, JSON.stringify(chatMessage));
+            }
+            SquadChat.messageInputBox.val("");
+        },
+        async onMessageReceived(payload) {
+            let message = JSON.parse(payload.body);
+            if(message.messageType === 'JOIN') {
+                Print.joinMessage(message);
+            } else if(message.messageType === 'LEAVE') {
+                Print.leaveMessage(message);
+            } else {
+                await Print.singleMessage(message);
+                SquadChat.scrollToBottom();
+            }
         }
     };
 
     const Print = {
+        joinMessage(message) {
+        },
+        leaveMessage(message) {
+        },
         async inviteOptions() {
             let squadMemberIds = (await Fetch.Get.squadMembers()).map(member => member.id);
             let squadInviteIds = (await Fetch.Get.currentInvitees()).map(invitee => invitee.id);
@@ -57,13 +119,13 @@ $(function() {
             SquadChat.scrollToBottom();
         },
         singleMessage(message) {
-            SquadChat.messageBoxDiv.append(`
+            SquadChat.messageOutputBox.append(`
                 <div class="single-message-wrapper" data-user-id="${message.sender.id}">
                     <div class="message-sender-img-wrapper">
-                        <img class="message-sender-img" src="${message.sender.profilePicture.url}">
+                        <img class="message-sender-img soft-hidden" src="${message.sender.profilePicture.url}">
                     </div>
                     <div class="single-message-content-wrapper">
-                        <div class="single-message-top-wrapper">
+                        <div class="single-message-top-wrapper hidden">
                             <div class="single-message-username">
                                 ${message.sender.username}
                             </div>
@@ -81,6 +143,11 @@ $(function() {
                     </div>
                 </div>
             `);
+            if(!SquadChat.recentMessage(message)) {
+                let children = SquadChat.messageOutputBox.children();
+                children.last().find(".message-sender-img").removeClass("soft-hidden");
+                children.last().find(".single-message-top-wrapper").removeClass("hidden");
+            }
         },
         async squadPicture() {
             let squadPicture = await Fetch.Get.squadPicture();
@@ -135,6 +202,7 @@ $(function() {
 
     const Events = {
         async initialize() {
+            await Socket.connect();
             await $(window)
                 .ready(async function() {
                     Print.inviteOptions();
@@ -145,6 +213,12 @@ $(function() {
                 })
             ;
             $(document)
+                .on("click", "#chat-send-button", Socket.sendMessage)
+                .on("keyup", function(e) {
+                    if($("#chat-text-input").is(":focus") && e.key === "Enter") {
+                        $("#chat-send-button").trigger("click");
+                    }
+                })
                 .on("click", "#invite-users-button", SquadChat.inviteUser)
                 .on("mouseenter", ".single-message-wrapper", function() {
                     if($("#user-details-div").attr("data-user-id") === $(this).attr("data-user-id")) {
