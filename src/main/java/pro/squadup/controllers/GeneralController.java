@@ -1,19 +1,31 @@
 package pro.squadup.controllers;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import pro.squadup.models.Stray;
-import pro.squadup.repositories.StrayRepository;
+import pro.squadup.models.*;
+import pro.squadup.repositories.*;
+import pro.squadup.utils.Utils;
+
+import java.util.Set;
 
 @Controller
 public class GeneralController {
 
     private final StrayRepository strayDao;
+    private final UserRepository userDao;
+    private final SquadRepository squadDao;
+    private final ComradeRepository comradeDao;
+    private final RecruitRepository recruitDao;
 
-    public GeneralController(StrayRepository strayDao) {
+    public GeneralController(StrayRepository strayDao, UserRepository userDao, SquadRepository squadDao, ComradeRepository comradeDao, RecruitRepository recruiteDao) {
         this.strayDao = strayDao;
+        this.userDao = userDao;
+        this.squadDao = squadDao;
+        this.comradeDao = comradeDao;
+        this.recruitDao = recruiteDao;
     }
 
     @GetMapping("/")
@@ -38,7 +50,10 @@ public class GeneralController {
     }
 
     @GetMapping("/dashboard")
-    public String showHomePage() {
+    public String showHomePage(Model model) {
+        User currentUser = userDao.findById(Utils.currentUserId()).get();
+        Set<Squad> squads = squadDao.findAllByMembers(currentUser);
+        model.addAttribute("userSquads", squads);
         return "general/dashboard";
     }
 }
