@@ -21,7 +21,17 @@
     background: rgba(33, 37, 41, .3);
 }
 
-.create-squad, .purple-card {
+.create-squad {
+    margin: 2vw;
+    width: 20vw;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border: ridge 12px;
+    border-color: var(--bs-lighterpurp) !important;
+}
+
+.purple-card{
     margin: 2vw;
     width: 20vw;
     display: flex;
