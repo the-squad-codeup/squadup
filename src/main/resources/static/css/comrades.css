@@ -1,43 +1,4 @@
-#page-wrapper{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.green-container{
-    display: flex;
-    justify-content: space-between;
-    border: ridge #5CFD42 .5vw;
-    margin: auto;
-    width: 95vw;
-    height: 100vh;
-}
-
-.green-card {
-    margin: 2vw;
-    width: 75vw;
-    border: ridge 12px;
-    border-color: var(--bs-gamergreen) !important;
-    background: rgba(33, 37, 41, .3);
-}
-
-.create-squad, .purple-card {
-    margin: 2vw;
-    width: 20vw;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    border: ridge 12px;
-    border-color: var(--bs-lighterpurp) !important;
-}
-
-.invite-buttons {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.squads {
+.comrades {
     /*font-size: 80px;*/
     color: #fff;
     /*text-align: center;*/
@@ -73,17 +34,3 @@
         text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #ff0000, 0 0 40px #ff0000, 0 0 50px #ff0000, 0 0 60px #ff0000, 0 0 70px #ff0000;
     }
 }
-h1 {
-    text-align: center;
-    border-bottom: ridge 3px #5CFD42;
-}
-
-h3 {
-    text-align: center;
-    border-bottom: ridge 3px #5CFD42;
-}
-/*    h1, h3 {*/
-/*        text-align: center;*/
-/*        border-bottom: ridge 3px #5CFD42;*/
-/*        !*>>>>>>> main*!*/
-/*    }*/
