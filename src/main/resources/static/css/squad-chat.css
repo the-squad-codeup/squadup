@@ -14,6 +14,23 @@
     align-items: center;
 }
 
+#squad-img-wrapper {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 8em;
+    height: 8em;
+    background-position: center;
+    background-size: cover;
+    background-image: url("https://cdn.filestackcontent.com/dynXYf9AS26ImuqTgUPj");
+}
+
+#upload-squad-picture {
+    position: absolute;
+    left: 7em;
+    top: 7em;
+}
+
 #squad-title-wrapper {
     width: 100%;
     height: 4em;

@@ -63,7 +63,7 @@ $(async function() {
                 console.log(file);
                 let uploadedPicture = await Fetch.Post.profilePicture(file, FileStack.csrfToken).then(res => res);
                 console.log(uploadedPicture);
-                $('.squad-image').css('background-image', `url("${uploadedPicture.url}")`)
+                $('.profile-image').css('background-image', `url("${uploadedPicture.url}")`)
             }
         },
         squadOptions: {
@@ -80,13 +80,7 @@ $(async function() {
                 console.log(file);
                 let uploadedPicture = await Fetch.Post.squadPicture(file, FileStack.csrfToken).then(res => res);
                 console.log(uploadedPicture);
-                $('.profile-image').css('background-image', `url("${uploadedPicture.url}")`)
-                // $("#pic-div").append(`
-                //     <img src="${uploadedPicture.url}">
-                // `);
-                // $("#navbar-profile-image").parent().empty().append(`
-                //     <img id="navbar-profile-image" src="${uploadedPicture.url}" style="max-height: 1.75em; max-width: 1.75em;">
-                // `);
+                $('.squad-image').css('background-image', `url("${uploadedPicture.url}")`);
             }
         },
         filestackKey: await Fetch.Get.filestackKey().then(res => res),
@@ -95,9 +89,14 @@ $(async function() {
 
     const Events = {
         initialize() {
-            $(document).on("click", "#upload-profile-picture", function() {
-                FileStack.client.picker(FileStack.userProfileOptions).open();
-            });
+            $(document)
+                .on("click", "#upload-profile-picture", function() {
+                    FileStack.client.picker(FileStack.userProfileOptions).open();
+                })
+                .on("click", "#upload-squad-picture", function() {
+                    FileStack.client.picker(FileStack.squadOptions).open();
+                })
+            ;
         }
     }
 

@@ -72,6 +72,10 @@ $(function() {
                     </div>
                 </div>
             `);
+        },
+        async squadPicture() {
+            let squadPicture = await Fetch.Get.squadPicture();
+            $('.squad-image').css('background-image', `url("${squadPicture.url}")`);
         }
     };
 
@@ -88,6 +92,9 @@ $(function() {
             },
             async squadMessages() {
                 return await fetch(`${Utils.url()}squads/${SquadChat.squadId}/messages`).then(res => res.json());
+            },
+            async squadPicture() {
+                return await fetch(`${Utils.url()}squads/${SquadChat.squadId}/picture`).then(res => res.json());
             }
         },
         Post: {
@@ -110,6 +117,7 @@ $(function() {
                     Print.inviteOptions();
                     Print.currentSquadMembers();
                     Print.messageHistory();
+                    Print.squadPicture();
                 })
             ;
             $(document)
