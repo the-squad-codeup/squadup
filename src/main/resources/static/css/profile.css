@@ -149,9 +149,9 @@
     width: 10vw;
     height: 10vw;
     position: absolute;
-    margin-top: -2.3vw;
-    margin-left: 9.8vw;
-    transform: rotate(45deg);
+    margin-top: -3.3vw;
+    margin-left: 10.7vw;
+    transform: rotate(225deg);
 }
 #location-icon{
     width: 3vw;

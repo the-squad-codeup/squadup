@@ -48,12 +48,13 @@ public class ProfilePictureController {
 //            System.out.println("Inside conditional, currentPicture is not null. Deleting currentPicture");
 //            profilePictureDao.deleteById(currentPicture.getId());
 //        }
+        userDao.save(user);
+        picture.setUser(user);
+        profilePictureDao.save(picture);
         if(currentPicture != null) {
             System.out.println("Inside conditional, currentPicture is not null. Deleting currentPicture");
             profilePictureDao.deleteById(currentPicture.getId());
         }
-        picture.setUser(user);
-        profilePictureDao.save(picture);
         return picture;
     }
 

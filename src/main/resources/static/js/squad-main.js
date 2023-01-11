@@ -89,4 +89,5 @@ $(function() {
     };
 
     SquadMain.initialize();
+
 });

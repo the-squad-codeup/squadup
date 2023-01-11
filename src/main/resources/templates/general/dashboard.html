@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns="http://www.w3.org/1999/html">
 <head>
     <div th:replace="partials :: headFragment('Home Page')"></div>
     <link rel="stylesheet" th:href="@{/css/games.css}">
@@ -11,47 +11,52 @@
     <nav th:replace="partials :: siteBar"></nav>
     <div id="page-wrapper" class="card-head">
         <!--ROUGH DRAFT:::: to display Current User logged in-->
-        <div class="dash-cam">
-            <div class="user-info" sec:authorize="isAuthenticated()"><h5>Welcome back to HeadQuarters,
-                <span th:text="${#authentication.principal.username}"/>!</h5>
+        <div class="card-pro">
+            <div class="card-body user-info" sec:authorize="isAuthenticated()"><h1>Welcome back to HeadQuarters,
+                    <span th:text="${#authentication.principal.username}"/>!</h1>
 
-                User ID: <span th:text="${#authentication.principal.id}"/><br>
-                Email: <span th:text="${#authentication.principal.email}"/>
+<!--                User ID: <span th:text="${#authentication.principal.id}"/><br>-->
+<!--                Email: <span th:text="${#authentication.principal.email}"/>-->
             </div>
         </div>
         <div id="new-wrapper">
-            <div class="card-body">
-                <!--ROUGH DRAFT::::Display User Games-->
-                <div class="dash-cam">
-                    <h1>My Games</h1>
-                    <div id="my-games" class="row container"></div>
-                </div>
-            </div>
-            <div class="card-body">
+<!--GAMES MAY OR MAYNOT BE INCLUDED IN FINAL PRODUCTION-->
+<!--            <h2>My Games</h2>-->
+<!--            <div class="card-body">-->
+<!--                &lt;!&ndash;ROUGH DRAFT::::Display User Games&ndash;&gt;-->
+
+<!--                <div id="games-div" class="row container p-5"></div>-->
+<!--                -->
+<!--            </div>-->
+
+            <h2>Check on your Comrades</h2>
+            <div id="arrowsBtnCom" class="card-body">
+
                 <!--ROUGH DRAFT::::Displaying Comrades-->
-                <div class="dash-cam">
-                    <h1>My Comrades</h1>
-                    <div>
-                        <section id="card-com" class="row container">
-                        </section>
-                    </div>
-                </div>
-            </div>
-            <div class="card-body">
-                <div class="dash-cam">
-                    <!--ROUGH DRAFT::::Displaying New Recruits-->
-                    <h1>My Recruits</h1>
-                    <section id="card-rec" class="row container">
-                    </section>
-                </div>
+                    <div class="arrow-left"></div>
+
+                        <section id="card-com" class="row"></section>
+
+                    <div class="arrow-right"></div>
+
             </div>
 
-            <!--ROUGH DRAFT::::Displaying Squads -->
+            <h2>Check out these new recruits</h2>
+            <div id="arrowsBtnRec" class="card-body">
 
+                <!--ROUGH DRAFT::::Displaying New Recruits-->
+                    <div class="arrow-left"></div>
+                            <section id="card-rec" class="row"></section>
+                    <div id="arrowsBtnRecR" class="arrow-right"></div>
 
-
-        </div>
+            </div>
     </div>
+
+<!--            ROUGH DRAFT::::Displaying Squads-->
+
+
+
+
 <nav th:replace="partials :: footer"></nav>
 <div th:replace="partials :: scripts"></div>
 <script th:type="module" th:src="@{/js/games.js}"></script>

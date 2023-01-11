@@ -1,4 +1,41 @@
+.squads-container, .green-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border: solid #5CFD42 .5vw;
+    margin: auto;
+    width: 95vw;
+    height: 100vh;
+}
+
+
+.active-squads, .green-card {
+    /*align-items: center;*/
+    /*justify-content: center;*/
+    width: 75vw;
+    border: ridge 12px;
+    border-color: var(--bs-gamergreen) !important;
+    background: rgba(33, 37, 41, .3);
+}
+
+.create-squad, .purple-card {
+    margin: 2vw;
+    width: 20vw;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border: ridge 12px;
+    border-color: var(--bs-lighterpurp) !important;
+    /*margin-top: 5%;*/
+}
+
 .invite-buttons {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
+}
+
+h1, h3 {
+    text-align: center;
+    border-bottom: ridge 3px #5CFD42;
 }

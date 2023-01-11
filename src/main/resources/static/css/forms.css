@@ -33,17 +33,17 @@
  /*END of About us edits*/
 
 /*=========button format for form pages==========*/
-#emailSend, #signupPasswordSubmit, #loginPasswordSubmit {
-    margin: 2%;
-    border: var(--bs-gamergreen) ridge 5px;
-    border-radius: 8px;
-    background-color: dimgray;
-}
+/*#emailSend, #signupPasswordSubmit, #loginPasswordSubmit, .btn {*/
+/*    margin: 2%;*/
+/*    border: var(--bs-gamergreen) ridge 5px;*/
+/*    border-radius: 8px;*/
+/*    background-color: dimgray;*/
+/*}*/
 
-button:active {
-    box-shadow: 0 5px black;
-    transform: translateY(4px);
-}
+/*button:active {*/
+/*    box-shadow: 0 5px black;*/
+/*    transform: translateY(4px);*/
+/*}*/
 
 /*=========text input format for form pages login and contact us==========*/
 
