@@ -2,7 +2,7 @@
     height: 46vw;
     width: 95%;
     border: solid #5CFD42 .5vw;
-    margin: auto;
+    margin: 1vw auto;
 }
 #page-wrapper{
     display: flex;
@@ -151,8 +151,8 @@
     width: 12vw;
     height: 12vw;
     position: absolute;
-    margin-top: -4.2vw;
-    margin-left: 9.5vw;
+    margin-top: -4.25vw;
+    margin-left: 9.75vw;
     transform: rotate(225deg);
 }
 #location-icon{
