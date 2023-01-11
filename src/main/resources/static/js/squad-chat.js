@@ -43,8 +43,12 @@ $(function() {
             console.log(`Inside editMessage. Message ID is ${messageId}, and the content is: ${content}`);
             Socket.editMessage(messageId, content);
         },
-        deleteMessage(messageId) {
-
+        deleteMessage(messageDiv) {
+            console.log("Inside SquadChat.deleteMessage. messageDiv:");
+            console.log(messageDiv);
+            let messageId = messageDiv.attr("data-message-id");
+            console.log(`messageId: ${messageId}`);
+            Socket.deleteMessage(messageId);
         }
     };
 
@@ -84,12 +88,25 @@ $(function() {
         editMessage(messageId, messageContent) {
             SquadChat.topic = `/secured/squad-app/squad-chat/${SquadChat.squadId}`;
             if(messageContent && SquadChat.stompClient) {
-                let chatMessage = {
+                let editMessage = {
                     id: messageId,
                     content: messageContent,
                     messageType: 'EDIT'
-                }
-                SquadChat.stompClient.send(`${SquadChat.topic}/edit`, {}, JSON.stringify(chatMessage));
+                };
+                SquadChat.stompClient.send(`${SquadChat.topic}/edit`, {}, JSON.stringify(editMessage));
+            }
+        },
+        deleteMessage(messageId) {
+            console.log("Inside Socket.deleteMessage");
+            SquadChat.topic = `/secured/squad-app/squad-chat/${SquadChat.squadId}`;
+            if(messageId && SquadChat.stompClient) {
+                let deleteMessage = {
+                    id: messageId,
+                    messageType: 'DELETE'
+                };
+                console.log("deleteMessage object:");
+                console.log(deleteMessage);
+                SquadChat.stompClient.send(`${SquadChat.topic}/delete`, {}, JSON.stringify(deleteMessage));
             }
         },
         async onMessageReceived(payload) {
@@ -98,13 +115,13 @@ $(function() {
                 Print.joinMessage(message);
             } else if(message.messageType === 'LEAVE') {
                 Print.leaveMessage(message);
+            } else if(message.messageType === 'EDIT') {
+                await Print.editMessage(message);
+            } else if(message.messageType === 'DELETE') {
+                await Print.deleteMessage(message);
             } else {
-                if($("#chat-messages-div").find(`[data-message-id="${message.id}"]`).length < 1) {
-                    await Print.singleMessage(message);
-                    SquadChat.scrollToBottom();
-                } else {
-                    await Print.editMessage(message);
-                }
+                await Print.singleMessage(message);
+                SquadChat.scrollToBottom();
             }
         }
     };
@@ -194,6 +211,11 @@ $(function() {
             SquadChat.messageOutputBox.find(`[data-message-id="${message.id}"]`).find(".single-message-content").append(`
                     <span class="was-edited">(edited)</span>
                 `);
+        },
+        async deleteMessage(message) {
+            console.log("inside Print.deleteMessage. message:")
+            console.log(message)
+            SquadChat.messageOutputBox.find(`[data-message-id="${message.id}"]`).remove();
         },
         async squadPicture() {
             let squadPicture = await Fetch.Get.squadPicture();
@@ -317,14 +339,13 @@ $(function() {
                     $(this).parent().parent().find(".single-message-content span").remove();
                     $(this).parent().parent().find(".single-message-content").attr("contenteditable", "true").focus();
                 })
-                .on("click", ".delete-message-button", function() {
-
+                .on("click", ".delete-message-button", async function() {
+                    console.log("Inside delete message click event");
+                    await SquadChat.deleteMessage($(this).parent().parent());
                 })
             ;
         }
     };
 
     SquadChat.initialize();
-    console.log("This is a test----------------------------------------------------------------------");
-    console.log();
 });
