@@ -1,5 +1,12 @@
+
 #games-div {
     color: white;
+    height: 17vw;
+    width: 70vw;
+    margin-top: 7vw;
+    position: absolute;
+
+    display: flex;
 }
 
 .game-card {
@@ -12,17 +19,101 @@
 
 
 
- h4 {
+ .fav-title {
      color: #5CFD42;
+     height: 2vw;
+
  }
+
 
 
 .games-container{
     /*height: 46vw;*/
     width: 95%;
-    border: solid #5CFD42 .5vw;
     margin: auto;
+    border: solid #5CFD42 .5vw;
 }
+.rainbow {
+    animation: colorRotate 20s linear 0s infinite;
+}
+
+@keyframes colorRotate {
+    from {
+        border-color: #ff0000;
+        box-shadow: 0px 0px 20px 10px #ff0000;
+    }
+    12.5% {
+        /*border-color: #0099ff;*/
+        border-color: #ff8000;
+        box-shadow: 0px 0px 20px 10px #ff8000;
+    }
+    25% {
+        /*border-color: #0099ff;*/
+        border-color: #ffea00;
+        box-shadow: 0px 0px 20px 10px #ffea00;
+    }
+    37.5% {
+        border-color: #37ff00;
+        box-shadow: 0px 0px 20px 10px #37ff00;
+    }
+    50% {
+        border-color: #00fff7;
+        box-shadow: 0px 0px 20px 10px #00fff7;
+    }
+    65.5% {
+        border-color: #0077ff;
+        box-shadow: 0px 0px 20px 10px #0077ff;
+    }
+    75% {
+        border-color: #8251ff;
+        box-shadow: 0px 0px 20px 10px #8251ff;
+    }
+    87.5% {
+        border-color: #e600ff;
+        box-shadow: 0px 0px 20px 10px #e600ff;
+    }
+    100% {
+        border-color: #ff0000;
+        box-shadow: 0px 0px 20px 10px #ff0000;
+    }
+}
+.games {
+    /*font-size: 80px;*/
+    color: #fff;
+    /*text-align: center;*/
+    animation: glow-text 20s linear 0s infinite;
+}
+
+@keyframes glow-text {
+    from {
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #ff0000, 0 0 40px #ff0000, 0 0 50px #ff0000, 0 0 60px #ff0000, 0 0 70px #ff0000;
+    }
+    12.5% {
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #ff8000, 0 0 40px #ff8000, 0 0 50px #ff8000, 0 0 60px #ff8000, 0 0 70px #ff8000;
+    }
+    25% {
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #ffea00, 0 0 40px #ffea00, 0 0 50px #ffea00, 0 0 60px #ffea00, 0 0 70px #ffea00;
+    }
+    37.5% {
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #37ff00, 0 0 40px #37ff00, 0 0 50px #37ff00, 0 0 60px #37ff00, 0 0 70px #37ff00;
+    }
+    50% {
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #00fff7, 0 0 40px #00fff7, 0 0 50px #00fff7, 0 0 60px #00fff7, 0 0 70px #00fff7;
+    }
+    65.5% {
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #0077ff, 0 0 40px #0077ff, 0 0 50px #0077ff, 0 0 60px #0077ff, 0 0 70px #0077ff;
+    }
+    75% {
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #8251ff, 0 0 40px #8251ff, 0 0 50px #8251ff, 0 0 60px #8251ff, 0 0 70px #8251ff;
+    }
+    87.5% {
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e600ff, 0 0 40px #e600ff, 0 0 50px #e600ff, 0 0 60px #e600ff, 0 0 70px #e600ff;
+    }
+    100% {
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #ff0000, 0 0 40px #ff0000, 0 0 50px #ff0000, 0 0 60px #ff0000, 0 0 70px #ff0000;
+    }
+}
+
 
 #favorite-icon{
     width: 10vw;
@@ -32,17 +123,21 @@
     margin-left: 4.2vw;
     transform: rotate(225deg);
 }
-
-/*.my-favorite-game{*/
-/*    height: 24vw;*/
-/*    width: 18vw;*/
-/*    background-size: cover;*/
-/*    background-position: center;*/
-/*    !*margin-top: 20.5vw;*!*/
-/*    !*margin-left: 4vw;*!*/
-/*    !*position: absolute;*!*/
-/*    border: solid #5CFD42 0.3vw;*/
-/*}*/
+.remove-game-button{
+    height: 4vw;
+    width: 4vw;
+    margin-top: -.75vw;
+}
+.favorite-game-button{
+    height: 6vw;
+    width: 6vw;
+    margin-top: -1.75vw;
+}
+.add-game-button{
+    height: 4vw;
+    width: 4vw;
+    margin: -1.5vw auto;
+}
 
 .all-games-img {
 }
@@ -52,7 +147,7 @@
 }
 .track {
     display: inline-flex;
-    height: 17vw;
+    height: 16vw;
     transition: transform 0.2s ease-in-out;
 }
 
@@ -81,11 +176,12 @@
     background-color: #000;
     cursor: pointer;
 }
-.nav .prev {
+.nav .prev, .nav .prev2{
     left: -1vw;
     display: none;
 }
-.nav .prev img{
+
+.nav .prev img, .nav .prev2 img{
     height: 4vw;
     width: 4vw;
     position: absolute;
@@ -94,14 +190,14 @@
     max-width: none;
     transform: rotate(180deg);
 }
-.nav .prev.show {
+.nav .prev.show, .nav .prev2.show{
     display: block;
 }
-.nav .next {
+.nav .next, .nav .next2 {
     right: -0.443vw;
     /*background-image: url('/public/Icons/next.png');*/
 }
-.nav .next img{
+.nav .next img, .nav .next2 img {
     height: 4vw;
     width: 4vw;
     position: absolute;
@@ -109,14 +205,14 @@
     margin-top: -2vw;
     max-width: none;
 }
-.nav .next.hide {
-    display: none;
+.nav .next.hide, .nav .next2.hide {
+    visibility: hidden;
 }
 .my-games{
 
     height: 17vw;
     width: 70vw;
-    margin-top: -19vw;
+    margin-top: -18vw;
     margin-left: 20vw;
     position: absolute;
 
@@ -136,4 +232,89 @@
 .buttons-div{
     margin-top: 14.5vw;
 
+}
+#add-games-container{
+    padding: 4vw;
+    width: 90vw;
+    height: 29vw;
+    margin: 2vw auto;
+    border: 0.3vw;
+    display: flex;
+    justify-content: center;
+}
+#add-games-container p{
+    font-size: 1.25vw;
+    position: absolute;
+    margin-top: 4vw;
+}
+#search-bar{
+    border: solid #5cfd42 0.3vw;
+    height: 3.5vw;
+    position: absolute;
+}
+#game-search-input{
+    width: 40vw;
+    height: 3vw;
+    background-color: #333333;
+    color: #5cfd42;
+
+}
+#game-search-button{
+    width: 3vw;
+    height: 3vw;
+}
+.my-games2{
+
+    height: 17vw;
+    width: 70vw;
+    margin-top: 0vw;
+    margin-left: 20vw;
+    position: absolute;
+
+    display: flex;
+}
+
+.rainbow {
+    animation: colorRotate 20s linear 0s infinite;
+}
+
+@keyframes colorRotate {
+    from {
+        border-color: #ff0000;
+        box-shadow: 0px 0px 20px 10px #ff0000;
+    }
+    12.5% {
+        /*border-color: #0099ff;*/
+        border-color: #ff8000;
+        box-shadow: 0px 0px 20px 10px #ff8000;
+    }
+    25% {
+        /*border-color: #0099ff;*/
+        border-color: #ffea00;
+        box-shadow: 0px 0px 20px 10px #ffea00;
+    }
+    37.5% {
+        border-color: #37ff00;
+        box-shadow: 0px 0px 20px 10px #37ff00;
+    }
+    50% {
+        border-color: #00fff7;
+        box-shadow: 0px 0px 20px 10px #00fff7;
+    }
+    65.5% {
+        border-color: #0077ff;
+        box-shadow: 0px 0px 20px 10px #0077ff;
+    }
+    75% {
+        border-color: #8251ff;
+        box-shadow: 0px 0px 20px 10px #8251ff;
+    }
+    87.5% {
+        border-color: #e600ff;
+        box-shadow: 0px 0px 20px 10px #e600ff;
+    }
+    100% {
+        border-color: #ff0000;
+        box-shadow: 0px 0px 20px 10px #ff0000;
+    }
 }
