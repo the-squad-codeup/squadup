@@ -21,14 +21,14 @@
         </div>
         <div id="new-wrapper" class="card-body">
             <div class="card-body">
-                <h1 class="title-card">Check on your Comrades</h1>
+                <h1 class="title-card rainbowDash glow-text">Check on your Comrades</h1>
                 <section id="card-com" class="row"></section>
             </div>
 
 
 <!--ROUGH DRAFT::::Displaying New Recruits-->
             <div class="card-body">
-                <h1 class="title-card">Check out these new recruits</h1>
+                <h1 class="title-card rainbowDash glow-text">Check out these new recruits</h1>
                 <section id="card-rec" class="row"></section>
             </div>
 
@@ -36,7 +36,7 @@
 
 <!--ROUGH DRAFT::::Displaying Squads-->
             <div th:if="${userSquads}" class="card-body">
-                <h1 class="title-card">Active Squads</h1>
+                <h1 class="title-card rainbowDash glow-text">Active Squads</h1>
                 <div th:if="${#lists.isEmpty(userSquads)}">
                     <h5 class="empty-card"> No squad(s)? Click Here to create a squad from your comrades!</h5>
                 </div>

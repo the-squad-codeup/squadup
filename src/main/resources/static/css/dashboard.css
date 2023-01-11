@@ -44,42 +44,42 @@ h1 {
     border-color: var(--bs-lighterpurp) !important;
 }
 
-.card-slider-mask {
-    margin: 0 20px;
-    max-width: calc(100% - 40px);
-    overflow:hidden;
-}
-.arrow-left{
-    display: flex;
-    align-self: center;
-    width: 0;
-    height: 0;
-    border-top: 40px solid transparent;
-    border-bottom: 40px solid transparent;
-    border-right: 40px solid #00fff7;
-    opacity: 60%;
-    position: absolute;
-    margin-right: 90vw;
-}
+/*.card-slider-mask {*/
+/*    margin: 0 20px;*/
+/*    max-width: calc(100% - 40px);*/
+/*    overflow:hidden;*/
+/*}*/
+/*.arrow-left{*/
+/*    display: flex;*/
+/*    align-self: center;*/
+/*    width: 0;*/
+/*    height: 0;*/
+/*    border-top: 40px solid transparent;*/
+/*    border-bottom: 40px solid transparent;*/
+/*    border-right: 40px solid #00fff7;*/
+/*    opacity: 60%;*/
+/*    position: absolute;*/
+/*    margin-right: 90vw;*/
+/*}*/
 
-.arrow-right{
-    display: flex;
-    align-self: center;
-    width: 0;
-    height: 0;
-    border-top: 40px solid transparent;
-    border-bottom: 40px solid transparent;
-    border-left: 40px solid #00fff7;
-    opacity: 60%;
-    position: absolute;
-    margin-left: 90vw;
-}
+/*.arrow-right{*/
+/*    display: flex;*/
+/*    align-self: center;*/
+/*    width: 0;*/
+/*    height: 0;*/
+/*    border-top: 40px solid transparent;*/
+/*    border-bottom: 40px solid transparent;*/
+/*    border-left: 40px solid #00fff7;*/
+/*    opacity: 60%;*/
+/*    position: absolute;*/
+/*    margin-left: 90vw;*/
+/*}*/
 
-.arrow-left, .arrow-right:hover{
-    cursor: pointer;
-    color: #5CFD42;
+/*.arrow-left, .arrow-right:hover{*/
+/*    cursor: pointer;*/
+/*    color: #5CFD42;*/
 
-}
+/*}*/
 
 
 .add-game-button, .favorite-game-button, .remove-game-button, #remove {
@@ -131,11 +131,10 @@ button:active {
 }
 
 .title-card {
-    color: black;
     width: 79vw;
     height: 10vh;
-    border: 5px ridge white;
-    background-color: white;
+    border: 5px ridge black;
+    background-color: black;
     opacity: 70%;
 }
 
@@ -231,10 +230,13 @@ img.card-img-top {
         text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #ff0000, 0 0 40px #ff0000, 0 0 50px #ff0000, 0 0 60px #ff0000, 0 0 70px #ff0000;
     }
 }
-/*=======*/
+
+.rainbowDash {
+    animation: colorRotate 20s linear 0s infinite !important;
+}
 
 
 
 
 
->>>>>>> main
+
