@@ -1,4 +1,133 @@
+.squads-container, .green-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border: solid #5CFD42 .5vw;
+    margin: auto;
+    width: 95vw;
+    height: 100vh;
+}
+
+
+.active-squads, .green-card {
+    /*align-items: center;*/
+    /*justify-content: center;*/
+    width: 75vw;
+    border: ridge 12px;
+    border-color: var(--bs-gamergreen) !important;
+    background: rgba(33, 37, 41, .3);
+}
+
+.create-squad, .purple-card {
+    margin: 2vw;
+    width: 20vw;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border: ridge 12px;
+    border-color: var(--bs-lighterpurp) !important;
+    /*margin-top: 5%;*/
+}
+
 .invite-buttons {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
 }
+
+/*<<<<<<< HEAD*/
+.squads {
+    /*font-size: 80px;*/
+    color: #fff;
+    /*text-align: center;*/
+    animation: glow-text 20s linear 0s infinite;
+}
+
+@keyframes glow-text {
+    from {
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #ff0000, 0 0 40px #ff0000, 0 0 50px #ff0000, 0 0 60px #ff0000, 0 0 70px #ff0000;
+    }
+    12.5% {
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #ff8000, 0 0 40px #ff8000, 0 0 50px #ff8000, 0 0 60px #ff8000, 0 0 70px #ff8000;
+    }
+    25% {
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #ffea00, 0 0 40px #ffea00, 0 0 50px #ffea00, 0 0 60px #ffea00, 0 0 70px #ffea00;
+    }
+    37.5% {
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #37ff00, 0 0 40px #37ff00, 0 0 50px #37ff00, 0 0 60px #37ff00, 0 0 70px #37ff00;
+    }
+    50% {
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #00fff7, 0 0 40px #00fff7, 0 0 50px #00fff7, 0 0 60px #00fff7, 0 0 70px #00fff7;
+    }
+    65.5% {
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #0077ff, 0 0 40px #0077ff, 0 0 50px #0077ff, 0 0 60px #0077ff, 0 0 70px #0077ff;
+    }
+    75% {
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #8251ff, 0 0 40px #8251ff, 0 0 50px #8251ff, 0 0 60px #8251ff, 0 0 70px #8251ff;
+    }
+    87.5% {
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e600ff, 0 0 40px #e600ff, 0 0 50px #e600ff, 0 0 60px #e600ff, 0 0 70px #e600ff;
+    }
+    100% {
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #ff0000, 0 0 40px #ff0000, 0 0 50px #ff0000, 0 0 60px #ff0000, 0 0 70px #ff0000;
+    }
+}
+/*=======*/
+h1 {
+    text-align: center;
+    border-bottom: ridge 3px #5CFD42;
+}
+h3 {
+    text-align: center;
+    border-bottom: ridge 3px #5CFD42;
+}
+/*    h1, h3 {*/
+/*        text-align: center;*/
+/*        border-bottom: ridge 3px #5CFD42;*/
+/*        !*>>>>>>> main*!*/
+/*    }*/
+
+
+.squads {
+    /*font-size: 80px;*/
+    color: #fff;
+    /*text-align: center;*/
+    animation: glow-text 20s linear 0s infinite;
+}
+
+@keyframes glow-text {
+    from {
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #ff0000, 0 0 40px #ff0000, 0 0 50px #ff0000, 0 0 60px #ff0000, 0 0 70px #ff0000;
+    }
+    12.5% {
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #ff8000, 0 0 40px #ff8000, 0 0 50px #ff8000, 0 0 60px #ff8000, 0 0 70px #ff8000;
+    }
+    25% {
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #ffea00, 0 0 40px #ffea00, 0 0 50px #ffea00, 0 0 60px #ffea00, 0 0 70px #ffea00;
+    }
+    37.5% {
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #37ff00, 0 0 40px #37ff00, 0 0 50px #37ff00, 0 0 60px #37ff00, 0 0 70px #37ff00;
+    }
+    50% {
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #00fff7, 0 0 40px #00fff7, 0 0 50px #00fff7, 0 0 60px #00fff7, 0 0 70px #00fff7;
+    }
+    65.5% {
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #0077ff, 0 0 40px #0077ff, 0 0 50px #0077ff, 0 0 60px #0077ff, 0 0 70px #0077ff;
+    }
+    75% {
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #8251ff, 0 0 40px #8251ff, 0 0 50px #8251ff, 0 0 60px #8251ff, 0 0 70px #8251ff;
+    }
+    87.5% {
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e600ff, 0 0 40px #e600ff, 0 0 50px #e600ff, 0 0 60px #e600ff, 0 0 70px #e600ff;
+    }
+    100% {
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #ff0000, 0 0 40px #ff0000, 0 0 50px #ff0000, 0 0 60px #ff0000, 0 0 70px #ff0000;
+    }
+}
+
+
+
+
+
+
+
