@@ -93,7 +93,7 @@ $(async function() {
                 .on("click", "#upload-profile-picture", function() {
                     FileStack.client.picker(FileStack.userProfileOptions).open();
                 })
-                .on("click", "#upload-squad-picture", function() {
+                .on("click", ".squad-image", function() {
                     FileStack.client.picker(FileStack.squadOptions).open();
                 })
             ;

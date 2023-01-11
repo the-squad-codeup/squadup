@@ -85,15 +85,6 @@ $(function() {
             let squadOwner = await Fetch.Get.squadOwner();
             let currentUser = await Fetch.Get.currentUser();
             let isOwner = squadOwner.id === currentUser.id
-            // await $("head").append(`
-            //     <script type="text/javascript">
-            //         const squadUser = {
-            //             id: ${currentUser.id},
-            //             username: ${currentUser.username},
-            //             isOwner: ${isOwner}
-            //         };
-            //     </script>
-            // `);
             $("body").prepend(`
                 <div hidden id="user-details-div" data-user-id="${currentUser.id}" data-is-owner="${isOwner}">
             `);
@@ -159,6 +150,14 @@ $(function() {
                     if($("#user-details-div").attr("data-user-id") === $(this).attr("data-user-id")) {
                         $(this).find(".message-options").addClass("hidden");
                     }
+                })
+                .on("mouseenter", ".squad-image", function() {
+                    $(this).addClass("darken");
+                    $("#upload-squad-picture").removeClass("hidden");
+                })
+                .on("mouseleave", ".squad-image", function() {
+                    $(this).removeClass("darken");
+                    $("#upload-squad-picture").addClass("hidden");
                 })
                 .on("click", ".edit-message-button", function() {
 
