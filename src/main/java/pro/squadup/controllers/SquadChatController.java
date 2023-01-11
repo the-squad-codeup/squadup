@@ -1,5 +1,7 @@
 package pro.squadup.controllers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -7,6 +9,10 @@ import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import pro.squadup.models.Squad;
 import pro.squadup.models.SquadChatMessage;
 import pro.squadup.models.User;
@@ -59,6 +65,30 @@ public class SquadChatController {
         initializeMessage(chatMessage, squadId);
         squadChatDao.save(chatMessage);
         messagingTemplate.convertAndSend(format("/secured/squad-room/%s", squadId), chatMessage);
+    }
+
+    @MessageMapping("/squad-chat/{squadId}/edit")
+    public void editMessage(@DestinationVariable Long squadId, @Payload SquadChatMessage editMessage) throws JsonProcessingException {
+        SquadChatMessage messageToEdit = squadChatDao.findById(editMessage.getId()).get();
+        User currentUser = userDao.findById(Utils.currentUserId()).get();
+        if(messageToEdit.getSender().getId() == currentUser.getId()) {
+            messageToEdit.setContent(editMessage.getContent());
+            messageToEdit.setMessageType(editMessage.getMessageType());
+            messageToEdit.setEdited(true);
+            squadChatDao.save(messageToEdit);
+            messagingTemplate.convertAndSend(format("/secured/squad-room/%s", squadId), messageToEdit);
+        }
+    }
+
+    @MessageMapping("/squad-chat/{squadId}/delete")
+    public void deleteMessage(@DestinationVariable Long squadId, @Payload SquadChatMessage deleteMessage) {
+        SquadChatMessage messageToDelete = squadChatDao.findById(deleteMessage.getId()).get();
+        User currentUser = userDao.findById(Utils.currentUserId()).get();
+        if(messageToDelete.getSender().getId() == currentUser.getId()) {
+            messageToDelete.setMessageType(deleteMessage.getMessageType());
+            squadChatDao.delete(messageToDelete);
+            messagingTemplate.convertAndSend(format("/secured/squad-room/%s", squadId), messageToDelete);
+        }
     }
 
     private SquadChatMessage initializeMessage(SquadChatMessage message, Long squadId) {
