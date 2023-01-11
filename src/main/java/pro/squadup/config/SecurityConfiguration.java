@@ -45,7 +45,10 @@ public class SecurityConfiguration {
                         "/squads/*/*",
                         "/invites",
                         "/invites/*",
-                        "/invites/*/*"
+                        "/invites/*/*",
+                        "/messages",
+                        "/messages/*",
+                        "/messages/*/*"
                 )
                 .authenticated()
                 // Pages viewable without logging in
