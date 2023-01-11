@@ -124,4 +124,10 @@ public class SquadController {
             squadDao.delete(squadToDelete);
         }
     }
+
+    @GetMapping("/squads/{squadId}/owner")
+    public @ResponseBody User getSquadOwner(@PathVariable Long squadId) {
+        Squad squad = squadDao.findById(squadId).get();
+        return squad.getOwner();
+    }
 }
