@@ -21,12 +21,23 @@ $(async function() {
                 let postOptions = {
                     method: 'POST',
                     headers: {
-                        'Content-Type' : 'application/json',
-                        'X-CSRF-TOKEN' : FileStack.csrfToken
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': FileStack.csrfToken
                     },
                     body: JSON.stringify(file)
                 }
                 return await fetch(`${Utils.url()}user/picture`, postOptions).then(res => res.json());
+            },
+            async squadPicture(file) {
+                let postOptions = {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': FileStack.csrfToken
+                    },
+                    body: JSON.stringify(file)
+                }
+                return await fetch(`${Utils.url()}squads/${$("#squad-title").attr("data-squad-id")}/picture`, postOptions).then(res => res.json());
             }
         }
     }
@@ -38,7 +49,7 @@ $(async function() {
             Events.initialize();
         },
         client: null,
-        options: {
+        userProfileOptions: {
             fromSources: ["local_file_system", "url"],
             accept: ["image/*"],
             transformations: {
@@ -53,12 +64,23 @@ $(async function() {
                 let uploadedPicture = await Fetch.Post.profilePicture(file, FileStack.csrfToken).then(res => res);
                 console.log(uploadedPicture);
                 $('.profile-image').css('background-image', `url("${uploadedPicture.url}")`)
-                // $("#pic-div").append(`
-                //     <img src="${uploadedPicture.url}">
-                // `);
-                // $("#navbar-profile-image").parent().empty().append(`
-                //     <img id="navbar-profile-image" src="${uploadedPicture.url}" style="max-height: 1.75em; max-width: 1.75em;">
-                // `);
+            }
+        },
+        squadOptions: {
+            fromSources: ["local_file_system", "url"],
+            accept: ["image/*"],
+            transformations: {
+                crop: false,
+                circle: true,
+                rotate: false,
+                force: true
+            },
+            imageMax: [480, 480],
+            onFileUploadFinished: async function(file) {
+                console.log(file);
+                let uploadedPicture = await Fetch.Post.squadPicture(file, FileStack.csrfToken).then(res => res);
+                console.log(uploadedPicture);
+                $('.squad-image').css('background-image', `url("${uploadedPicture.url}")`);
             }
         },
         filestackKey: await Fetch.Get.filestackKey().then(res => res),
@@ -67,9 +89,14 @@ $(async function() {
 
     const Events = {
         initialize() {
-            $(document).on("click", "#upload-profile-picture", function() {
-                FileStack.client.picker(FileStack.options).open();
-            });
+            $(document)
+                .on("click", "#upload-profile-picture", function() {
+                    FileStack.client.picker(FileStack.userProfileOptions).open();
+                })
+                .on("click", ".squad-image", function() {
+                    FileStack.client.picker(FileStack.squadOptions).open();
+                })
+            ;
         }
     }
 

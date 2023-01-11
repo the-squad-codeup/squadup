@@ -1,7 +1,11 @@
 package pro.squadup.controllers;
 
+import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.util.JSONPObject;
+import io.netty.handler.codec.json.JsonObjectDecoder;
+import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -115,4 +119,21 @@ public class SquadController {
         Squad squad = squadDao.findById(squadId).get();
         return squadChatMessageDao.findAllByChat(squad.getChat());
     }
+
+    @PostMapping("/squads/{squadId}/delete")
+    public @ResponseBody Squad deleteSquad(@PathVariable Long squadId) {
+        User currentUser = userDao.findById(Utils.currentUserId()).get();
+        Squad squadToDelete = squadDao.findById(squadId).get();
+        if(squadToDelete.getOwner().equals(currentUser)) {
+            squadDao.delete(squadToDelete);
+        }
+        return squadToDelete;
+    }
+
+    @GetMapping("/squads/{squadId}/owner")
+    public @ResponseBody User getSquadOwner(@PathVariable Long squadId) {
+        Squad squad = squadDao.findById(squadId).get();
+        return squad.getOwner();
+    }
+
 }

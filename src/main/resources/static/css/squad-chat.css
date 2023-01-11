@@ -14,6 +14,36 @@
     align-items: center;
 }
 
+#squad-img-wrapper {
+    position: absolute;
+    left: 0.5em;
+    top: 4.5em;
+    width: 8em;
+    height: 8em;
+    z-index: 100;
+}
+
+.squad-image {
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+    background-image: url("https://cdn.filestackcontent.com/dynXYf9AS26ImuqTgUPj");
+}
+
+.darken {
+    filter: brightness(50%);
+}
+
+#upload-squad-picture {
+    position: absolute;
+    left: 4em;
+    top: 4em;
+    width: 4em;
+    height: 4em;
+    pointer-events: none;
+}
+
 #squad-title-wrapper {
     width: 100%;
     height: 4em;
@@ -49,12 +79,72 @@
 }
 
 .single-message-wrapper {
+    position: relative;
     width: 100%;
     display: flex;
+    margin: .5em 0;
+}
+
+.single-message-content-wrapper {
+    width: 100%;
+}
+
+.single-message-top-wrapper {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.single-message-timestamp {
+    font-size: x-small;
+    filter: brightness(60%);
+    margin-left: 1em;
+}
+
+.single-message-content {
+    padding-right: 4em;
+}
+
+.message-options {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.message-edit-button-wrapper {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+.was-edited {
+    margin-left: 1em;
+    font-size: x-small;
+    filter: brightness(60%);
+}
+
+.message-button {
+    width: 2em;
+    height: 2em;
+    display: block;
+}
+
+.hidden {
+    display: none;
+}
+
+.soft-hidden {
+    height: 0;
+    opacity: 0;
 }
 
 .message-sender-img-wrapper {
     width: 3em;
+    margin-right: .5em;
 }
 
 #chat-sidebar-wrapper {
