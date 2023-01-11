@@ -39,3 +39,7 @@ h1, h3 {
     text-align: center;
     border-bottom: ridge 3px #5CFD42;
 }
+
+#create-squad-name {
+    margin-bottom: 3vh;
+}
