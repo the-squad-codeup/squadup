@@ -37,10 +37,32 @@
     justify-content: space-between;
 }
 
+h1, h3 {
+    text-align: center;
+    border-bottom: ridge 3px #5CFD42;
+}
+
+p{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.squad-title{
+    font-size: 1.5rem;
+    border-bottom: ridge 3px #5CFD42;
+}
+
+.squad-title:link{
+    color: white;
+    text-decoration: none;
+}
+
+.squad-title:visited{
+    color: white;
+}
+
 .squads {
-    /*font-size: 80px;*/
     color: #fff;
-    /*text-align: center;*/
     animation: glow-text 20s linear 0s infinite;
 }
 
@@ -73,17 +95,3 @@
         text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #ff0000, 0 0 40px #ff0000, 0 0 50px #ff0000, 0 0 60px #ff0000, 0 0 70px #ff0000;
     }
 }
-h1 {
-    text-align: center;
-    border-bottom: ridge 3px #5CFD42;
-}
-
-h3 {
-    text-align: center;
-    border-bottom: ridge 3px #5CFD42;
-}
-/*    h1, h3 {*/
-/*        text-align: center;*/
-/*        border-bottom: ridge 3px #5CFD42;*/
-/*        !*>>>>>>> main*!*/
-/*    }*/
