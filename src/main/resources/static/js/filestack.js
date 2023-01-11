@@ -21,12 +21,23 @@ $(async function() {
                 let postOptions = {
                     method: 'POST',
                     headers: {
-                        'Content-Type' : 'application/json',
-                        'X-CSRF-TOKEN' : FileStack.csrfToken
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': FileStack.csrfToken
                     },
                     body: JSON.stringify(file)
                 }
                 return await fetch(`${Utils.url()}user/picture`, postOptions).then(res => res.json());
+            },
+            async squadPicture(file) {
+                let postOptions = {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': FileStack.csrfToken
+                    },
+                    body: JSON.stringify(file)
+                }
+                return await fetch(`${Utils.url()}squads/${$("#squad-title").attr("data-squad-id")}/picture`, postOptions).then(res => res.json());
             }
         }
     }
@@ -38,7 +49,7 @@ $(async function() {
             Events.initialize();
         },
         client: null,
-        options: {
+        userProfileOptions: {
             fromSources: ["local_file_system", "url"],
             accept: ["image/*"],
             transformations: {
@@ -51,6 +62,23 @@ $(async function() {
             onFileUploadFinished: async function(file) {
                 console.log(file);
                 let uploadedPicture = await Fetch.Post.profilePicture(file, FileStack.csrfToken).then(res => res);
+                console.log(uploadedPicture);
+                $('.squad-image').css('background-image', `url("${uploadedPicture.url}")`)
+            }
+        },
+        squadOptions: {
+            fromSources: ["local_file_system", "url"],
+            accept: ["image/*"],
+            transformations: {
+                crop: false,
+                circle: true,
+                rotate: false,
+                force: true
+            },
+            imageMax: [480, 480],
+            onFileUploadFinished: async function(file) {
+                console.log(file);
+                let uploadedPicture = await Fetch.Post.squadPicture(file, FileStack.csrfToken).then(res => res);
                 console.log(uploadedPicture);
                 $('.profile-image').css('background-image', `url("${uploadedPicture.url}")`)
                 // $("#pic-div").append(`
@@ -68,7 +96,7 @@ $(async function() {
     const Events = {
         initialize() {
             $(document).on("click", "#upload-profile-picture", function() {
-                FileStack.client.picker(FileStack.options).open();
+                FileStack.client.picker(FileStack.userProfileOptions).open();
             });
         }
     }
