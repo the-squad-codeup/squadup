@@ -121,12 +121,13 @@ public class SquadController {
     }
 
     @PostMapping("/squads/{squadId}/delete")
-    public @ResponseBody void deleteSquad(@PathVariable Long squadId) {
+    public @ResponseBody Squad deleteSquad(@PathVariable Long squadId) {
         User currentUser = userDao.findById(Utils.currentUserId()).get();
         Squad squadToDelete = squadDao.findById(squadId).get();
         if(squadToDelete.getOwner().equals(currentUser)) {
             squadDao.delete(squadToDelete);
         }
+        return squadToDelete;
     }
 
     @GetMapping("/squads/{squadId}/owner")
