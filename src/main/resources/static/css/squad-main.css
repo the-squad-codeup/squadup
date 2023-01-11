@@ -1,17 +1,20 @@
-.squads-container, .green-container{
+#page-wrapper{
     display: flex;
-    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.green-container{
+    display: flex;
     justify-content: space-between;
-    border: solid #5CFD42 .5vw;
+    border: ridge #5CFD42 .5vw;
     margin: auto;
     width: 95vw;
     height: 100vh;
 }
 
-
-.active-squads, .green-card {
-    /*align-items: center;*/
-    /*justify-content: center;*/
+.green-card {
+    margin: 2vw;
     width: 75vw;
     border: ridge 12px;
     border-color: var(--bs-gamergreen) !important;
@@ -26,7 +29,6 @@
     flex-direction: column;
     border: ridge 12px;
     border-color: var(--bs-lighterpurp) !important;
-    /*margin-top: 5%;*/
 }
 
 .invite-buttons {
@@ -38,4 +40,23 @@
 h1, h3 {
     text-align: center;
     border-bottom: ridge 3px #5CFD42;
+}
+
+p{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.squad-title{
+    font-size: 1.5rem;
+    border-bottom: ridge 3px #5CFD42;
+}
+
+.squad-title:link{
+    color: white;
+    text-decoration: none;
+}
+
+.squad-title:visited{
+    color: white;
 }
