@@ -24,11 +24,20 @@ $(function (){
         let favoriteGame = await fetch(`${Utils.url()}game/favorite`).then(res => res.json());
         console.log("favorite game:")
         console.log(favoriteGame)
+        if (favoriteGame.id !== null) {
             $('#page-wrapper').append(`
                 <div class="favorite-game" style="background-image: url(${favoriteGame.artwork});">
                     <img src="/Icons/favorite.png" alt="" id="favorite-icon">
                 </div>
             `)
+        }else{
+            $('#page-wrapper').append(`
+                <div class="favorite-game">
+                <img src="/Icons/favDefault.jpg" alt="">
+                    <img src="/Icons/favorite.png" alt="" id="favorite-icon">
+                </div>
+            `)
+        }
     }
     getUserFavorite()
 

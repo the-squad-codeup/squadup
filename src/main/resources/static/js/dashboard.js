@@ -238,3 +238,8 @@ printRecCards(getAllRecruits());
 
 });
 
+
+window.addEventListener("load", function(e){
+    console.log("Inside remove class event listener function")
+    document.getElementById("nav-games-link").classList.remove("games");
+})

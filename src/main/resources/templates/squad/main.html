@@ -11,16 +11,15 @@
     <div class="green-container">
 
         <div class="green-card">
-            <h1>Active Squads</h1>
-
-            <div id="active-squads-div">
+                <h1>Active Squads</h1>
+            <div>
                 <div th:each="squad : ${userSquads}">
                     <div class="purple-card">
-                        <h3 th:text="${squad.name}"></h3>
+                        <a class="squad-title" th:text="${squad.name}" th:href="@{/squads/${squad.id}/chat}"></a>
                         <div th:each="member : ${squad.members}">
                             <p th:text="${member.username}"></p>
                         </div>
-
+                        <button type="submit">Disband Squad</button>
                     </div>
                 </div>
             </div>
@@ -48,6 +47,7 @@
     <nav th:replace="partials :: footer"></nav>
     <div th:replace="partials :: scripts"></div>
     <script type="module" th:src="@{/js/squad-main.js}"></script>
+
 
 </div>
 </body>

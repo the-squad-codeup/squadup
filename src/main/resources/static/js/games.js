@@ -37,6 +37,15 @@ $(function () {
                         </div>  
                     </div>
                 `);
+            } else{
+                MyGames.myFavoriteGameDiv.empty().append(`
+                    <div class="div-card col-3 m-3" data-game-id="${favoriteGame.id}">
+                        <div class="card game-card rainbow">
+                            <img src="/Icons/favDefault.jpg" class="card-img all-games-img">
+                            <img src="/Icons/favorite.png" alt="" id="favorite-icon">
+                        </div>  
+                    </div>
+                `);
             }
         },
         // async myGames() {

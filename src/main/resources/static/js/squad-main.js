@@ -42,14 +42,14 @@ $(function() {
                 this.singleSquad(squad);
             }
         },
-        singleSquad(squad) {
-            $("#active-squads-div").append(`
-                <div data-squad-id="${squad.id}">
-                    <br>
-                    <a href="/squads/${squad.id}/chat">${squad.name}</a>
-                </div>
-            `);
-        },
+        // singleSquad(squad) {
+        //     $("#active-squads-div").append(`
+        //         <div data-squad-id="${squad.id}">
+        //             <br>
+        //             <a href="/squads/${squad.id}/chat">${squad.name}</a>
+        //         </div>
+        //     `);
+        // },
         async currentInvites() {
             console.log("Inside currentInvites. currentInvites: ");
             let invitesDiv = $("#squad-invites-div");

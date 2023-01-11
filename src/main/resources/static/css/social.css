@@ -26,8 +26,9 @@
     width: 50%;
 
     background: #8F8F8F;
-    border: 8px solid #05FF00;
+    border: ridge 8px #05FF00;
     backdrop-filter: blur(2px);
+
 }
 
 .arrow-left{
@@ -90,7 +91,7 @@
     width: 450px;
     display: flex;
     flex-direction: column;
-    border: 3px solid #03ff00;
+    border: 3px ridge #03ff00;
     border-radius: 3px;
     padding: 15px;
 }
@@ -131,13 +132,6 @@ p.card-text, h4{
     column-gap: 20PX;
 }
 
-#accept, #reject, #remove  {
-    /*margin: 2%;*/
-    /*border: var(--bs-gamergreen) ridge 5px;*/
-    /*border-radius: 8px;*/
-    /*background-color: dimgray;*/
-}
-
 img.card-img-top {
     height: 125px;
     width: 125px;
@@ -155,14 +149,6 @@ img.card-img-top {
 .su-card-top {
     column-gap: 20px;
 }
-
-/*#accept:hover{*/
-/*    color: #03ff00;*/
-/*}*/
-
-/*#remove:hover, #reject:hover{*/
-/*    color: #FF0000;*/
-/*}*/
 
         /*   STYLING FOR MOBILE VIEWS   */
 
