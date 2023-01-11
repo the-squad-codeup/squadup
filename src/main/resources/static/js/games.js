@@ -28,10 +28,17 @@ $(function () {
             console.log("Inside favorite games");
             let favoriteGame = await Fetch.Get.myFavoriteGame().then(res => res);
             console.log(favoriteGame);
+            MyGames.myFavoriteGameDiv.empty().append(`
+                    <div class="div-card col-3 m-3">
+                        <div class="card game-card rainbow">
+                            <img src="${favoriteGame.artwork}" class="card-img all-games-img">
+                        </div>  
+                    </div>
+                `);
             if(favoriteGame.id != null) {
                 MyGames.myFavoriteGameDiv.empty().append(`
                     <div class="div-card col-3 m-3" data-game-id="${favoriteGame.id}">
-                        <div class="card game-card rainbow">
+                        <div class="card game-card">
                             <img src="${favoriteGame.artwork}" class="card-img all-games-img">
                             <img src="/Icons/favorite.png" alt="" id="favorite-icon">
                         </div>  
