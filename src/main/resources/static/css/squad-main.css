@@ -8,9 +8,8 @@
     display: flex;
     justify-content: space-between;
     border: ridge #5CFD42 .5vw;
-    margin: auto;
+    margin: 2vw;
     width: 95vw;
-    height: 100vh;
 }
 
 .green-card {
