@@ -103,11 +103,13 @@ p.card-text, h4{
     display: flex;
 }
 
+    /*  BELOW IS WHERE IT MAKES THE GAMES INSIDE THE CARDS SCROLLABLE!!: */
 .su-card-middle {
     flex: 1 0 auto;
     overflow: hidden;
+    overflow-x: scroll;
 }
-
+    /*    ^^^^^^^^^^^^     */
 .su-card-games-list {
     display: flex;
     column-gap: 10px;
