@@ -23,6 +23,7 @@
 .create-squad {
     margin: 2vw;
     width: 20vw;
+    height: 75vw;
     display: flex;
     align-items: center;
     flex-direction: column;
