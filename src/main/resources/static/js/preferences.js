@@ -209,7 +209,7 @@ $(function() {
             $(document)
                 .on("click", "#edit-preferences-submit-button", async function() {
                     await Fetch.Post.updatedPreferences(MyPreferences.packagePreferencesObject());
-                    window.location.replace(`/profile`);
+                    window.location.replace(`/games`);
                 })
                 .on("change", "#location", function() {
                     Overlays.toggleOverlay();
