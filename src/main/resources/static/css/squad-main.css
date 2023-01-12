@@ -41,11 +41,19 @@
     border-color: var(--bs-lighterpurp) !important;
 }
 
+.squad-invites{
+    padding-top: 25vh;
+}
+
 .invite-buttons {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
+
+/*input{*/
+/*    margin: 1vh;*/
+/*}*/
 
 h1, h3 {
     text-align: center;
