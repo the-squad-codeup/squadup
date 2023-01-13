@@ -32,3 +32,14 @@
 .social-side-container {
     width: 10em;
 }
+
+/*SQUADS AND COMRADE STYLING */
+.solo-squad-img, .solo-com-img {
+    height: 15vw;
+    width: 15vw;
+    border: solid #5CFD42 0.3vw;
+    border-radius: 50%;
+    background-position: center;
+    background-size: cover;
+   overflow-y: scroll;
+}

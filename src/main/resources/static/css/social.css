@@ -151,21 +151,6 @@ img.card-img-top {
     column-gap: 20px;
 }
 
-        /*SQUADS AND COMRADE STYLING */
-.side-content {
-    height: 15vw;
-    width: 15vw;
-    border: solid #5CFD42 0.3vw;
-    border-radius: 50%;
-    background-position: center;
-    background-size: cover;
-    position: absolute;
-    left: 0.5em;
-    top: 4.5em;
-    z-index: 100;
-}
-
-
         /*   STYLING FOR MOBILE VIEWS   */
 
 @media only screen and (max-width: 600px) {
