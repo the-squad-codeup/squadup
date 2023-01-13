@@ -144,7 +144,7 @@ async function printSquads(){
     $("#squads-content").empty().append(`
         <div id="add-squad-wrapper" class="solo-squad">
             <h5>Add Squad</h5>
-            <img class="solo-squad-img rgb" src="https://cdn.filestackcontent.com/ZbMRmZDQQC65sr7daKvq">
+            <img class="solo-squad-img rgb" src="https://cdn.filestackcontent.com/YmC6UtutQsiTT2tYduKI">
         </div>
     `);
     for(let squad of squads){
@@ -174,4 +174,10 @@ async function pringComrades(){
 
 printSquads();
 pringComrades();
+
+$(document)
+    .on("click", ".solo-com-img", function () {
+        window.location.href=`${Utils.url()}profile/${$(this).parent().attr("data-comrade-id")}/view`;
+    })
+;
 });

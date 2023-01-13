@@ -32,7 +32,7 @@ public class Utils {
                     "local_file_system",
                     "Stored",
                     "4IRT98MxlthTjGsm",
-                    "https://cdn.filestackcontent.com/dynXYf9AS26ImuqTgUPj"
+                    "https://cdn.filestackcontent.com/Humw6OOXTemRtPob8kJB"
                 )
         ;
     }

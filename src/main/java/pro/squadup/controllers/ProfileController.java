@@ -8,10 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import pro.squadup.models.Language;
-import pro.squadup.models.Platform;
-import pro.squadup.models.Preferences;
-import pro.squadup.models.User;
+import pro.squadup.models.*;
 import pro.squadup.repositories.*;
 import pro.squadup.utils.Utils;
 
@@ -45,20 +42,23 @@ public class ProfileController {
     }
 
     @GetMapping("/profile")
-    public String myProfilePage(Model model) {
-        User user = userDao.findById(Utils.currentUserId()).get();
-        model.addAttribute("user", user);
-        return "profile/profile";
+    public String myProfilePage() {
+        String returnString = String.format("redirect:/profile/" + Utils.currentUserId() + "/view");
+        return returnString;
     }
 
     @GetMapping("/profile/{userId}/view")
     public String profilePage(Model model, @PathVariable Long userId) {
         User currentUser = userDao.findById(Utils.currentUserId()).get();
         User user = userDao.findById(userId).get();
-        if(currentUser.getId() == userId) {
-            return "redirect:/profile";
+        if(isMyProfile(currentUser, user)) {
+            model.addAttribute("user", currentUser);
+        } else {
+            model.addAttribute("user", user);
         }
-        model.addAttribute("user", user);
+        model.addAttribute("isMyProfile", isMyProfile(currentUser, user));
+        model.addAttribute("isRecruit", isRecruit(currentUser, user));
+        model.addAttribute("isComrade", isComrade(currentUser, user));
         return "profile/profile";
     }
 
@@ -113,4 +113,25 @@ public class ProfileController {
     }
 
 
+    private boolean isMyProfile(User currentUser, User user) {
+        return currentUser.getId().equals(user.getId());
+    }
+
+    private boolean isRecruit(User currentUser, User user) {
+        for(Recruit recruit : currentUser.getRecruits()) {
+            if(recruit.getUserTwo().getId().equals(user.getId())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean isComrade(User currentUser, User user) {
+        for(Comrade comrade : currentUser.getComrades()) {
+            if(comrade.getUserTwo().getId().equals(user.getId())) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
