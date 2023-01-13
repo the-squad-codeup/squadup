@@ -139,6 +139,7 @@ img.card-img-top {
     /////////////////////////////////////////////// Recruits Section Ends ///////////////////////////////////////////////////*/
 
 .social-title {
+    width: 100%;
     display: flex;
     justify-content: center;
     font-size: xx-large;
@@ -146,5 +147,43 @@ img.card-img-top {
 }
 
 .social-side-container {
-    width: 10em;
+    height: 100%;
+    overflow: hidden;
+    width: 12em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/*SQUADS AND COMRADE STYLING */
+.solo-squad-img, .solo-com-img {
+    border: solid 0.3vw;
+    border-radius: 50%;
+    background-position: center;
+    background-size: cover;
+}
+
+.solo-squad, .solo-com {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.side-wrapper{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.side-wrapper::-webkit-scrollbar{
+    display: none;
+}
+
+
+.side-content {
+    width: 100%;
 }
