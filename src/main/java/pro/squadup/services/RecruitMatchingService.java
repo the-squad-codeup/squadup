@@ -42,15 +42,6 @@ public class RecruitMatchingService {
 
     public void matchRecruits(User user, Set<User> allUsers) throws JsonProcessingException {
         for(User otherUser : allUsers) {
-            System.out.printf("----------------------Matching %s with %s---------------------------%n", user.getUsername(), otherUser.getUsername());
-            System.out.printf("First user preferences not null: %s%n", user.getPreferences() != null);
-            System.out.printf("Second user preferences not null: %s%n", otherUser.getPreferences() != null);
-            System.out.printf("User id's are not equal: %s%n", user.getId() != otherUser.getId());
-            System.out.printf("Users not already comrades: %s%n", !areComrades(user, otherUser));
-            System.out.printf("Users not already recruited: %s%n", !alreadyRecruited(user, otherUser));
-            System.out.printf("Users contain a matching platform: %s%n", containsMatchingPlatform(user, otherUser));
-            System.out.printf("Users contain matching game: %s%n", containsMatchingGames(user, otherUser));
-            System.out.printf("Users contain matching genres: %s%n", containsMatchingGenres(user, otherUser));
             if(
                     user.getPreferences() != null &&
                     otherUser.getPreferences() != null &&
@@ -76,13 +67,9 @@ public class RecruitMatchingService {
         return recruitDao.existsByUserOneAndUserTwo(user1, user2);
     }
 
-    private boolean containsMatchingPlatform(User user1, User user2) throws JsonProcessingException {
-        ObjectMapper mapper = new ObjectMapper();
-        System.out.println("Checking matching platforms");
+    private boolean containsMatchingPlatform(User user1, User user2) {
         Set<Platform> user1Platforms = user1.getPreferences().getPlatforms();
-        System.out.printf("User1 platforms: %n%s%n", mapper.writeValueAsString(user1Platforms));
         Set<Platform> user2Platforms = user2.getPreferences().getPlatforms();
-        System.out.printf("User2 platforms: %n%s%n", mapper.writeValueAsString(user2Platforms));
         for(Platform platform1 : user1Platforms) {
             if(user2Platforms.contains(platform1)) {
                 return true;
