@@ -13,7 +13,7 @@ $(function () {
         $("#card").html('');
         for (let recruit of recruits) {
             $(`#card`).append(`
-                <div class="su-card" data-recruit-id="${recruit.id}">
+                <div class="su-card rgb" data-recruit-id="${recruit.id}">
                     <div class="su-card-top">
                         <div class="su-card-col su-card-col-shrink">
                             <img class="card-img-top" src="${recruit.userTwo.profilePicture.url}" alt="user profile picture">
