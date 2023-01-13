@@ -27,7 +27,7 @@ $(function (){
         if (favoriteGame.id !== null) {
             $('#page-wrapper').append(`
                 <div class="favorite-game rgb" style="background-image: url(${favoriteGame.artwork});">
-                    <img src="/Icons/favorite.png" alt="" id="favorite-icon">
+                    <img src="/Icons/favorite.png" alt="" id="favorite-icon" class="rgbImage">
                 </div>
             `)
         }else{
@@ -81,13 +81,13 @@ $(function (){
         `)
 
         // Genres
-        $('.genres').append(`
-                        <h3>GENRES</h3>
-                        <div></div>      
-        `)
+        // $('.genres').append(`
+        //                 <h3>GENRES</h3>
+        //                 <div></div>
+        // `)
         for(let genre of userInfo.preferences.genres){
-            $('.genres div').append(`
-                 <span>${genre.name} | </span>
+            $('#genres-wrapper').append(`
+                 <p>${genre.name} </p>
             `)
         }
 
@@ -138,23 +138,32 @@ $(function (){
 
 
 /*<!--        Stroke inducing carousel -->*/
-
 const prev = document.querySelector(".prev");
 const next = document.querySelector(".next");
 const carousel = document.querySelector(".my-games");
 const track = document.querySelector(".track");
 let width = carousel.offsetWidth;
 let index = 0;
+
+let mobileView = window.matchMedia("(max-width: 480px)")
+
 window.addEventListener("resize", function () {
     width = carousel.offsetWidth;
 });
 next.addEventListener("click", function (e) {
     e.preventDefault();
-    index = index + 1;
+    index += 1;
     prev.classList.add("show");
-    track.style.transform = "translateX(" + index * -70 + "vw)";
-    if (track.offsetWidth - index * width < index * width) {
-        next.classList.add("hide");
+    if(mobileView.matches){
+        track.style.transform = "translateX(" + index * -60 + "vw)";
+        if (track.offsetWidth - index * width < (index - 1) * width / 3) {
+            next.classList.add("hide");
+        }
+    }else{
+        track.style.transform = "translateX(" + index * -70 + "vw)";
+        if (track.offsetWidth - index * width < (index -1) * width / 6) {
+            next.classList.add("hide");
+        }
     }
 });
 prev.addEventListener("click", function () {
@@ -163,5 +172,22 @@ prev.addEventListener("click", function () {
     if (index === 0) {
         prev.classList.remove("show");
     }
-    track.style.transform = "translateX(" + index * -70 + "vw)";
+    if(mobileView.matches){
+        track.style.transform = "translateX(" + index * -60 + "vw)";
+    }else{
+        track.style.transform = "translateX(" + index * -70 + "vw)";
+    }
 });
+
+// genreUp.addEventListener("click",(e)=>{
+//     e.preventDefault();
+//     console.log("up")
+//
+//     index2 += 1;
+//     UpDown.style.transform = "translateY(-10vw)";
+// });
+// genreDown.addEventListener("click",()=>{
+//     console.log("Down")
+//     index2 -= 1;
+//     UpDown.style.transform = "translateY(-10vw)";
+// });
