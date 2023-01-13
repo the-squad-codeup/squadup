@@ -16,12 +16,12 @@
         <div class="squad-image"></div>
         <img id="upload-squad-picture" class="hidden" th:src="@{/Icons/edit.png}" alt="">
     </div>
-    <div id="squad-chat-wrapper">
-        <div id="squad-title-wrapper">
+    <div id="squad-chat-wrapper" class="rgb">
+        <div id="squad-title-wrapper" class="rgb">
             <div id="squad-title" th:data-squad-id="${squad.id}" th:text="${squad.name}"></div>
         </div>
         <div id="chat-body-wrapper">
-            <div id="chat-messages-div-wrapper">
+            <div id="chat-messages-div-wrapper" class="rgb">
                 <div id="chat-messages-div">
                     <!-- All chat messages -->
                 </div>
