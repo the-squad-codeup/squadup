@@ -16,11 +16,118 @@
     position: relative;
 }
 
+/*////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////// Recruits Section ///////////////////////////////////////////////////*/
 #recruits-wrapper {
     flex-grow: 1;
     border-right: solid #5CFD42 .36vw;
     border-left: solid #5CFD42 .36vw;
 }
+
+.arrow-left{
+    border-top: 60px solid transparent;
+    border-bottom: 60px solid transparent;
+
+    border-right: 60px solid #05FF00;
+}
+
+.arrow-right{
+    border-top: 60px solid transparent;
+    border-bottom: 60px solid transparent;
+
+    border-left: 60px solid #05FF00;
+}
+
+.arrow-left, .arrow-right:hover{
+    cursor: pointer;
+
+}
+
+        /*  STYLING FOR CARDS AND CARD CONTENTS  */
+
+.card-slider-mask {
+    margin: 0 20px;
+    max-width: calc(100% - 40px);
+    overflow:hidden;
+}
+
+#card {
+    left: 450px;
+    display:flex;
+    flex-wrap: nowrap;
+    column-gap: 25px;
+    position: relative;
+    transition: all ease .3s;
+}
+
+.su-card {
+    height: 450px;
+    width: 450px;
+    display: flex;
+    flex-direction: column;
+    border: 3px ridge #05FF00;
+    border-radius: 3px;
+    padding: 15px;
+}
+
+p.card-text, h4{
+    color: #05FF00;
+}
+
+.su-card-top, .su-card-middle, .su-card-bottom {
+    display: flex;
+}
+
+/*  BELOW IS WHERE IT MAKES THE GAMES INSIDE THE CARDS SCROLLABLE!!: */
+.su-card-middle {
+    flex: 1 0 auto;
+    overflow: hidden;
+    overflow-x: scroll;
+}
+/*    ^^^^^^^^^^^^     */
+.su-card-games-list {
+    display: flex;
+    column-gap: 10px;
+}
+
+.su-card-games-list {
+    display: flex;
+    column-gap: 10px;
+    flex: none;
+    height: 100%;
+    align-items: center;
+}
+
+.su-card-game {
+    width: 117px;
+}
+
+.su-card-bottom {
+    align-items: center;
+    justify-content: center;
+    column-gap: 20PX;
+}
+
+img.card-img-top {
+    height: 125px;
+    width: 125px;
+    border-radius: 59px;
+}
+
+.su-card-col {
+    flex: 1 0 0;
+}
+
+.su-card-col-shrink {
+    flex: none;
+}
+
+.su-card-top {
+    column-gap: 20px;
+}
+
+/*////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////// Recruits Section Ends ///////////////////////////////////////////////////*/
 
 .social-title {
     display: flex;
