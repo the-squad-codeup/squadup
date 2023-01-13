@@ -15,10 +15,20 @@ body {
     margin-bottom: 3rem;
 }
 
+.nav-edits {
+    background-color: black;
+    border: solid 5px;
+    opacity: 80%;
+    border-radius: 5px;
+}
+
 .text-success {
     color: var(--bs-gamergreen) !important;
 }
 
+.nav-link {
+    color: white;
+}
 
 /*all buttons are affected see if i want all buttons like this*/
 .navbar, .nav-item:hover, .nav-link:hover{
@@ -31,7 +41,7 @@ body {
     color: #5CFD42;
 }
 
-.navbar, #site-bar-logout-link:hover {
+#site-bar-logout-link:hover {
     color: red;
     border-top: purple solid 4px;
     border-bottom: purple solid 4px;
