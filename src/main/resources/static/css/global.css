@@ -67,10 +67,15 @@ button:active {
     width: auto;
     height: 40px;
 }
+
 .foot-link {
     text-decoration: none;
     color: whitesmoke;
     /*padding-bottom: 10px;*/
+}
+.foot-adjust {
+    position: absolute;
+    margin-bottom: -5px;
 }
 
 
@@ -205,4 +210,7 @@ img {
     100% {
         text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #ff0000, 0 0 40px #ff0000, 0 0 50px #ff0000, 0 0 60px #ff0000, 0 0 70px #ff0000;
     }
+}
+.test-outline {
+    border: orange solid 3px;
 }
