@@ -1,6 +1,7 @@
 package pro.squadup.services;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 import pro.squadup.models.*;
 import pro.squadup.repositories.ComradeRepository;
@@ -66,7 +67,7 @@ public class RecruitMatchingService {
         return recruitDao.existsByUserOneAndUserTwo(user1, user2);
     }
 
-    private boolean containsMatchingPlatform(User user1, User user2) throws JsonProcessingException {
+    private boolean containsMatchingPlatform(User user1, User user2) {
         Set<Platform> user1Platforms = user1.getPreferences().getPlatforms();
         Set<Platform> user2Platforms = user2.getPreferences().getPlatforms();
         for(Platform platform1 : user1Platforms) {

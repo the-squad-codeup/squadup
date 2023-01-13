@@ -16,4 +16,9 @@ public class SocialController {
         return "social/recruits";
     }
 
+    @GetMapping("/hq")
+    public String socialHQPage() {
+        return "social/social-hq";
+    }
+
 }
