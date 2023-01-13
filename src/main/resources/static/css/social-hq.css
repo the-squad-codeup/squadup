@@ -31,25 +31,24 @@
     top: 5em;
 }
 
-.arrow-left{
-    left: 0;
-    border-top: 60px solid transparent;
-    border-bottom: 60px solid transparent;
-
-    border-right: 60px solid #05FF00;
+.arrow-left, .arrow-left-img{
+    height: 4vw;
+    width: 4vw;
+    position: absolute;
+    margin-left: -2vw;
+    margin-top: -2vw;
+    max-width: none;
+    transform: rotate(180deg);
 }
 
-.arrow-right{
+.arrow-right, .arrow-right-img{
     right: 0;
-    border-top: 60px solid transparent;
-    border-bottom: 60px solid transparent;
-
-    border-left: 60px solid #05FF00;
-}
-
-.arrow-left, .arrow-right:hover{
-    cursor: pointer;
-
+    height: 4vw;
+    width: 4vw;
+    position: absolute;
+    margin-left: -2vw;
+    margin-top: -2vw;
+    max-width: none;
 }
 
         /*  STYLING FOR CARDS AND CARD CONTENTS  */
@@ -75,13 +74,13 @@
     width: 450px;
     display: flex;
     flex-direction: column;
-    border: 3px ridge #05FF00;
+    border: 3px ridge #5CFD42;
     border-radius: 3px;
     padding: 15px;
 }
 
 p.card-text, h4{
-    color: #05FF00;
+    color: #5CFD42;
 }
 
 .su-card-top, .su-card-middle, .su-card-bottom {
@@ -95,6 +94,7 @@ p.card-text, h4{
     overflow-x: scroll;
 }
 /*    ^^^^^^^^^^^^     */
+
 .su-card-games-list {
     display: flex;
     column-gap: 10px;
