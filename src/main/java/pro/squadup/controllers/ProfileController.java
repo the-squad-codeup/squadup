@@ -51,6 +51,17 @@ public class ProfileController {
         return "profile/profile";
     }
 
+    @GetMapping("/profile/{userId}/view")
+    public String profilePage(Model model, @PathVariable Long userId) {
+        User currentUser = userDao.findById(Utils.currentUserId()).get();
+        User user = userDao.findById(userId).get();
+        if(currentUser.getId() == userId) {
+            return "redirect:/profile";
+        }
+        model.addAttribute("user", user);
+        return "profile/profile";
+    }
+
     @GetMapping("/profile/preferences")
     public String preferencesPage(Model model){
         User user = userDao.findById(Utils.currentUserId()).get();
