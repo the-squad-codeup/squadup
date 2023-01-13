@@ -19,7 +19,7 @@
 /*////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////// Recruits Section ///////////////////////////////////////////////////*/
 #recruits-wrapper {
-    flex-grow: 1;
+    width: 100%;
     overflow: hidden;
     border-right: solid #5CFD42 .36vw;
     border-left: solid #5CFD42 .36vw;
@@ -147,6 +147,7 @@ img.card-img-top {
 }
 
 .social-side-container {
+    min-width: 12em;
     height: 100%;
     overflow: hidden;
     width: 12em;

@@ -34,7 +34,7 @@
         <div class="navbar-collapse collapse w-100 order-1 order-lg-0 collapse-portion">
             <ul class="navbar-nav me-auto">
                 <li sec:authorize="isAuthenticated()" class="nav-item">
-                    <a id="nav-hq-link" class="nav-item social-hq" th:href="@{/hq}">Social HQ</a>
+                    <a id="nav-hq-link" class="nav-link social-hq" th:href="@{/hq}">Social HQ</a>
                 </li>
                 <li sec:authorize="isAuthenticated()" class="nav-item">
                     <a id="nav-home-link" class="nav-link dashboard" th:href="@{/dashboard}">Dashboard</a>
