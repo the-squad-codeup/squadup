@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <div th:replace="partials :: headFragment('Squad Chat')"></div>
+    <link rel="stylesheet" th:href="@{/css/social-hq.css}">
+</head>
+<body>
+<nav th:replace="partials :: siteBar"></nav>
+<div id="page-wrapper">
+
+    <div id="social-wrapper" class="rgb">
+        <div id="squads-wrapper" class="social-side-container">
+            <div class="social-title rgb">
+                Squads
+            </div>
+            <div id="squads-content-wrapper" class="wrapper-container side-wrapper">
+                <div id="squads-content" class="side-content">
+
+
+
+                </div>
+            </div>
+        </div>
+        <div id="recruits-wrapper" class="rgb">
+            <div class="social-title rgb">
+                Recruits
+            </div>
+            <div id="recruits-content-wrapper" class="wrapper-container">
+                <div id="recruits-content">
+                    <div class="arrow-left"></div>
+
+                    <div class="arrow-right"></div>
+                </div>
+            </div>
+        </div>
+        <div id="comrades-wrapper" class="social-side-container">
+            <div class="social-title rgb">
+                Comrades
+            </div>
+            <div id="comrades-content-wrapper" class="wrapper-container side-wrapper">
+                <div id="comrades-content" class="side-content">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<nav th:replace="partials :: footer"></nav>
+<div th:replace="partials :: scripts"></div>
+<script th:type="module" th:src="@{/js/social-hq.js}"></script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+#page-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#social-wrapper {
+    width: 96vw;
+    height: calc(96vh - 120px);
+    border: solid #5CFD42 .36vw;
+    position: relative;
+    display: flex;
+}
+
+.wrapper-container {
+    position: relative;
+}
+
+#recruits-wrapper {
+    flex-grow: 1;
+    border-right: solid #5CFD42 .36vw;
+    border-left: solid #5CFD42 .36vw;
+}
+
+.social-title {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    font-size: xx-large;
+    border-bottom: solid #5CFD42 .36vw;
+}
+
+.social-side-container {
+    height: 100%;
+    overflow: hidden;
+    width: 12em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/*SQUADS AND COMRADE STYLING */
+.solo-squad-img, .solo-com-img {
+    border: solid 0.3vw;
+    border-radius: 50%;
+    background-position: center;
+    background-size: cover;
+}
+
+.solo-squad, .solo-com {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.side-wrapper{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.side-wrapper::-webkit-scrollbar{
+    display: none;
+}
+
+
+.side-content {
+    width: 100%;
+}

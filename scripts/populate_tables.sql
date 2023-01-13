@@ -50,3 +50,4 @@ INSERT INTO platform_mapping (igdb_id, platform_id)
            (49, 3),
            (169, 3),
            (130, 4);
+

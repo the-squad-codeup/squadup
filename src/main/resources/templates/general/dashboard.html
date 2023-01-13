@@ -12,12 +12,13 @@
     <div id="page-wrapper" class="card-head">
         <!--ROUGH DRAFT:::: to display Current User logged in-->
         <div class="card-pro">
-            <div class="card-body user-info" sec:authorize="isAuthenticated()"><h1>Welcome back to HeadQuarters,
+            <div class="card-body user-info" sec:authorize="isAuthenticated()">
+                <h1>Welcome back to HeadQuarters,
                     <span th:text="${#authentication.principal.username}"/>!</h1>
-
 <!--                User ID: <span th:text="${#authentication.principal.id}"/><br>-->
 <!--                Email: <span th:text="${#authentication.principal.email}"/>-->
             </div>
+            <div class="pro-pic"></div>
         </div>
         <div id="new-wrapper" class="card-body">
             <div class="card-body">

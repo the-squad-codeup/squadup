@@ -114,7 +114,7 @@ public class GameController {
             currentUser.getPreferences().setGames(userGames);
             preferencesDao.save(currentUser.getPreferences());
             userDao.save(currentUser);
-            recruitMatchingService.matchAllRecruits();
+            recruitMatchingService.matchRecruits(currentUser, new HashSet<>(userDao.findAll()));
         }
         return game;
     }

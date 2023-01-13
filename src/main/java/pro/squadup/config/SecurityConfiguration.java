@@ -49,7 +49,10 @@ public class SecurityConfiguration {
                         "/messages",
                         "/messages/*",
                         "/messages/*/*",
-                        "/messages/*/*/*"
+                        "/messages/*/*/*",
+                        "/hq",
+                        "/hq/*",
+                        "/hq/*/*"
                 )
                 .authenticated()
                 // Pages viewable without logging in
