@@ -24,14 +24,14 @@ async function printSquads(){
     $("#squads-content").empty().append(`
         <div id="add-squad-wrapper" class="solo-squad">
             <h5>Add Squad</h5>
-            <img class="solo-squad-img" src="https://cdn.filestackcontent.com/ZbMRmZDQQC65sr7daKvq">
+            <img class="solo-squad-img rgb" src="https://cdn.filestackcontent.com/ZbMRmZDQQC65sr7daKvq">
         </div>
     `);
     for(let squad of squads){
         $("#squads-content").append(`
             <div data-squad-id="${squad.id}" class="solo-squad">
                 <h5>${squad.name}</h5>
-                <img class="solo-squad-img" src="${squad.squadPicture.url}">
+                <img class="solo-squad-img rgb" src="${squad.squadPicture.url}">
             </div>
         `)
     }
@@ -45,7 +45,7 @@ async function pringComrades(){
         $("#comrades-content").append(`
             <div data-comrade-id="${comrade.id}" class="solo-com">
                 <h5>${comrade.userTwo.username}</h5>
-                <img class="solo-com-img" src="${comrade.userTwo.profilePicture.url}">
+                <img class="solo-com-img rgb" src="${comrade.userTwo.profilePicture.url}">
             </div>
         `);
     }

@@ -23,6 +23,7 @@
 }
 
 .social-title {
+    width: 100%;
     display: flex;
     justify-content: center;
     font-size: xx-large;
@@ -30,7 +31,12 @@
 }
 
 .social-side-container {
-    width: 10em;
+    height: 100%;
+    overflow: hidden;
+    width: 12em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 /*SQUADS AND COMRADE STYLING */
@@ -41,5 +47,29 @@
     border-radius: 50%;
     background-position: center;
     background-size: cover;
-   overflow-y: scroll;
+}
+
+.solo-squad, .solo-com {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.side-wrapper{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.side-wrapper::-webkit-scrollbar{
+    display: none;
+}
+
+
+.side-content {
+    width: 100%;
 }
