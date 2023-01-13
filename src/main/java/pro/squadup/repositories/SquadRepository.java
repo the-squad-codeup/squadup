@@ -10,4 +10,5 @@ import java.util.Set;
 @Repository
 public interface SquadRepository extends JpaRepository<Squad, Long> {
     Set<Squad> findAllByMembers(User members);
+    Set<Squad> findAllByOwner(User owner);
 }
