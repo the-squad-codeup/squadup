@@ -49,7 +49,8 @@ public class SecurityConfiguration {
                         "/messages",
                         "/messages/*",
                         "/messages/*/*",
-                        "/messages/*/*/*"
+                        "/messages/*/*/*",
+                        "/hq"
                 )
                 .authenticated()
                 // Pages viewable without logging in

@@ -64,6 +64,7 @@ $(function() {
         onError(error) {
         },
         enterSquad(squadId) {
+            console.log("Inside enterSquad");
             SquadChat.topic = `/secured/squad-app/squad-chat/${squadId}`;
             SquadChat.currentSubscription = SquadChat.stompClient.subscribe(`/secured/squad-room/${squadId}`, this.onMessageReceived);
             SquadChat.stompClient.send(`${SquadChat.topic}/add-user`, {}, JSON.stringify({messageType: 'JOIN'}));
@@ -74,6 +75,7 @@ $(function() {
             SquadChat.currentSubscription = SquadChat.stompClient.unsubscribe();
         },
         sendMessage() {
+            console.log("Inside sendMessage");
             let messageContent = SquadChat.messageInputBox.val();
             SquadChat.topic = `/secured/squad-app/squad-chat/${SquadChat.squadId}`;
             if(messageContent && SquadChat.stompClient) {
@@ -81,6 +83,8 @@ $(function() {
                     content: messageContent,
                     messageType: 'CHAT'
                 };
+                console.log("Sending message: ");
+                console.log(chatMessage);
                 SquadChat.stompClient.send(`${SquadChat.topic}/send`, {}, JSON.stringify(chatMessage));
             }
             SquadChat.messageInputBox.val("");
@@ -110,11 +114,14 @@ $(function() {
             }
         },
         async onMessageReceived(payload) {
+            console.log("Inside onMessageReceived");
             let message = JSON.parse(payload.body);
+            console.log("Payload received:");
+            console.log(message);
             if(message.messageType === 'JOIN') {
-                Print.joinMessage(message);
+                await SquadChat.updateSquadMembers(message);
             } else if(message.messageType === 'LEAVE') {
-                Print.leaveMessage(message);
+                await Print.leaveMessage(message);
             } else if(message.messageType === 'EDIT') {
                 await Print.editMessage(message);
             } else if(message.messageType === 'DELETE') {
@@ -127,7 +134,13 @@ $(function() {
     };
 
     const Print = {
-        joinMessage(message) {
+        async joinMessage(message) {
+            let squadMemberIds = (await Fetch.Get.squadMembers()).map(member => member.id);
+            if(!squadMemberIds.includes(message.sender.id)) {
+                message.content = `${message.sender.username} has joined the chat! Say hello :)`;
+                message.sender.username = "";
+                this.singleMessage(message);
+            }
         },
         leaveMessage(message) {
         },
