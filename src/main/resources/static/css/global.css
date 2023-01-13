@@ -45,7 +45,8 @@
     font-size: 18px;
 }
 /*Other BTNS*/
-#emailSend, #signupPasswordSubmit, #loginPasswordSubmit {
+/*#emailSend, #signupPasswordSubmit, #loginPasswordSubmit {*/
+#signupPasswordSubmit, #loginPasswordSubmit {
     margin: 2%;
     border: var(--bs-gamergreen) ridge 5px;
     border-radius: 8px;

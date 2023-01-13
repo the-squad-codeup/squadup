@@ -16,7 +16,7 @@
     justify-content: center;
     /*border: ridge 12px;*/
     /*border-color: var(--bs-gamergreen) !important;*/
-    background: rgba(33, 37, 41, .3);
+    /*background: rgba(33, 37, 41, .3);*/
 }
 
 .card-title, .card-text {
@@ -65,11 +65,13 @@ textarea {
     margin-left: 21vw;
     margin-right: 24vw;
     width: 40%;
+    border-radius: 8px;
+    background-color: #5cfd42;
 }
 
 .card-con {
     /*border: purple ridge 10px;*/
-    width: 90%
+    width: 90%;
     /*min-width: 80%;*/
     /*padding-top: 5%;*/
     /*padding-bottom: 10%;*/
@@ -88,7 +90,7 @@ textarea {
     width: 90%;
     margin-left: 3vw;
     margin-right: 6vw;
-
+    border-radius: 8px;
 }
 
 
@@ -170,6 +172,7 @@ textarea {
 
 .content-adjust {
     margin: 10vw;
+    border-radius: 10px;
 }
 
 .max-size {
