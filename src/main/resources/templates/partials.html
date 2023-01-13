@@ -85,16 +85,25 @@
         </div>
     </div>
 </nav>
-<footer id="footer" th:fragment="footer" class="nav navbar-expand-lg navbar-dark bg-dark fixed-bottom">
-    <div class="container-fluid d-flex flex-wrap justify-content-center">
-        <ul class="navbar-foot d-flex flex-wrap pt-3">
-            <li class="foot-item">
-                <a id="foot-contact-link" class="foot-link p-4" th:href="@{/contact}">CONTACT US</a>
-            </li>
-            <li class="foot-item">
-                <a id="footer-about-link" class="foot-link p-4" th:href="@{/about}">ABOUT US</a>
-            </li>
-        </ul>
+<footer id="footer" th:fragment="footer" class="nav navbar-expand-lg navbar-dark bg-dark fixed-bottom d-flex justify-content-center rainbow">
+<!--    <div class="container-fluid d-flex flex-wrap justify-content-center test-outline">-->
+<!--        <ul class="navbar-foot d-flex flex-wrap pt-3 test-outline">-->
+<!--        <ul class=" test-outline">-->
+<!--            <li class="foot-item test-outline">-->
+<!--                <a id="foot-contact-link" class="foot-link p-4 foot-glow-text" th:href="@{/contact}">CONTACT US</a>-->
+<!--            </li >-->
+<!--            <li class="foot-item test-outline">-->
+<!--                <a id="footer-about-link" class="foot-link p-4" th:href="@{/about}">ABOUT US</a>-->
+<!--            </li>-->
+<!--        </ul>-->
+        <div class="foot-adjust">
+            <span class="foot-item">
+                <a id="foot-contact-link" class="foot-link p-1" th:href="@{/contact}">CONTACT US</a>
+            </span >
+            <span class="foot-item">
+                <a id="footer-about-link" class="foot-link p-1" th:href="@{/about}">ABOUT US</a>
+            </span>
+        </div>
     </div>
 </footer>
 
