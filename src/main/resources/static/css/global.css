@@ -181,6 +181,42 @@ img {
     }
 }
 
+.rgbImage {
+    animation: rgbImage 20s linear 0s infinite;
+}
+
+@keyframes rgbImage {
+    from {
+        fill: #ff0000;
+    }
+    12.5% {
+        /*border-color: #0099ff;*/
+       fill: #ff8000;
+    }
+    25% {
+        /*border-color: #0099ff;*/
+        fill: #ffea00;
+    }
+    37.5% {
+        fill: #37ff00;
+    }
+    50% {
+        fill: #00fff7;
+    }
+    65.5% {
+        fill: #0077ff;
+    }
+    75% {
+        fill: #8251ff;
+    }
+    87.5% {
+        fill: #e600ff;
+    }
+    100% {
+        fill: #ff0000;
+    }
+}
+
 .glow-text {
     color: #fff;
     animation: glow-text 20s linear 0s infinite;
