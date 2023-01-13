@@ -25,31 +25,35 @@
     border-left: solid #5CFD42 .36vw;
 }
 
-.arrow{
-    position: absolute;
-    z-index: 10;
-    top: 5em;
+#recruits-content{
+    overflow: hidden;
 }
 
-.arrow-left, .arrow-left-img{
-    height: 4vw;
-    width: 4vw;
-    position: absolute;
-    margin-left: -2vw;
-    margin-top: -2vw;
-    max-width: none;
-    transform: rotate(180deg);
-}
+/*.arrow{*/
+/*    position: absolute;*/
+/*    z-index: 10;*/
+/*    top: 5em;*/
+/*}*/
 
-.arrow-right, .arrow-right-img{
-    right: 0;
-    height: 4vw;
-    width: 4vw;
-    position: absolute;
-    margin-left: -2vw;
-    margin-top: -2vw;
-    max-width: none;
-}
+/*.arrow-left, .arrow-left-img{*/
+/*    height: 4vw;*/
+/*    width: 4vw;*/
+/*    position: absolute;*/
+/*    margin-left: -2vw;*/
+/*    margin-top: -2vw;*/
+/*    max-width: none;*/
+/*    transform: rotate(180deg);*/
+/*}*/
+
+/*.arrow-right, .arrow-right-img{*/
+/*    right: 0;*/
+/*    height: 4vw;*/
+/*    width: 4vw;*/
+/*    position: absolute;*/
+/*    margin-left: -2vw;*/
+/*    margin-top: -2vw;*/
+/*    max-width: none;*/
+/*}*/
 
         /*  STYLING FOR CARDS AND CARD CONTENTS  */
 
@@ -57,7 +61,7 @@
     padding-top: 9vh;
     margin: 0 20px;
     max-width: calc(100% - 40px);
-    overflow:hidden;
+    overflow-x: scroll;
 }
 
 #card {
