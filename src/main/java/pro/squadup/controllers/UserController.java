@@ -88,6 +88,12 @@ public class UserController {
         return squadDao.findAllByMembers(currentUser);
     }
 
+    @GetMapping("/user/squads-owned")
+    public @ResponseBody Set<Squad> getAllSquadsOwned() {
+        User currentUser = userDao.findById(Utils.currentUserId()).get();
+        return squadDao.findAllByOwner(currentUser);
+    }
+
     private void authWithHttpServletRequest(HttpServletRequest request, String username, String password) {
         try {
             request.login(username, password);
