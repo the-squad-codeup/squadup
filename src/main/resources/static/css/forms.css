@@ -9,12 +9,13 @@
 }
 
 .card-body{
+    padding: 3vw;
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: center;
-    border: ridge 12px;
-    border-color: var(--bs-gamergreen) !important;
+    /*border: ridge 12px;*/
+    /*border-color: var(--bs-gamergreen) !important;*/
     background: rgba(33, 37, 41, .3);
 }
 
@@ -61,24 +62,35 @@ textarea {
 /*------------------Form edits START 1st Contacts Page 2nd Login and Sign up Pages----------------------------------*/
 #emailSend {
     margin-top: 5%;
-    width: 95%;
+    margin-left: 21vw;
+    margin-right: 24vw;
+    width: 40%;
 }
 
 .card-con {
-    border: purple ridge 10px;
-    min-width: 50%;
-    padding-top: 5%;
-    padding-bottom: 10%;
-    margin: auto;
-    display: grid;
-    grid-template-columns: 1fr;
-    background: rgba(33, 37, 41, .3);
+    /*border: purple ridge 10px;*/
+    width: 90%
+    /*min-width: 80%;*/
+    /*padding-top: 5%;*/
+    /*padding-bottom: 10%;*/
+    /*padding:10%;*/
+    /*margin: 0.5vw;*/
+    /*display: grid;*/
+    /*grid-template-columns: 1fr;*/
+    /*background: rgba(33, 37, 41, .3);*/
 }
 
 
 #fname, #lname, #email, #phoneNumber {
-    margin: 2%;
+    /*margin: 2%;*/
 }
+.hundo {
+    width: 90%;
+    margin-left: 3vw;
+    margin-right: 6vw;
+
+}
+
 
 /*==========================================================*/
 /*Login Form and Sign In Form*/
@@ -156,4 +168,14 @@ textarea {
 /*}*/
 /*End of switch*/
 
+.content-adjust {
+    margin: 10vw;
+}
 
+.max-size {
+    width: 100%;
+}
+
+.test-outline {
+    border: orange ridge 10px;
+}

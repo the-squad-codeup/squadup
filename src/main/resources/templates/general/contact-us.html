@@ -8,22 +8,22 @@
 <body>
 <nav th:replace="partials :: siteBar"></nav>
 <div id="page-wrapper">
-    <div class="g-5">
+    <div class=" content-adjust rainbow">
         <div class="col">
-            <div class="card-body rounded-3 p-5">
+            <div class="card-body">
                 <h1 class="text-center text-success">Contact the SQUADUP support Team</h1>
-                <div class="container">
-                    <form class="card-con" id="contactUs" name="contactUs" th:action="@{/contact}" method="post">
+                <div class="">
+                    <form class="card-con max-size" id="contactUs" name="contactUs" th:action="@{/contact}" method="post">
                         <label for="fname"></label>
-                        <input type="text" id="fname" name="fname" placeholder="First Name">
+                        <input type="text" id="fname" name="fname" placeholder="First Name" class="hundo">
                         <label for="lname"></label>
-                        <input type="text" id="lname" name="lname" placeholder="Last Name">
+                        <input type="text" id="lname" name="lname" placeholder="Last Name" class="hundo">
                         <label for="email"></label>
-                        <input type="text" id="email" name="email" placeholder="Email Address">
+                        <input type="text" id="email" name="email" placeholder="Email Address" class="hundo">
                         <label for="phoneNumber"></label>
-                        <input type="text" id="phoneNumber" name="phoneNumber" placeholder="Phone Number">
+                        <input type="text" id="phoneNumber" name="phoneNumber" placeholder="Phone Number" class="hundo">
                         <label for="body"></label>
-                        <textarea id="body" name="body" placeholder="Talk to us here"></textarea>
+                        <textarea id="body" name="body" placeholder="Talk to us here" class="hundo"></textarea>
                         <button id="emailSend" type="submit" disabled>Send</button>
                     </form>
                 </div>
