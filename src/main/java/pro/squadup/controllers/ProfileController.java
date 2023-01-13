@@ -24,6 +24,7 @@ public class ProfileController {
     private LanguageRepository languageDao;
     private LocationRepository locationDao;
     private RatingRepository ratingDao;
+    private ComradeRepository comradeDao;
 
     public ProfileController(
             UserRepository userDao,
@@ -31,7 +32,8 @@ public class ProfileController {
             PlatformRepository platformDao,
             LanguageRepository languageDao,
             LocationRepository locationDao,
-            RatingRepository ratingDao
+            RatingRepository ratingDao,
+            ComradeRepository comradeDao
     ) {
         this.userDao = userDao;
         this.preferencesDao = preferencesDao;
@@ -39,6 +41,7 @@ public class ProfileController {
         this.languageDao = languageDao;
         this.locationDao = locationDao;
         this.ratingDao = ratingDao;
+        this.comradeDao = comradeDao;
     }
 
     @GetMapping("/profile")
@@ -47,10 +50,10 @@ public class ProfileController {
         return returnString;
     }
 
-    @GetMapping("/profile/{userId}/view")
-    public String profilePage(Model model, @PathVariable Long userId) {
+    @GetMapping("/profile/{comradeId}/view")
+    public String profilePage(Model model, @PathVariable Long comradeId) {
         User currentUser = userDao.findById(Utils.currentUserId()).get();
-        User user = userDao.findById(userId).get();
+        User user = userDao.findById(comradeDao.findById(comradeId).get().getUserTwo().getId()).get();
         if(isMyProfile(currentUser, user)) {
             model.addAttribute("user", currentUser);
         } else {
