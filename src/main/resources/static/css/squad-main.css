@@ -51,9 +51,17 @@
     justify-content: space-between;
 }
 
-/*input{*/
-/*    margin: 1vh;*/
-/*}*/
+.disband-squad-button{
+    margin: 1vh;
+}
+
+.create-button{
+    margin: 1vh;
+}
+
+#create-squad-name{
+    margin: 1vh;
+}
 
 h1, h3 {
     text-align: center;
