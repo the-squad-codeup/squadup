@@ -4,6 +4,7 @@
 <head>
     <div th:replace="partials :: headFragment('Contact-Us Page')"></div>
     <link rel="stylesheet" th:href="@{/css/forms.css}">
+    <link rel="stylesheet" th:href="@{/css/contact.css}">
 </head>
 <body>
 <nav th:replace="partials :: siteBar"></nav>
@@ -11,7 +12,7 @@
     <div class=" content-adjust rainbow">
         <div class="col">
             <div class="card-body">
-                <h1 class="text-center text-success">Contact the SQUADUP support Team</h1>
+                <h3 class="text-center glow-text">Contact SQUADUP Support </h3>
                 <div class="">
                     <form class="card-con max-size" id="contactUs" name="contactUs" th:action="@{/contact}" method="post">
                         <label for="fname"></label>
@@ -24,7 +25,7 @@
                         <input type="text" id="phoneNumber" name="phoneNumber" placeholder="Phone Number" class="hundo rgb">
                         <label for="body"></label>
                         <textarea id="body" name="body" placeholder="Talk to us here" class="hundo rgb"></textarea>
-                        <button class="rgb" id="emailSend" type="submit" disabled>Send</button>
+                        <button id="emailSend" type="submit" disabled>Send</button>
                     </form>
                 </div>
 
