@@ -20,11 +20,19 @@
     /////////////////////////////////////////////// Recruits Section ///////////////////////////////////////////////////*/
 #recruits-wrapper {
     flex-grow: 1;
+    overflow: hidden;
     border-right: solid #5CFD42 .36vw;
     border-left: solid #5CFD42 .36vw;
 }
 
+.arrow{
+    position: absolute;
+    z-index: 10;
+    top: 5em;
+}
+
 .arrow-left{
+    left: 0;
     border-top: 60px solid transparent;
     border-bottom: 60px solid transparent;
 
@@ -32,6 +40,7 @@
 }
 
 .arrow-right{
+    right: 0;
     border-top: 60px solid transparent;
     border-bottom: 60px solid transparent;
 
@@ -46,13 +55,13 @@
         /*  STYLING FOR CARDS AND CARD CONTENTS  */
 
 .card-slider-mask {
+    padding-top: 9vh;
     margin: 0 20px;
     max-width: calc(100% - 40px);
     overflow:hidden;
 }
 
 #card {
-    left: 450px;
     display:flex;
     flex-wrap: nowrap;
     column-gap: 25px;

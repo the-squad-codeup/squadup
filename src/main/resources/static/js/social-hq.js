@@ -1,5 +1,4 @@
-import {Utils} from "./utils";
-
+import {Utils} from "./utils.js";
 $(function () {
     console.log("Inside social-hq.js");
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -45,7 +44,7 @@ $(function () {
     }
 
 
-    document.getElementById('arrows-wrapper').addEventListener('click', async function(e){
+    $(document).on('click', ".arrow", async function(e){
         e.preventDefault();
         if (e.target && e.target.classList.contains("arrow-right")) {
             let cardList = document.getElementById('card');
@@ -54,12 +53,12 @@ $(function () {
             // count the amount of cards in the card list
             let cardCount = cardList.childElementCount;
             let maxClicks = cardCount - 1;
-            // if the current data-left value is less than the (maxClicks * 460), decrease the data-left value by 460
+            // if the current data-left value is less than the (maxClicks * 450), decrease the data-left value by 450
             if (currentLeft == -(maxClicks * 450)) {
                 //do nothing
             }
             else {
-                // set the cardList to have a css left value of 460px less than the current left value
+                // set the cardList to have a css left value of 450px less than the current left value
                 cardList.style.left = `${parseInt(currentLeft) - 450}px`;
                 // set the data-left value of the card list to the new left value
                 cardList.dataset.left = `${parseInt(currentLeft) - 450}`;
@@ -70,8 +69,8 @@ $(function () {
             // get the current data-left value of the card list
             let currentLeft = cardList.dataset.left;
             if (currentLeft == "0") {
-                // set the cardList to have a css left value of 460px less than the current left value
-                cardList.style.left = `${parseInt(currentLeft) + 450}px`;
+                // set the cardList to have a css left value of 450px less than the current left value
+                // cardList.style.left = `${parseInt(currentLeft) + 450}px`;
             }
             else {
                 // set the cardList to have a css left value of 450px less than the current left value
