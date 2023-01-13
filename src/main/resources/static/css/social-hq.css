@@ -12,6 +12,10 @@
     display: flex;
 }
 
+.wrapper-container {
+    position: relative;
+}
+
 #recruits-wrapper {
     flex-grow: 1;
     border-right: solid #5CFD42 .36vw;
