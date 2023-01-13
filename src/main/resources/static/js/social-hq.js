@@ -177,7 +177,10 @@ pringComrades();
 
 $(document)
     .on("click", ".solo-com-img", function () {
-        window.location.href=`${Utils.url()}profile/${$(this).parent().attr("data-comrade-id")}/view`;
+        window.location.href=`${Utils.url()}profile/${$(this).parent().attr("data-comrade-id")}/comrade`;
+    })
+    .on("click", ".card-img-top", function() {
+        window.location.href=`${Utils.url()}profile/${$(this).parent().parent().parent().attr("data-recruit-id")}/recruit`;
     })
 ;
 });
