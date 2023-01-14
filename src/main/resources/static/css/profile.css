@@ -31,16 +31,29 @@
     margin-left: 10vw;
     z-index: 3;
 }
-.gamertag{
+
+.username{
     color: #5CFD42;
     font-size: 4vw;
     position: absolute;
     height: 4vw;
     width: 40vw;
-    margin-top: 1vw;
+    margin-top: 0;
     margin-left: 10vw;
     display: flex;
     align-items: center;
+}
+.gamertag{
+    color: #5CFD42;
+    font-size: 1.8vw;
+    position: absolute;
+    height: 2vw;
+    width: 40vw;
+    margin-top: 4.5vw;
+    margin-left: 12vw;
+    display: flex;
+    align-items: center;
+    filter: brightness(75%);
 }
 .bio div{
     color: #5CFD42;

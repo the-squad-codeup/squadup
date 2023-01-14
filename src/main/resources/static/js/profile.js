@@ -2,12 +2,16 @@ import { Utils } from "./utils.js";
 $(async function (){
     const $backendDiv = $("#profile-backend-info");
     const currentUserId = $backendDiv.attr("data-user-id");
-    const isMyProfile = $backendDiv.attr("data-is-current-user");
-    const isComrade = $backendDiv.attr("data-is-comrade");
-    const isRecruit = $backendDiv.attr("data-is-recruit");
+    const isMyProfile = $backendDiv.attr("data-is-current-user") === "true";
+    const isComrade = $backendDiv.attr("data-is-comrade") === "true";
+    const isRecruit = $backendDiv.attr("data-is-recruit") === "true";
     const currentUser = await fetch(`${Utils.url()}user/${currentUserId}/info`).then(res => res.json());
 
+    console.log(`User profile belongs to: ${currentUser.username}. Their info is:`);
     console.log(currentUser);
+    console.log(`This is my profile: ${isMyProfile}`);
+    console.log(`This is a Comrade: ${isComrade}`);
+    console.log(`This is a Recruit: ${isRecruit}`);
     async function getUserGames() {
         // let userGames = await fetch(`${Utils.url()}game/user`).then(res => res.json());
         let userGames = currentUser.preferences.games;
@@ -83,12 +87,26 @@ $(async function (){
             <div>${userInfo.preferences.bio}</div>
         `)
 
-        // Gamertag
+        // Username
         $('.info-container').append(`
-        <div class="gamertag">
-               ${userInfo.preferences.gamertag}
-        </div>
-        `)
+            <div class="username">
+                ${userInfo.username}
+            </div>
+        `);
+
+        console.log("Printing gamertag.");
+        console.log(`isMyProfile: ${isMyProfile}`);
+        console.log(`isComrade: ${isComrade}`);
+        console.log(`isRecruit: ${isRecruit}`);
+        // Gamertag
+        if(isMyProfile || isComrade) {
+            console.log("Why am I inside here?");
+            $('.info-container').append(`
+                <div class="gamertag">
+                       Discord: ${userInfo.preferences.gamertag}
+                </div>
+            `);
+        }
 
         // Genres
         // $('.genres').append(`
