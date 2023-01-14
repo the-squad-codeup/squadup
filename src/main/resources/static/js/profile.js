@@ -1,12 +1,16 @@
 import { Utils } from "./utils.js";
-$(function (){
+$(async function (){
     const $backendDiv = $("#profile-backend-info");
     const currentUserId = $backendDiv.attr("data-user-id");
     const isMyProfile = $backendDiv.attr("data-is-current-user");
     const isComrade = $backendDiv.attr("data-is-comrade");
     const isRecruit = $backendDiv.attr("data-is-recruit");
+    const currentUser = await fetch(`${Utils.url()}user/${currentUserId}/info`).then(res => res.json());
+
+    console.log(currentUser);
     async function getUserGames() {
-        let userGames = await fetch(`${Utils.url()}game/user`).then(res => res.json());
+        // let userGames = await fetch(`${Utils.url()}game/user`).then(res => res.json());
+        let userGames = currentUser.preferences.games;
         console.log("Array of user's games")
         console.log(userGames)
         for(let game of userGames){
@@ -26,7 +30,8 @@ $(function (){
 
 
     async function getUserFavorite() {
-        let favoriteGame = await fetch(`${Utils.url()}game/favorite`).then(res => res.json());
+        // let favoriteGame = await fetch(`${Utils.url()}game/favorite`).then(res => res.json());
+        let favoriteGame = currentUser.preferences.favoriteGame;
         console.log("favorite game:")
         console.log(favoriteGame)
         if (favoriteGame.id !== null) {
@@ -47,8 +52,8 @@ $(function (){
     getUserFavorite()
 
     async function getUserInfo(){
-        let userInfo = await fetch(`${Utils.url()}user/get`).then(res => res.json());
-
+        // let userInfo = await fetch(`${Utils.url()}user/get`).then(res => res.json());
+        let userInfo = currentUser;
         // Platforms
         $('.my-platforms').append(`
           My Games:
