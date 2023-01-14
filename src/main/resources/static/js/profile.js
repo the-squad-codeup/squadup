@@ -1,5 +1,10 @@
 import { Utils } from "./utils.js";
 $(function (){
+    const $backendDiv = $("#profile-backend-info");
+    const currentUserId = $backendDiv.attr("data-user-id");
+    const isMyProfile = $backendDiv.attr("data-is-current-user");
+    const isComrade = $backendDiv.attr("data-is-comrade");
+    const isRecruit = $backendDiv.attr("data-is-recruit");
     async function getUserGames() {
         let userGames = await fetch(`${Utils.url()}game/user`).then(res => res.json());
         console.log("Array of user's games")
