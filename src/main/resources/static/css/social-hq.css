@@ -197,3 +197,58 @@ img.card-img-top {
 .side-content {
     width: 100%;
 }
+
+.squad-modal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 12;
+    border-radius: 2px;
+}
+
+.modal-top {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.squad-modal img {
+    width: 3em;
+}
+
+.modal-title {
+    border-bottom: 4px;
+    font-size: xx-large;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.squad-overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(3px);
+    z-index: 10;
+}
+
+.hidden {
+    display: none;
+}
+
+.modal-exit-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+}

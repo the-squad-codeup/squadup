@@ -1,6 +1,8 @@
 import {Utils} from "./utils.js"
 $(function () {
     console.log("Inside social-hq.js");
+    let backgroundUrl = `${window.location.protocol}//${window.location.host}/background-image`;
+    $(".squad-modal").css("background", `url('${backgroundUrl}') no-repeat center center`);
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////// Recruits Section ///////////////////////////////////////////////////
     const csrfToken = $("meta[name='_csrf']").attr("content")
@@ -154,7 +156,7 @@ $(function () {
         $("#squads-content").empty().append(`
             <div id="add-squad-wrapper" class="solo-squad">
                 <h5>Add Squad</h5>
-                <img class="solo-squad-img rgb" src="https://cdn.filestackcontent.com/Humw6OOXTemRtPob8kJB">
+                <img class="solo-squad-img rgb" src="https://cdn.filestackcontent.com/YmC6UtutQsiTT2tYduKI">
             </div>
         `);
         for(let squad of squads){
@@ -185,14 +187,19 @@ $(function () {
         let comrades = await getComrades();
         $(".squad-modal").empty().append(`
             <button class="modal-exit-btn">X</button>
-            <div class="modal-squad-name-wrapper">
-                <div class="modal-squad-name-label">
-                    Squad Name:
-                </div>
-                <input class="modal-squad-name-input" type="text">
+            <div class="modal-title rgb">
+                Create A Squad
             </div>
-            <div class="modal-squad-picture-wrapper">
-                <img class="modal-squad-picture" src="https://cdn.filestackcontent.com/YmC6UtutQsiTT2tYduKI">
+            <div class="modal-top">
+                <div class="modal-squad-name-wrapper">
+                    <div class="modal-squad-name-label">
+                        Squad Name:
+                    </div>
+                    <input class="modal-squad-name-input" type="text">
+                </div>
+                <div class="modal-squad-picture-wrapper">
+                    <img class="modal-squad-picture" src="https://cdn.filestackcontent.com/Humw6OOXTemRtPob8kJB">
+                </div>
             </div>
             <div class="modal-squad-invites-wrapper">
                 <div class="modal-squad-invitees-mask">
@@ -243,5 +250,7 @@ $(function () {
                 printSquadModal();
             }
         })
+        .on("click", ".squad-overlay", hideModal)
+        .on("click", ".modal-exit-btn", hideModal)
     ;
 });
