@@ -158,7 +158,7 @@ async function printSquads(){
 }
 
 
-async function pringComrades(){
+async function printComrades(){
     let comrades = await getComrades();
     console.log(comrades)
     for(let comrade of comrades){
@@ -171,9 +171,38 @@ async function pringComrades(){
     }
 }
 
+async function printAddSquadModal() {
+    let comrades = await getComrades();
+    $(".squad-modal").empty().append(`
+        <button class="modal-exit-btn">X</button>
+        <div class="modal-squad-name-wrapper">
+            <div class="modal-squad-name-label">
+                Squad Name:
+            </div>
+            <input class="modal-squad-name-input" type="text">
+        </div>
+        <div class="modal-squad-picture-wrapper">
+            <img class="modal-squad-picture" src="https://cdn.filestackcontent.com/YmC6UtutQsiTT2tYduKI">
+        </div>
+        <div class="modal-squad-invites-wrapper">
+            <div class="modal-squad-invite-">
+            
+            </div>
+        </div>
+        <div class="modal-squad-create-btn-wrapper">
+            <button class="modal-squad-create-btn">Create Squad</button>
+        </div>
+    `);
+    for(let comrade of comrades) {
+        $(".modal-squad-invites-select").append(`
+            <option class="modal-squad-invites-option" data-comrade-id="${comrade.id}">
+        `);
+    }
+}
+
 
 printSquads();
-pringComrades();
+printComrades();
 
 $(document)
     .on("click", ".solo-com-img", function () {
@@ -181,6 +210,13 @@ $(document)
     })
     .on("click", ".card-img-top", function() {
         window.location.href=`${Utils.url()}profile/${$(this).parent().parent().parent().attr("data-recruit-id")}/recruit`;
+    })
+    .on("click", ".solo-squad-img", function() {
+        if($(this).parent(`[id="add-squad-wrapper"]`)) {
+            printAddSquadModal();
+        } else {
+            printSquadModal();
+        }
     })
 ;
 });
