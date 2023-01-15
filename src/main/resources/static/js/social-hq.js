@@ -140,6 +140,10 @@ $(function () {
         return await fetch(`${Utils.url()}comrades/all`).then(res => res.json())
     }
 
+    async function getUser(userId) {
+        return await fetch(`${Utils.url()}user/${userId}/info`).then(res => res.json());
+    }
+
     function showModal() {
         $(".squad-modal").removeClass("hidden");
         $(".squad-overlay").removeClass("hidden");
@@ -216,7 +220,9 @@ $(function () {
                     </div>
                     <div class="modal-squad-invitees-mask invite-mask">
                         <div class="modal-squad-invitees invite-container">
-                            Choose A Comrade To Invite
+                            <div style="display: flex; width: 100%; justify-content: center;">
+                                Choose A Comrade To Invite
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -237,6 +243,11 @@ $(function () {
                 </div>
             `);
         }
+    }
+
+    async function printModalInvitee(userId) {
+        let user = await getUser(userId);
+
     }
 
 
@@ -260,5 +271,9 @@ $(function () {
         })
         .on("click", ".squad-overlay", hideModal)
         .on("click", ".modal-exit-btn", hideModal)
+        .on("click", ".modal-squad-comrade-img", function() {
+            printModalInvitee($(this).parent().parent().attr("data-user-id"));
+            $(this).parent().parent().remove()
+        });
     ;
 });
