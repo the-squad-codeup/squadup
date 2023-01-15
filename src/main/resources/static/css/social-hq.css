@@ -4,6 +4,10 @@
     align-items: center;
 }
 
+body {
+    color: #5CFD42;
+}
+
 #social-wrapper {
     width: 96vw;
     height: calc(96vh - 120px);
