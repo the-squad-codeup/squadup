@@ -205,26 +205,70 @@ img.card-img-top {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 50%;
+    width: 36em;
     transform: translate(-50%, -50%);
     z-index: 12;
     border-radius: 2px;
-}
-
-.modal-top {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-}
-
-.squad-modal img {
-    width: 3em;
 }
 
 .modal-title {
     border-bottom: 4px;
     font-size: xx-large;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.modal-top {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.modal-squad-name-input {
+    width: 20em;
+    margin: 0 0.5em;
+}
+
+.modal-squad-picture {
+    width: 6em;
+}
+
+.modal-user-img {
+    width: 4em;
+}
+
+.user-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.invite-title {
+    display: flex;
+    justify-content: center;
+    font-size: xx-large;
+}
+
+.invite-mask {
+    overflow: hidden;
+    width: 100%;
+}
+
+.invite-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-x: scroll;
+    height: 8em;
+}
+
+.single-user-wrapper {
+    margin: 1em 2em;
     display: flex;
     flex-direction: column;
     align-items: center;

@@ -191,25 +191,33 @@ $(function () {
                 Create A Squad
             </div>
             <div class="modal-top">
-                <div class="modal-squad-name-wrapper">
-                    <div class="modal-squad-name-label">
-                        Squad Name:
-                    </div>
-                    <input class="modal-squad-name-input" type="text">
+                <div class="modal-squad-name-label">
+                    Squad Name:
                 </div>
+                <input class="modal-squad-name-input" type="text">
                 <div class="modal-squad-picture-wrapper">
                     <img class="modal-squad-picture" src="https://cdn.filestackcontent.com/Humw6OOXTemRtPob8kJB">
                 </div>
             </div>
             <div class="modal-squad-invites-wrapper">
-                <div class="modal-squad-invitees-mask">
-                    <div class="modal-squad-invitees">
-                        
+                <div class="modal-squad-comrades-wrapper user-wrapper">
+                    <div class="modal-squad-comrades-title invite-title">
+                        Invite Comrades:
+                    </div>
+                    <div class="modal-squad-comrades-mask invite-mask">
+                        <div class="modal-squad-comrades invite-container">
+                            
+                        </div>
                     </div>
                 </div>
-                <div class="modal-squad-comrades-mask">
-                    <div class="modal-squad-comrades">
-                    
+                <div class="modal-squad-invitees-wrapper user-wrapper">
+                    <div class="modal-squad-invitees-title invite-title">
+                        Current Invites
+                    </div>
+                    <div class="modal-squad-invitees-mask invite-mask">
+                        <div class="modal-squad-invitees invite-container">
+                            Choose A Comrade To Invite
+                        </div>
                     </div>
                 </div>
             </div>
@@ -219,12 +227,12 @@ $(function () {
         `);
         for(let comrade of comrades) {
             $(".modal-squad-comrades").append(`
-                <div class="modal-squad-comrade-wrapper" data-user-id="${comrade.userTwo.id}">
+                <div class="modal-squad-comrade-wrapper single-user-wrapper" data-user-id="${comrade.userTwo.id}">
                     <div class="modal-squad-comrade-username">
                         ${comrade.userTwo.username}
                     </div>
                     <div class="modal-squad-comrade-img-wrapper">
-                        <img class="modal-squad-comrade-img" src="${comrade.userTwo.profilePicture.url}">
+                        <img class="modal-squad-comrade-img modal-user-img" src="${comrade.userTwo.profilePicture.url}">
                     </div>
                 </div>
             `);
