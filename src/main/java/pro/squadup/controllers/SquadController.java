@@ -47,6 +47,11 @@ public class SquadController {
         return "squad/main";
     }
 
+    @GetMapping("/squads/{squadId}/info")
+    public @ResponseBody Squad getSquadInfoById(@PathVariable Long squadId) {
+        return squadDao.findById(squadId).get();
+    }
+
     @PostMapping("/squads/create")
     public String createSquad(Model model, @ModelAttribute Squad squad) throws JsonProcessingException {
         // getting user, default squadPicture, empty Chat to set in squad

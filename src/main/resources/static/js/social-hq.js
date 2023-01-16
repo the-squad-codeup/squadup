@@ -136,25 +136,55 @@ $(function () {
         return await fetch(`${Utils.url()}user/squads`).then(res => res.json());
     }
 
+    async function getSquad(squadId) {
+        return await fetch(`${Utils.url()}squads/${squadId}/info`).then(res => res.json());
+    }
+
+    async function getSquadOwner(squadId) {
+        return await fetch(`${Utils.url()}squads/${squadId}/owner`).then(res => res.json());
+    }
+
     async function getComrades(){
-        return await fetch(`${Utils.url()}comrades/all`).then(res => res.json())
+        return await fetch(`${Utils.url()}comrades/all`).then(res => res.json());
+    }
+
+    async function getCurrentUser() {
+        return await fetch(`${Utils.url()}user/get`).then(res => res.json());
     }
 
     async function getUser(userId) {
         return await fetch(`${Utils.url()}user/${userId}/info`).then(res => res.json());
     }
 
+    async function getCurrentInvitees(squadId) {
+        return await fetch(`${Utils.url()}invites/${squadId}/current`).then(res => res.json());
+    }
+
+    async function getPossibleInvitees(squadId) {
+        return await fetch(`${Utils.url()}invites/${squadId}/possible`).then(res => res.json());
+    }
+
+    async function sendInvite(squadId, userId) {
+        const fetchOptions = {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN' : csrfToken
+            }
+        }
+        return await fetch(`${Utils.url()}squads/${squadId}/invite/${userId}`, fetchOptions).then(res => res.json());
+    }
+
     async function createSquad() {
         let invitees = [];
-        console.log($(".modal-squad-invitee-wrapper"));
-        for(let $invitee of $(".modal-squad-invitee-wrapper")) {
+        console.log($(".add-modal-squad-invitee-wrapper"));
+        for(let $invitee of $(".add-modal-squad-invitee-wrapper")) {
             console.log($invitee)
             invitees.push($invitee.attributes[1].value);
         };
         let squadToCreate = {
-            name: $(".modal-squad-name-input").val(),
+            name: $(".add-modal-squad-name-input").val(),
             inviteeIds: invitees,
-            squadPictureId: $(".modal-squad-img").attr("data-squad-img-id")
+            squadPictureId: $(".add-modal-squad-img").attr("data-squad-img-id")
         };
         let fetchOptions = {
             method: 'POST',
@@ -225,17 +255,95 @@ $(function () {
     async function printAddSquadModal() {
         let comrades = await getComrades();
         $(".squad-modal").empty().append(`
-            <button class="modal-exit-btn">X</button>
-            <div class="modal-title rgb">
+            <div class="add-modal-title rgb">
                 Create A Squad
             </div>
-            <div class="modal-top">
-                <div class="modal-squad-name-label">
+            <div class="add-modal-top">
+                <div class="add-modal-squad-name-label">
                     Squad Name:
                 </div>
-                <input class="modal-squad-name-input" type="text">
+                <input class="add-modal-squad-name-input" type="text">
+                <div class="add-modal-squad-img-wrapper">
+                    <img class="add-modal-squad-img" src="https://cdn.filestackcontent.com/Humw6OOXTemRtPob8kJB">
+                </div>
+            </div>
+            <div class="add-modal-squad-invites-wrapper">
+                <div class="add-modal-squad-comrades-wrapper user-wrapper">
+                    <div class="add-modal-squad-comrades-title invite-title">
+                        Invite Comrades:
+                    </div>
+                    <div class="add-modal-squad-comrades-mask invite-mask">
+                        <div class="add-modal-squad-comrades invite-container">
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="add-modal-squad-invitees-wrapper user-wrapper">
+                    <div class="add-modal-squad-invitees-title invite-title">
+                        Current Invites
+                    </div>
+                    <div class="add-modal-squad-invitees-mask invite-mask">
+                        <div class="add-modal-squad-invitees invite-container">
+                            <div class="add-empty-invitees" style="display: flex; width: 100%; justify-content: center;">
+                                Choose A Comrade To Invite
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="add-modal-squad-create-btn-wrapper">
+                <button class="add-modal-squad-create-btn">Create Squad</button>
+            </div>
+        `);
+        for(let comrade of comrades) {
+            $(".add-modal-squad-comrades").append(`
+                <div class="add-modal-squad-comrade-wrapper single-user-wrapper" data-user-id="${comrade.userTwo.id}">
+                    <div class="add-modal-squad-comrade-username">
+                        ${comrade.userTwo.username}
+                    </div>
+                    <div class="add-modal-squad-comrade-img-wrapper">
+                        <img class="add-modal-squad-comrade-img modal-user-img" src="${comrade.userTwo.profilePicture.url}">
+                    </div>
+                </div>
+            `);
+        }
+    }
+
+    async function printSquadModalOwner(squadId) {
+        let squad = await getSquad(squadId);
+        console.log(squad);
+        let squadMemberIds = squad.members.map(member => member.id);
+        let squadInvitees = await getCurrentInvitees(squadId);
+        let squadInviteIds = squadInvitees.map(invitee => invitee.id);
+        let usersToInvite = await getPossibleInvitees(squadId);
+        let trimmedUsersToInvite = [];
+        for(let user of usersToInvite) {
+            if(!(squadMemberIds.includes(user.id) || squadInviteIds.includes(user.id))) {
+                trimmedUsersToInvite.push(user);
+            }
+        }
+        for(let member of squad.members) {
+            $(".squad-modal").empty().append(`
+            <div hidden id="modal-squad-info" data-squad-id="${squad.id}"></div>
+            <div class="modal-top">
                 <div class="modal-squad-img-wrapper">
-                    <img class="modal-squad-img" src="https://cdn.filestackcontent.com/Humw6OOXTemRtPob8kJB">
+                    <img class="modal-squad-img squad-image" src="${squad.squadPicture.url}">
+                </div>
+                <div class="modal-title rgb">
+                    ${squad.name}
+                </div>
+                <div class="modal-squad-chat-btn-wrapper">
+                    <button class="modal-squad-chat-btn">Chat</button>
+                </div>
+            </div>
+            <div class="modal-squad-members-wrapper user-wrapper">
+                <div class="modal-squad-members-title invite-title">
+                    Members:
+                </div>
+                <div class="modal-squad-members-mask invite-mask">
+                    <div class="modal-squad-members invite-container">
+                        
+                    </div>
                 </div>
             </div>
             <div class="modal-squad-invites-wrapper">
@@ -262,22 +370,104 @@ $(function () {
                     </div>
                 </div>
             </div>
-            <div class="modal-squad-create-btn-wrapper">
-                <button class="modal-squad-create-btn">Create Squad</button>
+            <div class="modal-squad-btn-wrapper">
+                <button class="modal-squad-disband-btn">Disband Squad</button>
             </div>
         `);
-        for(let comrade of comrades) {
-            $(".modal-squad-comrades").append(`
-                <div class="modal-squad-comrade-wrapper single-user-wrapper" data-user-id="${comrade.userTwo.id}">
+            $(".modal-squad-members").append(`
+                <div class="modal-squad-member-wrapper single-user-wrapper" data-user-id="${member.id}">
                     <div class="modal-squad-comrade-username">
-                        ${comrade.userTwo.username}
+                        ${member.username}
                     </div>
                     <div class="modal-squad-comrade-img-wrapper">
-                        <img class="modal-squad-comrade-img modal-user-img" src="${comrade.userTwo.profilePicture.url}">
+                        <img class="modal-squad-comrade-img modal-user-img" src="${member.profilePicture.url}">
                     </div>
                 </div>
             `);
         }
+        for(let user of trimmedUsersToInvite) {
+            $(".modal-squad-comrades").append(`
+                <div class="modal-squad-comrade-wrapper single-user-wrapper" data-user-id="${user.id}">
+                    <div class="modal-squad-comrade-username">
+                        ${user.username}
+                    </div>
+                    <div class="modal-squad-comrade-img-wrapper">
+                        <img class="modal-squad-comrade-img modal-user-img" src="${user.profilePicture.url}">
+                    </div>
+                </div>
+            `);
+        }
+        for(let invitee of squadInvitees) {
+            if($(".modal-squad-invitees").find(".empty-invitees").length){
+                $(".modal-squad-invitees").empty();
+            }
+            $(".modal-squad-invitees").append(`
+                <div class="modal-squad-invitee-wrapper single-user-wrapper" data-user-id="${invitee.id}">
+                    <div class="modal-squad-invitee-username">
+                        ${invitee.username}
+                    </div>
+                    <div class="modal-squad-invitee-img-wrapper">
+                        <img class="modal-squad-invitee-img modal-user-img" src="${invitee.profilePicture.url}">
+                    </div>
+                </div>
+            `);
+        }
+    }
+
+    async function printSquadModal(squadId) {
+        let squad = await getSquad(squadId);
+        console.log(squad);
+
+        $(".squad-modal").empty().append(`
+            <div hidden id="modal-squad-info" data-squad-id="${squad.id}"></div>
+            <img class="modal-squad-img squad-image" src="${squad.squadPicture.url}">
+            <div class="modal-title rgb">
+                ${squad.name}
+            </div>
+            <div class="modal-squad-members-wrapper user-wrapper">
+                <div class="modal-squad-members-title invite-title">
+                    Members:
+                </div>
+                <div class="modal-squad-members-mask invite-mask">
+                    <div class="modal-squad-members invite-container">
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="modal-squad-btn-wrapper">
+                <button class="modal-squad-chat-btn">Squad Chat</button>
+            </div>
+        `);
+        for(let member of squad.members) {
+            $(".modal-squad-members").append(`
+                <div class="modal-squad-member-wrapper single-user-wrapper" data-user-id="${member.id}">
+                    <div class="modal-squad-comrade-username">
+                        ${member.username}
+                    </div>
+                    <div class="modal-squad-comrade-img-wrapper">
+                        <img class="modal-squad-comrade-img modal-user-img" src="${member.profilePicture.url}">
+                    </div>
+                </div>
+            `);
+        }
+    }
+
+
+    async function printAddModalInvitee(userId) {
+        let user = await getUser(userId);
+        if($(".add-modal-squad-invitees").find(".add-empty-invitees").length) {
+            $(".add-modal-squad-invitees").empty()
+        }
+        $(".add-modal-squad-invitees").prepend(`
+            <div class="add-modal-squad-invitee-wrapper single-user-wrapper" data-user-id="${user.id}">
+                    <div class="add-modal-squad-invitee-username">
+                        ${user.username}
+                    </div>
+                    <div class="add-modal-squad-invitee-img-wrapper">
+                        <img class="add-modal-squad-invitee-img modal-user-img" src="${user.profilePicture.url}">
+                    </div>
+                </div>
+        `);
     }
 
     async function printModalInvitee(userId) {
@@ -312,17 +502,27 @@ $(function () {
             if($(this).parent("#add-squad-wrapper").length) {
                 printAddSquadModal();
             } else {
-                printSquadModal();
+                let user = await getCurrentUser();
+                let owner = await getSquadOwner($(this).parent().attr("data-squad-id"));
+                if(user.id === owner.id) {
+                    printSquadModalOwner($(this).parent().attr("data-squad-id"));
+                } else {
+                    printSquadModal($(this).parent().attr("data-squad-id"))
+                }
             }
             showModal();
         })
         .on("click", ".squad-overlay", hideModal)
-        .on("click", ".modal-exit-btn", hideModal)
-        .on("click", ".modal-squad-comrade-img", function() {
+        .on("click", ".add-modal-squad-comrade-img", function() {
+            printAddModalInvitee($(this).parent().parent().attr("data-user-id"));
+            $(this).parent().parent().remove();
+        })
+        .on("click", ".modal-squad-comrade-img", async function() {
+            await sendInvite($("#modal-squad-info").attr("data-squad-id"), $(this).parent().parent().attr("data-user-id"))
             printModalInvitee($(this).parent().parent().attr("data-user-id"));
             $(this).parent().parent().remove();
         })
-        .on("click", ".modal-squad-create-btn", async function() {
+        .on("click", ".add-modal-squad-create-btn", async function() {
             createSquad();
             hideModal();
         })
