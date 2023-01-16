@@ -38,6 +38,17 @@ $(async function() {
                     body: JSON.stringify(file)
                 }
                 return await fetch(`${Utils.url()}squads/${$("#squad-title").attr("data-squad-id")}/picture`, postOptions).then(res => res.json());
+            },
+            async addSquadPicture(file) {
+                let postOptions = {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': FileStack.csrfToken
+                    },
+                    body: JSON.stringify(file)
+                }
+                return await fetch(`${Utils.url()}squads/picture/new`, postOptions).then(res => res.json());
             }
         }
     }
@@ -83,6 +94,23 @@ $(async function() {
                 $('.squad-image').css('background-image', `url("${uploadedPicture.url}")`);
             }
         },
+        addSquadOptions: {
+            fromSources: ["local_file_system", "url"],
+            accept: ["image/*"],
+            transformations: {
+                crop: false,
+                circle: true,
+                rotate: false,
+                force: true
+            },
+            imageMax: [480, 480],
+            onFileUploadFinished: async function(file) {
+                console.log(file);
+                let uploadedPicture = await Fetch.Post.addSquadPicture(file, FileStack.csrfToken).then(res => res);
+                console.log(uploadedPicture);
+                $('.modal-squad-img').attr('src', `url("${uploadedPicture.url}")`).attr("data-squad-img-id", `${uploadedPicture.id}`);
+            }
+        },
         filestackKey: await Fetch.Get.filestackKey().then(res => res),
         csrfToken: $("meta[name='_csrf']").attr("content")
     };
@@ -96,6 +124,9 @@ $(async function() {
                 .on("click", ".squad-image", function() {
                     FileStack.client.picker(FileStack.squadOptions).open();
                 })
+                .on("click", ".modal-squad-img", function() {
+                    FileStack.client.picker(FileStack.addSquadOptions).open();
+                });
             ;
         }
     }

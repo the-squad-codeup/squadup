@@ -199,8 +199,8 @@ $(function () {
                     Squad Name:
                 </div>
                 <input class="modal-squad-name-input" type="text">
-                <div class="modal-squad-picture-wrapper">
-                    <img class="modal-squad-picture" src="https://cdn.filestackcontent.com/Humw6OOXTemRtPob8kJB">
+                <div class="modal-squad-img-wrapper">
+                    <img class="modal-squad-img" src="https://cdn.filestackcontent.com/Humw6OOXTemRtPob8kJB">
                 </div>
             </div>
             <div class="modal-squad-invites-wrapper">
@@ -274,18 +274,18 @@ $(function () {
             window.location.href=`${Utils.url()}profile/${$(this).parent().parent().parent().attr("data-recruit-id")}/recruit`;
         })
         .on("click", ".solo-squad-img", async function() {
-            showModal();
             if($(this).parent("#add-squad-wrapper").length) {
                 printAddSquadModal();
             } else {
                 printSquadModal();
             }
+            showModal();
         })
         .on("click", ".squad-overlay", hideModal)
         .on("click", ".modal-exit-btn", hideModal)
         .on("click", ".modal-squad-comrade-img", function() {
             printModalInvitee($(this).parent().parent().attr("data-user-id"));
-            $(this).parent().parent().remove()
+            $(this).parent().parent().remove();
         });
     ;
 });
