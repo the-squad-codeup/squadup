@@ -5,7 +5,7 @@ $(function () {
     $(".squad-modal").css("background", `url('${backgroundUrl}') no-repeat center center`);
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////// Recruits Section ///////////////////////////////////////////////////
-    const csrfToken = $("meta[name='_csrf']").attr("content")
+    const csrfToken = $("meta[name='_csrf']").attr("content");
 
     console.log("Inside recruits.js");
     async function printUserCards(recruits) {
@@ -142,6 +142,19 @@ $(function () {
 
     async function getUser(userId) {
         return await fetch(`${Utils.url()}user/${userId}/info`).then(res => res.json());
+    }
+
+    async function createSquad() {
+        let squadToCreate = {
+            name: $(".modal-squad-name-input").text()
+        }
+        let fetchOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type' : 'application/json',
+                'X-CSRF-TOKEN' : csrfToken
+            },
+        }
     }
 
     function showModal() {
@@ -286,6 +299,11 @@ $(function () {
         .on("click", ".modal-squad-comrade-img", function() {
             printModalInvitee($(this).parent().parent().attr("data-user-id"));
             $(this).parent().parent().remove();
-        });
+        })
+        .on("click", ".modal-squad-create-btn", async function() {
+            createSquad();
+            printNewSquad();
+            hideModal();
+        })
     ;
 });
