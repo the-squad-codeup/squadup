@@ -420,9 +420,16 @@ $(function () {
 
         $(".squad-modal").empty().append(`
             <div hidden id="modal-squad-info" data-squad-id="${squad.id}"></div>
-            <img class="modal-squad-img squad-image" src="${squad.squadPicture.url}">
-            <div class="modal-title rgb">
-                ${squad.name}
+            <div class="modal-top">
+                <div class="modal-squad-img-wrapper">
+                    <img class="modal-squad-img" src="${squad.squadPicture.url}">
+                </div>
+                <div class="modal-title rgb">
+                    ${squad.name}
+                </div>
+                <div class="modal-squad-chat-btn-wrapper">
+                    <button class="modal-squad-chat-btn">Chat</button>
+                </div>
             </div>
             <div class="modal-squad-members-wrapper user-wrapper">
                 <div class="modal-squad-members-title invite-title">
@@ -433,9 +440,6 @@ $(function () {
                         
                     </div>
                 </div>
-            </div>
-            <div class="modal-squad-btn-wrapper">
-                <button class="modal-squad-chat-btn">Squad Chat</button>
             </div>
         `);
         for(let member of squad.members) {
