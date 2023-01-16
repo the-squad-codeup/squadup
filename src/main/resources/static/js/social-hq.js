@@ -220,7 +220,7 @@ $(function () {
                     </div>
                     <div class="modal-squad-invitees-mask invite-mask">
                         <div class="modal-squad-invitees invite-container">
-                            <div style="display: flex; width: 100%; justify-content: center;">
+                            <div class="empty-invitees" style="display: flex; width: 100%; justify-content: center;">
                                 Choose A Comrade To Invite
                             </div>
                         </div>
@@ -247,7 +247,19 @@ $(function () {
 
     async function printModalInvitee(userId) {
         let user = await getUser(userId);
-
+        if($(".modal-squad-invitees").find(".empty-invitees").length) {
+            $(".modal-squad-invitees").empty()
+        }
+        $(".modal-squad-invitees").prepend(`
+            <div class="modal-squad-invitee-wrapper single-user-wrapper" data-user-id="${user.id}">
+                    <div class="modal-squad-invitee-username">
+                        ${user.username}
+                    </div>
+                    <div class="modal-squad-invitee-img-wrapper">
+                        <img class="modal-squad-invitee-img modal-user-img" src="${user.profilePicture.url}">
+                    </div>
+                </div>
+        `);
     }
 
 
@@ -263,7 +275,7 @@ $(function () {
         })
         .on("click", ".solo-squad-img", async function() {
             showModal();
-            if($(this).parent(`[id="add-squad-wrapper"]`)) {
+            if($(this).parent("#add-squad-wrapper").length) {
                 printAddSquadModal();
             } else {
                 printSquadModal();
