@@ -43,4 +43,10 @@ public class SquadPictureController {
         squadPictureDao.deleteById(currentPicture.getId());
         return squadPicture;
     }
+
+    @PostMapping("/squads/picture/new")
+    public SquadPicture setAddSquadPicture(@RequestBody SquadPicture squadPicture) {
+        squadPictureDao.save(squadPicture);
+        return squadPicture;
+    }
 }

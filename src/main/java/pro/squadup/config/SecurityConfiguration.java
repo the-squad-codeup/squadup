@@ -38,6 +38,7 @@ public class SecurityConfiguration {
                         "/build-profile",
                         "/games",
                         "/profile/*",
+                        "/profile/*/*",
                         "/game/*",
                         "/squad/*",
                         "/squads",

@@ -27,7 +27,7 @@ public class SquadPicture {
     @Column(nullable = false)
     private String source;
 
-    @Column(nullable = false)
+    @Column
     private String status;
 
     @Column(nullable = false)

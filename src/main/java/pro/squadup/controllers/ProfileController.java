@@ -8,10 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import pro.squadup.models.Language;
-import pro.squadup.models.Platform;
-import pro.squadup.models.Preferences;
-import pro.squadup.models.User;
+import pro.squadup.models.*;
 import pro.squadup.repositories.*;
 import pro.squadup.utils.Utils;
 
@@ -27,6 +24,8 @@ public class ProfileController {
     private LanguageRepository languageDao;
     private LocationRepository locationDao;
     private RatingRepository ratingDao;
+    private ComradeRepository comradeDao;
+    private RecruitRepository recruitDao;
 
     public ProfileController(
             UserRepository userDao,
@@ -34,7 +33,9 @@ public class ProfileController {
             PlatformRepository platformDao,
             LanguageRepository languageDao,
             LocationRepository locationDao,
-            RatingRepository ratingDao
+            RatingRepository ratingDao,
+            ComradeRepository comradeDao,
+            RecruitRepository recruitDao
     ) {
         this.userDao = userDao;
         this.preferencesDao = preferencesDao;
@@ -42,12 +43,28 @@ public class ProfileController {
         this.languageDao = languageDao;
         this.locationDao = locationDao;
         this.ratingDao = ratingDao;
+        this.comradeDao = comradeDao;
+        this.recruitDao = recruitDao;
     }
 
     @GetMapping("/profile")
     public String myProfilePage(Model model) {
         User user = userDao.findById(Utils.currentUserId()).get();
-        model.addAttribute("user", user);
+        prepProfileRedirect(model, user);
+        return "profile/profile";
+    }
+
+    @GetMapping("/profile/{comradeId}/comrade")
+    public String profilePageFromComrade(Model model, @PathVariable Long comradeId) {
+        User user = userDao.findById(comradeDao.findById(comradeId).get().getUserTwo().getId()).get();
+        prepProfileRedirect(model, user);
+        return "profile/profile";
+    }
+
+    @GetMapping("/profile/{recruitId}/recruit")
+    public String profilePageFromRecruit(Model model, @PathVariable Long recruitId) {
+        User user = userDao.findById(recruitDao.findById(recruitId).get().getUserTwo().getId()).get();
+        prepProfileRedirect(model, user);
         return "profile/profile";
     }
 
@@ -102,4 +119,37 @@ public class ProfileController {
     }
 
 
+    private boolean isMyProfile(User currentUser, User user) {
+        return currentUser.getId().equals(user.getId());
+    }
+
+    private boolean isRecruit(User currentUser, User user) {
+        for(Recruit recruit : currentUser.getRecruits()) {
+            if(recruit.getUserTwo().getId().equals(user.getId())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean isComrade(User currentUser, User user) {
+        for(Comrade comrade : currentUser.getComrades()) {
+            if(comrade.getUserTwo().getId().equals(user.getId())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void prepProfileRedirect(Model model, User user) {
+        User currentUser = userDao.findById(Utils.currentUserId()).get();
+        if(isMyProfile(currentUser, user)) {
+            model.addAttribute("user", currentUser);
+        } else {
+            model.addAttribute("user", user);
+        }
+        model.addAttribute("isMyProfile", isMyProfile(currentUser, user));
+        model.addAttribute("isRecruit", isRecruit(currentUser, user));
+        model.addAttribute("isComrade", isComrade(currentUser, user));
+    }
 }
