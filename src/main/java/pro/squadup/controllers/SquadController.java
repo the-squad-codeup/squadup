@@ -13,6 +13,7 @@ import pro.squadup.models.*;
 import pro.squadup.repositories.*;
 import pro.squadup.utils.Utils;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -46,42 +47,47 @@ public class SquadController {
 
     @PostMapping("/squads/create")
     public String createSquad(Model model, @ModelAttribute Squad squad) throws JsonProcessingException {
-        ObjectMapper mapper = new ObjectMapper();
-
-        System.out.println("Inside create squad");
-        System.out.printf("Squad passed in: %s%n", mapper.writeValueAsString(squad));
-
         // getting user, default squadPicture, empty Chat to set in squad
         User currentUser = userDao.findById(Utils.currentUserId()).get();
         SquadPicture squadPicture = Utils.defaultSquadPicture();
         SquadChat chat = new SquadChat();
         Set<User> members = new HashSet<>();
-
         // setting user, picture, chat
         squad.setOwner(currentUser);
         members.add(currentUser);
         squad.setMembers(members);
-
         // saving new entities
         squadPictureDao.save(squadPicture);
         squadChatDao.save(chat);
-
 //        squadDao.save(squad);
-
         squad.setSquadPicture(squadPicture);
         squad.setChat(chat);
-//        squadPicture.setSquad(squad);
-//        chat.setSquad(squad);
-
-
         // saving changes to squad
         squadDao.save(squad);
-
-
         model.addAttribute("squad", squad);
-
-        System.out.printf("Squad created: %n%s%n", mapper.writeValueAsString(squad));
         return "squad/chat";
+    }
+
+    @PostMapping("/squads/create/new")
+    public @ResponseBody Squad createNewSquad(@RequestBody NewSquadInfo newSquadInfo) throws JsonProcessingException {
+        User currentUser = userDao.findById(Utils.currentUserId()).get();
+        SquadPicture squadPicture = squadPictureDao.findById(newSquadInfo.getSquadPictureId()).get();
+        SquadChat chat = new SquadChat();
+        Set<User> members = new HashSet<>();
+        Squad squad = new Squad();
+        squad.setOwner(currentUser);
+        members.add(currentUser);
+        squad.setMembers(members);
+        squadChatDao.save(chat);
+        squad.setSquadPicture(squadPicture);
+        squad.setChat(chat);
+        squad.setName(newSquadInfo.getName());
+        squadDao.save(squad);
+        for(Long inviteeId : newSquadInfo.getInviteeIds()) {
+            SquadInvite invite = new SquadInvite(currentUser, userDao.findById(inviteeId).get(), squad);
+            squadInviteDao.save(invite);
+        }
+        return squad;
     }
 
     @GetMapping("/squads/{squadId}/chat")

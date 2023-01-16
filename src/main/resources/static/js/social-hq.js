@@ -145,16 +145,28 @@ $(function () {
     }
 
     async function createSquad() {
+        let invitees = [];
+        console.log($(".modal-squad-invitee-wrapper"));
+        for(let $invitee of $(".modal-squad-invitee-wrapper")) {
+            console.log($invitee)
+            invitees.push($invitee.attributes[1].value);
+        };
         let squadToCreate = {
-            name: $(".modal-squad-name-input").text()
-        }
+            name: $(".modal-squad-name-input").val(),
+            inviteeIds: invitees,
+            squadPictureId: $(".modal-squad-img").attr("data-squad-img-id")
+        };
         let fetchOptions = {
             method: 'POST',
             headers: {
                 'Content-Type' : 'application/json',
                 'X-CSRF-TOKEN' : csrfToken
             },
-        }
+            body: JSON.stringify(squadToCreate)
+        };
+        console.log(fetchOptions);
+        let addedSquad = await fetch(`${Utils.url()}squads/create/new`, fetchOptions).then(res => res.json());
+        console.log(addedSquad);
     }
 
     function showModal() {

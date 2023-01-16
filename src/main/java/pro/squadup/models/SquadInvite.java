@@ -27,6 +27,12 @@ public class SquadInvite {
     public SquadInvite() {
     }
 
+    public SquadInvite(User sender, User recipient, Squad squad) {
+        this.sender = sender;
+        this.recipient = recipient;
+        this.squad = squad;
+    }
+
     public Long getId() {
         return id;
     }

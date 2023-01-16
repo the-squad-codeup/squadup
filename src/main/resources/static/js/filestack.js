@@ -108,7 +108,8 @@ $(async function() {
                 console.log(file);
                 let uploadedPicture = await Fetch.Post.addSquadPicture(file, FileStack.csrfToken).then(res => res);
                 console.log(uploadedPicture);
-                $('.modal-squad-img').attr('src', `url("${uploadedPicture.url}")`).attr("data-squad-img-id", `${uploadedPicture.id}`);
+                $('.modal-squad-img').attr('src', `${uploadedPicture.url}`);
+                $(".modal-squad-img").attr("data-squad-img-id", `${uploadedPicture.id}`);
             }
         },
         filestackKey: await Fetch.Get.filestackKey().then(res => res),
