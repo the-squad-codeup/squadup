@@ -5,10 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import pro.squadup.models.ProfilePicture;
 import pro.squadup.models.Squad;
 import pro.squadup.models.User;
@@ -80,6 +77,11 @@ public class UserController {
         ObjectMapper mapper = new ObjectMapper();
         mapper.writeValueAsString(currentUser);
         return currentUser;
+    }
+
+    @GetMapping("/user/{userId}/info")
+    public @ResponseBody User getUserInfo(@PathVariable Long userId) {
+        return userDao.findById(userId).get();
     }
 
     @GetMapping("/user/squads")
