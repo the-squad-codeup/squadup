@@ -167,6 +167,7 @@ $(function () {
         console.log(fetchOptions);
         let addedSquad = await fetch(`${Utils.url()}squads/create/new`, fetchOptions).then(res => res.json());
         console.log(addedSquad);
+        printNewSquad(addedSquad);
     }
 
     function showModal() {
@@ -181,13 +182,8 @@ $(function () {
 
     async function printSquads(){
         let squads = await getSquads();
-        console.log(squads)
-        $("#squads-content").empty().append(`
-            <div id="add-squad-wrapper" class="solo-squad">
-                <h5>Add Squad</h5>
-                <img class="solo-squad-img rgb" src="https://cdn.filestackcontent.com/YmC6UtutQsiTT2tYduKI">
-            </div>
-        `);
+        console.log(squads);
+        $("#squads-content").empty();
         for(let squad of squads){
             $("#squads-content").append(`
                 <div data-squad-id="${squad.id}" class="solo-squad">
@@ -196,8 +192,22 @@ $(function () {
                 </div>
             `)
         }
+        $("#squads-content").append(`
+            <div id="add-squad-wrapper" class="solo-squad">
+                <h5>Add Squad</h5>
+                <img class="solo-squad-img rgb" src="https://cdn.filestackcontent.com/YmC6UtutQsiTT2tYduKI">
+            </div>
+        `);
     }
 
+    async function printNewSquad(squad) {
+        $("#squads-content").prepend(`
+            <div data-squad-id="${squad.id}" class="solo-squad">
+                <h5>${squad.name}</h5>
+                <img class="solo-squad-img rgb" src="${squad.squadPicture.url}">
+            </div>
+        `);
+    }
 
     async function printComrades(){
         let comrades = await getComrades();
@@ -314,7 +324,6 @@ $(function () {
         })
         .on("click", ".modal-squad-create-btn", async function() {
             createSquad();
-            printNewSquad();
             hideModal();
         })
     ;

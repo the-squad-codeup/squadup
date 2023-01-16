@@ -71,7 +71,12 @@ public class SquadController {
     @PostMapping("/squads/create/new")
     public @ResponseBody Squad createNewSquad(@RequestBody NewSquadInfo newSquadInfo) throws JsonProcessingException {
         User currentUser = userDao.findById(Utils.currentUserId()).get();
-        SquadPicture squadPicture = squadPictureDao.findById(newSquadInfo.getSquadPictureId()).get();
+        SquadPicture squadPicture;
+        if(newSquadInfo.getSquadPictureId() != null) {
+            squadPicture = squadPictureDao.findById(newSquadInfo.getSquadPictureId()).get();
+        } else {
+            squadPicture = Utils.defaultSquadPicture();
+        }
         SquadChat chat = new SquadChat();
         Set<User> members = new HashSet<>();
         Squad squad = new Squad();
