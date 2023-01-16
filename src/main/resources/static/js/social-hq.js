@@ -530,5 +530,8 @@ $(function () {
             createSquad();
             hideModal();
         })
+        .on("click", ".modal-squad-chat-btn", function() {
+
+        })
     ;
 });

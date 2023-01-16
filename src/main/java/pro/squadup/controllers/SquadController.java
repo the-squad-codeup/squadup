@@ -110,9 +110,13 @@ public class SquadController {
 
     @GetMapping("/squads/{squadId}/chat")
     public String showSquadPage(Model model, @PathVariable Long squadId) {
+        User currentUser = userDao.findById(Utils.currentUserId()).get();
         Squad squad = squadDao.findById(squadId).get();
-        model.addAttribute("squad", squad);
-        return "squad/chat";
+        if(squad.getMembers().contains(currentUser)) {
+            model.addAttribute("squad", squad);
+            return "squad/chat";
+        }
+        return "social/social-hq";
     }
 
     @GetMapping("/squads/{squadId}/members")
