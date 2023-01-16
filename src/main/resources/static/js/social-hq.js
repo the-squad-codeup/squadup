@@ -24,6 +24,8 @@ $(function () {
                         </div>
                     </div>
                     <div class="su-card-middle">
+                        <img class="arrow-left" th:src="@{/Icons/next.png}">
+                        <img class="arrow-right" th:src="@{/Icons/next.png}">
                         <div class="su-card-games-list">
                         </div>
                     </div>

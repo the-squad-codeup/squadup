@@ -124,16 +124,19 @@
     transform: rotate(225deg);
 }
 .remove-game-button{
+    cursor: pointer;
     height: 4vw;
     width: 4vw;
     margin-top: -.75vw;
 }
 .favorite-game-button{
+    cursor: pointer;
     height: 6vw;
     width: 6vw;
     margin-top: -1.75vw;
 }
 .add-game-button{
+    cursor: pointer;
     height: 4vw;
     width: 4vw;
     margin: -1.5vw auto;

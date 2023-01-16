@@ -35,25 +35,28 @@
 /*    top: 5em;*/
 /*}*/
 
-/*.arrow-left, .arrow-left-img{*/
-/*    height: 4vw;*/
-/*    width: 4vw;*/
-/*    position: absolute;*/
-/*    margin-left: -2vw;*/
-/*    margin-top: -2vw;*/
-/*    max-width: none;*/
-/*    transform: rotate(180deg);*/
-/*}*/
+.arrow-left{
+    display: flex;
+    height: 4vw;
+    width: 4vw;
+    position: absolute;
+    margin-left: -2vw;
+    margin-top: -2vw;
+    max-width: none;
+    background: transparent;
+    transform: rotate(180deg);
+}
 
-/*.arrow-right, .arrow-right-img{*/
-/*    right: 0;*/
-/*    height: 4vw;*/
-/*    width: 4vw;*/
-/*    position: absolute;*/
-/*    margin-left: -2vw;*/
-/*    margin-top: -2vw;*/
-/*    max-width: none;*/
-/*}*/
+.arrow-right{
+    display: flex;
+    right: 0;
+    height: 4vw;
+    width: 4vw;
+    position: absolute;
+    margin-left: -2vw;
+    margin-top: -2vw;
+    max-width: none;
+}
 
         /*  STYLING FOR CARDS AND CARD CONTENTS  */
 
@@ -91,13 +94,10 @@ p.card-text, h4{
     display: flex;
 }
 
-/*  BELOW IS WHERE IT MAKES THE GAMES INSIDE THE CARDS SCROLLABLE!!: */
 .su-card-middle {
     flex: 1 0 auto;
     overflow: hidden;
-    overflow-x: scroll;
 }
-/*    ^^^^^^^^^^^^     */
 
 .su-card-games-list {
     display: flex;
