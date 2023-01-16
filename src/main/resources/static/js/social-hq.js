@@ -174,6 +174,16 @@ $(function () {
         return await fetch(`${Utils.url()}squads/${squadId}/invite/${userId}`, fetchOptions).then(res => res.json());
     }
 
+    async function disbandSquad(squadId) {
+        let fetchOptions = {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN' : csrfToken
+            }
+        };
+        return await fetch(`${Utils.url()}squads/${squadId}/delete`, fetchOptions).then(res => res.json());
+    }
+
     async function createSquad() {
         let invitees = [];
         console.log($(".add-modal-squad-invitee-wrapper"));
@@ -491,6 +501,10 @@ $(function () {
         `);
     }
 
+    function removeSquad(squadId) {
+        $("#squads-content").find(`[data-squad-id='${squadId}']`).remove();
+    }
+
 
     printSquads();
     printComrades();
@@ -531,7 +545,13 @@ $(function () {
             hideModal();
         })
         .on("click", ".modal-squad-chat-btn", function() {
-
+            window.location.href=`${Utils.url()}squads/${$("#modal-squad-info").attr("data-squad-id")}/chat`;
+        })
+        .on("click", ".modal-squad-disband-btn", async function() {
+            let squadId = $("#modal-squad-info").attr("data-squad-id");
+            await disbandSquad(squadId);
+            removeSquad(squadId);
+            hideModal();
         })
     ;
 });
