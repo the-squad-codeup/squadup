@@ -17,6 +17,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
+import static java.lang.String.format;
+
 @Controller
 public class SquadController {
 
@@ -86,11 +88,17 @@ public class SquadController {
         squadChatDao.save(chat);
         squad.setSquadPicture(squadPicture);
         squad.setChat(chat);
-        squad.setName(newSquadInfo.getName());
+        if(!newSquadInfo.getName().equals("")) {
+            squad.setName(newSquadInfo.getName());
+        } else {
+            squad.setName(format("%s's Squad", currentUser.getUsername()));
+        }
         squadDao.save(squad);
-        for(Long inviteeId : newSquadInfo.getInviteeIds()) {
-            SquadInvite invite = new SquadInvite(currentUser, userDao.findById(inviteeId).get(), squad);
-            squadInviteDao.save(invite);
+        if(newSquadInfo.getInviteeIds() != null) {
+            for (Long inviteeId : newSquadInfo.getInviteeIds()) {
+                SquadInvite invite = new SquadInvite(currentUser, userDao.findById(inviteeId).get(), squad);
+                squadInviteDao.save(invite);
+            }
         }
         return squad;
     }
@@ -135,6 +143,9 @@ public class SquadController {
     public @ResponseBody Squad deleteSquad(@PathVariable Long squadId) {
         User currentUser = userDao.findById(Utils.currentUserId()).get();
         Squad squadToDelete = squadDao.findById(squadId).get();
+        for(SquadInvite invite : squadInviteDao.findAllBySquad(squadToDelete)) {
+            squadInviteDao.delete(invite);
+        }
         if(squadToDelete.getOwner().equals(currentUser)) {
             squadDao.delete(squadToDelete);
         }
