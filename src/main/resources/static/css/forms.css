@@ -105,7 +105,7 @@ textarea {
     border-color: var(--bs-gamergreen) !important;
 }
 
-.form-log, .form-sign, .form-signtwo{
+.form-log, .form-sign{
     display: flex;
     flex-direction: column;
     justify-content: center;

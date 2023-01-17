@@ -12,11 +12,11 @@
 <body>
 <nav th:replace="partials :: siteBar"></nav>
 <div id="page-wrapper">
-    <div id="squad-img-wrapper">
-        <div class="squad-image"></div>
-        <img id="upload-squad-picture" class="hidden" th:src="@{/Icons/edit.png}" alt="">
-    </div>
     <div id="squad-chat-wrapper" class="rgb">
+        <div id="squad-img-wrapper" class="rgb">
+            <div class="squad-image rgb"></div>
+            <img id="upload-squad-picture" class="hidden" th:src="@{/Icons/edit.png}" alt="">
+        </div>
         <div id="squad-title-wrapper" class="rgb">
             <div id="squad-title" th:data-squad-id="${squad.id}" th:text="${squad.name}"></div>
         </div>
@@ -33,15 +33,10 @@
                         <div id="squad-users-div"></div>
                     </div>
                 </div>
-                <div id="invite-users-div">
-                    <select id="invite-users-select">
-                    </select>
-                    <button id="invite-users-button">Invite</button>
-                </div>
             </div>
 
         </div>
-        <div id="text-input-wrapper">
+        <div id="text-input-wrapper" class="rgb">
             <input id="chat-text-input" type="text" autocomplete="off">
             <div id="chat-button-container">
                 <div id="chat-send-button" class="btn btn-outline-success">Send Message</div>

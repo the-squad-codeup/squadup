@@ -5,16 +5,15 @@
     <div th:replace="partials :: headFragment('Sign Up')"></div>
 <!--    <style> @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@1,700&display=swap'); </style>-->
     <link rel="stylesheet" th:href="@{/css/forms.css}">
+    <link rel="stylesheet" th:href="@{/css/signup.css}">
 </head>
 <body>
 <nav th:replace="partials :: siteBar"></nav>
 <div id="page-wrapper">
 
-
-    <h1 class="text-center pt-5 my-5 outlined">Sign Up to SquadUp!</h1>
-
-    <div class="card-signtwo container rounded-3 p-5">
-        <form class="form-signtwo text-light" th:action="@{/signup}" method="POST" th:object="${user}">
+    <div class="su-outer rounded-3 rainbow">
+        <h1 class="text-center outlined signup">Sign Up for SquadUp!</h1>
+        <form class="form-signtwo text-light rgb" th:action="@{/signup}" method="POST" th:object="${user}">
             <div class="mb-3">
                 <label for="signupEmailAddress" class="form-label">Email Address</label>
                 <input type="email" class="form-control" id="signupEmailAddress" th:field="*{email}" autocomplete="off">
@@ -37,7 +36,7 @@
                 <input type="password" class="form-control" id="signupConfirmPassword">
                 <div id="passwordsMustMatch" class="form-text d-none" style="color: #F00;">Passwords must match</div>
             </div>
-            <button id="signupPasswordSubmit" type="submit" class="btn btn-primary" disabled>Signup</button>
+            <button id="signupPasswordSubmit" type="submit">Signup</button>
         </form>
 
     </div>
