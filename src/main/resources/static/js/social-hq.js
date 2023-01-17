@@ -168,6 +168,26 @@ $(function () {
         return await fetch(`${Utils.url()}invites/${squadId}/possible`).then(res => res.json());
     }
 
+    async function postAcceptSquadInvite(squadId) {
+        let fetchOptions = {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN' : csrfToken
+            }
+        };
+        return await fetch(`${Utils.url()}invites/${squadId}/accept`, fetchOptions).then(res => res.json());
+    }
+
+    async function postRejectSquadInvite(squadId) {
+        let fetchOptions = {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN' : csrfToken
+            }
+        };
+        await fetch(`${Utils.url()}invites/${squadId}/reject`, fetchOptions);
+    }
+
     async function sendInvite(squadId, userId) {
         const fetchOptions = {
             method: 'POST',
@@ -567,6 +587,10 @@ $(function () {
         $("#squads-content").find(`[data-squad-id='${squadId}']`).remove();
     }
 
+    function removeSquadInvite(squadId) {
+        $("#pending-squads-content").find(`[data-squad-id='${squadId}']`).remove();
+    }
+
 
     printSquads();
     printComrades();
@@ -619,6 +643,17 @@ $(function () {
         .on("click", ".solo-pending-squad-img", async function() {
             printPendingSquadInviteModal($(this).parent().attr("data-squad-id"));
             showModal();
+        })
+        .on("click", ".modal-squad-invite-accept-btn", async function() {
+            let acceptedSquad = await postAcceptSquadInvite($("#modal-squad-info").attr("data-squad-id"));
+            removeSquadInvite($("#modal-squad-info").attr("data-squad-id"));
+            await printNewSquad(acceptedSquad);
+            hideModal();
+        })
+        .on("click", ".modal-squad-invite-reject-btn", async function() {
+            await postRejectSquadInvite($("#modal-squad-info").attr("data-squad-id"));
+            removeSquadInvite($("#modal-squad-info").attr("data-squad-id"));
+            hideModal();
         })
     ;
 });
