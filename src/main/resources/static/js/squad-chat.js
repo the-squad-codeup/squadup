@@ -13,11 +13,6 @@ $(function() {
         initialize() {
             Events.initialize();
         },
-        async inviteUser() {
-            let userId = $("#invite-users-select").find(":selected").attr("data-user-id");
-            let invitedUser = await Fetch.Post.sendInvite(userId);
-            Print.removeUserFromInviteList(invitedUser);
-        },
         scrollToBottom() {
             document.getElementById("chat-messages-div-wrapper").scrollTo(0, document.getElementById("chat-messages-div").scrollHeight);
         },
@@ -119,7 +114,7 @@ $(function() {
             console.log("Payload received:");
             console.log(message);
             if(message.messageType === 'JOIN') {
-                await SquadChat.updateSquadMembers(message);
+                // await SquadChat.updateSquadMembers(message);
             } else if(message.messageType === 'LEAVE') {
                 await Print.leaveMessage(message);
             } else if(message.messageType === 'EDIT') {
@@ -144,18 +139,6 @@ $(function() {
         },
         leaveMessage(message) {
         },
-        async inviteOptions() {
-            let squadMemberIds = (await Fetch.Get.squadMembers()).map(member => member.id);
-            let squadInviteIds = (await Fetch.Get.currentInvitees()).map(invitee => invitee.id);
-            let usersToInvite = await Fetch.Get.possibleInvitees();
-            for(let user of usersToInvite) {
-                if(!(squadMemberIds.includes(user.id) || squadInviteIds.includes(user.id))) {
-                    $("#invite-users-select").append(`
-                        <option data-user-id="${user.id}">${user.username}</option>
-                    `);
-                }
-            }
-        },
         async currentSquadMembers() {
             let squadMembers = await Fetch.Get.squadMembers();
             for(let member of squadMembers) {
@@ -166,9 +149,6 @@ $(function() {
                     </div>
                 `);
             }
-        },
-        removeUserFromInviteList(user) {
-            $("#invite-users-select").children(`[data-user-id="${user.id}"]`).remove();
         },
         async messageHistory() {
             let messages = await Fetch.Get.squadMessages();
@@ -200,7 +180,7 @@ $(function() {
                             </div>
                         </div>
                         <div class="message-edit-button-wrapper hidden">
-                            <div class="btn btn-outline-success message-edit-button">Edit</div>
+                            <div class="message-edit-button"><i class="bi bi-send"></i></div>
                         </div>
                         <div class="message-options hidden">
                             <img class="message-button edit-message-button" src="/Icons/edit.png" alt="">
@@ -251,12 +231,6 @@ $(function() {
             async squadMembers() {
                 return await fetch(`${Utils.url()}squads/${SquadChat.squadId}/members`).then(res => res.json());
             },
-            async possibleInvitees() {
-                return await fetch(`${Utils.url()}invites/${SquadChat.squadId}/possible`).then(res => res.json());
-            },
-            async currentInvitees() {
-                return await fetch(`${Utils.url()}invites/${SquadChat.squadId}/current`).then(res => res.json());
-            },
             async squadMessages() {
                 return await fetch(`${Utils.url()}squads/${SquadChat.squadId}/messages`).then(res => res.json());
             },
@@ -271,15 +245,6 @@ $(function() {
             }
         },
         Post: {
-            async sendInvite(userId) {
-                const fetchOptions = {
-                    method: 'POST',
-                    headers: {
-                        'X-CSRF-TOKEN' : SquadChat.csrfToken
-                    }
-                }
-                return await fetch(`${Utils.url()}squads/${SquadChat.squadId}/invite/${userId}`, fetchOptions).then(res => res.json());
-            },
             async editMessage(messageId, content) {
                 const message = {
                     id: messageId,
@@ -303,7 +268,6 @@ $(function() {
             await Socket.connect();
             await $(window)
                 .ready(async function() {
-                    Print.inviteOptions();
                     Print.currentSquadMembers();
                     Print.messageHistory();
                     Print.squadPicture();
@@ -317,15 +281,19 @@ $(function() {
                     await SquadChat.editMessage($(this).parent().parent());
                     $(this).parent().addClass("hidden");
                 })
+                .on("keydown", function(e) {
+                    if($(".single-message-content").is(":focus") && e.key === "Enter") {
+                        e.preventDefault();
+                    }
+                })
                 .on("keyup", function(e) {
                     if($("#chat-text-input").is(":focus") && e.key === "Enter") {
                         $("#chat-send-button").trigger("click");
                     }
-                    if($(".single-message-content").is(":focus") && e.key === "Enter") {
+                    if($(".single-message-content div").is(":focus") && e.key === "Enter") {
                         $(":focus").parent().parent().find(".message-edit-button").trigger("click");
                     }
                 })
-                .on("click", "#invite-users-button", SquadChat.inviteUser)
                 .on("mouseenter", ".single-message-wrapper", function() {
                     if(
                         $("#user-details-div").attr("data-user-id") === $(this).attr("data-user-id") &&
