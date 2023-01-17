@@ -474,7 +474,7 @@ img.card-img-top {
     }
 
     .social-title {
-        display: none;
+        visibility: hidden;
     }
 
     .side-wrapper {
