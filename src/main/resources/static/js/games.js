@@ -82,7 +82,7 @@ $(function () {
             div.prepend(`
                 <div class="card" data-game-id="${game.id}" style="background-image: url(${game.artwork});">
                         <div class="buttons-div d-flex justify-content-between">
-                            <img class="add-game-button" src="/Icons/add.png">
+                            <img class="add-game-button clickable" src="/Icons/add.png">
                         </div>
                     </div>
             `);
@@ -244,8 +244,8 @@ async function getUserGames() {
 <!--                <div class="card-container">-->
                     <div class="card" data-game-id="${game.id}" style="background-image: url(${game.artwork});">
                         <div class="buttons-div d-flex justify-content-between">
-                            <img class="favorite-game-button" src="Icons/favorite.png">
-                            <img class="remove-game-button" src="/Icons/trash.png">
+                            <img class="favorite-game-button clickable" src="Icons/favorite.png">
+                            <img class="remove-game-button clickable" src="/Icons/trash.png">
                         </div>
                     </div>
 
