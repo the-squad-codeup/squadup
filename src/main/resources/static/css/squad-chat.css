@@ -24,6 +24,9 @@
     z-index: 100;
     border: solid 4px;
     border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .squad-image {
@@ -33,7 +36,9 @@
     background-size: cover;
     border: 4px;
     border-radius: 50%;
-
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 .darken {
@@ -41,8 +46,8 @@
 }
 
 #upload-squad-picture {
-    position: absolute;
     pointer-events: none;
+    z-index: 5;
 }
 
 #squad-title-wrapper {
@@ -270,9 +275,6 @@
     }
 
     #squad-img-wrapper {
-        display: flex;
-        justify-content: center;
-        align-items: center;
         width: 5em;
         height: 5em;
     }

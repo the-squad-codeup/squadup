@@ -274,6 +274,10 @@ $(function() {
                     Print.messageHistory();
                     Print.squadPicture();
                     await Print.squadUserDetails();
+                    if($("#user-details-div").attr("data-is-owner") === "false") {
+                        console.log("inside if statement initializing. data-is-owner is false")
+                        $(".squad-image").removeClass("clickable");
+                    }
                 })
             ;
             $(document)
@@ -310,12 +314,16 @@ $(function() {
                     }
                 })
                 .on("mouseenter", ".squad-image", function() {
-                    $(this).addClass("darken");
-                    $("#upload-squad-picture").removeClass("hidden");
+                    if($("#user-details-div").attr("data-is-owner") === "true"){
+                        $(this).addClass("darken");
+                        $("#upload-squad-picture").removeClass("hidden");
+                    }
                 })
                 .on("mouseleave", ".squad-image", function() {
-                    $(this).removeClass("darken");
-                    $("#upload-squad-picture").addClass("hidden");
+                    if($("#user-details-div").attr("data-is-owner") === "true") {
+                        $(this).removeClass("darken");
+                        $("#upload-squad-picture").addClass("hidden");
+                    }
                 })
                 .on("click", ".edit-message-button", function() {
                     $(this).parent().parent().find(".message-edit-button-wrapper").removeClass("hidden");
