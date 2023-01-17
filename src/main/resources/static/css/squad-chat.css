@@ -24,6 +24,9 @@
     z-index: 100;
     border: solid 4px;
     border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .squad-image {
@@ -31,10 +34,11 @@
     height: 100%;
     background-position: center;
     background-size: cover;
-    background-image: url("https://cdn.filestackcontent.com/dynXYf9AS26ImuqTgUPj");
     border: 4px;
     border-radius: 50%;
-
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 .darken {
@@ -42,12 +46,8 @@
 }
 
 #upload-squad-picture {
-    position: absolute;
-    left: 4em;
-    top: 4em;
-    width: 4em;
-    height: 4em;
     pointer-events: none;
+    z-index: 5;
 }
 
 #squad-title-wrapper {

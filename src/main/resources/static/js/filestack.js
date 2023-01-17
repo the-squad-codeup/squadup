@@ -58,7 +58,7 @@ $(async function() {
             console.log("inside initialize");
             this.client = await filestack.init(this.filestackKey);
             Events.initialize();
-        },
+            },
         client: null,
         userProfileOptions: {
             fromSources: ["local_file_system", "url"],
@@ -123,7 +123,9 @@ $(async function() {
                     FileStack.client.picker(FileStack.userProfileOptions).open();
                 })
                 .on("click", ".squad-image", function() {
-                    FileStack.client.picker(FileStack.squadOptions).open();
+                    if($("#user-details-div").attr("data-is-owner") === "true") {
+                        FileStack.client.picker(FileStack.squadOptions).open();
+                    }
                 })
                 .on("click", ".add-modal-squad-img", function() {
                     FileStack.client.picker(FileStack.addSquadOptions).open();

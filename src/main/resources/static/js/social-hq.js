@@ -312,7 +312,10 @@ $(function () {
                 </div>
                 <input class="add-modal-squad-name-input" type="text">
                 <div class="add-modal-squad-img-wrapper">
-                    <img class="add-modal-squad-img clickable" src="https://cdn.filestackcontent.com/Humw6OOXTemRtPob8kJB">
+                    <div>
+                        <img class="add-modal-squad-img editable-squad-img clickable" src="https://cdn.filestackcontent.com/Humw6OOXTemRtPob8kJB">
+                        <img id="upload-squad-picture" class="hidden" src="/Icons/edit.png" alt="">
+                    </div>
                 </div>
             </div>
             <div class="add-modal-squad-invites-wrapper">
@@ -374,7 +377,10 @@ $(function () {
             <div hidden id="modal-squad-info" data-squad-id="${squad.id}"></div>
             <div class="modal-top">
                 <div class="modal-squad-img-wrapper clickable">
-                    <img class="modal-squad-img squad-image clickable" src="${squad.squadPicture.url}">
+                    <div>
+                        <img class="modal-squad-img squad-image editable-squad-img clickable" src="${squad.squadPicture.url}">
+                        <img id="upload-squad-picture" class="hidden" src="/Icons/edit.png" alt="">
+                    </div>
                 </div>
                 <div class="modal-title rgb">
                     ${squad.name}
@@ -579,8 +585,6 @@ $(function () {
                 </div>
             `);
         }
-
-
     }
 
     function removeSquad(squadId) {
@@ -654,6 +658,14 @@ $(function () {
             await postRejectSquadInvite($("#modal-squad-info").attr("data-squad-id"));
             removeSquadInvite($("#modal-squad-info").attr("data-squad-id"));
             hideModal();
+        })
+        .on("mouseenter", ".editable-squad-img", function() {
+            $(this).addClass("darken");
+            $("#upload-squad-picture").removeClass("hidden");
+        })
+        .on("mouseleave", ".editable-squad-img", function() {
+            $(this).removeClass("darken");
+            $("#upload-squad-picture").addClass("hidden");
         })
     ;
 });

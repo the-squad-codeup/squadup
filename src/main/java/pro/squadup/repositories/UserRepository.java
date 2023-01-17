@@ -8,4 +8,5 @@ import pro.squadup.models.User;
 public interface UserRepository extends JpaRepository<User, Long> {
     User findByUsername(String username);
     User findByEmail(String email);
+    boolean existsByEmail(String email);
 }

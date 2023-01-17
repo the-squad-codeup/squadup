@@ -36,10 +36,13 @@ public class PasswordResetController {
 
     @PostMapping("/pwreset")
     public String sendForgotPasswordEmail(@RequestParam(name = "email") String email, Model model) throws MessagingException {
-        PasswordReset passwordReset = new PasswordReset(email, Utils.generatePasswordResetToken(), Utils.generatePasswordResetTimestamp());
-        passwordResetDao.save(passwordReset);
-        mailService.passwordReset(passwordReset);
-        return "reset/pw-reset-sent";
+        if(userDao.existsByEmail(email)) {
+            PasswordReset passwordReset = new PasswordReset(email, Utils.generatePasswordResetToken(), Utils.generatePasswordResetTimestamp());
+            passwordResetDao.save(passwordReset);
+            mailService.passwordReset(passwordReset);
+            return "reset/pw-reset-sent";
+        }
+        return "reset/forgot-pw?invalidEmail";
     }
 
     @GetMapping("/pwreset/{token}")

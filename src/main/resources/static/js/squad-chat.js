@@ -22,12 +22,14 @@ $(function() {
             console.log("lastMessage: ");
             console.log(lastMessage);
             if(lastMessage[0].previousElementSibling != null && lastMessage[0].attributes[2].nodeValue === lastMessage[0].previousElementSibling.attributes[2].nodeValue) {
-                let prevMessageTime = Utils.dateStringToJSDate(lastMessage.prev().find(".single-message-timestamp").text().trim()).getTime();
+                let prevMessageTime = Utils.dateStringToJSDate(lastMessage.prev().find(".single-message-timestamp").attr("data-timestamp").trim()).getTime();
                 console.log("prevMessageTime: ");
                 console.log(prevMessageTime);
                 let thisMessageTime = Utils.dateStringToJSDate(message.timestamp).getTime();
                 console.log("thisMessageTime");
-                console.log("thisMessageTime");
+                console.log(thisMessageTime);
+                console.log("the timestamp itself");
+                console.log(message.timestamp);
                 return thisMessageTime - prevMessageTime < 60000;
             }
             return false;
@@ -171,8 +173,8 @@ $(function() {
                                 <div class="single-message-username">
                                     ${message.sender.username}
                                 </div>
-                                <div class="single-message-timestamp">
-                                    ${message.timestamp}
+                                <div class="single-message-timestamp" data-timestamp="${message.timestamp}">
+                                    ${Utils.dateStringToJSDate(message.timestamp).toString().slice(0, 24)}
                                 </div>
                             </div>
                             <div class="single-message-content" contenteditable="false">
@@ -272,6 +274,10 @@ $(function() {
                     Print.messageHistory();
                     Print.squadPicture();
                     await Print.squadUserDetails();
+                    if($("#user-details-div").attr("data-is-owner") === "false") {
+                        console.log("inside if statement initializing. data-is-owner is false")
+                        $(".squad-image").removeClass("clickable");
+                    }
                 })
             ;
             $(document)
@@ -308,12 +314,16 @@ $(function() {
                     }
                 })
                 .on("mouseenter", ".squad-image", function() {
-                    $(this).addClass("darken");
-                    $("#upload-squad-picture").removeClass("hidden");
+                    if($("#user-details-div").attr("data-is-owner") === "true"){
+                        $(this).addClass("darken");
+                        $("#upload-squad-picture").removeClass("hidden");
+                    }
                 })
                 .on("mouseleave", ".squad-image", function() {
-                    $(this).removeClass("darken");
-                    $("#upload-squad-picture").addClass("hidden");
+                    if($("#user-details-div").attr("data-is-owner") === "true") {
+                        $(this).removeClass("darken");
+                        $("#upload-squad-picture").addClass("hidden");
+                    }
                 })
                 .on("click", ".edit-message-button", function() {
                     $(this).parent().parent().find(".message-edit-button-wrapper").removeClass("hidden");
