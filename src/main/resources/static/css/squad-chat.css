@@ -260,7 +260,38 @@
     }
 }
 
+@media only screen and (max-width: 600px) {
+    .squad-member-name {
+        display: none;
+    }
 
+    #current-users-wrapper h5 {
+        display: none;
+    }
+
+    #chat-sidebar-wrapper {
+        width: 4em;
+        min-width: 4em;
+    }
+
+    #squad-img-wrapper {
+        width: 5em;
+        height: 5em;
+    }
+
+    #squad-chat-wrapper {
+        border-radius: 2.5em 0 0 0;
+    }
+
+    #chat-button-container {
+        width: calc(4em + 2px);
+        min-width: calc(4em + 2px);
+    }
+
+    #squad-title {
+        font-size: x-large;
+    }
+}
 
 
 

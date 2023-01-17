@@ -352,3 +352,56 @@ img.card-img-top {
     margin-right: auto;
     width: 6em;
 }
+
+@media only screen and (max-width: 600px) {
+    #social-wrapper {
+        flex-direction: column;
+    }
+
+    .social-title {
+        display: none;
+    }
+
+    .side-wrapper {
+        flex-direction: row;
+    }
+
+    .side-content {
+        width: auto;
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+    }
+
+    .side-content h5 {
+        display: none;
+    }
+
+    .social-side-container {
+        width: 100%;
+        height: auto;
+        flex-display: row;
+    }
+
+    .solo-squad, .solo-com {
+        width: 5em;
+        margin: 1em;
+    }
+
+    .card-slider-mask {
+        padding-top: 0;
+    }
+
+    .su-card {
+        width: 85vw;
+        min-width: 85vw;
+    }
+
+    #recruits-wrapper {
+        border: none;
+    }
+
+    .squad-modal {
+        width: 96vw;
+    }
+}
