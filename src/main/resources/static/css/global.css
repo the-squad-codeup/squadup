@@ -9,6 +9,7 @@ body {
 
 /*navbar edits*/
 .navbar{
+    background-color: black;
     display: flex;
     align-items: center;
     height: 60px;
