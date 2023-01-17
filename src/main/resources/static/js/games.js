@@ -276,7 +276,7 @@ next.addEventListener("click", function (e) {
     index = index + 1;
     prev.classList.add("show");
     track.style.transform = "translateX(" + index * -70 + "vw)";
-    if (track.offsetWidth - index * width < index * width) {
+    if (track.offsetWidth - index * width < (index -1) * width / 6) {
         next.classList.add("hide");
     }
 });
@@ -294,7 +294,7 @@ next2.addEventListener("click", function (e) {
     index2 = index2 + 1;
     prev2.classList.add("show");
     searchTrack.style.transform = "translateX(" + index2 * -70 + "vw)";
-    if (searchTrack.offsetWidth - index2 * width < index2 * width) {
+    if (searchTrack.offsetWidth - index2 * width < (index2 -1) * width / 6) {
         next2.classList.add("hide");
     }
 });

@@ -22,7 +22,7 @@ $(async function (){
             //     <div class="game" style="background-image: url(${game.artwork});">
             //     </div>
             // `)
-            $('.track').append(`
+            $('.track').prepend(`
 <!--                <div class="card-container">-->
                     <div class="card rgb" style="background-image: url(${game.artwork});"></div>
 <!--                </div>-->
@@ -103,7 +103,7 @@ $(async function (){
             console.log("Why am I inside here?");
             $('.info-container').append(`
                 <div class="gamertag">
-                       Discord: ${userInfo.preferences.gamertag}
+                       ${userInfo.preferences.gamertag}
                 </div>
             `);
         }
@@ -207,15 +207,26 @@ prev.addEventListener("click", function () {
     }
 });
 
-// genreUp.addEventListener("click",(e)=>{
-//     e.preventDefault();
-//     console.log("up")
-//
-//     index2 += 1;
-//     UpDown.style.transform = "translateY(-10vw)";
-// });
-// genreDown.addEventListener("click",()=>{
-//     console.log("Down")
-//     index2 -= 1;
-//     UpDown.style.transform = "translateY(-10vw)";
-// });
+// IS AUTHENTICATED //
+function editPermissions(){
+    if(document.getElementById("profile-backend-info").getAttribute("data-is-current-user") === "true"){
+        $('#profile-image-container').append(`             
+            <img id="upload-profile-picture" class="hidden" src="/Icons/edit.png">
+        `)
+        $(document)
+            .on("mouseenter", "#profile-image-container", function() {
+                $(".profile-image").addClass("darken");
+                $("#upload-profile-picture").removeClass("hidden");
+            })
+            .on("mouseleave", "#profile-image-container", function() {
+                $(".profile-image").removeClass("darken");
+                $("#upload-profile-picture").addClass("hidden");
+            })
+    }
+}
+editPermissions()
+
+$(document)
+.on("click","#addGameCard",()=>{
+    window.location.href =`${Utils.url()}games`;
+})
