@@ -4,6 +4,7 @@
 <head>
     <div th:replace="partials :: headFragment('Login')"></div>
     <link rel="stylesheet" th:href="@{/css/forms.css}">
+    <link rel="stylesheet" th:href="@{/css/login.css}">
 </head>
 <body>
 
@@ -17,8 +18,8 @@
         <div class="row g-5">
             <div class="col-12 col-lg-5">
 <!--EDIT FROM JH changed from a container to card-log class for design-->
-                <div class="card-log container rounded-3 p-5">
-                    <h1 class="text-center text-light">Login</h1>
+                <div class="rainbow container rounded-3 p-5">
+                    <h1 class="text-center text-light login">Login</h1>
                     <!--Div that shows user they entered invalid parameters if it receives and error-->
                     <div th:if="${param.error}" class="text-light">
                         Invalid Username and Password.
@@ -33,7 +34,7 @@
                     </div>
 
                     <!--Login Form-->
-                    <form class="form-log text-light" th:action="@{/login}" method="POST">
+                    <form class="inner-login text-light rgb" th:action="@{/login}" method="POST">
                         <div class="mb-3">
                             <label for="username" class="form-label">Username</label>
                             <input type="text" class="form-control" id="username" name="username" autocomplete="off">
@@ -79,7 +80,7 @@
                             <input type="password" class="form-control" id="signupConfirmPassword">
                             <div id="passwordsMustMatch" class="form-text d-none" style="color: #F00;">Passwords must match</div>
                         </div>
-                        <button id="signupPasswordSubmit" type="submit" disabled>Signup</button>
+                        <button id="li" type="submit" disabled>Signup</button>
                     </form>
 
                 </div>
