@@ -156,6 +156,10 @@ $(function () {
         return await fetch(`${Utils.url()}user/${userId}/info`).then(res => res.json());
     }
 
+    async function currentInvites() {
+        return await fetch(`${Utils.url()}invites/recipient`).then(res => res.json());
+    }
+
     async function getCurrentInvitees(squadId) {
         return await fetch(`${Utils.url()}invites/${squadId}/current`).then(res => res.json());
     }
