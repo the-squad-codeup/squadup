@@ -18,7 +18,7 @@
         <div class="row g-5">
             <div class="col-12 col-lg-5">
 <!--EDIT FROM JH changed from a container to card-log class for design-->
-                <div class="rainbow container rounded-3 p-5">
+                <div class="rainbow container rounded-3 li-outer">
                     <h1 class="text-center text-light login">Login</h1>
                     <!--Div that shows user they entered invalid parameters if it receives and error-->
                     <div th:if="${param.error}" class="text-light">
@@ -45,12 +45,15 @@
                         </div>
                         <button id="loginPasswordSubmit" type="submit">Login</button>
                     </form>
-                    <p id="notAUserToggle" class="text-light mt-5" style="cursor: pointer;">
-                        Not a user? Click here to signup
-                    </p>
-                    <p id="forgot-password-link" class="text-light mt-5" style="cursor: pointer;">
-                        Forgot your password? Click here to reset password.
-                    </p>
+                    <div id="log-subtext">
+                        <p id="notAUserToggle" class="text-light mt-3" style="cursor: pointer;">
+                            Not a user? Signup here
+                        </p>
+                        <p id="forgot-password-link" class="text-light mt-3" style="cursor: pointer;">
+                            Forgot your password?
+                        </p>
+                    </div>
+
                 </div>
             </div>
             <div class="col-12 col-lg-7">

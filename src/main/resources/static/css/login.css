@@ -48,6 +48,8 @@
     color: #fff;
     /*text-align: center;*/
     animation: glow-text 20s linear 0s infinite;
+    margin-top: -3vw;
+    margin-bottom: 2vw;
 }
 
 @keyframes glow-text {
@@ -78,6 +80,10 @@
     100% {
         text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #ff0000, 0 0 40px #ff0000, 0 0 50px #ff0000, 0 0 60px #ff0000, 0 0 70px #ff0000;
     }
+}
+
+.li-outer {
+    padding: 5vw;
 }
 
 .inner-login {
@@ -134,4 +140,26 @@
     100% {
         background-color: #ff0000;
     }
+}
+
+
+#log-subtext {
+    margin-top: 3vw;
+    margin-bottom: -3vw;
+    margin-left: 2vw;
+}
+
+
+
+@media (width <= 430px) {
+
+    .login {
+        margin-top: 1vw;
+        margin-bottom: 6vw;
+    }
+
+    #log-subtext {
+        margin-left: 7vw;
+    }
+
 }
