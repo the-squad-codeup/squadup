@@ -149,6 +149,13 @@
     margin-left: 2vw;
 }
 
+#signUpButton {
+    margin: 2%;
+    border-radius: 8px;
+    border-style:solid;
+    color: white;
+    animation: rgb-background 20s linear 0s infinite;
+}
 
 
 @media (width <= 430px) {
@@ -163,3 +170,4 @@
     }
 
 }
+

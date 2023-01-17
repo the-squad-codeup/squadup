@@ -34,7 +34,7 @@
                     </div>
 
                     <!--Login Form-->
-                    <form class="inner-login text-light rgb" th:action="@{/login}" method="POST">
+                    <form class="inner-login text-light rgb bg-dark" th:action="@{/login}" method="POST">
                         <div class="mb-3">
                             <label for="username" class="form-label">Username</label>
                             <input type="text" class="form-control" id="username" name="username" autocomplete="off">
@@ -57,10 +57,10 @@
                 </div>
             </div>
             <div class="col-12 col-lg-7">
-                <div id="signupContainer" class="card-sign container rounded-3 p-5" style="display: none;">
-                    <h1 class="text-center text-light">Signup</h1>
+                <div id="signupContainer" class="li-outer container rounded-3 rainbow" style="display: none;">
+                    <h1 class="login text-center text-light">Signup</h1>
 
-                    <form class="form-sign text-light" th:action="@{/signup}" method="POST" th:object="${user}">
+                    <form class=" inner-login text-light rgb bg-dark" th:action="@{/signup}" method="POST" th:object="${user}">
                         <div class="mb-3">
                             <label for="signupEmailAddress" class="form-label">Email Address</label>
                             <input type="email" class="form-control" id="signupEmailAddress" th:field="*{email}" autocomplete="off">
@@ -83,7 +83,7 @@
                             <input type="password" class="form-control" id="signupConfirmPassword">
                             <div id="passwordsMustMatch" class="form-text d-none" style="color: #F00;">Passwords must match</div>
                         </div>
-                        <button id="li" type="submit" disabled>Signup</button>
+                        <button id="signUpButton" type="submit" disabled>Signup</button>
                     </form>
 
                 </div>
