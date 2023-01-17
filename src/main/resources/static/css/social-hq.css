@@ -211,7 +211,10 @@ img.card-img-top {
     width: 36em;
     transform: translate(-50%, -50%);
     z-index: 12;
-    border-radius: 2px;
+    border-radius: 16px;
+    padding: 2vh;
+    border: 1px solid;
+
 }
 
 .add-modal-title {

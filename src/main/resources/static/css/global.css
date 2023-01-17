@@ -110,7 +110,7 @@ img {
 /**/
 
 .rainbow {
-    animation: colorRotate 20s linear 0s infinite;
+    animation: colorRotate 20s linear 0s infinite !important;
 }
 
 @keyframes colorRotate {
