@@ -179,12 +179,12 @@ $(function() {
                                 ${message.content}
                             </div>
                         </div>
-                        <div class="message-edit-button-wrapper hidden">
+                        <div class="message-edit-button-wrapper clickable hidden">
                             <div class="message-edit-button"><i class="bi bi-send"></i></div>
                         </div>
                         <div class="message-options hidden">
-                            <img class="message-button edit-message-button" src="/Icons/edit.png" alt="">
-                            <img class="message-button delete-message-button" src="/Icons/trash.png" alt="">
+                            <img class="message-button edit-message-button clickable" src="/Icons/edit.png" alt="">
+                            <img class="message-button delete-message-button clickable" src="/Icons/trash.png" alt="">
                         </div>
                     </div>
                 `);

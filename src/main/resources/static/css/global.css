@@ -263,3 +263,7 @@ img {
 .test-outline {
     border: orange solid 3px;
 }
+
+.clickable:hover {
+    cursor: pointer;
+}
