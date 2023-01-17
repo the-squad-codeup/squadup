@@ -114,7 +114,7 @@ $(function() {
             console.log("Payload received:");
             console.log(message);
             if(message.messageType === 'JOIN') {
-                await SquadChat.updateSquadMembers(message);
+                // await SquadChat.updateSquadMembers(message);
             } else if(message.messageType === 'LEAVE') {
                 await Print.leaveMessage(message);
             } else if(message.messageType === 'EDIT') {
@@ -180,7 +180,7 @@ $(function() {
                             </div>
                         </div>
                         <div class="message-edit-button-wrapper hidden">
-                            <div class="btn btn-outline-success message-edit-button">Edit</div>
+                            <div class="message-edit-button"><i class="bi bi-send"></i></div>
                         </div>
                         <div class="message-options hidden">
                             <img class="message-button edit-message-button" src="/Icons/edit.png" alt="">
@@ -281,11 +281,16 @@ $(function() {
                     await SquadChat.editMessage($(this).parent().parent());
                     $(this).parent().addClass("hidden");
                 })
+                .on("keydown", function(e) {
+                    if($(".single-message-content").is(":focus") && e.key === "Enter") {
+                        e.preventDefault();
+                    }
+                })
                 .on("keyup", function(e) {
                     if($("#chat-text-input").is(":focus") && e.key === "Enter") {
                         $("#chat-send-button").trigger("click");
                     }
-                    if($(".single-message-content").is(":focus") && e.key === "Enter") {
+                    if($(".single-message-content div").is(":focus") && e.key === "Enter") {
                         $(":focus").parent().parent().find(".message-edit-button").trigger("click");
                     }
                 })

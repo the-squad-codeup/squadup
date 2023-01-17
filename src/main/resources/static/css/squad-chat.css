@@ -124,8 +124,9 @@
 
 .message-edit-button-wrapper {
     position: absolute;
-    right: 0;
+    right: 1em;
     bottom: 0;
+    color: #5CFD42;
 }
 
 .was-edited {
