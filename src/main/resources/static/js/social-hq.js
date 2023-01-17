@@ -30,8 +30,8 @@ $(function () {
                         </div>
                     </div>
                     <div class="su-card-bottom">
-                        <a href="#" id="accept" class="btn btn-outline-success accept-link">Accept</a>
-                        <a href="#" id="reject" class="btn btn-outline-danger reject-link">Reject</a>
+                        <a href="#" id="accept" class="btn btn-outline-success accept-link rgb">Accept</a>
+                        <a href="#" id="reject" class="btn btn-outline-danger reject-link rgb">Reject</a>
                     </div>
                 </div>
             `);
@@ -343,7 +343,7 @@ $(function () {
                 </div>
             </div>
             <div class="add-modal-squad-create-btn-wrapper">
-                <button class="add-modal-squad-create-btn">Create Squad</button>
+                <button class="add-modal-squad-create-btn rgb">Create Squad</button>
             </div>
         `);
         for(let comrade of comrades) {
@@ -382,7 +382,7 @@ $(function () {
                         <img id="upload-squad-picture" class="hidden" src="/Icons/edit.png" alt="">
                     </div>
                 </div>
-                <div class="modal-title rgb">
+                <div class="modal-title">
                     ${squad.name}
                 </div>
                 <div class="modal-squad-chat-btn-wrapper">
@@ -391,7 +391,7 @@ $(function () {
             </div>
             <div class="modal-squad-members-wrapper user-wrapper">
                 <div class="modal-squad-members-title invite-title">
-                    Members:
+                    Members
                 </div>
                 <div class="modal-squad-members-mask invite-mask">
                     <div class="modal-squad-members invite-container">
@@ -402,7 +402,7 @@ $(function () {
             <div class="modal-squad-invites-wrapper">
                 <div class="modal-squad-comrades-wrapper user-wrapper">
                     <div class="modal-squad-comrades-title invite-title">
-                        Invite Comrades:
+                        Invite Comrades
                     </div>
                     <div class="modal-squad-comrades-mask invite-mask">
                         <div class="modal-squad-comrades invite-container">
