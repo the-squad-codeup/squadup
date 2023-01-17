@@ -115,7 +115,7 @@ public class ProfileController {
         userPreferences.setPlatforms(updatedPlatforms);
         userPreferences.setGamertag(updatedPreferences.getGamertag());
         preferencesDao.save(userPreferences);
-        return "redirect:/recruits";
+        return "redirect:/hq";
     }
 
 
