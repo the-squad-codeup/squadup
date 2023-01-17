@@ -17,6 +17,12 @@
             <div class="col-12 col-lg-5">
                 <div class="container bg-dark rounded-3 p-5 rainbow">
                     <h1 class="text-center text-light glow-text">Forgot Password</h1>
+                <div class="container bg-dark rounded-3 p-5">
+                    <h1 class="text-center text-light">Forgot Password</h1>
+                    <div th:if="${param.invalidEmail}" class="text-light">
+                        Email does not exist in our system. Please enter a valid email or register as a new user.
+                    </div>
+>>>>>>> main
                     <div th:if="${param.invalid}" class="text-light">
                         Reset Password token is invalid. Please enter your email to send new reset password email.
                     </div>

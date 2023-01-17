@@ -11,10 +11,11 @@
 </head>
 <body>
 <nav th:replace="partials :: siteBar"></nav>
+<div hidden id="modal-squad-info" th:data-squad-id="${squad.id}"></div>
 <div id="page-wrapper">
     <div id="squad-chat-wrapper" class="rgb">
         <div id="squad-img-wrapper" class="rgb">
-            <div class="squad-image rgb"></div>
+            <div class="squad-image rgb clickable"></div>
             <img id="upload-squad-picture" class="hidden" th:src="@{/Icons/edit.png}" alt="">
         </div>
         <div id="squad-title-wrapper" class="rgb">
@@ -39,7 +40,7 @@
         <div id="text-input-wrapper" class="rgb">
             <input id="chat-text-input" type="text" autocomplete="off">
             <div id="chat-button-container">
-                <div id="chat-send-button" class="btn btn-outline-success">Send Message</div>
+                <div id="chat-send-button" class="btn btn-outline-success">Send</div>
             </div>
         </div>
 

@@ -11,6 +11,7 @@ body {
 #social-wrapper {
     width: 96vw;
     height: calc(96vh - 120px);
+    min-height: 575px;
     border: solid #5CFD42 .36vw;
     position: relative;
     display: flex;
@@ -39,25 +40,28 @@ body {
 /*    top: 5em;*/
 /*}*/
 
-/*.arrow-left, .arrow-left-img{*/
-/*    height: 4vw;*/
-/*    width: 4vw;*/
-/*    position: absolute;*/
-/*    margin-left: -2vw;*/
-/*    margin-top: -2vw;*/
-/*    max-width: none;*/
-/*    transform: rotate(180deg);*/
-/*}*/
+.arrow-left{
+    display: flex;
+    height: 4vw;
+    width: 4vw;
+    position: absolute;
+    margin-left: -2vw;
+    margin-top: -2vw;
+    max-width: none;
+    background: transparent;
+    transform: rotate(180deg);
+}
 
-/*.arrow-right, .arrow-right-img{*/
-/*    right: 0;*/
-/*    height: 4vw;*/
-/*    width: 4vw;*/
-/*    position: absolute;*/
-/*    margin-left: -2vw;*/
-/*    margin-top: -2vw;*/
-/*    max-width: none;*/
-/*}*/
+.arrow-right{
+    display: flex;
+    right: 0;
+    height: 4vw;
+    width: 4vw;
+    position: absolute;
+    margin-left: -2vw;
+    margin-top: -2vw;
+    max-width: none;
+}
 
         /*  STYLING FOR CARDS AND CARD CONTENTS  */
 
@@ -95,13 +99,11 @@ p.card-text, h4{
     display: flex;
 }
 
-/*  BELOW IS WHERE IT MAKES THE GAMES INSIDE THE CARDS SCROLLABLE!!: */
 .su-card-middle {
     flex: 1 0 auto;
     overflow: hidden;
     overflow-x: scroll;
 }
-/*    ^^^^^^^^^^^^     */
 
 .su-card-games-list {
     display: flex;
@@ -156,10 +158,10 @@ img.card-img-top {
 }
 
 .social-side-container {
-    min-width: 12em;
+    min-width: 10em;
     height: 100%;
     overflow: hidden;
-    width: 12em;
+    width: 10em;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -171,10 +173,13 @@ img.card-img-top {
     border-radius: 50%;
     background-position: center;
     background-size: cover;
+    width: 7em;
 }
 
 .solo-squad, .solo-com {
     width: 100%;
+    margin-bottom: 2vh;
+    margin-top: 4vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -208,7 +213,10 @@ img.card-img-top {
     width: 36em;
     transform: translate(-50%, -50%);
     z-index: 12;
-    border-radius: 2px;
+    border-radius: 16px;
+    padding: 2vh;
+    border: 1px solid;
+
 }
 
 .add-modal-title {
@@ -232,8 +240,20 @@ img.card-img-top {
     margin: 0 0.5em;
 }
 
-.add-modal-squad-img {
+.add-modal-squad-img-wrapper>div, .modal-squad-img-wrapper>div {
+    margin-left: 1em;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 6em;
+    height: 6em;
+}
+
+.add-modal-squad-img, .modal-squad-img {
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 .modal-user-img {
@@ -294,6 +314,10 @@ img.card-img-top {
     display: none;
 }
 
+.darken {
+    filter: brightness(50%);
+}
+
 .modal-title {
     font-size: xx-large;
     height: 2em;
@@ -336,9 +360,6 @@ img.card-img-top {
 }
 
 .modal-squad-img-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     flex: 1;
 }
 
@@ -346,3 +367,68 @@ img.card-img-top {
     margin-right: auto;
     width: 6em;
 }
+
+#upload-squad-picture {
+    z-index: 5;
+    pointer-events: none;
+    width: 4em;
+    height: 4em;
+}
+
+@media only screen and (max-width: 600px) {
+    #social-wrapper {
+        flex-direction: column;
+    }
+
+    .social-title {
+        display: none;
+    }
+
+    .side-wrapper {
+        flex-direction: row;
+    }
+
+    .side-content {
+        width: auto;
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+    }
+
+    .side-content h5 {
+        display: none;
+    }
+
+    .social-side-container {
+        width: 100%;
+        height: auto;
+        flex-display: row;
+    }
+
+    .solo-squad, .solo-com {
+        width: 5em;
+        margin: 1em;
+    }
+
+    .card-slider-mask {
+        padding-top: 0;
+    }
+
+    .su-card {
+        width: 85vw;
+        min-width: 85vw;
+    }
+
+    #recruits-wrapper {
+        border: none;
+    }
+
+    .squad-modal {
+        width: 96vw;
+    }
+
+    #social-wrapper {
+        height: auto;
+    }
+}
+

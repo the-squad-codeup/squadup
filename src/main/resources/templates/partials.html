@@ -37,18 +37,6 @@
                     <a id="nav-hq-link" class="nav-link social-hq" th:href="@{/hq}">Social HQ</a>
                 </li>
                 <li sec:authorize="isAuthenticated()" class="nav-item">
-                    <a id="nav-home-link" class="nav-link dashboard" th:href="@{/dashboard}">Dashboard</a>
-                </li>
-                <li sec:authorize="isAuthenticated()" class="nav-item">
-                    <a id="nav-recruits-link" class="nav-link recruits" th:href="@{/recruits}">Recruits</a>
-                </li>
-                <li sec:authorize="isAuthenticated()" class="nav-item">
-                    <a id="nav-comrades-link" class="nav-link comrades" th:href="@{/comrades}">Comrades</a>
-                </li>
-                <li sec:authorize="isAuthenticated()" class="nav-item">
-                    <a id="nav-squads-link" class="nav-link squads" th:href="@{/squads}">Squads</a>
-                </li>
-                <li sec:authorize="isAuthenticated()" class="nav-item">
                     <a id="nav-games-link" class="nav-link games" th:href="@{/games}">Games</a>
                 </li>
             </ul>

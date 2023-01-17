@@ -18,7 +18,7 @@ $(function () {
                 <div class="su-card rgb" data-recruit-id="${recruit.id}">
                     <div class="su-card-top">
                         <div class="su-card-col su-card-col-shrink">
-                            <img class="card-img-top" src="${recruit.userTwo.profilePicture.url}" alt="user profile picture">
+                            <img class="card-img-top clickable" src="${recruit.userTwo.profilePicture.url}" alt="user profile picture">
                             <h4 class="card-title">${recruit.userTwo.username}</h4>
                         </div>
                         <div class="su-card-col">
@@ -46,42 +46,42 @@ $(function () {
     }
 
 
-    $(document).on('click', ".arrow", async function(e){
-        e.preventDefault();
-        if (e.target && e.target.classList.contains("arrow-right")) {
-            let cardList = document.getElementById('card');
-            // get the current data-left value of the card list
-            let currentLeft = cardList.dataset.left;
-            // count the amount of cards in the card list
-            let cardCount = cardList.childElementCount;
-            let maxClicks = cardCount - 1;
-            // if the current data-left value is less than the (maxClicks * 450), decrease the data-left value by 450
-            if (currentLeft == -(maxClicks * 450)) {
-                //do nothing
-            }
-            else {
-                // set the cardList to have a css left value of 450px less than the current left value
-                cardList.style.left = `${parseInt(currentLeft) - 450}px`;
-                // set the data-left value of the card list to the new left value
-                cardList.dataset.left = `${parseInt(currentLeft) - 450}`;
-            }
-        }
-        if (e.target && e.target.classList.contains("arrow-left")){
-            let cardList = document.getElementById('card');
-            // get the current data-left value of the card list
-            let currentLeft = cardList.dataset.left;
-            if (currentLeft == "0") {
-                // set the cardList to have a css left value of 450px less than the current left value
-                // cardList.style.left = `${parseInt(currentLeft) + 450}px`;
-            }
-            else {
-                // set the cardList to have a css left value of 450px less than the current left value
-                cardList.style.left = `${parseInt(currentLeft) + 450}px`;
-                // set the data-left value of the card list to the new left value
-                cardList.dataset.left = `${parseInt(currentLeft) + 450}`;
-            }
-        }
-    })
+    // $(document).on('click', ".arrow", async function(e){
+    //     e.preventDefault();
+    //     if (e.target && e.target.classList.contains("arrow-right")) {
+    //         let cardList = document.getElementById('card');
+    //         // get the current data-left value of the card list
+    //         let currentLeft = cardList.dataset.left;
+    //         // count the amount of cards in the card list
+    //         let cardCount = cardList.childElementCount;
+    //         let maxClicks = cardCount - 1;
+    //         // if the current data-left value is less than the (maxClicks * 450), decrease the data-left value by 450
+    //         if (currentLeft == -(maxClicks * 450)) {
+    //             //do nothing
+    //         }
+    //         else {
+    //             // set the cardList to have a css left value of 450px less than the current left value
+    //             cardList.style.left = `${parseInt(currentLeft) - 450}px`;
+    //             // set the data-left value of the card list to the new left value
+    //             cardList.dataset.left = `${parseInt(currentLeft) - 450}`;
+    //         }
+    //     }
+    //     if (e.target && e.target.classList.contains("arrow-left")){
+    //         let cardList = document.getElementById('card');
+    //         // get the current data-left value of the card list
+    //         let currentLeft = cardList.dataset.left;
+    //         if (currentLeft == "0") {
+    //             // set the cardList to have a css left value of 450px less than the current left value
+    //             // cardList.style.left = `${parseInt(currentLeft) + 450}px`;
+    //         }
+    //         else {
+    //             // set the cardList to have a css left value of 450px less than the current left value
+    //             cardList.style.left = `${parseInt(currentLeft) + 450}px`;
+    //             // set the data-left value of the card list to the new left value
+    //             cardList.dataset.left = `${parseInt(currentLeft) + 450}`;
+    //         }
+    //     }
+    // })
 
 
 
@@ -252,14 +252,14 @@ $(function () {
             $("#squads-content").append(`
                 <div data-squad-id="${squad.id}" class="solo-squad">
                     <h5>${squad.name}</h5>
-                    <img class="solo-squad-img rgb" src="${squad.squadPicture.url}">
+                    <img class="solo-squad-img rgb clickable" src="${squad.squadPicture.url}">
                 </div>
             `)
         }
         $("#squads-content").append(`
             <div id="add-squad-wrapper" class="solo-squad">
                 <h5>Add Squad</h5>
-                <img class="solo-squad-img rgb" src="https://cdn.filestackcontent.com/YmC6UtutQsiTT2tYduKI">
+                <img class="solo-squad-img rgb clickable" src="https://cdn.filestackcontent.com/YmC6UtutQsiTT2tYduKI">
             </div>
         `);
     }
@@ -268,7 +268,7 @@ $(function () {
         $("#squads-content").prepend(`
             <div data-squad-id="${squad.id}" class="solo-squad">
                 <h5>${squad.name}</h5>
-                <img class="solo-squad-img rgb" src="${squad.squadPicture.url}">
+                <img class="solo-squad-img rgb clickable" src="${squad.squadPicture.url}">
             </div>
         `);
     }
@@ -281,7 +281,7 @@ $(function () {
             $("#pending-squads-content").prepend(`
                 <div data-squad-id="${invite.squad.id}" class="solo-squad">
                     <h5 class="invite-text">New Invite!</h5>
-                    <img class="solo-pending-squad-img rgb" src="${invite.squad.squadPicture.url}">
+                    <img class="solo-pending-squad-img rgb clickable" src="${invite.squad.squadPicture.url}">
                 </div>
             `);
         }
@@ -294,7 +294,7 @@ $(function () {
             $("#comrades-content").append(`
                 <div data-comrade-id="${comrade.id}" class="solo-com">
                     <h5>${comrade.userTwo.username}</h5>
-                    <img class="solo-com-img rgb" src="${comrade.userTwo.profilePicture.url}">
+                    <img class="solo-com-img rgb clickable" src="${comrade.userTwo.profilePicture.url}">
                 </div>
             `);
         }
@@ -312,7 +312,10 @@ $(function () {
                 </div>
                 <input class="add-modal-squad-name-input" type="text">
                 <div class="add-modal-squad-img-wrapper">
-                    <img class="add-modal-squad-img" src="https://cdn.filestackcontent.com/Humw6OOXTemRtPob8kJB">
+                    <div>
+                        <img class="add-modal-squad-img editable-squad-img clickable" src="https://cdn.filestackcontent.com/Humw6OOXTemRtPob8kJB">
+                        <img id="upload-squad-picture" class="hidden" src="/Icons/edit.png" alt="">
+                    </div>
                 </div>
             </div>
             <div class="add-modal-squad-invites-wrapper">
@@ -350,7 +353,7 @@ $(function () {
                         ${comrade.userTwo.username}
                     </div>
                     <div class="add-modal-squad-comrade-img-wrapper">
-                        <img class="add-modal-squad-comrade-img modal-user-img" src="${comrade.userTwo.profilePicture.url}">
+                        <img class="add-modal-squad-comrade-img modal-user-img clickable" src="${comrade.userTwo.profilePicture.url}">
                     </div>
                 </div>
             `);
@@ -373,8 +376,11 @@ $(function () {
         $(".squad-modal").empty().append(`
             <div hidden id="modal-squad-info" data-squad-id="${squad.id}"></div>
             <div class="modal-top">
-                <div class="modal-squad-img-wrapper">
-                    <img class="modal-squad-img squad-image" src="${squad.squadPicture.url}">
+                <div class="modal-squad-img-wrapper clickable">
+                    <div>
+                        <img class="modal-squad-img squad-image editable-squad-img clickable" src="${squad.squadPicture.url}">
+                        <img id="upload-squad-picture" class="hidden" src="/Icons/edit.png" alt="">
+                    </div>
                 </div>
                 <div class="modal-title rgb">
                     ${squad.name}
@@ -424,11 +430,11 @@ $(function () {
         for(let member of squad.members) {
             $(".modal-squad-members").append(`
                 <div class="modal-squad-member-wrapper single-user-wrapper" data-user-id="${member.id}">
-                    <div class="modal-squad-comrade-username">
+                    <div class="modal-squad-member-username">
                         ${member.username}
                     </div>
-                    <div class="modal-squad-comrade-img-wrapper">
-                        <img class="modal-squad-comrade-img modal-user-img" src="${member.profilePicture.url}">
+                    <div class="modal-squad-member-img-wrapper">
+                        <img class="modal-squad-member-img modal-user-img" src="${member.profilePicture.url}">
                     </div>
                 </div>
             `);
@@ -440,7 +446,7 @@ $(function () {
                         ${user.username}
                     </div>
                     <div class="modal-squad-comrade-img-wrapper">
-                        <img class="modal-squad-comrade-img modal-user-img" src="${user.profilePicture.url}">
+                        <img class="modal-squad-comrade-img modal-user-img clickable" src="${user.profilePicture.url}">
                     </div>
                 </div>
             `);
@@ -493,11 +499,11 @@ $(function () {
         for(let member of squad.members) {
             $(".modal-squad-members").append(`
                 <div class="modal-squad-member-wrapper single-user-wrapper" data-user-id="${member.id}">
-                    <div class="modal-squad-comrade-username">
+                    <div class="modal-squad-member-username">
                         ${member.username}
                     </div>
-                    <div class="modal-squad-comrade-img-wrapper">
-                        <img class="modal-squad-comrade-img modal-user-img" src="${member.profilePicture.url}">
+                    <div class="modal-squad-member-img-wrapper">
+                        <img class="modal-squad-member-img modal-user-img" src="${member.profilePicture.url}">
                     </div>
                 </div>
             `);
@@ -570,17 +576,15 @@ $(function () {
         for(let member of squad.members) {
             $(".modal-squad-members").append(`
                 <div class="modal-squad-member-wrapper single-user-wrapper" data-user-id="${member.id}">
-                    <div class="modal-squad-comrade-username">
+                    <div class="modal-squad-member-username">
                         ${member.username}
                     </div>
-                    <div class="modal-squad-comrade-img-wrapper">
-                        <img class="modal-squad-comrade-img modal-user-img" src="${member.profilePicture.url}">
+                    <div class="modal-squad-member-img-wrapper">
+                        <img class="modal-squad-member-img modal-user-img" src="${member.profilePicture.url}">
                     </div>
                 </div>
             `);
         }
-
-
     }
 
     function removeSquad(squadId) {
@@ -654,6 +658,14 @@ $(function () {
             await postRejectSquadInvite($("#modal-squad-info").attr("data-squad-id"));
             removeSquadInvite($("#modal-squad-info").attr("data-squad-id"));
             hideModal();
+        })
+        .on("mouseenter", ".editable-squad-img", function() {
+            $(this).addClass("darken");
+            $("#upload-squad-picture").removeClass("hidden");
+        })
+        .on("mouseleave", ".editable-squad-img", function() {
+            $(this).removeClass("darken");
+            $("#upload-squad-picture").addClass("hidden");
         })
     ;
 });
