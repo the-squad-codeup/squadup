@@ -43,10 +43,6 @@
 
 #upload-squad-picture {
     position: absolute;
-    left: 4em;
-    top: 4em;
-    width: 4em;
-    height: 4em;
     pointer-events: none;
 }
 
@@ -275,6 +271,9 @@
     }
 
     #squad-img-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         width: 5em;
         height: 5em;
     }

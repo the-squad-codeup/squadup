@@ -121,5 +121,9 @@ public class RecruitMatchingService {
         newRecruit.setUserOne(user1);
         newRecruit.setUserTwo(user2);
         recruitDao.save(newRecruit);
+        Recruit newInverseRecruit = new Recruit(currentTimeAndDate, false);
+        newInverseRecruit.setUserOne(user2);
+        newInverseRecruit.setUserTwo(user1);
+        recruitDao.save(newInverseRecruit);
     }
 }
