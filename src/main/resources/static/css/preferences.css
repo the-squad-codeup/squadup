@@ -37,6 +37,20 @@ body {
     animation: glow-text 20s linear 0s infinite;
 }
 
+.titulo{
+    margin: auto;
+    padding-left: 29%;
+    margin-bottom: 1vw;
+}
+.titlepref {
+    /*font-size: 80px;*/
+    color: #fff;
+    /*text-align: center;*/
+    animation: glow-text 20s linear 0s infinite;
+
+    font-size: 3vw;
+}
+
 @keyframes glow-text {
     from {
         text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #ff0000, 0 0 40px #ff0000, 0 0 50px #ff0000, 0 0 60px #ff0000, 0 0 70px #ff0000;
@@ -96,3 +110,18 @@ body {
 .select2-results__option[aria-selected=true] {
     color: #000000;
 }
+
+
+
+@media (width <= 430px) {
+
+    .titlepref {
+        font-size: 5vw;
+    }
+
+    .titulo {
+        padding-left: 15%;
+        margin-bottom: 3vw;
+    }
+}
+
