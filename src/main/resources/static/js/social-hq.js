@@ -156,7 +156,7 @@ $(function () {
         return await fetch(`${Utils.url()}user/${userId}/info`).then(res => res.json());
     }
 
-    async function currentInvites() {
+    async function getCurrentInvites() {
         return await fetch(`${Utils.url()}invites/recipient`).then(res => res.json());
     }
 
@@ -253,6 +253,20 @@ $(function () {
         `);
     }
 
+    async function printPendingSquadInvites() {
+        let invites = await getCurrentInvites();
+        console.log("Inside pending invites");
+        console.log(invites);
+        for(let invite of invites) {
+            $("#pending-squads-content").prepend(`
+                <div data-squad-id="${invite.squad.id}" class="solo-squad">
+                    <h5 class="invite-text">New Invite!</h5>
+                    <img class="solo-pending-squad-img rgb" src="${invite.squad.squadPicture.url}">
+                </div>
+            `);
+        }
+    }
+
     async function printComrades(){
         let comrades = await getComrades();
         console.log(comrades)
@@ -336,8 +350,7 @@ $(function () {
                 trimmedUsersToInvite.push(user);
             }
         }
-        for(let member of squad.members) {
-            $(".squad-modal").empty().append(`
+        $(".squad-modal").empty().append(`
             <div hidden id="modal-squad-info" data-squad-id="${squad.id}"></div>
             <div class="modal-top">
                 <div class="modal-squad-img-wrapper">
@@ -388,6 +401,7 @@ $(function () {
                 <button class="modal-squad-disband-btn">Disband Squad</button>
             </div>
         `);
+        for(let member of squad.members) {
             $(".modal-squad-members").append(`
                 <div class="modal-squad-member-wrapper single-user-wrapper" data-user-id="${member.id}">
                     <div class="modal-squad-comrade-username">
@@ -505,6 +519,50 @@ $(function () {
         `);
     }
 
+    async function printPendingSquadInviteModal(squadId) {
+        let squad = await getSquad(squadId);
+        $(".squad-modal").empty().append(`
+            <div hidden id="modal-squad-info" data-squad-id="${squad.id}"></div>
+            <div class="modal-top">
+                <div class="modal-squad-img-wrapper">
+                    <img class="modal-squad-img" src="${squad.squadPicture.url}">
+                </div>
+                <div class="modal-title rgb">
+                    ${squad.name}
+                </div>
+                <div> </div>
+            </div>
+            <div class="modal-squad-members-wrapper user-wrapper">
+                <div class="modal-squad-members-title invite-title">
+                    Members:
+                </div>
+                <div class="modal-squad-members-mask invite-mask">
+                    <div class="modal-squad-members invite-container">
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="modal-squad-btn-wrapper">
+                <button class="modal-squad-invite-accept-btn">Accept</button>
+                <button class="modal-squad-invite-reject-btn">Reject</button>
+            </div>
+        `);
+        for(let member of squad.members) {
+            $(".modal-squad-members").append(`
+                <div class="modal-squad-member-wrapper single-user-wrapper" data-user-id="${member.id}">
+                    <div class="modal-squad-comrade-username">
+                        ${member.username}
+                    </div>
+                    <div class="modal-squad-comrade-img-wrapper">
+                        <img class="modal-squad-comrade-img modal-user-img" src="${member.profilePicture.url}">
+                    </div>
+                </div>
+            `);
+        }
+
+
+    }
+
     function removeSquad(squadId) {
         $("#squads-content").find(`[data-squad-id='${squadId}']`).remove();
     }
@@ -512,6 +570,7 @@ $(function () {
 
     printSquads();
     printComrades();
+    printPendingSquadInvites();
 
     $(document)
         .on("click", ".solo-com-img", function () {
@@ -556,6 +615,10 @@ $(function () {
             await disbandSquad(squadId);
             removeSquad(squadId);
             hideModal();
+        })
+        .on("click", ".solo-pending-squad-img", async function() {
+            printPendingSquadInviteModal($(this).parent().attr("data-squad-id"));
+            showModal();
         })
     ;
 });

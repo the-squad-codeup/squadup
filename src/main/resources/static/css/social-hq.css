@@ -166,7 +166,7 @@ img.card-img-top {
 }
 
 /*SQUADS AND COMRADE STYLING */
-.solo-squad-img, .solo-com-img {
+.solo-squad-img, .solo-com-img, .solo-pending-squad-img {
     border: solid 0.3vw;
     border-radius: 50%;
     background-position: center;
