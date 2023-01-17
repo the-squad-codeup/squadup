@@ -42,7 +42,7 @@ public class PasswordResetController {
             mailService.passwordReset(passwordReset);
             return "reset/pw-reset-sent";
         }
-        return "reset/forgot-pw?invalid-email";
+        return "reset/forgot-pw?invalidEmail";
     }
 
     @GetMapping("/pwreset/{token}")
