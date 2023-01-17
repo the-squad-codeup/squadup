@@ -20,7 +20,7 @@
 }
 
 .card-title, .card-text {
-    border-bottom: whitesmoke solid 2px;
+    /*border-bottom: whitesmoke solid 2px;*/
     text-align: center;
     color: whitesmoke;
 }
