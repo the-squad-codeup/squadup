@@ -101,6 +101,7 @@ p.card-text, h4{
 .su-card-middle {
     flex: 1 0 auto;
     overflow: hidden;
+    overflow-x: scroll;
 }
 
 .su-card-games-list {

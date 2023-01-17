@@ -26,8 +26,6 @@ $(function () {
                         </div>
                     </div>
                     <div class="su-card-middle">
-                        <img class="arrow-left" th:src="@{/Icons/next.png}">
-                        <img class="arrow-right" th:src="@{/Icons/next.png}">
                         <div class="su-card-games-list">
                         </div>
                     </div>
@@ -48,42 +46,42 @@ $(function () {
     }
 
 
-    $(document).on('click', ".arrow", async function(e){
-        e.preventDefault();
-        if (e.target && e.target.classList.contains("arrow-right")) {
-            let cardList = document.getElementById('card');
-            // get the current data-left value of the card list
-            let currentLeft = cardList.dataset.left;
-            // count the amount of cards in the card list
-            let cardCount = cardList.childElementCount;
-            let maxClicks = cardCount - 1;
-            // if the current data-left value is less than the (maxClicks * 450), decrease the data-left value by 450
-            if (currentLeft == -(maxClicks * 450)) {
-                //do nothing
-            }
-            else {
-                // set the cardList to have a css left value of 450px less than the current left value
-                cardList.style.left = `${parseInt(currentLeft) - 450}px`;
-                // set the data-left value of the card list to the new left value
-                cardList.dataset.left = `${parseInt(currentLeft) - 450}`;
-            }
-        }
-        if (e.target && e.target.classList.contains("arrow-left")){
-            let cardList = document.getElementById('card');
-            // get the current data-left value of the card list
-            let currentLeft = cardList.dataset.left;
-            if (currentLeft == "0") {
-                // set the cardList to have a css left value of 450px less than the current left value
-                // cardList.style.left = `${parseInt(currentLeft) + 450}px`;
-            }
-            else {
-                // set the cardList to have a css left value of 450px less than the current left value
-                cardList.style.left = `${parseInt(currentLeft) + 450}px`;
-                // set the data-left value of the card list to the new left value
-                cardList.dataset.left = `${parseInt(currentLeft) + 450}`;
-            }
-        }
-    })
+    // $(document).on('click', ".arrow", async function(e){
+    //     e.preventDefault();
+    //     if (e.target && e.target.classList.contains("arrow-right")) {
+    //         let cardList = document.getElementById('card');
+    //         // get the current data-left value of the card list
+    //         let currentLeft = cardList.dataset.left;
+    //         // count the amount of cards in the card list
+    //         let cardCount = cardList.childElementCount;
+    //         let maxClicks = cardCount - 1;
+    //         // if the current data-left value is less than the (maxClicks * 450), decrease the data-left value by 450
+    //         if (currentLeft == -(maxClicks * 450)) {
+    //             //do nothing
+    //         }
+    //         else {
+    //             // set the cardList to have a css left value of 450px less than the current left value
+    //             cardList.style.left = `${parseInt(currentLeft) - 450}px`;
+    //             // set the data-left value of the card list to the new left value
+    //             cardList.dataset.left = `${parseInt(currentLeft) - 450}`;
+    //         }
+    //     }
+    //     if (e.target && e.target.classList.contains("arrow-left")){
+    //         let cardList = document.getElementById('card');
+    //         // get the current data-left value of the card list
+    //         let currentLeft = cardList.dataset.left;
+    //         if (currentLeft == "0") {
+    //             // set the cardList to have a css left value of 450px less than the current left value
+    //             // cardList.style.left = `${parseInt(currentLeft) + 450}px`;
+    //         }
+    //         else {
+    //             // set the cardList to have a css left value of 450px less than the current left value
+    //             cardList.style.left = `${parseInt(currentLeft) + 450}px`;
+    //             // set the data-left value of the card list to the new left value
+    //             cardList.dataset.left = `${parseInt(currentLeft) + 450}`;
+    //         }
+    //     }
+    // })
 
 
 
