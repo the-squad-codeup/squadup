@@ -3,7 +3,7 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <div th:replace="partials :: headFragment('Reset Password')"></div>
-
+    <link rel="stylesheet" th:href="@{/css/pwreset.css}">
 </head>
 <body>
 <div id="page-wrapper">
@@ -15,7 +15,7 @@
     <div class="container pt-5 my-5">
         <div class="row g-5">
             <div class="col-12 col-lg-5">
-                <div class="container bg-dark rounded-3 p-5">
+                <div class="container bg-dark rounded-3 p-5 rainbow">
                     <h1 class="text-center text-light">Reset Password</h1>
 
                     <p class="text-center text-light">An email has been sent with a link to reset your password.</p>
