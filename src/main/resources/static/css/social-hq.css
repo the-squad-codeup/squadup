@@ -239,8 +239,20 @@ img.card-img-top {
     margin: 0 0.5em;
 }
 
-.add-modal-squad-img {
+.add-modal-squad-img-wrapper>div, .modal-squad-img-wrapper>div {
+    margin-left: 1em;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 6em;
+    height: 6em;
+}
+
+.add-modal-squad-img, .modal-squad-img {
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 .modal-user-img {
@@ -301,6 +313,10 @@ img.card-img-top {
     display: none;
 }
 
+.darken {
+    filter: brightness(50%);
+}
+
 .modal-title {
     font-size: xx-large;
     height: 2em;
@@ -343,15 +359,19 @@ img.card-img-top {
 }
 
 .modal-squad-img-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     flex: 1;
 }
 
 .modal-squad-img {
     margin-right: auto;
     width: 6em;
+}
+
+#upload-squad-picture {
+    z-index: 5;
+    pointer-events: none;
+    width: 4em;
+    height: 4em;
 }
 
 @media only screen and (max-width: 600px) {
@@ -410,3 +430,4 @@ img.card-img-top {
         height: auto;
     }
 }
+
