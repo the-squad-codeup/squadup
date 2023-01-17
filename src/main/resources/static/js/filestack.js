@@ -37,7 +37,7 @@ $(async function() {
                     },
                     body: JSON.stringify(file)
                 }
-                return await fetch(`${Utils.url()}squads/${$("#squad-title").attr("data-squad-id")}/picture`, postOptions).then(res => res.json());
+                return await fetch(`${Utils.url()}squads/${$("#modal-squad-info").attr("data-squad-id")}/picture`, postOptions).then(res => res.json());
             },
             async addSquadPicture(file) {
                 let postOptions = {
@@ -91,7 +91,7 @@ $(async function() {
                 console.log(file);
                 let uploadedPicture = await Fetch.Post.squadPicture(file, FileStack.csrfToken).then(res => res);
                 console.log(uploadedPicture);
-                $('.squad-image').css('background-image', `url("${uploadedPicture.url}")`);
+                $('.squad-image').attr('src', `${uploadedPicture.url}`);
             }
         },
         addSquadOptions: {
@@ -108,7 +108,8 @@ $(async function() {
                 console.log(file);
                 let uploadedPicture = await Fetch.Post.addSquadPicture(file, FileStack.csrfToken).then(res => res);
                 console.log(uploadedPicture);
-                $('.modal-squad-img').attr('src', `url("${uploadedPicture.url}")`).attr("data-squad-img-id", `${uploadedPicture.id}`);
+                $('.add-modal-squad-img').attr('src', `${uploadedPicture.url}`);
+                $(".add-modal-squad-img").attr("data-squad-img-id", `${uploadedPicture.id}`);
             }
         },
         filestackKey: await Fetch.Get.filestackKey().then(res => res),
@@ -124,7 +125,7 @@ $(async function() {
                 .on("click", ".squad-image", function() {
                     FileStack.client.picker(FileStack.squadOptions).open();
                 })
-                .on("click", ".modal-squad-img", function() {
+                .on("click", ".add-modal-squad-img", function() {
                     FileStack.client.picker(FileStack.addSquadOptions).open();
                 });
             ;

@@ -13,8 +13,11 @@ import pro.squadup.models.*;
 import pro.squadup.repositories.*;
 import pro.squadup.utils.Utils;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+
+import static java.lang.String.format;
 
 @Controller
 public class SquadController {
@@ -44,51 +47,76 @@ public class SquadController {
         return "squad/main";
     }
 
+    @GetMapping("/squads/{squadId}/info")
+    public @ResponseBody Squad getSquadInfoById(@PathVariable Long squadId) {
+        return squadDao.findById(squadId).get();
+    }
+
     @PostMapping("/squads/create")
     public String createSquad(Model model, @ModelAttribute Squad squad) throws JsonProcessingException {
-        ObjectMapper mapper = new ObjectMapper();
-
-        System.out.println("Inside create squad");
-        System.out.printf("Squad passed in: %s%n", mapper.writeValueAsString(squad));
-
         // getting user, default squadPicture, empty Chat to set in squad
         User currentUser = userDao.findById(Utils.currentUserId()).get();
         SquadPicture squadPicture = Utils.defaultSquadPicture();
         SquadChat chat = new SquadChat();
         Set<User> members = new HashSet<>();
-
         // setting user, picture, chat
         squad.setOwner(currentUser);
         members.add(currentUser);
         squad.setMembers(members);
-
         // saving new entities
         squadPictureDao.save(squadPicture);
         squadChatDao.save(chat);
-
 //        squadDao.save(squad);
-
         squad.setSquadPicture(squadPicture);
         squad.setChat(chat);
-//        squadPicture.setSquad(squad);
-//        chat.setSquad(squad);
-
-
         // saving changes to squad
         squadDao.save(squad);
-
-
         model.addAttribute("squad", squad);
-
-        System.out.printf("Squad created: %n%s%n", mapper.writeValueAsString(squad));
         return "squad/chat";
+    }
+
+    @PostMapping("/squads/create/new")
+    public @ResponseBody Squad createNewSquad(@RequestBody NewSquadInfo newSquadInfo) throws JsonProcessingException {
+        User currentUser = userDao.findById(Utils.currentUserId()).get();
+        SquadPicture squadPicture;
+        if(newSquadInfo.getSquadPictureId() != null) {
+            squadPicture = squadPictureDao.findById(newSquadInfo.getSquadPictureId()).get();
+        } else {
+            squadPicture = Utils.defaultSquadPicture();
+        }
+        SquadChat chat = new SquadChat();
+        Set<User> members = new HashSet<>();
+        Squad squad = new Squad();
+        squad.setOwner(currentUser);
+        members.add(currentUser);
+        squad.setMembers(members);
+        squadChatDao.save(chat);
+        squad.setSquadPicture(squadPicture);
+        squad.setChat(chat);
+        if(!newSquadInfo.getName().equals("")) {
+            squad.setName(newSquadInfo.getName());
+        } else {
+            squad.setName(format("%s's Squad", currentUser.getUsername()));
+        }
+        squadDao.save(squad);
+        if(newSquadInfo.getInviteeIds() != null) {
+            for (Long inviteeId : newSquadInfo.getInviteeIds()) {
+                SquadInvite invite = new SquadInvite(currentUser, userDao.findById(inviteeId).get(), squad);
+                squadInviteDao.save(invite);
+            }
+        }
+        return squad;
     }
 
     @GetMapping("/squads/{squadId}/chat")
     public String showSquadPage(Model model, @PathVariable Long squadId) {
+        User currentUser = userDao.findById(Utils.currentUserId()).get();
         Squad squad = squadDao.findById(squadId).get();
-        model.addAttribute("squad", squad);
-        return "squad/chat";
+        if(squad.getMembers().contains(currentUser)) {
+            model.addAttribute("squad", squad);
+            return "squad/chat";
+        }
+        return "social/social-hq";
     }
 
     @GetMapping("/squads/{squadId}/members")
@@ -124,6 +152,9 @@ public class SquadController {
     public @ResponseBody Squad deleteSquad(@PathVariable Long squadId) {
         User currentUser = userDao.findById(Utils.currentUserId()).get();
         Squad squadToDelete = squadDao.findById(squadId).get();
+        for(SquadInvite invite : squadInviteDao.findAllBySquad(squadToDelete)) {
+            squadInviteDao.delete(invite);
+        }
         if(squadToDelete.getOwner().equals(currentUser)) {
             squadDao.delete(squadToDelete);
         }

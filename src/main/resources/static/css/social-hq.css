@@ -166,7 +166,7 @@ img.card-img-top {
 }
 
 /*SQUADS AND COMRADE STYLING */
-.solo-squad-img, .solo-com-img {
+.solo-squad-img, .solo-com-img, .solo-pending-squad-img {
     border: solid 0.3vw;
     border-radius: 50%;
     background-position: center;
@@ -211,7 +211,7 @@ img.card-img-top {
     border-radius: 2px;
 }
 
-.modal-title {
+.add-modal-title {
     border-bottom: 4px;
     font-size: xx-large;
     width: 100%;
@@ -220,7 +220,7 @@ img.card-img-top {
     align-items: center;
 }
 
-.modal-top {
+.add-modal-top {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -232,7 +232,7 @@ img.card-img-top {
     margin: 0 0.5em;
 }
 
-.modal-squad-img {
+.add-modal-squad-img {
     width: 6em;
 }
 
@@ -240,7 +240,7 @@ img.card-img-top {
     width: 4em;
 }
 
-.modal-squad-invites-wrapper {
+.add-modal-squad-invites-wrapper {
     width: 100%;
 }
 
@@ -249,13 +249,13 @@ img.card-img-top {
     flex-direction: column;
     justify-content: center;
     width: 100%;
-    margin-top: 2em;
+    margin-top: 0.5em;
 }
 
 .invite-title {
     display: flex;
     justify-content: center;
-    font-size: xx-large;
+    font-size: x-large;
 }
 
 .invite-mask {
@@ -267,11 +267,11 @@ img.card-img-top {
 .invite-container {
     display: flex;
     align-items: center;
-    height: 8em;
+    height: 6em;
 }
 
 .single-user-wrapper {
-    margin: 1em 2em;
+    margin: 0 1em;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -294,8 +294,55 @@ img.card-img-top {
     display: none;
 }
 
-.modal-exit-btn {
-    position: absolute;
-    top: 0;
-    right: 0;
+.modal-title {
+    font-size: xx-large;
+    height: 2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+}
+
+.modal-squad-btn-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 0.5em;
+}
+
+.modal-squad-invites-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.modal-top {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-squad-chat-btn-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+}
+
+.modal-squad-chat-btn {
+    margin-left: auto;
+}
+
+.modal-squad-img-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+}
+
+.modal-squad-img {
+    margin-right: auto;
+    width: 6em;
 }
