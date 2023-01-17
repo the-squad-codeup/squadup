@@ -8,6 +8,7 @@
     width: 96vw;
     height: calc(96vh - 100px);
     border: solid #5CFD42 4px;
+    border-radius: 4em 0 0 0;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -16,11 +17,13 @@
 
 #squad-img-wrapper {
     position: absolute;
-    left: 0.5em;
-    top: 4.5em;
+    left: -4px;
+    top: -4px;
     width: 8em;
     height: 8em;
     z-index: 100;
+    border: solid 4px;
+    border-radius: 50%;
 }
 
 .squad-image {
@@ -29,6 +32,9 @@
     background-position: center;
     background-size: cover;
     background-image: url("https://cdn.filestackcontent.com/dynXYf9AS26ImuqTgUPj");
+    border: 4px;
+    border-radius: 50%;
+
 }
 
 .darken {
@@ -187,7 +193,7 @@
     width: 100%;
     padding: .36em 0;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
 }
 
