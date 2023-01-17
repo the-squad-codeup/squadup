@@ -56,11 +56,13 @@
 }
 
 #signupPasswordSubmit{
-    margin: 2%;
+    margin: auto;
+    width: 12%;
     border-radius: 8px;
     border-style:solid;
     color: white;
     animation: rgb-background 20s linear 0s infinite;
+
 }
 
 
@@ -111,5 +113,8 @@
 
     }
 
+    #signupPasswordSubmit{
+        width: 40%;
+    }
 
 }
