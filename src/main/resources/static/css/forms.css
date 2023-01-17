@@ -188,7 +188,7 @@ textarea {
 
 
 .rgb-background {
-    animation: rgb 20s linear 0s infinite;
+    animation: rgb-background 20s linear 0s infinite;
 }
 
 @keyframes rgb-background {
