@@ -9,6 +9,7 @@ body {
 
 /*navbar edits*/
 .navbar{
+    background-color: black;
     display: flex;
     align-items: center;
     height: 60px;
@@ -109,7 +110,7 @@ img {
 /**/
 
 .rainbow {
-    animation: colorRotate 20s linear 0s infinite;
+    animation: colorRotate 20s linear 0s infinite !important;
 }
 
 @keyframes colorRotate {

@@ -172,10 +172,13 @@ img.card-img-top {
     border-radius: 50%;
     background-position: center;
     background-size: cover;
+    width: 6vw;
 }
 
 .solo-squad, .solo-com {
     width: 100%;
+    margin-bottom: 2vh;
+    margin-top: 4vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -209,7 +212,10 @@ img.card-img-top {
     width: 36em;
     transform: translate(-50%, -50%);
     z-index: 12;
-    border-radius: 2px;
+    border-radius: 16px;
+    padding: 2vh;
+    border: 1px solid;
+
 }
 
 .add-modal-title {
@@ -346,4 +352,57 @@ img.card-img-top {
 .modal-squad-img {
     margin-right: auto;
     width: 6em;
+}
+
+@media only screen and (max-width: 600px) {
+    #social-wrapper {
+        flex-direction: column;
+    }
+
+    .social-title {
+        display: none;
+    }
+
+    .side-wrapper {
+        flex-direction: row;
+    }
+
+    .side-content {
+        width: auto;
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+    }
+
+    .side-content h5 {
+        display: none;
+    }
+
+    .social-side-container {
+        width: 100%;
+        height: auto;
+        flex-display: row;
+    }
+
+    .solo-squad, .solo-com {
+        width: 5em;
+        margin: 1em;
+    }
+
+    .card-slider-mask {
+        padding-top: 0;
+    }
+
+    .su-card {
+        width: 85vw;
+        min-width: 85vw;
+    }
+
+    #recruits-wrapper {
+        border: none;
+    }
+
+    .squad-modal {
+        width: 96vw;
+    }
 }
