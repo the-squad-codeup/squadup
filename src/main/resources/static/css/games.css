@@ -33,6 +33,7 @@
     margin: auto;
     border: solid #5CFD42 .5vw;
 }
+
 .rainbow {
     animation: colorRotate 20s linear 0s infinite;
 }
