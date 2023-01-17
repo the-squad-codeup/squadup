@@ -265,6 +265,7 @@
 #game-search-button{
     width: 3vw;
     height: 3vw;
+    cursor: pointer;
 }
 .my-games2{
 
