@@ -398,4 +398,8 @@ img.card-img-top {
     .squad-modal {
         width: 96vw;
     }
+
+    #social-wrapper {
+        height: auto;
+    }
 }
