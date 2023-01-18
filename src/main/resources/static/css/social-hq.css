@@ -479,7 +479,7 @@ img.card-img-top {
     }
 
     .social-title {
-        visibility: hidden;
+        display: none;
     }
 
     .side-wrapper {
@@ -519,7 +519,7 @@ img.card-img-top {
 
     #recruits-wrapper {
         border: none;
-        height: 500px;
+        height: 450px;
     }
 
     .squad-modal {
