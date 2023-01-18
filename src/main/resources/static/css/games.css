@@ -350,3 +350,28 @@
 .block {
     display: block;
 }
+
+.filter-words {
+    width: 40%;
+    margin: auto;
+}
+
+@media screen and (max-width: 480px) {
+
+
+    #game-search-input{
+        width: 40vw;
+        height: 3vw;
+        background-color: #333333;
+        color: #5cfd42;
+
+    }
+    #game-search-button{
+        width: 3vw;
+        height: 3vw;
+        cursor: pointer;
+
+        /*duck gif*/
+    }
+
+}
