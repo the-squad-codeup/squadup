@@ -1,17 +1,14 @@
 import {Utils} from "./utils.js"
 $(function () {
-    console.log("Inside social-hq.js");
     let backgroundUrl = `${window.location.protocol}//${window.location.host}/background-image`;
     $(".squad-modal").css("background", `url('${backgroundUrl}') no-repeat center center`);
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////// Recruits Section ///////////////////////////////////////////////////
     const csrfToken = $("meta[name='_csrf']").attr("content");
 
-    console.log("Inside recruits.js");
     async function printUserCards(recruits) {
         recruits = await recruits;
         recruits = recruits.sort((prev, current) => (new Date(prev.dateRecruited)) - (new Date(current.dateRecruited)))
-        console.log(recruits);
         $("#card").html('');
         for (let recruit of recruits) {
             $(`#card`).append(`
@@ -89,7 +86,6 @@ $(function () {
         e.preventDefault();
         if (e.target && e.target.classList.contains("accept-link")) {
             let accept = e.target.parentElement.parentElement.getAttribute("data-recruit-id");
-            console.log(accept);
             const fetchOptions = {
                 method: 'POST',
                 headers: {
@@ -98,13 +94,11 @@ $(function () {
             }
             let results = await fetch(`${Utils.url()}recruits/${accept}/accept`, fetchOptions);
             let data = await results.json();
-            console.log(data);
             e.target.parentElement.parentElement.remove();
         }
 
         if (e.target && e.target.classList.contains("reject-link")) {
             let reject = e.target.parentElement.parentElement.getAttribute("data-recruit-id");
-            console.log(reject);
             const fetchOptions = {
                 method: 'POST',
                 headers: {
@@ -113,7 +107,6 @@ $(function () {
             }
             let results = await fetch(`${Utils.url()}recruits/${reject}/reject`, fetchOptions);
             let data = await results.json();
-            console.log(data);
             e.target.parentElement.parentElement.remove();
         }
     })
@@ -121,7 +114,6 @@ $(function () {
     async function getAllRecruits(){
         let results = await fetch(`${Utils.url()}recruits/all`);
         let data = await results.json();
-        console.log(data);
         return data;
     }
 
@@ -210,9 +202,7 @@ $(function () {
 
     async function createSquad() {
         let invitees = [];
-        console.log($(".add-modal-squad-invitee-wrapper"));
         for(let $invitee of $(".add-modal-squad-invitee-wrapper")) {
-            console.log($invitee)
             invitees.push($invitee.attributes[1].value);
         };
         let squadToCreate = {
@@ -228,9 +218,7 @@ $(function () {
             },
             body: JSON.stringify(squadToCreate)
         };
-        console.log(fetchOptions);
         let addedSquad = await fetch(`${Utils.url()}squads/create/new`, fetchOptions).then(res => res.json());
-        console.log(addedSquad);
         printNewSquad(addedSquad);
     }
 
@@ -246,7 +234,6 @@ $(function () {
 
     async function printSquads(){
         let squads = await getSquads();
-        console.log(squads);
         $("#squads-content").empty();
         for(let squad of squads){
             $("#squads-content").append(`
@@ -275,8 +262,6 @@ $(function () {
 
     async function printPendingSquadInvites() {
         let invites = await getCurrentInvites();
-        console.log("Inside pending invites");
-        console.log(invites);
         for(let invite of invites) {
             $("#pending-squads-content").prepend(`
                 <div data-squad-id="${invite.squad.id}" class="solo-squad">
@@ -289,7 +274,6 @@ $(function () {
 
     async function printComrades(){
         let comrades = await getComrades();
-        console.log(comrades)
         for(let comrade of comrades){
             $("#comrades-content").append(`
                 <div data-comrade-id="${comrade.id}" class="solo-com">
@@ -362,7 +346,6 @@ $(function () {
 
     async function printSquadModalOwner(squadId) {
         let squad = await getSquad(squadId);
-        console.log(squad);
         let squadMemberIds = squad.members.map(member => member.id);
         let squadInvitees = await getCurrentInvitees(squadId);
         let squadInviteIds = squadInvitees.map(invitee => invitee.id);
@@ -470,7 +453,6 @@ $(function () {
 
     async function printSquadModal(squadId) {
         let squad = await getSquad(squadId);
-        console.log(squad);
 
         $(".squad-modal").empty().append(`
             <div hidden id="modal-squad-info" data-squad-id="${squad.id}"></div>
