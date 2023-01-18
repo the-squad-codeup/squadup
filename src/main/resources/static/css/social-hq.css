@@ -554,3 +554,17 @@ img.card-img-top {
 #comrades-call-to-action {
     padding: 1em;
 }
+
+
+#recruits-call-to-action {
+    padding-top: 3em;
+}
+
+#addGameCard {
+    margin-top: 2em;
+}
+
+#addGameCard img {
+    height: 12em;
+    width: 10em;
+}
