@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-    <div th:replace="partials :: headFragment('My Profile')"></div>
+    <div th:replace="partials :: headFragment('User Profile')"></div>
 
     <link rel="stylesheet" th:href="@{/css/profile.css}">
 </head>
@@ -34,6 +34,9 @@
         <div class="my-games">
             <div class="inner-carousel">
                 <div class="track">
+                    <div th:if="${isMyProfile == true}" id="games-call-to-action">
+                        Click <a th:href="@{/games}">here</a> to add games to your profile. This will match you to other members as recruits.
+                    </div>
                     <!--                    games populate here-->
                 </div>
                 <div class="nav">

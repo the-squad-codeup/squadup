@@ -10,18 +10,20 @@ $(async function (){
     async function getUserGames() {
         // let userGames = await fetch(`${Utils.url()}game/user`).then(res => res.json());
         let userGames = currentUser.preferences.games;
-        for(let game of userGames){
-            // $('.my-games').append(`
-            //     <div class="game" style="background-image: url(${game.artwork});">
-            //     </div>
-            // `)
-            $('.track').append(`
-<!--                <div class="card-container">-->
-                    <div class="card rgb" style="background-image: url(${game.artwork});"></div>
-<!--                </div>-->
-             `)
+        if (userGames.length > 0) {
+            $(".track").empty();
+            for (let game of userGames) {
+                // $('.my-games').append(`
+                //     <div class="game" style="background-image: url(${game.artwork});">
+                //     </div>
+                // `)
+                $('.track').append(`
+    <!--                <div class="card-container">-->
+                        <div class="card rgb" style="background-image: url(${game.artwork});"></div>
+    <!--                </div>-->
+                 `)
+            }
         }
-
     }
     getUserGames()
 
