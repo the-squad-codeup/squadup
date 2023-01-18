@@ -1,7 +1,6 @@
 package pro.squadup.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -73,20 +72,13 @@ public class SquadInviteController {
 
     @PostMapping("/invites/{squadId}/accept")
     public Squad acceptSquadInvite(@PathVariable Long squadId) throws JsonProcessingException {
-        ObjectMapper mapper = new ObjectMapper();
-        System.out.println("Inside acceptSquadInvite");
         User currentUser = userDao.findById(Utils.currentUserId()).get();
-        System.out.printf("Current User: %n%s%n", mapper.writeValueAsString(currentUser));
         Squad squad = squadDao.findById(squadId).get();
-        System.out.printf("Squad: %n%s%n", mapper.writeValueAsString(squad));
         if(squadInviteDao.existsBySquadAndRecipient(squad, currentUser)) {
-            System.out.println("Squad invite exists by squad and recipient!");
             SquadInvite invite = squadInviteDao.findBySquadAndRecipient(squad, currentUser);
-            System.out.printf("SquadInvite: %n%s%n", mapper.writeValueAsString(invite));
             Set<User> squadMembers = squad.getMembers();
             squadMembers.add(currentUser);
             squad.setMembers(squadMembers);
-            System.out.printf("Updated squad: %n%s%n", mapper.writeValueAsString(squad));
             squadDao.save(squad);
             squadInviteDao.delete(invite);
         }

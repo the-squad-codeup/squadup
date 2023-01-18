@@ -1,11 +1,6 @@
 package pro.squadup.controllers;
 
-import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.util.JSONPObject;
-import io.netty.handler.codec.json.JsonObjectDecoder;
-import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +8,6 @@ import pro.squadup.models.*;
 import pro.squadup.repositories.*;
 import pro.squadup.utils.Utils;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -143,7 +137,6 @@ public class SquadController {
 
     @GetMapping("/squads/{squadId}/messages")
     public @ResponseBody Set<SquadChatMessage> getAllSquadChatMessages(@PathVariable Long squadId) {
-        System.out.println("Inside getAllSquadChatMessages");
         Squad squad = squadDao.findById(squadId).get();
         return squadChatMessageDao.findAllByChat(squad.getChat());
     }
