@@ -182,7 +182,6 @@
 }
 .nav .prev, .nav .prev2{
     left: -1vw;
-    display: none;
 }
 
 .nav .prev img, .nav .prev2 img{
@@ -495,7 +494,6 @@
     }
     .nav .prev {
         margin-left: -1.5vw;
-        display: none;
     }
     .nav .prev img{
         height: 10vw;
@@ -615,4 +613,8 @@
         width: auto;
         margin: -3.5vw auto;
     }
+}
+
+.hidden {
+    display: none;
 }
