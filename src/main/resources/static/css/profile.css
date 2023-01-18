@@ -4,9 +4,11 @@
     border: solid #5CFD42 .5vw;
     margin: 1vw auto;
 }
+
 #page-wrapper{
     display: flex;
 }
+
 .profile-image{
     height: 15vw;
     width: 15vw;
@@ -43,6 +45,7 @@
     display: flex;
     align-items: center;
 }
+
 .gamertag{
     color: #5CFD42;
     font-size: 1.8vw;
@@ -55,6 +58,7 @@
     align-items: center;
     filter: brightness(75%);
 }
+
 .bio div{
     color: #5CFD42;
     font-size: 1.5vw;
@@ -65,6 +69,7 @@
     width: 40vw;
 
 }
+
 .genres{
     border: solid #5CFD42 0.3vw;
     height: 15vw;
@@ -75,6 +80,7 @@
     display: flex;
     justify-content: center;
 }
+
 .genres h3{
     font-size: 2vw;
     color: #5CFD42;
@@ -91,13 +97,30 @@
     margin-left: .5vw;
     -webkit-text-stroke: 0.1vw #5cfd42;
 }
+
 #genres-wrapper{
-    width: 21.5vw
+    width: 100%;
 }
+
+#genres-wrapper-wrapper::-webkit-scrollbar-thumb{
+    background-image: linear-gradient(180deg, yellowgreen 0%, #5CFD42 99%);
+    border-radius: 100px;
+    width: 9px;
+}
+
+#genres-wrapper-wrapper::-webkit-scrollbar{
+    background-color: black;
+    border-radius: 100px;
+    width: 9px;
+    height: 9px;
+}
+
 #genres-wrapper-wrapper {
-   overflow: scroll;
+   overflow-y: scroll;
     margin-top: 2.5vw;
+    width: 100%;
 }
+
 .favorite-game{
     height: 24vw;
     width: 18vw;
@@ -110,12 +133,14 @@
     border: solid #5CFD42 0.3vw;
     z-index: 4;
 }
+
 #hr{
     width: 102%;
     position: absolute;
     margin-top: 2.2vw;
     border: solid blueviolet 0.15vw;
 }
+
 .my-platforms{
     color: #5CFD42;
     font-size: 2vw;
@@ -123,6 +148,7 @@
     margin-left: 20vw;
     position: absolute;
 }
+
 .icon{
     width: 2vw;
     height: 2vw;
@@ -130,6 +156,7 @@
     margin-right: 0.5vw;
     border: solid #5CFD42 0.2vw;
 }
+
 .preferences{
     font-size: 1.5vw;
     border: 0.3vw solid ;
@@ -146,6 +173,7 @@
 .language{
     padding: 0vw 3vw;
 }
+
 .my-games{
 
     height: 15vw;
@@ -156,6 +184,7 @@
 
     display: flex;
 }
+
 .game{
     border: 0.3vw solid #5cfd42;
     margin-right: 0.5vw;
@@ -175,12 +204,15 @@
     cursor: pointer;
     z-index: 5;
 }
+
 .darken {
     filter: brightness(50%);
 }
+
 .hidden {
     display: none;
 }
+
 #favorite-icon{
     width: 12vw;
     height: 12vw;
@@ -189,6 +221,7 @@
     margin-left: 9.75vw;
     transform: rotate(225deg);
 }
+
 #location-icon{
     width: 3vw;
     margin-top: -0.25vw;
@@ -201,6 +234,7 @@
 .inner-carousel {
     overflow: hidden;
 }
+
 .track {
     display: inline-flex;
     height: 100%;
@@ -229,10 +263,12 @@
     background-color: #000;
     cursor: pointer;
 }
+
 .nav .prev {
     left: -1vw;
     display: none;
 }
+
 .nav .prev img{
     height: 4vw;
     width: 4vw;
@@ -242,13 +278,16 @@
     max-width: none;
     transform: rotate(180deg);
 }
+
 .nav .prev.show {
     display: block;
 }
+
 .nav .next {
     right: -0.443vw;
     /*background-image: url('/public/Icons/next.png');*/
 }
+
 .nav .next img{
     height: 4vw;
     width: 4vw;
@@ -257,6 +296,7 @@
     margin-top: -2vw;
     max-width: none;
 }
+
 .nav .next.hide {
     display: none;
 }
@@ -267,16 +307,19 @@
     /*text-align: center;*/
     animation: glow-text 20s linear 0s infinite;
 }
+
 #addGameCard{
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
 #addGameCard p{
     color: #5CFD42;
     font-size: 2vw;
     margin-top: 1vw;
 }
+
 #addGameCard img{
     margin-top: -2vw;
 }
@@ -553,6 +596,14 @@
     }
     #genres-wrapper{
         width: 24.5vw;
+    }
+
+    #genres-wrapper-wrapper::-webkit-scrollbar-thumb{
+        visibility: hidden;
+    }
+
+    #genres-wrapper-wrapper::-webkit-scrollbar{
+        visibility: hidden;
     }
 }
 

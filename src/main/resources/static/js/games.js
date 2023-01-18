@@ -152,11 +152,14 @@ $(function () {
                     }
                 })
                 .on("click", ".add-game-button", async function() {
+                    let userGames = await fetch(`${Utils.url()}game/user`).then(res => res.json());
+                    if(userGames == 0) {
+                        MyGames.myGamesDiv.find(".track").empty();
+                    }
                     let gameId = $(this).parent().parent().attr("data-game-id");
                     let addedGame = await Fetch.Post.addGame(gameId);
                     let gameIds = [...MyGames.myGamesDiv.find(".card")].map(game => parseInt(game.attributes[1].value));
-
-                    if(!gameIds.includes(parseInt(addedGame.id))){
+                    if (!gameIds.includes(parseInt(addedGame.id))) {
                         await Print.singleMyGame(addedGame, MyGames.myGamesDiv.find(".track"));
                     }
                 })

@@ -80,6 +80,21 @@
     overflow-y: scroll;
 }
 
+#chat-messages-div-wrapper::-webkit-scrollbar-thumb,
+#squad-users-div::-webkit-scrollbar-thumb{
+    background-image: linear-gradient(180deg, yellowgreen 0%, #5CFD42 99%);
+    border-radius: 100px;
+    width: 9px;
+}
+
+#chat-messages-div-wrapper::-webkit-scrollbar,
+#squad-users-div::-webkit-scrollbar{
+    background-color: black;
+    border-radius: 100px;
+    width: 9px;
+    height: 9px;
+}
+
 #chat-messages-div {
     width: 100%;
     padding-top: 60vh;
@@ -107,15 +122,16 @@
     font-size: x-small;
     filter: brightness(60%);
     margin-left: 1em;
+    margin-right: 10px;
 }
 
 .single-message-content {
-    padding-right: 4em;
+    padding-right: calc(4em + 10px);
 }
 
 .message-options {
     position: absolute;
-    right: 0;
+    right: 10px;
     bottom: 0;
     display: flex;
     align-items: center;
@@ -171,6 +187,7 @@
     flex-direction: column;
     align-items: center;
     overflow: hidden;
+    margin-right: 10px;
 }
 
 #squad-users-div-wrapper {
@@ -291,6 +308,17 @@
     #squad-title {
         font-size: x-large;
     }
+
+    #chat-messages-div-wrapper::-webkit-scrollbar-thumb,
+    #squad-users-div::-webkit-scrollbar-thumb{
+        visibility: hidden;
+    }
+
+    #chat-messages-div-wrapper::-webkit-scrollbar,
+    #squad-users-div::-webkit-scrollbar{
+        visibility: hidden;
+    }
+
 }
 
 
