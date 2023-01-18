@@ -654,5 +654,8 @@ $(function () {
             $(this).removeClass("darken");
             $("#upload-squad-picture").addClass("hidden");
         })
+        .on("click", "#addGameCard", function() {
+            window.location.href=`${Utils.url()}games`;
+        })
     ;
 });
