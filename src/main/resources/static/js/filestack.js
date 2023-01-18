@@ -82,6 +82,7 @@ $(async function() {
             onFileUploadFinished: async function(file) {
                 let uploadedPicture = await Fetch.Post.squadPicture(file, FileStack.csrfToken).then(res => res);
                 $('.squad-image').attr('src', `${uploadedPicture.url}`);
+                $(`.solo-squad[data-squad-id='${$("#modal-squad-info").attr("data-squad-id")}']`).find("img").attr('src', `${uploadedPicture.url}`);
             }
         },
         addSquadOptions: {
@@ -111,7 +112,7 @@ $(async function() {
                     FileStack.client.picker(FileStack.userProfileOptions).open();
                 })
                 .on("click", ".squad-image", function() {
-                    if($("#user-details-div").attr("data-is-owner") === "true") {
+                    if($("#user-details-div").attr("data-is-owner") === "true" || $(".squad-image").hasClass("clickable")) {
                         FileStack.client.picker(FileStack.squadOptions).open();
                     }
                 })
