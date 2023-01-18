@@ -196,22 +196,25 @@ $(function () {
 
 async function getUserGames() {
     let userGames = await fetch(`${Utils.url()}game/user`).then(res => res.json());
-    for(let game of userGames){
-        // $('.my-games').append(`
-        //     <div class="game" style="background-image: url(${game.artwork});">
-        //     </div>
-        // `)
-        $('#my-games').find(".track").append(`
-<!--                <div class="card-container">-->
-                    <div class="card" data-game-id="${game.id}" style="background-image: url(${game.artwork});">
-                        <div class="buttons-div d-flex justify-content-between">
-                            <img class="favorite-game-button clickable" src="Icons/favorite.png">
-                            <img class="remove-game-button clickable" src="/Icons/trash.png">
+    if(userGames.length > 0) {
+        $("#my-games").find(".track").empty();
+        for (let game of userGames) {
+            // $('.my-games').append(`
+            //     <div class="game" style="background-image: url(${game.artwork});">
+            //     </div>
+            // `)
+            $('#my-games').find(".track").append(`
+    <!--                <div class="card-container">-->
+                        <div class="card" data-game-id="${game.id}" style="background-image: url(${game.artwork});">
+                            <div class="buttons-div d-flex justify-content-between">
+                                <img class="favorite-game-button clickable" src="Icons/favorite.png">
+                                <img class="remove-game-button clickable" src="/Icons/trash.png">
+                            </div>
                         </div>
-                    </div>
-
-<!--                </div>-->
-             `)
+    
+    <!--                </div>-->
+                 `)
+        }
     }
 
 }
