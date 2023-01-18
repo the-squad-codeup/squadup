@@ -1,13 +1,13 @@
 package pro.squadup.services;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 import pro.squadup.models.*;
 import pro.squadup.repositories.ComradeRepository;
 import pro.squadup.repositories.GenreRepository;
 import pro.squadup.repositories.RecruitRepository;
 import pro.squadup.repositories.UserRepository;
+
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashSet;

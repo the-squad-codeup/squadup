@@ -11,12 +11,10 @@ $(function() {
 
         const csrfToken = $("meta[name='_csrf']").attr("content")
 
-        console.log("Inside comrades.js");
 
         async function printComCards(comrades) {
             comrades = await comrades;
             comrades = comrades.sort((prev, current) => (new Date(prev.dateComraded)) - new Date(current.dateComraded))
-            console.log(comrades);
             $("#card-com").html('');
             for (let comrade of comrades) {
                 $(`#card-com`).append(`
@@ -96,7 +94,6 @@ $(function() {
             e.preventDefault();
             if (e.target && e.target.classList.contains("unfriend-link")) {
                 let unfriend = e.target.parentElement.parentElement.getAttribute("data-comrade-id");
-                console.log(unfriend);
                 const fetchOptions = {
                     method: 'POST',
                     headers: {
@@ -111,7 +108,6 @@ $(function() {
         async function getComrades() {
             let results = await fetch(`${Utils.url()}comrades/all`);
             let data = await results.json();
-            console.log(data);
             return data;
         }
 
@@ -120,12 +116,10 @@ $(function() {
 //    ============================RECRUITS FUNCTION===================================
 //     const csrfTokenRec = $("meta[name='_csrf']").attr("content")
 
-        console.log("Inside recruits.js");
 
         async function printRecCards(recruits) {
             recruits = await recruits;
             recruits = recruits.sort((prev, current) => (new Date(prev.dateRecruited)) - (new Date(current.dateRecruited)))
-            console.log(recruits);
             $("#card-rec").html('');
             for (let recruit of recruits) {
                 $(`#card-rec`).append(`
@@ -204,7 +198,6 @@ $(function() {
             e.preventDefault();
             if (e.target && e.target.classList.contains("squadup-link")) {
                 let accept = e.target.parentElement.parentElement.getAttribute("data-recruit-id");
-                console.log(accept);
                 const fetchOptions = {
                     method: 'POST',
                     headers: {
@@ -213,13 +206,11 @@ $(function() {
                 }
                 let results = await fetch(`${Utils.url()}recruits/${accept}/accept`, fetchOptions);
                 let data = await results.json();
-                console.log(data);
                 e.target.parentElement.parentElement.remove();
             }
 
             if (e.target && e.target.classList.contains("squaddown-link")) {
                 let reject = e.target.parentElement.parentElement.getAttribute("data-recruit-id");
-                console.log(reject);
                 const fetchOptions = {
                     method: 'POST',
                     headers: {
@@ -228,7 +219,6 @@ $(function() {
                 }
                 let results = await fetch(`${Utils.url()}recruits/${reject}/reject`, fetchOptions);
                 let data = await results.json();
-                console.log(data);
                 e.target.parentElement.parentElement.remove();
             }
         })
@@ -236,7 +226,6 @@ $(function() {
         async function getAllRecruits() {
             let results = await fetch(`${Utils.url()}recruits/all`);
             let data = await results.json();
-            console.log(data);
             return data;
         }
 
@@ -244,7 +233,6 @@ $(function() {
     }
 
     window.addEventListener("load", function(e) {
-        console.log("Inside remove class event listener function")
         document.getElementById("nav-games-link").classList.remove("games");
     })
 });
