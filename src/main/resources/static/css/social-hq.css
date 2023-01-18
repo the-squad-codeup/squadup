@@ -8,44 +8,53 @@ body {
     color: #5CFD42;
 }
 /*SOCIAL BUTTONS================*/
-#accept, #reject, .modal-squad-chat-btn, .modal-squad-disband-btn {
+#accept,
+#reject,
+.modal-squad-chat-btn,
+.modal-squad-disband-btn,
+.add-modal-squad-create-btn,
+.modal-squad-invite-accept-btn,
+.modal-squad-invite-reject-btn {
     /*TAKEN FROM FROMS.CSS MAKE IT SIMPLE ONCE CLEAN============*/
-
     border: gray inset 4px;
     color: white;
     background-color: black;
     border-radius: 8px;
-    /*background-image: linear-gradient(180deg, black 0%, #5CFD42 99%);*/
 }
 
-/*#accept {*/
-/*    color: white;*/
-/*}*/
-
-/*#reject {*/
-/*    color: red;*/
-/*}*/
-
-#accept:active, #reject:active,
+#accept:active,
+#reject:active,
 .modal-squad-chat-btn:active,
-.modal-squad-disband-btn:active {
+.modal-squad-disband-btn:active,
+.add-modal-squad-create-btn:active
+.modal-squad-invite-accept-btn:active,
+.modal-squad-invite-reject-btn:active{
     box-shadow: 0 3px white;
     transform: translateY(4px);
 }
 
-.modal-squad-chat-btn, .modal-squad-disband-btn {
+.modal-squad-chat-btn,
+.modal-squad-disband-btn,
+.modal-squad-invite-accept-btn,
+.modal-squad-invite-reject-btn {
     animation: rgb 20s linear 0s infinite;
 }
 
-#accept:hover, .modal-squad-chat-btn:hover {
+#accept:hover,
+.modal-squad-chat-btn:hover,
+.modal-squad-invite-accept-btn:hover,
+.add-modal-squad-create-btn:hover {
     background-color: #5CFD42;
     color: black;
 }
 
-#reject:hover, .modal-squad-disband-btn:hover{
+#reject:hover,
+.modal-squad-disband-btn:hover,
+.modal-squad-invite-reject-btn:hover {
     background-color: #FF0000;
     color: black;
 }
+
 /*--------------------------*/
 
 #social-wrapper {
@@ -394,11 +403,13 @@ img.card-img-top {
     flex: 1;
 }
 
-.modal-squad-btn-wrapper {
+.modal-squad-btn-wrapper, .add-modal-squad-create-btn-wrapper {
     width: 100%;
     display: flex;
     justify-content: center;
     margin-top: 0.5em;
+    align-items: center;
+    column-gap: 20PX;
 }
 
 .modal-squad-invites-wrapper {
