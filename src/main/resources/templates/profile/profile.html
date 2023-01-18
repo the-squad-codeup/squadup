@@ -34,8 +34,10 @@
         <div class="my-games">
             <div class="inner-carousel">
                 <div class="track">
-                    <div th:if="${isMyProfile == true}" id="games-call-to-action">
-                        Click <a th:href="@{/games}">here</a> to add games to your profile. This will match you to other members as recruits.
+                    <div class="call-to-action-wrapper">
+                        <div th:if="${isMyProfile == true}" id="games-call-to-action">
+                            Click <a th:href="@{/games}">here</a> to add games to your profile. This will match you to other members as recruits.
+                        </div>
                     </div>
                     <!--                    games populate here-->
                 </div>

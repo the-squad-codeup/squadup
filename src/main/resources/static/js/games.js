@@ -197,6 +197,7 @@ $(function () {
 async function getUserGames() {
     let userGames = await fetch(`${Utils.url()}game/user`).then(res => res.json());
     if(userGames.length > 0) {
+        $("#my-games").find(".track").empty();
         for (let game of userGames) {
             // $('.my-games').append(`
             //     <div class="game" style="background-image: url(${game.artwork});">
