@@ -1,5 +1,6 @@
 body {
     background-color: black;
+    color: #5CFD42;
 }
 :root {
     --bs-gamergreen: rgba(92, 253, 66, 1);
@@ -94,7 +95,7 @@ button:active {
 
 #page-wrapper, .page-wrapper {
     margin: 72px 0;
-    color: white;
+    color: #5CFD42;
 }
 
 body {
@@ -274,4 +275,5 @@ img {
     display: flex;
     justify-content: center;
     align-items: center;
+    color: #5CFD42;
 }
