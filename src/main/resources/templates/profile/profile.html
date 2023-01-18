@@ -11,8 +11,9 @@
 <div hidden id="profile-backend-info" th:data-is-current-user="${isMyProfile}" th:data-is-comrade="${isComrade}" th:data-is-recruit="${isRecruit}" th:data-user-id="${user.id}"></div>
 <div id="page-wrapper">
     <div class="profile-container rainbow">
-        <div class="profile-image rgb"></div>
-             <img id="upload-profile-picture" th:src="@{/Icons/edit.png}" alt="">
+        <div id="profile-image-container">
+            <div class="profile-image rgb"></div>
+        </div>
         <div class="preferences rgb">
             <img id="location-icon" th:src="@{/Icons/location.png}" alt="">
 <!--            Location -->
@@ -34,10 +35,9 @@
         <div class="my-games">
             <div class="inner-carousel">
                 <div class="track">
-                    <div class="call-to-action-wrapper">
-                        <div th:if="${isMyProfile == true}" id="games-call-to-action">
-                            Click <a th:href="@{/games}">here</a> to add games to your profile. This will match you to other members as recruits.
-                        </div>
+                    <div id="addGameCard" class="card rgb" style="background-color: #333">
+                        <p>Add Game:</p>
+                        <img th:src="@{/Icons/add.png}">
                     </div>
                     <!--                    games populate here-->
                 </div>
