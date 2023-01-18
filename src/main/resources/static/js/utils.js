@@ -3,7 +3,6 @@ export const Utils = {
         return `${window.location.protocol}//${window.location.host}/`;
     },
     dateStringToJSDate(string) {
-        console.log(string);
         let year = string.slice(0, 4);
         let month = string.slice(5, 7);
         let day = string.slice(8, 10);
@@ -12,8 +11,6 @@ export const Utils = {
         let second = string.slice(17, 19);
         let millisecond = string.slice(20, 23);
         let date = new Date(year, month - 1, day, hour, minute, second, millisecond);
-        console.log("Converted string to date. Date: ")
-        console.log(date);
         return date;
     }
 };

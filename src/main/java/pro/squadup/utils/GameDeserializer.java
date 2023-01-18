@@ -2,10 +2,8 @@ package pro.squadup.utils;
 
 
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import pro.squadup.models.*;
 
@@ -79,9 +77,7 @@ public class GameDeserializer extends StdDeserializer<Game> {
     }
 
     // returns year int from Json object
-    private int yearFromNode(JsonNode node) throws JsonProcessingException {
-        ObjectMapper mapper = new ObjectMapper();
-        System.out.println(mapper.writeValueAsString(node));
+    private int yearFromNode(JsonNode node) {
         int year = 0;
         if(node.path("release_dates").get(0) != null && node.path("release_dates").get(0).get("y") != null) {
             year = node.path("release_dates").get(0).get("y").asInt();

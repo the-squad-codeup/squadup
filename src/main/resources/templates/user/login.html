@@ -18,7 +18,7 @@
         <div class="row g-5">
             <div class="col-12 col-lg-5">
 <!--EDIT FROM JH changed from a container to card-log class for design-->
-                <div class="rainbow container rounded-3 li-outer">
+                <div class="rainbow container rounded-3 li-outer colorReset2">
                     <h1 class="login text-center text-light colorReset1">Login</h1>
                     <!--Div that shows user they entered invalid parameters if it receives and error-->
                     <div th:if="${param.error}" class="text-light">
@@ -37,7 +37,7 @@
                     <form class="inner-login text-light rgb bg-dark" th:action="@{/login}" method="POST">
                         <div class="mb-3">
                             <label for="username" class="form-label">Username</label>
-                            <input type="text" class="form-control" id="username" name="username" autocomplete="off" maxlength="32">
+                            <input type="text" class="form-control" id="username" name="username" autocomplete="off" maxlength="38">
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">Password</label>

@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-    <div th:replace="partials :: headFragment('My Profile')"></div>
+    <div th:replace="partials :: headFragment('User Profile')"></div>
 
     <link rel="stylesheet" th:href="@{/css/profile.css}">
 </head>
@@ -11,8 +11,9 @@
 <div hidden id="profile-backend-info" th:data-is-current-user="${isMyProfile}" th:data-is-comrade="${isComrade}" th:data-is-recruit="${isRecruit}" th:data-user-id="${user.id}"></div>
 <div id="page-wrapper">
     <div class="profile-container rainbow">
-        <div class="profile-image rgb"></div>
-             <img id="upload-profile-picture" th:src="@{/Icons/edit.png}" alt="">
+        <div id="profile-image-container">
+            <div class="profile-image rgb"></div>
+        </div>
         <div class="preferences rgb">
             <img id="location-icon" th:src="@{/Icons/location.png}" alt="">
 <!--            Location -->
@@ -34,6 +35,10 @@
         <div class="my-games">
             <div class="inner-carousel">
                 <div class="track">
+                    <div id="addGameCard" class="card rgb" style="background-color: #333">
+                        <p>Add Game:</p>
+                        <img class="clickable" th:src="@{/Icons/add.png}">
+                    </div>
                     <!--                    games populate here-->
                 </div>
                 <div class="nav">

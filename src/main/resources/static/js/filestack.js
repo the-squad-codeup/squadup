@@ -3,21 +3,16 @@
 import { Utils } from "./utils.js";
 
 $(async function() {
-    console.log("Inside filestack.js");
 
     const Fetch = {
         Get: {
             async filestackKey() {
-                console.log("Inside get filestackKey. Key: ");
                 let keys = await fetch(`${Utils.url()}keys`).then(res => res.json());
-                console.log(keys);
                 return keys.filestack_KEY;
             }
         },
         Post: {
             async profilePicture(file) {
-                console.log("inside profilePicture. file: ");
-                console.log(file);
                 let postOptions = {
                     method: 'POST',
                     headers: {
@@ -55,7 +50,6 @@ $(async function() {
 
     const FileStack = {
         async initialize() {
-            console.log("inside initialize");
             this.client = await filestack.init(this.filestackKey);
             Events.initialize();
             },
@@ -71,9 +65,7 @@ $(async function() {
             },
             imageMax: [480, 480],
             onFileUploadFinished: async function(file) {
-                console.log(file);
                 let uploadedPicture = await Fetch.Post.profilePicture(file, FileStack.csrfToken).then(res => res);
-                console.log(uploadedPicture);
                 $('.profile-image').css('background-image', `url("${uploadedPicture.url}")`)
             }
         },
@@ -88,9 +80,7 @@ $(async function() {
             },
             imageMax: [480, 480],
             onFileUploadFinished: async function(file) {
-                console.log(file);
                 let uploadedPicture = await Fetch.Post.squadPicture(file, FileStack.csrfToken).then(res => res);
-                console.log(uploadedPicture);
                 $('.squad-image').attr('src', `${uploadedPicture.url}`);
             }
         },
@@ -105,9 +95,7 @@ $(async function() {
             },
             imageMax: [480, 480],
             onFileUploadFinished: async function(file) {
-                console.log(file);
                 let uploadedPicture = await Fetch.Post.addSquadPicture(file, FileStack.csrfToken).then(res => res);
-                console.log(uploadedPicture);
                 $('.add-modal-squad-img').attr('src', `${uploadedPicture.url}`);
                 $(".add-modal-squad-img").attr("data-squad-img-id", `${uploadedPicture.id}`);
             }

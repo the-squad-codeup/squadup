@@ -4,11 +4,9 @@ $(function() {
 
     const csrfToken = $("meta[name='_csrf']").attr("content")
 
-    console.log("Inside comrades.js");
     async function printUserCards(comrades) {
         comrades = await comrades;
         comrades = comrades.sort((prev, current) => (new Date(prev.dateComraded)) - new Date(current.dateComraded))
-        console.log(comrades);
         $("#card").html('');
         for (let comrade of comrades) {
             $(`#card`).append(`
@@ -87,7 +85,6 @@ $(function() {
         e.preventDefault();
         if (e.target && e.target.classList.contains("unfriend-link")) {
             let unfriend = e.target.parentElement.parentElement.getAttribute("data-comrade-id");
-            console.log(unfriend);
             const fetchOptions = {
                 method: 'POST',
                 headers: {
@@ -102,7 +99,6 @@ $(function() {
     async function getComrades(){
         let results = await fetch(`${Utils.url()}comrades/all`);
         let data = await results.json();
-        console.log(data);
         return data;
     }
 

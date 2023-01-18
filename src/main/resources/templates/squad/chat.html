@@ -15,7 +15,7 @@
 <div id="page-wrapper">
     <div id="squad-chat-wrapper" class="rgb">
         <div id="squad-img-wrapper" class="rgb">
-            <div class="squad-image rgb clickable"></div>
+            <img class="squad-image rgb clickable">
             <img id="upload-squad-picture" class="hidden" th:src="@{/Icons/edit.png}" alt="">
         </div>
         <div id="squad-title-wrapper" class="rgb">
@@ -24,6 +24,21 @@
         <div id="chat-body-wrapper">
             <div id="chat-messages-div-wrapper" class="rgb">
                 <div id="chat-messages-div">
+                    <div class="single-message-wrapper">
+                        <div class="message-sender-img-wrapper">
+                            <img class="message-sender-img soft-hidden" th:src="${squad.squadPicture.url}">
+                        </div>
+                        <div class="single-message-content-wrapper">
+                            <div class="single-message-top-wrapper hidden">
+                                <div class="single-message-username">
+                                    <span th:text="${squad.name}"></span>
+                                </div>
+                            </div>
+                            <div class="single-message-content" contenteditable="false">
+                                Welcome to your squad's chat room! You can chat with other squad members here. Enter your message in the input below.
+                            </div>
+                        </div>
+                    </div>
                     <!-- All chat messages -->
                 </div>
             </div>

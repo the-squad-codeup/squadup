@@ -176,16 +176,21 @@ $(function() {
     //     });
 
         $("#notAUserToggle").mousedown(function() {
-            $(".rainbow").css("animation", "none");
+
             $(".colorReset1").css("animation", "none");
+            $(".colorReset2").css("animation", "none");
+            $(".colorReset2").removeClass("rainbow")
+
             $(".rgb").css("animation", "none");
             $("#loginPasswordSubmit").css("animation", "none");
         });
 
         $("#notAUserToggle").mouseup(function() {
             $("#signupContainer").slideToggle();
-            $(".rainbow").css("animation", "colorRotate 20s linear 0s infinite");
+
             $(".colorReset1").css("animation", "glow-text 20s linear 0s infinite");
+            $(".colorReset2").css("animation", "colorRotate 20s linear 0s infinite");
+
             $(".rgb").css("animation", "rgb 20s linear 0s infinite");
             $("#loginPasswordSubmit").css("animation", "rgb-background 20s linear 0s infinite");
         });
