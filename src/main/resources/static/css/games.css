@@ -32,6 +32,7 @@
     width: 95%;
     margin: auto;
     border: solid #5CFD42 .5vw;
+    border-radius: 10px;
 }
 
 .rainbow {
@@ -243,6 +244,7 @@
     height: 29vw;
     margin: 2vw auto;
     border: 0.3vw;
+    border-radius: 10px;
     display: flex;
     justify-content: center;
 }
@@ -250,12 +252,13 @@
     font-size: 1.25vw;
     position: absolute;
     margin-top: 4vw;
-    width: 66vw;
+    width: 75vw;
     display: flex;
     justify-content: center;
 }
 #search-bar{
     border: solid #5cfd42 0.3vw;
+    border-radius: 10px;
     height: 3.5vw;
     position: absolute;
 }
@@ -264,6 +267,7 @@
     height: 3vw;
     background-color: #333333;
     color: #5cfd42;
+    font-size: 2vw;
 
 }
 #game-search-button{
@@ -379,11 +383,7 @@
         cursor: pointer;
 
     }
-    .filter-words {
-         width: 80vw;
-         margin: auto;
-     }
-    /*duck gif*/
+
     .span1 {
         margin-top: 3vw;
         margin-left: 4vw;
@@ -414,7 +414,7 @@
     }
 
     .filter-words {
-        width: 80vw;
+        width: 90vw;
         margin: auto;
         display: flex;
         justify-content: center;
@@ -424,6 +424,7 @@
         height: 3vw;
         background-color: #333333;
         color: #5cfd42;
+        border: none;
 
     }
     #game-search-button{
@@ -443,14 +444,17 @@
     }
     #search-bar{
         border: solid #5cfd42 0.3vw;
+        border-radius: 10px;
         height: 3.5vw;
         position: absolute;
         display: flex;
+        overflow: hidden;
     }
     #add-games-container p {
         font-size: 1.75vw;
         position: absolute;
         margin-top: 4vw;
+        border-radius: 10px;
     }
     .my-games {
         height: 30vw;
@@ -526,11 +530,13 @@
     }
     #my-favorite-game {
         margin-left: -4vw;
+        border-radius: 10px;
     }
     .games-container {
         width: 95%;
         margin: auto;
         border: solid #5CFD42 0.5vw;
+        border-radius: 10px;
         display: flex;
     }
     .div-card.col-3.m-3 {
@@ -597,6 +603,7 @@
         height: 25vh;
         margin: 2vw auto;
         border: 0.3vw;
+        border-radius: 10px;
         display: flex;
         justify-content: center;
     }
