@@ -3,6 +3,7 @@
     width: 95%;
     border: solid #5CFD42 .5vw;
     margin: 1vw auto;
+    border-radius: 10px;
 }
 
 #page-wrapper{
@@ -32,6 +33,7 @@
     margin-top: 6vw;
     margin-left: 10vw;
     z-index: 3;
+    border-bottom-right-radius: 10px;
 }
 
 .username{
@@ -79,6 +81,7 @@
     position: absolute;
     display: flex;
     justify-content: center;
+    border-radius: 10px;
 }
 
 .genres h3{
@@ -132,6 +135,11 @@
     position: absolute;
     border: solid #5CFD42 0.3vw;
     z-index: 4;
+    border-radius: 10px;
+}
+
+#genres-wrapper-wrapper {
+    border-radius: 10px;
 }
 
 #hr{
@@ -155,6 +163,7 @@
     margin-left: 0.5vw;
     margin-right: 0.5vw;
     border: solid #5CFD42 0.2vw;
+    border-radius: 10px;
 }
 
 .preferences{
@@ -168,6 +177,8 @@
     justify-content: space-evenly;
     position: absolute;
     display: flex;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
 }
 
 .language{
@@ -360,6 +371,8 @@
         width: 95%;
         border: solid #5CFD42 .5vw;
         margin: 1vw auto;
+        border-radius: 10px;
+
     }
 
     .profile-image {
@@ -531,6 +544,7 @@
     margin-left: 62vw;
     display: flex;
     justify-content: center;
+    border-radius: 10px;
 }
 .genres h3 {
     font-size: 5vw;
@@ -572,6 +586,8 @@
     position: absolute;
     z-index: 5;
     display: flex;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
 }
 #location-icon {
     width: auto;
