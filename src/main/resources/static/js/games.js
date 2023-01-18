@@ -213,6 +213,15 @@ async function getUserGames() {
     if(userGames.length > 0) {
         $("#my-games").find(".track").empty();
         setMaxIndex(userGames)
+        if(mobileView.matches){
+            if(userGames.length > 3) {
+                next.classList.remove("hidden");
+            }
+        } else {
+            if(userGames.length > 6) {
+                next.classList.remove("hidden");
+            }
+        }
         for (let game of userGames) {
             // $('.my-games').append(`
             //     <div class="game" style="background-image: url(${game.artwork});">
