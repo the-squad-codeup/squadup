@@ -240,24 +240,24 @@ img.card-img-top {
 .side-wrapper::-webkit-scrollbar-thumb,
 .card-slider-mask::-webkit-scrollbar-thumb,
 .invite-mask::-webkit-scrollbar-thumb,
-.modal-squad-members-mask::-webkit-scrollbar-thumb{
-    background-image: linear-gradient(180deg, red 0%, #5CFD42 99%);
-    /*box-shadow: inset 2px 2px 5px 0 #5CFD42;*/
-    animation: rbg 20s linear 0s infinite;
+.modal-squad-members-mask::-webkit-scrollbar-thumb,
+#chat-messages-div-wrapper::-webkit-scrollbar-thumb
+{
+    background-image: linear-gradient(180deg, yellowgreen 0%, #5CFD42 99%);
     border-radius: 100px;
-    width: 10px;
+    width: 9px;
 }
 
 .su-card-middle::-webkit-scrollbar,
 .side-wrapper::-webkit-scrollbar,
 .modal-squad-members-mask::-webkit-scrollbar,
 .invite-mask::-webkit-scrollbar,
-.card-slider-mask::-webkit-scrollbar {
+.card-slider-mask::-webkit-scrollbar,
+#chat-messages-div-wrapper::-webkit-scrollbar{
     background-color: black;
-    animation: rbg 20s linear 0s infinite;
     border-radius: 100px;
-    width: 10px;
-    height: 10px;
+    width: 9px;
+    height: 9px;
 }
 /*------------------------------*/
 
@@ -533,10 +533,24 @@ img.card-img-top {
     #social-wrapper {
         height: auto;
     }
+
+    .su-card-middle::-webkit-scrollbar,
+    .side-wrapper::-webkit-scrollbar,
+    .modal-squad-members-mask::-webkit-scrollbar,
+    .invite-mask::-webkit-scrollbar,
+    .card-slider-mask::-webkit-scrollbar{
+        visibility: hidden;
+    }
+
+    .su-card-middle::-webkit-scrollbar-thumb,
+    .side-wrapper::-webkit-scrollbar-thumb,
+    .card-slider-mask::-webkit-scrollbar-thumb,
+    .invite-mask::-webkit-scrollbar-thumb,
+    .modal-squad-members-mask::-webkit-scrollbar-thumb{
+        visibility: hidden;
+    }
 }
 
 #comrades-call-to-action {
     padding: 1em;
 }
-
-
