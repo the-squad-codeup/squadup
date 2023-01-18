@@ -32,7 +32,7 @@ body {
 
 .pref {
     /*font-size: 80px;*/
-    color: #fff;
+    /*color: #fff;*/
     /*text-align: center;*/
     animation: glow-text 20s linear 0s infinite;
 }
@@ -44,7 +44,7 @@ body {
 }
 .titlepref {
     /*font-size: 80px;*/
-    color: #fff;
+    /*color: #fff;*/
     /*text-align: center;*/
     animation: glow-text 20s linear 0s infinite;
 
