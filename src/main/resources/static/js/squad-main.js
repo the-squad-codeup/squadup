@@ -1,7 +1,6 @@
 import { Utils } from "./utils.js";
 
 $(function() {
-    console.log("Inside squad-main.js");
 
     const SquadMain = {
         csrfToken: $("meta[name='_csrf']").attr("content"),
@@ -63,13 +62,9 @@ $(function() {
         //     `);
         // },
         async currentInvites() {
-            console.log("Inside currentInvites. currentInvites: ");
             let invitesDiv = $("#squad-invites-div");
             let currentInvites = await Fetch.Get.currentInvites();
-            console.log(currentInvites);
             for(let invite of currentInvites) {
-                console.log("Inside for loop to print each invite. invite:");
-                console.log(invite);
                 invitesDiv.append(`
                     <div data-squad-id="${invite.squad.id}">
                         <h5>${invite.squad.name}</h5>
@@ -94,7 +89,6 @@ $(function() {
                     let squadId = $(this).parent().parent().attr("data-squad-id");
                     let acceptedSquad = await SquadMain.acceptSquadInvite(squadId);
                     $(this).parent().parent().remove();
-                    console.log(acceptedSquad);
                     Print.singleSquad(acceptedSquad);
                 })
                 .on("click", ".disband-squad-button", async function() {

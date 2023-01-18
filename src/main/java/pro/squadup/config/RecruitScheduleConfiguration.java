@@ -14,7 +14,7 @@ public class RecruitScheduleConfiguration {
     @Autowired
     private RecruitMatchingService recruitMatchingService;
 
-    @Scheduled(fixedRateString = "${recruit.matcher.delay.in.milliseconds}")
+    @Scheduled(cron = "0 0 0 * * ?")
     public void runRecruitMatchScheduler() throws JsonProcessingException {
         recruitMatchingService.matchAllRecruits();
     }

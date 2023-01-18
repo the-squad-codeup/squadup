@@ -69,7 +69,6 @@ public class GameController {
             }
         }
         long endTime = System.currentTimeMillis();
-        System.out.println("Time taken for searchGames: " + (endTime - startTime) + "ms.");
         return trimmedGames;
     }
 
@@ -128,18 +127,17 @@ public class GameController {
         return gameToRemove;
     }
 
-    private List<Game> scrapeGamesInfo(List<Game> igdbGames) throws JsonProcessingException {
+    private List<Game> scrapeGamesInfo(List<Game> igdbGames) {
         long startTime = System.currentTimeMillis();
         List<Game> games = new ArrayList<>();
         for(Game game : igdbGames) {
             games.add(scrapeGameInfo(game));
         }
         long endTime = System.currentTimeMillis();
-        System.out.println("scrapeGamesInfo complete in " + (endTime - startTime) + "ms");
         return games;
     }
 
-    private Game scrapeGameInfo(Game game) throws JsonProcessingException {
+    private Game scrapeGameInfo(Game game) {
         // Sets game to existing game in database if it already exists, or creates new game
         if(gameDao.existsByIgdbId(game.getIgdbId())) {
             game = gameDao.findByIgdbId(game.getIgdbId());
@@ -165,7 +163,7 @@ public class GameController {
         game.setGenres(genres);
     }
 
-    private void setGamePlatforms(Game game) throws JsonProcessingException {
+    private void setGamePlatforms(Game game) {
         // Sets game platform based on the platforms in our database
         Set<Platform> platforms = new HashSet<>();
         for (Platform platform : game.getPlatforms()) {

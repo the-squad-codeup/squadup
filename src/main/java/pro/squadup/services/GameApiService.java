@@ -1,7 +1,6 @@
 package pro.squadup.services;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
@@ -14,9 +13,6 @@ import pro.squadup.models.Game;
 import reactor.core.publisher.Mono;
 import reactor.netty.http.client.HttpClient;
 
-import java.lang.reflect.ParameterizedType;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -66,7 +62,6 @@ public class GameApiService {
         // Waiting for async call to resolve to a POJO and return it
         List<Game> games = res.block();
         long endTime = System.currentTimeMillis();
-        System.out.println("Time taken to do api search call: " + (endTime - startTime) + "ms.");
         return games;
     }
 
