@@ -57,7 +57,7 @@
 
 #signupPasswordSubmit{
     margin: auto;
-    width: 12%;
+    width: 90%;
     border-radius: 8px;
     border-style:solid;
     color: white;
@@ -113,8 +113,8 @@
 
     }
 
-    #signupPasswordSubmit{
-        width: 40%;
-    }
+    /*#signupPasswordSubmit{*/
+    /*    width: 40%;*/
+    /*}*/
 
 }
