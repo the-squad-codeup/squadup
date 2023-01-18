@@ -1,5 +1,4 @@
 import { Utils } from "./utils.js";
-
 $(function () {
     const MyGames = {
         initialize() {
@@ -56,8 +55,14 @@ $(function () {
             `);
         },
         async gameResults(data) {
-            let games = MyGames.sortGamesByYear(await data);
+            console.log("inside gameresults")
+            let games = await MyGames.sortGamesByYear(await data);
             MyGames.addGameDiv.empty();
+            console.log(games);
+            console.log(games.length);
+            if(games.length > 4) {
+                next2.classList.add("show");
+            }
             for(let game of games) {
                 this.singleSearchedGame(game, MyGames.addGameDiv);
             }
@@ -140,6 +145,10 @@ $(function () {
         initialize() {
             $(document)
                 .on("click", "#game-search-button", async function() {
+                    $(".search-track").css("transform", "translateX(0vw)");
+                    index2 = 0;
+                    prev2.classList.remove("show");
+                    next2.classList.add("show");
                     loading.classList.add("block");
                     await Print.gameResults(Fetch.Post.backendGameSearch($("#game-search-input").val()), $("#games-div"));
                     loading.classList.remove("block");
@@ -201,6 +210,10 @@ async function getUserGames() {
     let userGames = await fetch(`${Utils.url()}game/user`).then(res => res.json());
     if(userGames.length > 0) {
         $("#my-games").find(".track").empty();
+        if(userGames.length > 4) {
+            next2.classList.add("show");
+            next2.classList.remove("hide");
+        }
         for (let game of userGames) {
             // $('.my-games').append(`
             //     <div class="game" style="background-image: url(${game.artwork});">
@@ -242,7 +255,7 @@ next.addEventListener("click", function (e) {
     index = index + 1;
     prev.classList.add("show");
     track.style.transform = "translateX(" + index * -70 + "vw)";
-    if (track.offsetWidth - index * width < (index -1) * width / 6) {
+    if (track.offsetWidth - (index+1) * width < index * width / 6) {
         next.classList.add("hide");
     }
 });
@@ -259,7 +272,7 @@ next2.addEventListener("click", function (e) {
     index2 = index2 + 1;
     prev2.classList.add("show");
     searchTrack.style.transform = "translateX(" + index2 * -70 + "vw)";
-    if (searchTrack.offsetWidth - index2 * width < (index2 -1) * width / 6) {
+    if (searchTrack.offsetWidth - (index2+1) * width < index2 * width / 6) {
         next2.classList.add("hide");
     }
 });
@@ -276,3 +289,74 @@ const loading = document.querySelector(".load-gif");
 $(window).on("load", function () {
     loading.classList.add("none");
 });
+
+//media query
+let mobileView = window.matchMedia("(max-width: 480px)")
+
+window.addEventListener("resize", function () {
+    width = carousel.offsetWidth;
+});
+next.addEventListener("click", function (e) {
+    e.preventDefault();
+    index += 1;
+    prev.classList.add("show");
+    if(mobileView.matches){
+        track.style.transform = "translateX(" + index * -60 + "vw)";
+        if (track.offsetWidth - (index+1) * width < index * width / 3) {
+            next.classList.add("hide");
+        }
+    }else{
+        track.style.transform = "translateX(" + index * -70 + "vw)";
+        if (track.offsetWidth - (index+1) * width < index * width / 6) {
+            next.classList.add("hide");
+        }
+    }
+});
+prev.addEventListener("click", function () {
+    index = index - 1;
+    next.classList.remove("hide");
+    if (index === 0) {
+        prev.classList.remove("show");
+    }
+    if(mobileView.matches){
+        track.style.transform = "translateX(" + index * -60 + "vw)";
+    }else{
+        track.style.transform = "translateX(" + index * -70 + "vw)";
+    }
+});
+
+
+// carousel 2
+
+window.addEventListener("resize", function () {
+    width = carousel.offsetWidth;
+});
+next2.addEventListener("click", function (e) {
+    e.preventDefault();
+    index2 += 1;
+    prev.classList.add("show");
+    if(mobileView.matches){
+        searchTrack.style.transform = "translateX(" + index2 * -60 + "vw)";
+        if (track.offsetWidth - (index2+1) * width < index2 * width / 3) {
+            next.classList.add("hide");
+        }
+    }else{
+        searchTrack.style.transform = "translateX(" + index2 * -70 + "vw)";
+        if (track.offsetWidth - (index2+1) * width < index2 * width / 6) {
+            next.classList.add("hide");
+        }
+    }
+});
+prev2.addEventListener("click", function () {
+    index2 = index2 - 1;
+    next2.classList.remove("hide");
+    if (index2 === 0) {
+        prev2.classList.remove("show");
+    }
+    if(mobileView.matches){
+        searchTrack.style.transform = "translateX(" + index2 * -60 + "vw)";
+    }else{
+        searchTrack.style.transform = "translateX(" + index2 * -70 + "vw)";
+    }
+});
+
