@@ -9,35 +9,37 @@ $(function () {
     async function printUserCards(recruits) {
         recruits = await recruits;
         recruits = recruits.sort((prev, current) => (new Date(prev.dateRecruited)) - (new Date(current.dateRecruited)))
-        $("#card").html('');
-        for (let recruit of recruits) {
-            $(`#card`).append(`
-                <div class="su-card rgb" data-recruit-id="${recruit.id}">
-                    <div class="su-card-top">
-                        <div class="su-card-col su-card-col-shrink">
-                            <img class="card-img-top clickable" src="${recruit.userTwo.profilePicture.url}" alt="user profile picture">
-                            <h4 class="card-title">${recruit.userTwo.username}</h4>
+        if(recruits.length > 0) {
+            $("#card").html('');
+            for (let recruit of recruits) {
+                $(`#card`).append(`
+                    <div class="su-card rgb" data-recruit-id="${recruit.id}">
+                        <div class="su-card-top">
+                            <div class="su-card-col su-card-col-shrink">
+                                <img class="card-img-top clickable" src="${recruit.userTwo.profilePicture.url}" alt="user profile picture">
+                                <h4 class="card-title">${recruit.userTwo.username}</h4>
+                            </div>
+                            <div class="su-card-col">
+                                <p class="card-text">${recruit.userTwo.preferences.bio}</p>
+                            </div>
                         </div>
-                        <div class="su-card-col">
-                            <p class="card-text">${recruit.userTwo.preferences.bio}</p>
+                        <div class="su-card-middle">
+                            <div class="su-card-games-list">
+                            </div>
                         </div>
-                    </div>
-                    <div class="su-card-middle">
-                        <div class="su-card-games-list">
+                        <div class="su-card-bottom">
+                            <a href="#" id="accept" class="btn btn-outline-success accept-link rgb">Accept</a>
+                            <a href="#" id="reject" class="btn btn-outline-danger reject-link rgb">Reject</a>
                         </div>
-                    </div>
-                    <div class="su-card-bottom">
-                        <a href="#" id="accept" class="btn btn-outline-success accept-link rgb">Accept</a>
-                        <a href="#" id="reject" class="btn btn-outline-danger reject-link rgb">Reject</a>
-                    </div>
-                </div>
-            `);
-            for (let userTwoGame of recruit.userTwo.preferences.games) {
-                $(`#card`).children(`[data-recruit-id="${recruit.id}"]`).find(".su-card-games-list").append(`
-                    <div class="su-card-game">
-                        <img class="su-card-game-image" src="${userTwoGame.artwork}" alt="${userTwoGame.title} icon">
                     </div>
                 `);
+                    for (let userTwoGame of recruit.userTwo.preferences.games) {
+                        $(`#card`).children(`[data-recruit-id="${recruit.id}"]`).find(".su-card-games-list").append(`
+                        <div class="su-card-game">
+                            <img class="su-card-game-image" src="${userTwoGame.artwork}" alt="${userTwoGame.title} icon">
+                        </div>
+                    `);
+                }
             }
         }
     }
@@ -274,13 +276,16 @@ $(function () {
 
     async function printComrades(){
         let comrades = await getComrades();
-        for(let comrade of comrades){
-            $("#comrades-content").append(`
-                <div data-comrade-id="${comrade.id}" class="solo-com">
-                    <h5>${comrade.userTwo.username}</h5>
-                    <img class="solo-com-img rgb clickable" src="${comrade.userTwo.profilePicture.url}">
-                </div>
-            `);
+        if(comrades.length > 0) {
+            $("#comrades-content").empty();
+            for (let comrade of comrades) {
+                $("#comrades-content").append(`
+                    <div data-comrade-id="${comrade.id}" class="solo-com">
+                        <h5>${comrade.userTwo.username}</h5>
+                        <img class="solo-com-img rgb clickable" src="${comrade.userTwo.profilePicture.url}">
+                    </div>
+                `);
+            }
         }
     }
 
@@ -648,6 +653,9 @@ $(function () {
         .on("mouseleave", ".editable-squad-img", function() {
             $(this).removeClass("darken");
             $("#upload-squad-picture").addClass("hidden");
+        })
+        .on("click", "#addGameCard", function() {
+            window.location.href=`${Utils.url()}games`;
         })
     ;
 });
