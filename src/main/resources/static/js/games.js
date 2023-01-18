@@ -1,10 +1,8 @@
 import { Utils } from "./utils.js";
 
 $(function () {
-    console.log("Inside games.js");
     const MyGames = {
         initialize() {
-            console.log("inside Games.initialize()");
             Events.initialize();
             Print.myFavoriteGame(this.myFavoriteGameDiv);
             // Print.myGames();
@@ -24,9 +22,7 @@ $(function () {
 
     const Print = {
         async myFavoriteGame() {
-            console.log("Inside favorite games");
             let favoriteGame = await Fetch.Get.myFavoriteGame().then(res => res);
-            console.log(favoriteGame);
             if(favoriteGame.id != null) {
                 MyGames.myFavoriteGameDiv.empty().append(`
                     <div class="div-card col-3 m-3" data-game-id="${favoriteGame.id}">
@@ -47,17 +43,6 @@ $(function () {
                 `);
             }
         },
-        // async myGames() {
-        //     let userGames = await Fetch.Get.myGames().then(res => res);
-        //     console.log("Inside Print.myGames(). userGames: ");
-        //     console.log(userGames);
-        //     MyGames.myGamesDiv.empty();
-        //     for(let game of userGames) {
-        //         this.singleMyGame(game, MyGames.myGamesDiv.find(".track"));
-        //     }
-        // },
-
-
 
         async singleMyGame(data, div) {
             let game = await data;
@@ -82,7 +67,7 @@ $(function () {
             div.prepend(`
                 <div class="card" data-game-id="${game.id}" style="background-image: url(${game.artwork});">
                         <div class="buttons-div d-flex justify-content-between">
-                            <img class="add-game-button" src="/Icons/add.png">
+                            <img class="add-game-button clickable" src="/Icons/add.png">
                         </div>
                     </div>
             `);
@@ -98,21 +83,15 @@ $(function () {
             },
             async myGames() {
                 let data = await fetch(`${MyGames.baseUrl}game/user`).then(res => res.json());
-                console.log("Inside Fetch.Get.myGames(). Data returned:");
-                console.log(data);
                 return data;
             },
             async myFavoriteGame() {
                 let data = await fetch(`${MyGames.baseUrl}game/favorite`).then(res => res.json());
-                console.log("Inside Fetch.Get.myFavoriteGame(). Data returned:");
-                console.log(data);
                 return data;
             }
         },
         Post: {
             async backendGameSearch(query) {
-                console.log("Inside backendGameSearch. query: ");
-                console.log(query);
                 const fetchOptions = {
                     method: 'POST',
                     headers: {
@@ -122,12 +101,9 @@ $(function () {
                 }
                 let results = await fetch(`${MyGames.baseUrl}game/search`, fetchOptions);
                 let data = await results.json();
-                console.log(data);
                 return data;
             },
             async addGame(id) {
-                console.log("inside addGame. Id: ");
-                console.log(id);
                 const fetchOptions = {
                     method: 'POST',
                     headers: {
@@ -135,12 +111,9 @@ $(function () {
                     }
                 };
                 let data = await fetch(`${MyGames.baseUrl}game/${id}/add`, fetchOptions).then(res => res.json());
-                console.log(data);
                 return data;
             },
             async removeGame(id) {
-                console.log("inside removeGame. Id: ");
-                console.log(id);
                 const fetchOptions = {
                     method: 'POST',
                     headers: {
@@ -148,12 +121,9 @@ $(function () {
                     }
                 };
                 let data = await fetch(`${MyGames.baseUrl}game/${id}/remove`, fetchOptions).then(res => res.json());
-                console.log(data);
                 return data;
             },
             async favoriteGame(id) {
-                console.log("inside favoriteGame. Id: ");
-                console.log(id);
                 const fetchOptions = {
                     method: 'POST',
                     headers: {
@@ -161,7 +131,6 @@ $(function () {
                     }
                 };
                 let data = await fetch(`${MyGames.baseUrl}game/${id}/favorite`, fetchOptions).then(res => res.json());
-                console.log(data);
                 return data;
             }
         }
@@ -169,11 +138,8 @@ $(function () {
 
     const Events = {
         initialize() {
-            console.log("Inside Events.initialize()");
             $(document)
                 .on("click", "#game-search-button", async function() {
-                    console.log("button has been clicked. Value in input: ");
-                    console.log($("#game-search-input").val());
                     loading.classList.add("block");
                     await Print.gameResults(Fetch.Post.backendGameSearch($("#game-search-input").val()), $("#games-div"));
                     loading.classList.remove("block");
@@ -186,7 +152,6 @@ $(function () {
                     }
                 })
                 .on("click", ".add-game-button", async function() {
-                    console.log("Add Game Button clicked");
                     let gameId = $(this).parent().parent().attr("data-game-id");
                     let addedGame = await Fetch.Post.addGame(gameId);
                     let gameIds = [...MyGames.myGamesDiv.find(".card")].map(game => parseInt(game.attributes[1].value));
@@ -196,13 +161,11 @@ $(function () {
                     }
                 })
                 .on("click", ".remove-game-button", async function() {
-                    console.log("Remove Game Button clicked");
                     await Fetch.Post.removeGame($(this).parent().parent().attr("data-game-id"));
                     // await Print.myGames();
                     $(this).parent().parent().remove();
                 })
                 .on("click", ".favorite-game-button", async function() {
-                    console.log("Favorite Game Button clicked");
                     await Fetch.Post.favoriteGame($(this).parent().parent().attr("data-game-id"));
                     await Print.myFavoriteGame(MyGames.myFavoriteGameDiv);
                 })
@@ -233,8 +196,6 @@ $(function () {
 
 async function getUserGames() {
     let userGames = await fetch(`${Utils.url()}game/user`).then(res => res.json());
-    console.log("Array of user's games")
-    console.log(userGames)
     for(let game of userGames){
         // $('.my-games').append(`
         //     <div class="game" style="background-image: url(${game.artwork});">
@@ -244,8 +205,8 @@ async function getUserGames() {
 <!--                <div class="card-container">-->
                     <div class="card" data-game-id="${game.id}" style="background-image: url(${game.artwork});">
                         <div class="buttons-div d-flex justify-content-between">
-                            <img class="favorite-game-button" src="Icons/favorite.png">
-                            <img class="remove-game-button" src="/Icons/trash.png">
+                            <img class="favorite-game-button clickable" src="Icons/favorite.png">
+                            <img class="remove-game-button clickable" src="/Icons/trash.png">
                         </div>
                     </div>
 
@@ -271,7 +232,6 @@ window.addEventListener("resize", function () {
     width = carousel.offsetWidth;
 });
 next.addEventListener("click", function (e) {
-    console.log("inside event listener for next button click");
     e.preventDefault();
     index = index + 1;
     prev.classList.add("show");
@@ -289,7 +249,6 @@ prev.addEventListener("click", function () {
     track.style.transform = "translateX(" + index * -70 + "vw)";
 });
 next2.addEventListener("click", function (e) {
-    console.log("inside event listener for next button click");
     e.preventDefault();
     index2 = index2 + 1;
     prev2.classList.add("show");

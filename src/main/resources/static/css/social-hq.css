@@ -7,10 +7,51 @@
 body {
     color: #5CFD42;
 }
+/*SOCIAL BUTTONS================*/
+#accept, #reject, .modal-squad-chat-btn, .modal-squad-disband-btn {
+    /*TAKEN FROM FROMS.CSS MAKE IT SIMPLE ONCE CLEAN============*/
+
+    border: gray inset 4px;
+    color: white;
+    background-color: black;
+    border-radius: 8px;
+    /*background-image: linear-gradient(180deg, black 0%, #5CFD42 99%);*/
+}
+
+/*#accept {*/
+/*    color: white;*/
+/*}*/
+
+/*#reject {*/
+/*    color: red;*/
+/*}*/
+
+#accept:active, #reject:active,
+.modal-squad-chat-btn:active,
+.modal-squad-disband-btn:active {
+    box-shadow: 0 3px white;
+    transform: translateY(4px);
+}
+
+.modal-squad-chat-btn, .modal-squad-disband-btn {
+    animation: rgb 20s linear 0s infinite;
+}
+
+#accept:hover, .modal-squad-chat-btn:hover {
+    background-color: #5CFD42;
+    color: black;
+}
+
+#reject:hover, .modal-squad-disband-btn:hover{
+    background-color: #FF0000;
+    color: black;
+}
+/*--------------------------*/
 
 #social-wrapper {
     width: 96vw;
     height: calc(96vh - 120px);
+    min-height: 575px;
     border: solid #5CFD42 .36vw;
     position: relative;
     display: flex;
@@ -39,25 +80,28 @@ body {
 /*    top: 5em;*/
 /*}*/
 
-/*.arrow-left, .arrow-left-img{*/
-/*    height: 4vw;*/
-/*    width: 4vw;*/
-/*    position: absolute;*/
-/*    margin-left: -2vw;*/
-/*    margin-top: -2vw;*/
-/*    max-width: none;*/
-/*    transform: rotate(180deg);*/
-/*}*/
+.arrow-left{
+    display: flex;
+    height: 4vw;
+    width: 4vw;
+    position: absolute;
+    margin-left: -2vw;
+    margin-top: -2vw;
+    max-width: none;
+    background: transparent;
+    transform: rotate(180deg);
+}
 
-/*.arrow-right, .arrow-right-img{*/
-/*    right: 0;*/
-/*    height: 4vw;*/
-/*    width: 4vw;*/
-/*    position: absolute;*/
-/*    margin-left: -2vw;*/
-/*    margin-top: -2vw;*/
-/*    max-width: none;*/
-/*}*/
+.arrow-right{
+    display: flex;
+    right: 0;
+    height: 4vw;
+    width: 4vw;
+    position: absolute;
+    margin-left: -2vw;
+    margin-top: -2vw;
+    max-width: none;
+}
 
         /*  STYLING FOR CARDS AND CARD CONTENTS  */
 
@@ -82,7 +126,7 @@ body {
     width: 450px;
     display: flex;
     flex-direction: column;
-    border: 3px ridge #5CFD42;
+    border: 5px outset #5CFD42;
     border-radius: 3px;
     padding: 15px;
 }
@@ -95,13 +139,11 @@ p.card-text, h4{
     display: flex;
 }
 
-/*  BELOW IS WHERE IT MAKES THE GAMES INSIDE THE CARDS SCROLLABLE!!: */
 .su-card-middle {
     flex: 1 0 auto;
     overflow: hidden;
     overflow-x: scroll;
 }
-/*    ^^^^^^^^^^^^     */
 
 .su-card-games-list {
     display: flex;
@@ -124,6 +166,7 @@ p.card-text, h4{
     align-items: center;
     justify-content: center;
     column-gap: 20PX;
+    margin-top: 4vh;
 }
 
 img.card-img-top {
@@ -156,10 +199,10 @@ img.card-img-top {
 }
 
 .social-side-container {
-    min-width: 12em;
+    min-width: 10em;
     height: 100%;
     overflow: hidden;
-    width: 12em;
+    width: 10em;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -171,10 +214,13 @@ img.card-img-top {
     border-radius: 50%;
     background-position: center;
     background-size: cover;
+    width: 7em;
 }
 
 .solo-squad, .solo-com {
     width: 100%;
+    margin-bottom: 2vh;
+    margin-top: 4vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -185,14 +231,30 @@ img.card-img-top {
     display: flex;
     flex-direction: column;
     overflow-y: scroll;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+    /*-ms-overflow-style: none;*/
+    /*scrollbar-width: none;*/
+}
+/*SCROLLBAR EDITS============*/
+.su-card-middle::-webkit-scrollbar-thumb,
+.side-wrapper::-webkit-scrollbar-thumb,
+.card-slider-mask::-webkit-scrollbar-thumb,
+.invite-mask::-webkit-scrollbar-thumb,
+.modal-squad-members-mask::-webkit-scrollbar-thumb{
+    background-image: linear-gradient(180deg, black 0%, #5CFD42 99%);
+    box-shadow: inset 2px 2px 5px 0 #5CFD42;
+    border-radius: 100px;
+    /*display: none;*/
 }
 
-.side-wrapper::-webkit-scrollbar{
-    display: none;
+.su-card-middle::-webkit-scrollbar,
+.side-wrapper::-webkit-scrollbar,
+.modal-squad-members-mask::-webkit-scrollbar,
+.invite-mask::-webkit-scrollbar,
+.card-slider-mask::-webkit-scrollbar {
+    background-color: black;
+    border-radius: 100px;
 }
-
+/*------------------------------*/
 
 .side-content {
     width: 100%;
@@ -203,12 +265,15 @@ img.card-img-top {
     flex-direction: column;
     align-items: center;
     position: absolute;
-    top: 50%;
+    top: 120px;
     left: 50%;
     width: 36em;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, 0);
     z-index: 12;
-    border-radius: 2px;
+    border-radius: 16px;
+    padding: 2vh;
+    border: 1px solid;
+
 }
 
 .add-modal-title {
@@ -232,8 +297,20 @@ img.card-img-top {
     margin: 0 0.5em;
 }
 
-.add-modal-squad-img {
+.add-modal-squad-img-wrapper>div, .modal-squad-img-wrapper>div {
+    margin-left: 1em;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 6em;
+    height: 6em;
+}
+
+.add-modal-squad-img, .modal-squad-img {
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 .modal-user-img {
@@ -250,12 +327,16 @@ img.card-img-top {
     justify-content: center;
     width: 100%;
     margin-top: 0.5em;
+    border: outset 5px;
+    border-radius: 10px;
+    animation: rgb 20s linear 0s infinite;
 }
 
 .invite-title {
     display: flex;
     justify-content: center;
     font-size: x-large;
+    text-decoration: underline;
 }
 
 .invite-mask {
@@ -292,6 +373,10 @@ img.card-img-top {
 
 .hidden {
     display: none;
+}
+
+.darken {
+    filter: brightness(50%);
 }
 
 .modal-title {
@@ -336,9 +421,6 @@ img.card-img-top {
 }
 
 .modal-squad-img-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     flex: 1;
 }
 
@@ -346,3 +428,102 @@ img.card-img-top {
     margin-right: auto;
     width: 6em;
 }
+
+@keyframes rgb {
+    from {
+        border-color: #ff0000;
+    }
+    12.5% {
+        /*border-color: #0099ff;*/
+        border-color: #ff8000;
+    }
+    25% {
+        /*border-color: #0099ff;*/
+        border-color: #ffea00;
+    }
+    37.5% {
+        border-color: #37ff00;
+    }
+    50% {
+        border-color: #00fff7;
+    }
+    65.5% {
+        border-color: #0077ff;
+    }
+    75% {
+        border-color: #8251ff;
+    }
+    87.5% {
+        border-color: #e600ff;
+    }
+    100% {
+        border-color: #ff0000;
+    }
+}
+
+#upload-squad-picture {
+    z-index: 5;
+    pointer-events: none;
+    width: 4em;
+    height: 4em;
+}
+
+@media only screen and (max-width: 600px) {
+    #social-wrapper {
+        flex-direction: column;
+    }
+
+    .social-title {
+        visibility: hidden;
+    }
+
+    .side-wrapper {
+        flex-direction: row;
+    }
+
+    .side-content {
+        width: auto;
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+    }
+
+    .side-content h5 {
+        display: none;
+    }
+
+    .social-side-container {
+        width: 100%;
+        height: 9em;
+        flex-display: row;
+    }
+
+    .solo-squad, .solo-com {
+        width: 5em;
+        margin: 1em;
+    }
+
+    .card-slider-mask {
+        padding-top: 0;
+    }
+
+    .su-card {
+        width: 85vw;
+        min-width: 85vw;
+    }
+
+    #recruits-wrapper {
+        border: none;
+        height: 500px;
+    }
+
+    .squad-modal {
+        width: 96vw;
+    }
+
+    #social-wrapper {
+        height: auto;
+    }
+}
+
+

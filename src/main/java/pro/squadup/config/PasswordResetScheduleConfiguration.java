@@ -25,7 +25,6 @@ public class PasswordResetScheduleConfiguration {
 
         // Method gets all PasswordReset objects from table and deletes all that are expired
 
-        System.out.println("Scheduled event. Clearing password reset tokens");
         List<PasswordReset> pwTokens = passwordResetDao.findAll();
         List<PasswordReset> pwTokensToDelete = new ArrayList<>();
         for(PasswordReset pwToken : pwTokens) {

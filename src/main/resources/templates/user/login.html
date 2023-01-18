@@ -4,6 +4,7 @@
 <head>
     <div th:replace="partials :: headFragment('Login')"></div>
     <link rel="stylesheet" th:href="@{/css/forms.css}">
+    <link rel="stylesheet" th:href="@{/css/login.css}">
 </head>
 <body>
 
@@ -17,8 +18,8 @@
         <div class="row g-5">
             <div class="col-12 col-lg-5">
 <!--EDIT FROM JH changed from a container to card-log class for design-->
-                <div class="card-log container rounded-3 p-5">
-                    <h1 class="text-center text-light">Login</h1>
+                <div class="rainbow container rounded-3 li-outer colorReset2">
+                    <h1 class="login text-center text-light colorReset1">Login</h1>
                     <!--Div that shows user they entered invalid parameters if it receives and error-->
                     <div th:if="${param.error}" class="text-light">
                         Invalid Username and Password.
@@ -33,10 +34,10 @@
                     </div>
 
                     <!--Login Form-->
-                    <form class="form-log text-light" th:action="@{/login}" method="POST">
+                    <form class="inner-login text-light rgb bg-dark" th:action="@{/login}" method="POST">
                         <div class="mb-3">
                             <label for="username" class="form-label">Username</label>
-                            <input type="text" class="form-control" id="username" name="username" autocomplete="off">
+                            <input type="text" class="form-control" id="username" name="username" autocomplete="off" maxlength="38">
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
@@ -44,19 +45,22 @@
                         </div>
                         <button id="loginPasswordSubmit" type="submit">Login</button>
                     </form>
-                    <p id="notAUserToggle" class="text-light mt-5" style="cursor: pointer;">
-                        Not a user? Click here to signup
-                    </p>
-                    <p id="forgot-password-link" class="text-light mt-5" style="cursor: pointer;">
-                        Forgot your password? Click here to reset password.
-                    </p>
+                    <div id="log-subtext">
+                        <p id="notAUserToggle" class="text-light mt-3" style="cursor: pointer;">
+                            Not a user? Signup here
+                        </p>
+                        <p id="forgot-password-link" class="text-light mt-3" style="cursor: pointer;">
+                            Forgot your password?
+                        </p>
+                    </div>
+
                 </div>
             </div>
             <div class="col-12 col-lg-7">
-                <div id="signupContainer" class="card-sign container rounded-3 p-5" style="display: none;">
-                    <h1 class="text-center text-light">Signup</h1>
+                <div id="signupContainer" class="li-outer container rounded-3 rainbow" style="display: none;">
+                    <h1 class="login text-center text-light">Signup</h1>
 
-                    <form class="form-sign text-light" th:action="@{/signup}" method="POST" th:object="${user}">
+                    <form class=" inner-login text-light rgb bg-dark" th:action="@{/signup}" method="POST" th:object="${user}">
                         <div class="mb-3">
                             <label for="signupEmailAddress" class="form-label">Email Address</label>
                             <input type="email" class="form-control" id="signupEmailAddress" th:field="*{email}" autocomplete="off">
@@ -79,7 +83,7 @@
                             <input type="password" class="form-control" id="signupConfirmPassword">
                             <div id="passwordsMustMatch" class="form-text d-none" style="color: #F00;">Passwords must match</div>
                         </div>
-                        <button id="signupPasswordSubmit" type="submit" disabled>Signup</button>
+                        <button id="signUpButton" type="submit" disabled>Signup</button>
                     </form>
 
                 </div>

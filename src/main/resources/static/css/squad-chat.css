@@ -8,6 +8,7 @@
     width: 96vw;
     height: calc(96vh - 100px);
     border: solid #5CFD42 4px;
+    border-radius: 4em 0 0 0;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -16,11 +17,16 @@
 
 #squad-img-wrapper {
     position: absolute;
-    left: 0.5em;
-    top: 4.5em;
+    left: -4px;
+    top: -4px;
     width: 8em;
     height: 8em;
     z-index: 100;
+    border: solid 4px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .squad-image {
@@ -28,7 +34,11 @@
     height: 100%;
     background-position: center;
     background-size: cover;
-    background-image: url("https://cdn.filestackcontent.com/dynXYf9AS26ImuqTgUPj");
+    border: 4px;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 .darken {
@@ -36,12 +46,8 @@
 }
 
 #upload-squad-picture {
-    position: absolute;
-    left: 4em;
-    top: 4em;
-    width: 4em;
-    height: 4em;
     pointer-events: none;
+    z-index: 5;
 }
 
 #squad-title-wrapper {
@@ -118,8 +124,9 @@
 
 .message-edit-button-wrapper {
     position: absolute;
-    right: 0;
+    right: 1em;
     bottom: 0;
+    color: #5CFD42;
 }
 
 .was-edited {
@@ -187,7 +194,7 @@
     width: 100%;
     padding: .36em 0;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
 }
 
@@ -253,7 +260,38 @@
     }
 }
 
+@media only screen and (max-width: 600px) {
+    .squad-member-name {
+        display: none;
+    }
 
+    #current-users-wrapper h5 {
+        display: none;
+    }
+
+    #chat-sidebar-wrapper {
+        width: 4em;
+        min-width: 4em;
+    }
+
+    #squad-img-wrapper {
+        width: 5em;
+        height: 5em;
+    }
+
+    #squad-chat-wrapper {
+        border-radius: 2.5em 0 0 0;
+    }
+
+    #chat-button-container {
+        width: calc(4em + 2px);
+        min-width: calc(4em + 2px);
+    }
+
+    #squad-title {
+        font-size: x-large;
+    }
+}
 
 
 

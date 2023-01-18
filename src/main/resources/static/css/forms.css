@@ -105,7 +105,7 @@ textarea {
     border-color: var(--bs-gamergreen) !important;
 }
 
-.form-log, .form-sign, .form-signtwo{
+.form-log, .form-sign{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -188,7 +188,7 @@ textarea {
 
 
 .rgb-background {
-    animation: rgb 20s linear 0s infinite;
+    animation: rgb-background 20s linear 0s infinite;
 }
 
 @keyframes rgb-background {

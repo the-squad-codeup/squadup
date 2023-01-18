@@ -7,16 +7,9 @@ $(async function (){
     const isRecruit = $backendDiv.attr("data-is-recruit") === "true";
     const currentUser = await fetch(`${Utils.url()}user/${currentUserId}/info`).then(res => res.json());
 
-    console.log(`User profile belongs to: ${currentUser.username}. Their info is:`);
-    console.log(currentUser);
-    console.log(`This is my profile: ${isMyProfile}`);
-    console.log(`This is a Comrade: ${isComrade}`);
-    console.log(`This is a Recruit: ${isRecruit}`);
     async function getUserGames() {
         // let userGames = await fetch(`${Utils.url()}game/user`).then(res => res.json());
         let userGames = currentUser.preferences.games;
-        console.log("Array of user's games")
-        console.log(userGames)
         for(let game of userGames){
             // $('.my-games').append(`
             //     <div class="game" style="background-image: url(${game.artwork});">
@@ -36,8 +29,6 @@ $(async function (){
     async function getUserFavorite() {
         // let favoriteGame = await fetch(`${Utils.url()}game/favorite`).then(res => res.json());
         let favoriteGame = currentUser.preferences.favoriteGame;
-        console.log("favorite game:")
-        console.log(favoriteGame)
         if (favoriteGame.id !== null) {
             $('#page-wrapper').append(`
                 <div class="favorite-game rgb" style="background-image: url(${favoriteGame.artwork});">
@@ -94,13 +85,8 @@ $(async function (){
             </div>
         `);
 
-        console.log("Printing gamertag.");
-        console.log(`isMyProfile: ${isMyProfile}`);
-        console.log(`isComrade: ${isComrade}`);
-        console.log(`isRecruit: ${isRecruit}`);
         // Gamertag
         if(isMyProfile || isComrade) {
-            console.log("Why am I inside here?");
             $('.info-container').append(`
                 <div class="gamertag">
                        ${userInfo.preferences.gamertag}
@@ -150,8 +136,6 @@ $(async function (){
 
 
 
-        console.log("user info:")
-        console.log(userInfo)
     }
     getUserInfo()
 

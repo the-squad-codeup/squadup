@@ -14,7 +14,11 @@
 
     <title>Profile Preferences</title>
 
-    <h1 class="text-center pt-5 my-5 outlined pref">Let's fill out your preferences</h1>
+<!--    <h1 class="text-center pt-5 my-5 outlined pref">Let's fill out your preferences</h1>-->
+    <div class="titulo">
+        <span class="text-center titlepref">Let's fill out your preferences</span>
+    </div>
+
     <div hidden th:text="${preferences.id}" id="hidden-preferences-id"></div>
     <div class="container bg-dark rounded-3 p-5 rainbow"><!--the dark gray bubble area -->
 <!--        <div>-->
@@ -119,9 +123,9 @@
 
 <!--Gamertag-->
         <p>
-            <label for="gamertag">Enter your gamertag:</label>
+            <label for="gamertag">Enter your Discord Username:</label>
             <br>
-            <textarea type="text" class="form-control" id="gamertag" name="gamertag" rows="1"></textarea>
+            <textarea type="text" class="form-control" id="gamertag" name="gamertag" rows="1" maxlength="38" placeholder="DiscordUsername#1234"></textarea>
             <br>
         </p>
 <!--end of Gamertag-->

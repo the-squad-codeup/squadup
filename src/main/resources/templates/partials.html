@@ -28,7 +28,7 @@
 <body>
 
 <!--Sitebar Fragment-->
-<nav id="site-bar" th:fragment="siteBar" class="navbar navbar-expand-lg navbar-dark fixed-top rainbow">
+<nav id="site-bar" th:fragment="siteBar" class="navbar navbar-expand-lg navbar-dark fixed-top rainbow colorReset2">
     <div class="container-fluid nav-edits rgb">
         <!-- Links on Left -->
         <div class="navbar-collapse collapse w-100 order-1 order-lg-0 collapse-portion">
@@ -37,25 +37,13 @@
                     <a id="nav-hq-link" class="nav-link social-hq" th:href="@{/hq}">Social HQ</a>
                 </li>
                 <li sec:authorize="isAuthenticated()" class="nav-item">
-                    <a id="nav-home-link" class="nav-link dashboard" th:href="@{/dashboard}">Dashboard</a>
-                </li>
-                <li sec:authorize="isAuthenticated()" class="nav-item">
-                    <a id="nav-recruits-link" class="nav-link recruits" th:href="@{/recruits}">Recruits</a>
-                </li>
-                <li sec:authorize="isAuthenticated()" class="nav-item">
-                    <a id="nav-comrades-link" class="nav-link comrades" th:href="@{/comrades}">Comrades</a>
-                </li>
-                <li sec:authorize="isAuthenticated()" class="nav-item">
-                    <a id="nav-squads-link" class="nav-link squads" th:href="@{/squads}">Squads</a>
-                </li>
-                <li sec:authorize="isAuthenticated()" class="nav-item">
                     <a id="nav-games-link" class="nav-link games" th:href="@{/games}">Games</a>
                 </li>
             </ul>
         </div>
         <!-- Center Name Link -->
         <div class="nav-area order-0">
-            <a class="navbar-brand glow-text" th:href="@{/}">SquadUp</a>
+            <a class="navbar-brand glow-text colorReset1" th:href="@{/}">SquadUp</a>
             <button id="nav-but" class="navbar-toggler me-2" type="button" data-bs-toggle="collapse" data-bs-target=".collapse-portion">
 <!--                <span class="navbar-toggler-icon"></span>-->
                 <img th:src="@{/squadup-hamburger.png}" style="max-height: 1.75em; max-width: 1.75em;">
@@ -85,7 +73,7 @@
         </div>
     </div>
 </nav>
-<footer id="footer" th:fragment="footer" class="nav navbar-expand-lg navbar-dark bg-dark fixed-bottom d-flex justify-content-center rainbow">
+<footer id="footer" th:fragment="footer" class="nav navbar-expand-lg navbar-dark bg-dark fixed-bottom d-flex justify-content-center rainbow colorReset2">
 <!--    <div class="container-fluid d-flex flex-wrap justify-content-center test-outline">-->
 <!--        <ul class="navbar-foot d-flex flex-wrap pt-3 test-outline">-->
 <!--        <ul class=" test-outline">-->

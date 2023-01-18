@@ -13,26 +13,14 @@ $(function() {
         initialize() {
             Events.initialize();
         },
-        async inviteUser() {
-            let userId = $("#invite-users-select").find(":selected").attr("data-user-id");
-            let invitedUser = await Fetch.Post.sendInvite(userId);
-            Print.removeUserFromInviteList(invitedUser);
-        },
         scrollToBottom() {
             document.getElementById("chat-messages-div-wrapper").scrollTo(0, document.getElementById("chat-messages-div").scrollHeight);
         },
         recentMessage(message) {
-            console.log("Inside recent image");
             let lastMessage = SquadChat.messageOutputBox.children().last();
-            console.log("lastMessage: ");
-            console.log(lastMessage);
             if(lastMessage[0].previousElementSibling != null && lastMessage[0].attributes[2].nodeValue === lastMessage[0].previousElementSibling.attributes[2].nodeValue) {
-                let prevMessageTime = Utils.dateStringToJSDate(lastMessage.prev().find(".single-message-timestamp").text().trim()).getTime();
-                console.log("prevMessageTime: ");
-                console.log(prevMessageTime);
+                let prevMessageTime = Utils.dateStringToJSDate(lastMessage.prev().find(".single-message-timestamp").attr("data-timestamp").trim()).getTime();
                 let thisMessageTime = Utils.dateStringToJSDate(message.timestamp).getTime();
-                console.log("thisMessageTime");
-                console.log("thisMessageTime");
                 return thisMessageTime - prevMessageTime < 60000;
             }
             return false;
@@ -40,14 +28,10 @@ $(function() {
         editMessage(messageDiv) {
             let messageId = messageDiv.attr("data-message-id");
             let content = messageDiv.find(".single-message-content").text().trim();
-            console.log(`Inside editMessage. Message ID is ${messageId}, and the content is: ${content}`);
             Socket.editMessage(messageId, content);
         },
         deleteMessage(messageDiv) {
-            console.log("Inside SquadChat.deleteMessage. messageDiv:");
-            console.log(messageDiv);
             let messageId = messageDiv.attr("data-message-id");
-            console.log(`messageId: ${messageId}`);
             Socket.deleteMessage(messageId);
         }
     };
@@ -64,7 +48,6 @@ $(function() {
         onError(error) {
         },
         enterSquad(squadId) {
-            console.log("Inside enterSquad");
             SquadChat.topic = `/secured/squad-app/squad-chat/${squadId}`;
             SquadChat.currentSubscription = SquadChat.stompClient.subscribe(`/secured/squad-room/${squadId}`, this.onMessageReceived);
             SquadChat.stompClient.send(`${SquadChat.topic}/add-user`, {}, JSON.stringify({messageType: 'JOIN'}));
@@ -75,7 +58,6 @@ $(function() {
             SquadChat.currentSubscription = SquadChat.stompClient.unsubscribe();
         },
         sendMessage() {
-            console.log("Inside sendMessage");
             let messageContent = SquadChat.messageInputBox.val();
             SquadChat.topic = `/secured/squad-app/squad-chat/${SquadChat.squadId}`;
             if(messageContent && SquadChat.stompClient) {
@@ -83,8 +65,6 @@ $(function() {
                     content: messageContent,
                     messageType: 'CHAT'
                 };
-                console.log("Sending message: ");
-                console.log(chatMessage);
                 SquadChat.stompClient.send(`${SquadChat.topic}/send`, {}, JSON.stringify(chatMessage));
             }
             SquadChat.messageInputBox.val("");
@@ -101,25 +81,19 @@ $(function() {
             }
         },
         deleteMessage(messageId) {
-            console.log("Inside Socket.deleteMessage");
             SquadChat.topic = `/secured/squad-app/squad-chat/${SquadChat.squadId}`;
             if(messageId && SquadChat.stompClient) {
                 let deleteMessage = {
                     id: messageId,
                     messageType: 'DELETE'
                 };
-                console.log("deleteMessage object:");
-                console.log(deleteMessage);
                 SquadChat.stompClient.send(`${SquadChat.topic}/delete`, {}, JSON.stringify(deleteMessage));
             }
         },
         async onMessageReceived(payload) {
-            console.log("Inside onMessageReceived");
             let message = JSON.parse(payload.body);
-            console.log("Payload received:");
-            console.log(message);
             if(message.messageType === 'JOIN') {
-                await SquadChat.updateSquadMembers(message);
+                // await SquadChat.updateSquadMembers(message);
             } else if(message.messageType === 'LEAVE') {
                 await Print.leaveMessage(message);
             } else if(message.messageType === 'EDIT') {
@@ -144,18 +118,6 @@ $(function() {
         },
         leaveMessage(message) {
         },
-        async inviteOptions() {
-            let squadMemberIds = (await Fetch.Get.squadMembers()).map(member => member.id);
-            let squadInviteIds = (await Fetch.Get.currentInvitees()).map(invitee => invitee.id);
-            let usersToInvite = await Fetch.Get.possibleInvitees();
-            for(let user of usersToInvite) {
-                if(!(squadMemberIds.includes(user.id) || squadInviteIds.includes(user.id))) {
-                    $("#invite-users-select").append(`
-                        <option data-user-id="${user.id}">${user.username}</option>
-                    `);
-                }
-            }
-        },
         async currentSquadMembers() {
             let squadMembers = await Fetch.Get.squadMembers();
             for(let member of squadMembers) {
@@ -166,9 +128,6 @@ $(function() {
                     </div>
                 `);
             }
-        },
-        removeUserFromInviteList(user) {
-            $("#invite-users-select").children(`[data-user-id="${user.id}"]`).remove();
         },
         async messageHistory() {
             let messages = await Fetch.Get.squadMessages();
@@ -191,20 +150,20 @@ $(function() {
                                 <div class="single-message-username">
                                     ${message.sender.username}
                                 </div>
-                                <div class="single-message-timestamp">
-                                    ${message.timestamp}
+                                <div class="single-message-timestamp" data-timestamp="${message.timestamp}">
+                                    ${Utils.dateStringToJSDate(message.timestamp).toString().slice(0, 24)}
                                 </div>
                             </div>
                             <div class="single-message-content" contenteditable="false">
                                 ${message.content}
                             </div>
                         </div>
-                        <div class="message-edit-button-wrapper hidden">
-                            <div class="btn btn-outline-success message-edit-button">Edit</div>
+                        <div class="message-edit-button-wrapper clickable hidden">
+                            <div class="message-edit-button"><i class="bi bi-send"></i></div>
                         </div>
                         <div class="message-options hidden">
-                            <img class="message-button edit-message-button" src="/Icons/edit.png" alt="">
-                            <img class="message-button delete-message-button" src="/Icons/trash.png" alt="">
+                            <img class="message-button edit-message-button clickable" src="/Icons/edit.png" alt="">
+                            <img class="message-button delete-message-button clickable" src="/Icons/trash.png" alt="">
                         </div>
                     </div>
                 `);
@@ -228,13 +187,11 @@ $(function() {
             ;
         },
         async deleteMessage(message) {
-            console.log("inside Print.deleteMessage. message:")
-            console.log(message)
             SquadChat.messageOutputBox.find(`[data-message-id="${message.id}"]`).remove();
         },
         async squadPicture() {
             let squadPicture = await Fetch.Get.squadPicture();
-            $('.squad-image').css('background-image', `url("${squadPicture.url}")`);
+            $('.squad-image').attr('src', `${squadPicture.url}`);
         },
         async squadUserDetails() {
             let squadOwner = await Fetch.Get.squadOwner();
@@ -251,12 +208,6 @@ $(function() {
             async squadMembers() {
                 return await fetch(`${Utils.url()}squads/${SquadChat.squadId}/members`).then(res => res.json());
             },
-            async possibleInvitees() {
-                return await fetch(`${Utils.url()}invites/${SquadChat.squadId}/possible`).then(res => res.json());
-            },
-            async currentInvitees() {
-                return await fetch(`${Utils.url()}invites/${SquadChat.squadId}/current`).then(res => res.json());
-            },
             async squadMessages() {
                 return await fetch(`${Utils.url()}squads/${SquadChat.squadId}/messages`).then(res => res.json());
             },
@@ -271,15 +222,6 @@ $(function() {
             }
         },
         Post: {
-            async sendInvite(userId) {
-                const fetchOptions = {
-                    method: 'POST',
-                    headers: {
-                        'X-CSRF-TOKEN' : SquadChat.csrfToken
-                    }
-                }
-                return await fetch(`${Utils.url()}squads/${SquadChat.squadId}/invite/${userId}`, fetchOptions).then(res => res.json());
-            },
             async editMessage(messageId, content) {
                 const message = {
                     id: messageId,
@@ -292,7 +234,6 @@ $(function() {
                     },
                     body: JSON.stringify(message)
                 }
-                console.log(fetchOptions);
                 return await fetch(`${Utils.url()}messages/${SquadChat.squadId}/edit/${messageId}`, fetchOptions).then(res => res.json());
             }
         }
@@ -303,11 +244,13 @@ $(function() {
             await Socket.connect();
             await $(window)
                 .ready(async function() {
-                    Print.inviteOptions();
-                    Print.currentSquadMembers();
-                    Print.messageHistory();
-                    Print.squadPicture();
+                    await Print.currentSquadMembers();
+                    await Print.messageHistory();
+                    await Print.squadPicture();
                     await Print.squadUserDetails();
+                    if($("#user-details-div").attr("data-is-owner") === "false") {
+                        $(".squad-image").removeClass("clickable");
+                    }
                 })
             ;
             $(document)
@@ -317,15 +260,19 @@ $(function() {
                     await SquadChat.editMessage($(this).parent().parent());
                     $(this).parent().addClass("hidden");
                 })
+                .on("keydown", function(e) {
+                    if($(".single-message-content").is(":focus") && e.key === "Enter") {
+                        e.preventDefault();
+                    }
+                })
                 .on("keyup", function(e) {
                     if($("#chat-text-input").is(":focus") && e.key === "Enter") {
                         $("#chat-send-button").trigger("click");
                     }
-                    if($(".single-message-content").is(":focus") && e.key === "Enter") {
+                    if($(".single-message-content div").is(":focus") && e.key === "Enter") {
                         $(":focus").parent().parent().find(".message-edit-button").trigger("click");
                     }
                 })
-                .on("click", "#invite-users-button", SquadChat.inviteUser)
                 .on("mouseenter", ".single-message-wrapper", function() {
                     if(
                         $("#user-details-div").attr("data-user-id") === $(this).attr("data-user-id") &&
@@ -340,22 +287,24 @@ $(function() {
                     }
                 })
                 .on("mouseenter", ".squad-image", function() {
-                    $(this).addClass("darken");
-                    $("#upload-squad-picture").removeClass("hidden");
+                    if($("#user-details-div").attr("data-is-owner") === "true"){
+                        $(this).addClass("darken");
+                        $("#upload-squad-picture").removeClass("hidden");
+                    }
                 })
                 .on("mouseleave", ".squad-image", function() {
-                    $(this).removeClass("darken");
-                    $("#upload-squad-picture").addClass("hidden");
+                    if($("#user-details-div").attr("data-is-owner") === "true") {
+                        $(this).removeClass("darken");
+                        $("#upload-squad-picture").addClass("hidden");
+                    }
                 })
                 .on("click", ".edit-message-button", function() {
                     $(this).parent().parent().find(".message-edit-button-wrapper").removeClass("hidden");
                     $(this).parent().addClass("hidden");
-                    console.log($(this).parent().parent().find(".single-message-content"));
                     $(this).parent().parent().find(".single-message-content span").remove();
                     $(this).parent().parent().find(".single-message-content").attr("contenteditable", "true").focus();
                 })
                 .on("click", ".delete-message-button", async function() {
-                    console.log("Inside delete message click event");
                     await SquadChat.deleteMessage($(this).parent().parent());
                 })
             ;

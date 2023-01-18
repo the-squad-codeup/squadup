@@ -161,10 +161,40 @@ $(function() {
     ;
 
     // Toggles signup sheet
-    $("#notAUserToggle")
-        .click(() => {
-            $("#signupContainer").slideToggle();
+    // $("#notAUserToggle")
+    //     .click(() => {
+    //         $(".rainbow").css("animation", "none");
+    //         $(".colorReset1").css("animation", "none");
+    //         $(".rgb").css("animation", "none");
+    //         $("#loginPasswordSubmit").css("animation", "none");
+    //         // $(".colorReset1").css("animation", "glow-text 20s linear 0s infinite");
+    //         // $("#rainbowreset1").css("animation", "colorRotate 20s linear 0s infinite")
+    //         // $(".glow-text").css("animation", "glow-text 20s linear 0s infinite")
+    //         // $(".rgb").css("animation", "rgb 20s linear 0s infinite")
+    //         // $("#r1").css("animation", "colorRotate 20s linear 0s infinite")
+    //         // $(".rgb-background").css("animation", "rgb-background 20s linear 0s infinite")
+    //     });
+
+        $("#notAUserToggle").mousedown(function() {
+
+            $(".colorReset1").css("animation", "none");
+            $(".colorReset2").css("animation", "none");
+            $(".colorReset2").removeClass("rainbow")
+
+            $(".rgb").css("animation", "none");
+            $("#loginPasswordSubmit").css("animation", "none");
         });
+
+        $("#notAUserToggle").mouseup(function() {
+            $("#signupContainer").slideToggle();
+
+            $(".colorReset1").css("animation", "glow-text 20s linear 0s infinite");
+            $(".colorReset2").css("animation", "colorRotate 20s linear 0s infinite");
+
+            $(".rgb").css("animation", "rgb 20s linear 0s infinite");
+            $("#loginPasswordSubmit").css("animation", "rgb-background 20s linear 0s infinite");
+        });
+
 
     $("#forgot-password-link").on("click", function() {
         window.location.href = "/pwreset";

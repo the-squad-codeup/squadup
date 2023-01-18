@@ -9,6 +9,7 @@ body {
 
 /*navbar edits*/
 .navbar{
+    background-color: black;
     display: flex;
     align-items: center;
     height: 60px;
@@ -58,12 +59,14 @@ body {
 }
 /*Other BTNS*/
 /*#emailSend, #signupPasswordSubmit, #loginPasswordSubmit {*/
-#signupPasswordSubmit, #loginPasswordSubmit {
-    margin: 2%;
-    border: var(--bs-gamergreen) ridge 5px;
-    border-radius: 8px;
-    background-color: dimgray;
-}
+/*#signupPasswordSubmit, #loginPasswordSubmit {*/
+/*    margin: 2%;*/
+/*    border: var(--bs-gamergreen) ridge 5px;*/
+/*    border-radius: 8px;*/
+/*    background-color: dimgray;*/
+/*}*/
+
+
 
 button:active {
     box-shadow: 0 5px black;
@@ -107,7 +110,7 @@ img {
 /**/
 
 .rainbow {
-    animation: colorRotate 20s linear 0s infinite;
+    animation: colorRotate 20s linear 0s infinite !important;
 }
 
 @keyframes colorRotate {
@@ -259,4 +262,8 @@ img {
 }
 .test-outline {
     border: orange solid 3px;
+}
+
+.clickable:hover {
+    cursor: pointer;
 }

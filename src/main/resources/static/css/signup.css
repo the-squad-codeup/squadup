@@ -1,54 +1,9 @@
-body {
-    color: black;
-
-}
-
-.mapcontainer {
-    position: relative;
-    top: 0;
-    left: 20%;
-}
-
-/*make this at 100% for mobile view*/
-.map {
-    height: 60%;
-    width: 60%;
-    position: relative;
-    top: 0;
-    left: 0;
-}
-
-.overlay {
-    height: 100%;
-    width: 60%;
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-
-#gamertag, #bio {
-    width: 100%;
-}
-
-.pref {
+.signup {
     /*font-size: 80px;*/
     color: #fff;
     /*text-align: center;*/
     animation: glow-text 20s linear 0s infinite;
-}
-
-.titulo{
-    margin: auto;
-    padding-left: 29%;
-    margin-bottom: 1vw;
-}
-.titlepref {
-    /*font-size: 80px;*/
-    color: #fff;
-    /*text-align: center;*/
-    animation: glow-text 20s linear 0s infinite;
-
-    font-size: 3vw;
+    margin-bottom: 3vw;
 }
 
 @keyframes glow-text {
@@ -81,47 +36,85 @@ body {
     }
 }
 
-/* Input field */
-.select2-selection__rendered {
-    color: #000000;
+.su-outer {
+    margin-top: 10vw;
+    margin-left: 10vw;
+    margin-right: 10vw;
+    padding: 3vw;
+    border: solid 8px;
 }
 
-/* Around the search field */
-.select2-search {
-    color: #000000;
+.form-signtwo{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    border: solid 8px;
+    border-radius: 10px;
+    padding: 5%;
+    padding-bottom: 10%;
 }
 
-/* Search field */
-.select2-search input {
-    color: #000000;
+#signupPasswordSubmit{
+    margin: auto;
+    width: 12%;
+    border-radius: 8px;
+    border-style:solid;
+    color: white;
+    animation: rgb-background 20s linear 0s infinite;
+
 }
 
-/* Each result */
-.select2-results {
-    color: #000000;
+
+.rgb-background {
+    animation: rgb 20s linear 0s infinite;
 }
 
-/* Higlighted (hover) result */
-.select2-results__option--highlighted {
-    color: #000000;
+@keyframes rgb-background {
+    from {
+        background-color: #ff0000;
+    }
+    12.5% {
+        /*border-color: #0099ff;*/
+        background-color: #ff8000;
+    }
+    25% {
+        /*border-color: #0099ff;*/
+        background-color: #ffea00;
+    }
+    37.5% {
+        background-color: #37ff00;
+    }
+    50% {
+        background-color: #00fff7;
+    }
+    65.5% {
+        background-color: #0077ff;
+    }
+    75% {
+        background-color: #8251ff;
+    }
+    87.5% {
+        background-color: #e600ff;
+    }
+    100% {
+        background-color: #ff0000;
+    }
 }
-
-/* Selected option */
-.select2-results__option[aria-selected=true] {
-    color: #000000;
-}
-
 
 
 @media (width <= 430px) {
 
-    .titlepref {
-        font-size: 5vw;
+    .su-outer {
+
+        margin-left: 5vw;
+        margin-right: 5vw;
+        padding: 5vw;
+
     }
 
-    .titulo {
-        padding-left: 15%;
-        margin-bottom: 3vw;
+    #signupPasswordSubmit{
+        width: 40%;
     }
+
 }
-
