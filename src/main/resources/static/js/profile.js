@@ -10,6 +10,16 @@ $(async function (){
     async function getUserGames() {
         // let userGames = await fetch(`${Utils.url()}game/user`).then(res => res.json());
         let userGames = currentUser.preferences.games;
+        setMaxIndex(userGames);
+        if(mobileView.matches){
+            if(userGames.length > 3) {
+                next.classList.remove("hidden");
+            }
+        } else {
+            if(userGames.length > 6) {
+                next.classList.remove("hidden");
+            }
+        }
         for(let game of userGames){
             // $('.my-games').append(`
             //     <div class="game" style="background-image: url(${game.artwork});">
@@ -156,6 +166,7 @@ const track = document.querySelector(".track");
 let width = carousel.offsetWidth;
 let index = 0;
 
+let maxIndex = 0;
 let mobileView = window.matchMedia("(max-width: 480px)")
 
 window.addEventListener("resize", function () {
@@ -164,24 +175,21 @@ window.addEventListener("resize", function () {
 next.addEventListener("click", function (e) {
     e.preventDefault();
     index += 1;
-    prev.classList.add("show");
+    if (index >= maxIndex -1) {
+        next.classList.add("hidden");
+    }
+    prev.classList.remove("hidden");
     if(mobileView.matches){
         track.style.transform = "translateX(" + index * -60 + "vw)";
-        if (track.offsetWidth - index * width < (index - 1) * width / 3) {
-            next.classList.add("hide");
-        }
     }else{
         track.style.transform = "translateX(" + index * -70 + "vw)";
-        if (track.offsetWidth - index * width < (index -1) * width / 6) {
-            next.classList.add("hide");
-        }
     }
 });
 prev.addEventListener("click", function () {
     index = index - 1;
-    next.classList.remove("hide");
+    next.classList.remove("hidden");
     if (index === 0) {
-        prev.classList.remove("show");
+        prev.classList.add("hidden");
     }
     if(mobileView.matches){
         track.style.transform = "translateX(" + index * -60 + "vw)";
@@ -213,3 +221,17 @@ $(document)
 .on("click","#addGameCard",()=>{
     window.location.href =`${Utils.url()}games`;
 })
+
+function setMaxIndex(userGames) {
+    if(mobileView.matches) {
+        maxIndex = Math.ceil(userGames.length / 3);
+        if(userGames.length + 1 > 3) {
+            next.classList.remove("hidden");
+        }
+    } else {
+        if(userGames.length + 1 > 6) {
+            next.classList.remove("hidden");
+        }
+        maxIndex = Math.ceil(userGames.length / 6);
+    }
+}

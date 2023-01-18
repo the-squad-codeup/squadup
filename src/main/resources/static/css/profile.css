@@ -266,7 +266,6 @@
 
 .nav .prev {
     left: -1vw;
-    display: none;
 }
 
 .nav .prev img{
@@ -297,9 +296,9 @@
     max-width: none;
 }
 
-.nav .next.hide {
-    display: none;
-}
+/*.nav .next.hide {*/
+/*    display: none;*/
+/*}*/
 
 .profile {
     /*font-size: 80px;*/
@@ -429,7 +428,6 @@
     }
     .nav .prev {
         margin-left: -1.5vw;
-        display: none;
     }
     .nav .prev img{
         height: 10vw;
@@ -455,9 +453,9 @@
         margin-top: -5vw;
         max-width: none;
     }
-    .nav .next.hide {
-        display: none;
-    }
+    /*.nav .next.hide {*/
+    /*    display: none;*/
+    /*}*/
 
 .favorite-game{
     height: 36vw;
