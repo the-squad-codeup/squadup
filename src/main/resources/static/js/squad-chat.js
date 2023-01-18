@@ -216,7 +216,7 @@ $(function() {
         },
         async squadPicture() {
             let squadPicture = await Fetch.Get.squadPicture();
-            $('.squad-image').css('background-image', `url("${squadPicture.url}")`);
+            $('.squad-image').css('src', `${squadPicture.url}`);
         },
         async squadUserDetails() {
             let squadOwner = await Fetch.Get.squadOwner();
