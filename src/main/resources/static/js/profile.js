@@ -21,7 +21,6 @@ $(async function (){
 <!--                </div>-->
              `)
         }
-
     }
     getUserGames()
 

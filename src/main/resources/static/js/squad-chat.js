@@ -18,10 +18,12 @@ $(function() {
         },
         recentMessage(message) {
             let lastMessage = SquadChat.messageOutputBox.children().last();
-            if(lastMessage[0].previousElementSibling != null && lastMessage[0].attributes[2].nodeValue === lastMessage[0].previousElementSibling.attributes[2].nodeValue) {
-                let prevMessageTime = Utils.dateStringToJSDate(lastMessage.prev().find(".single-message-timestamp").attr("data-timestamp").trim()).getTime();
-                let thisMessageTime = Utils.dateStringToJSDate(message.timestamp).getTime();
-                return thisMessageTime - prevMessageTime < 60000;
+            if(lastMessage[0].previousElementSibling.attributes.length > 2) {
+                if (lastMessage[0].previousElementSibling != null && lastMessage[0].attributes[2].nodeValue === lastMessage[0].previousElementSibling.attributes[2].nodeValue) {
+                    let prevMessageTime = Utils.dateStringToJSDate(lastMessage.prev().find(".single-message-timestamp").attr("data-timestamp").trim()).getTime();
+                    let thisMessageTime = Utils.dateStringToJSDate(message.timestamp).getTime();
+                    return thisMessageTime - prevMessageTime < 60000;
+                }
             }
             return false;
         },

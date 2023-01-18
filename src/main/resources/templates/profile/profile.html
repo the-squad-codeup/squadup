@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-    <div th:replace="partials :: headFragment('My Profile')"></div>
+    <div th:replace="partials :: headFragment('User Profile')"></div>
 
     <link rel="stylesheet" th:href="@{/css/profile.css}">
 </head>
@@ -37,7 +37,7 @@
                 <div class="track">
                     <div id="addGameCard" class="card rgb" style="background-color: #333">
                         <p>Add Game:</p>
-                        <img th:src="@{/Icons/add.png}">
+                        <img class="clickable" th:src="@{/Icons/add.png}">
                     </div>
                     <!--                    games populate here-->
                 </div>
