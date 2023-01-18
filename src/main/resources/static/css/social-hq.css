@@ -536,7 +536,16 @@ img.card-img-top {
 }
 
 #recruits-call-to-action {
-    padding-top: 10em;
+    padding-top: 3em;
+}
+
+#addGameCard {
+    margin-top: 2em;
+}
+
+#addGameCard img {
+    height: 12em;
+    width: 10em;
 }
 
 
