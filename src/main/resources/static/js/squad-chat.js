@@ -215,8 +215,10 @@ $(function() {
             SquadChat.messageOutputBox.find(`[data-message-id="${message.id}"]`).remove();
         },
         async squadPicture() {
+            console.log("Inside squadPicture");
             let squadPicture = await Fetch.Get.squadPicture();
-            $('.squad-image').css('src', `${squadPicture.url}`);
+            console.log(squadPicture);
+            $('.squad-image').attr('src', `${squadPicture.url}`);
         },
         async squadUserDetails() {
             let squadOwner = await Fetch.Get.squadOwner();
@@ -270,9 +272,9 @@ $(function() {
             await Socket.connect();
             await $(window)
                 .ready(async function() {
-                    Print.currentSquadMembers();
-                    Print.messageHistory();
-                    Print.squadPicture();
+                    await Print.currentSquadMembers();
+                    await Print.messageHistory();
+                    await Print.squadPicture();
                     await Print.squadUserDetails();
                     if($("#user-details-div").attr("data-is-owner") === "false") {
                         console.log("inside if statement initializing. data-is-owner is false")
