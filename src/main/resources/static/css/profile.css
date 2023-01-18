@@ -91,9 +91,12 @@
     margin-left: .5vw;
     -webkit-text-stroke: 0.1vw #5cfd42;
 }
+#genres-wrapper{
+    width: 21.5vw
+}
 #genres-wrapper-wrapper {
    overflow: scroll;
-    margin: 2.5vw 0.5vw 0.5vw 0.5vw;
+    margin-top: 2.5vw;
 }
 .favorite-game{
     height: 24vw;
@@ -469,11 +472,11 @@
     position: absolute;
 }
 #upload-profile-picture {
-    width: 10vw;
+    width: 20vw;
     height: auto;
     position: absolute;
-    margin-top: 9vh;
-    margin-left: 65vw;
+    margin-top: 2.5vh;
+    margin-left: 6vw;
     cursor: pointer;
     z-index: 5;
 }
@@ -547,6 +550,9 @@
         margin-top: -7vw;
         margin-left: 13.5vw;
         transform: rotate(225deg);
+    }
+    #genres-wrapper{
+        width: 24.5vw;
     }
 }
 

@@ -121,7 +121,7 @@ $(async function (){
 
         // location
         $('.preferences').append(`
-                    <div class="location">${userInfo.preferences.location.timezone} | </div>
+                    <div class="location">${userInfo.preferences.location.timezone}</div>
         `)
 
         // Languages
