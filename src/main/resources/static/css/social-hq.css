@@ -55,6 +55,7 @@ body {
     border: solid #5CFD42 .36vw;
     position: relative;
     display: flex;
+    border-radius: 10px;
 }
 
 .wrapper-container {
