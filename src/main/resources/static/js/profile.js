@@ -15,7 +15,7 @@ $(async function (){
             //     <div class="game" style="background-image: url(${game.artwork});">
             //     </div>
             // `)
-            $('.track').append(`
+            $('.track').prepend(`
 <!--                <div class="card-container">-->
                     <div class="card rgb" style="background-image: url(${game.artwork});"></div>
 <!--                </div>-->
@@ -89,7 +89,7 @@ $(async function (){
         if(isMyProfile || isComrade) {
             $('.info-container').append(`
                 <div class="gamertag">
-                       Discord: ${userInfo.preferences.gamertag}
+                       ${userInfo.preferences.gamertag}
                 </div>
             `);
         }
@@ -107,7 +107,7 @@ $(async function (){
 
         // location
         $('.preferences').append(`
-                    <div class="location">${userInfo.preferences.location.timezone} | </div>
+                    <div class="location">${userInfo.preferences.location.timezone}</div>
         `)
 
         // Languages
@@ -190,3 +190,27 @@ prev.addEventListener("click", function () {
         track.style.transform = "translateX(" + index * -70 + "vw)";
     }
 });
+
+// IS AUTHENTICATED //
+function editPermissions(){
+    if(document.getElementById("profile-backend-info").getAttribute("data-is-current-user") === "true"){
+        $('#profile-image-container').append(`             
+            <img id="upload-profile-picture" class="hidden" src="/Icons/edit.png">
+        `)
+        $(document)
+            .on("mouseenter", "#profile-image-container", function() {
+                $(".profile-image").addClass("darken");
+                $("#upload-profile-picture").removeClass("hidden");
+            })
+            .on("mouseleave", "#profile-image-container", function() {
+                $(".profile-image").removeClass("darken");
+                $("#upload-profile-picture").addClass("hidden");
+            })
+    }
+}
+editPermissions()
+
+$(document)
+.on("click","#addGameCard",()=>{
+    window.location.href =`${Utils.url()}games`;
+})
