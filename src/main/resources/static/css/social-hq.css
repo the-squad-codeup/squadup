@@ -240,10 +240,11 @@ img.card-img-top {
 .card-slider-mask::-webkit-scrollbar-thumb,
 .invite-mask::-webkit-scrollbar-thumb,
 .modal-squad-members-mask::-webkit-scrollbar-thumb{
-    background-image: linear-gradient(180deg, black 0%, #5CFD42 99%);
-    box-shadow: inset 2px 2px 5px 0 #5CFD42;
+    background-image: linear-gradient(180deg, red 0%, #5CFD42 99%);
+    /*box-shadow: inset 2px 2px 5px 0 #5CFD42;*/
+    animation: rbg 20s linear 0s infinite;
     border-radius: 100px;
-    /*display: none;*/
+    width: 10px;
 }
 
 .su-card-middle::-webkit-scrollbar,
@@ -252,7 +253,10 @@ img.card-img-top {
 .invite-mask::-webkit-scrollbar,
 .card-slider-mask::-webkit-scrollbar {
     background-color: black;
+    animation: rbg 20s linear 0s infinite;
     border-radius: 100px;
+    width: 10px;
+    height: 10px;
 }
 /*------------------------------*/
 
