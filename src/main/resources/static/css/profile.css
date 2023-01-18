@@ -523,8 +523,8 @@
 .my-platforms {
     color: #5CFD42;
     font-size: 5vw;
-    margin-top: 50vh;
-    margin-left: 30vw;
+    margin-top: 49.5vh;
+    margin-left: 33vw;
     position: absolute;
 }
 #upload-profile-picture {
@@ -549,7 +549,7 @@
 .genres h3 {
     font-size: 5vw;
     height: 2.25vh;
-    margin-top: -1vh;
+    margin-top: 0vh;
     color: #5CFD42;
     position: absolute;
     background-color: black;
@@ -558,11 +558,12 @@
 #hr {
     width: 100%;
     position: absolute;
-    margin-top: 1vh;
+    margin-top: 3.3vh;
     border: solid blueviolet 0.15vw;
 }
 #genres-wrapper-wrapper{
     width: 100%;
+    margin-top: 3.3vh;
 }
 #genres-wrapper{
     justify-content: center;
