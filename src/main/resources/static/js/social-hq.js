@@ -310,7 +310,7 @@ $(function () {
             <div class="add-modal-squad-invites-wrapper">
                 <div class="add-modal-squad-comrades-wrapper user-wrapper">
                     <div class="add-modal-squad-comrades-title invite-title">
-                        Invite Comrades:
+                        Choose Comrades to Invite Here
                     </div>
                     <div class="add-modal-squad-comrades-mask invite-mask">
                         <div class="add-modal-squad-comrades invite-container">
@@ -390,7 +390,7 @@ $(function () {
             <div class="modal-squad-invites-wrapper">
                 <div class="modal-squad-comrades-wrapper user-wrapper">
                     <div class="modal-squad-comrades-title invite-title">
-                        Invite Comrades
+                        Choose Comrades to Invite Here
                     </div>
                     <div class="modal-squad-comrades-mask invite-mask">
                         <div class="modal-squad-comrades invite-container">
