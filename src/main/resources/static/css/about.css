@@ -47,10 +47,11 @@
 }
 
 .card-pro2 {
-    border: solid 5px;
+    border: solid 8px;
     border-radius: 5px;
     margin-top: 5%;
     margin-bottom: 30%;
+    padding: 3px;
 }
 /*.card-text {*/
 /*    width: 17vw;*/
