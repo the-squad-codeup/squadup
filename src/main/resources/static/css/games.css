@@ -184,15 +184,15 @@
     left: -1vw;
 }
 
-.nav .prev img, .nav .prev2 img{
-    height: 10vw;
-    width: auto;
-    position: absolute;
-    margin-left: -5vw;
-    margin-top: -5vw;
-    max-width: none;
-    transform: rotate(180deg);
-}
+/*.nav .prev img, .nav .prev2 img{*/
+/*    height: 10vw;*/
+/*    width: auto;*/
+/*    position: absolute;*/
+/*    margin-left: -5vw;*/
+/*    margin-top: -5vw;*/
+/*    max-width: none;*/
+/*    transform: rotate(180deg);*/
+/*}*/
 .nav .prev.show, .nav .prev2.show{
     display: block;
 }
@@ -200,13 +200,30 @@
     right: -0.443vw;
     /*background-image: url('/public/Icons/next.png');*/
 }
+/*.nav .next img, .nav .next2 img {*/
+/*    height: 10vw;*/
+/*    width: auto;*/
+/*    position: absolute;*/
+/*    margin-left: -5vw;*/
+/*    margin-top: -5vw;*/
+/*    max-width: none;*/
+/*}*/
 .nav .next img, .nav .next2 img {
-    height: 10vw;
+    height: 5vw;
     width: auto;
     position: absolute;
-    margin-left: -5vw;
-    margin-top: -5vw;
+    margin-left: -2.5vw;
+    margin-top: -2.5vw;
     max-width: none;
+}
+.nav .prev img, .nav .prev2 img {
+    height: 5vw;
+    width: auto;
+    position: absolute;
+    margin-left: -2.5vw;
+    margin-top: -2.5vw;
+    max-width: none;
+    transform: rotate(180deg);
 }
 .nav .next.hide, .nav .next2.hide {
     visibility: hidden;
