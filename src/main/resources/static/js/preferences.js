@@ -29,13 +29,11 @@ $(function() {
         packageLanguageOptions: function ($div) {
             let options = [];
             for(let child of $div.children()) {
-                console.log(child);
                 if(child.selected) {
                     options.push({language: child.value});
                 }
             }
 
-            console.log(options);
             return options;
         },
         packagePlatformOptions($div) {
@@ -112,7 +110,6 @@ $(function() {
     const Print = {
         async form() {
             let user = await Fetch.Get.currentUser().then(res => res);
-            console.log(user);
             await this.locationSelectElement(user);
             await this.languageSelectElement(user);
             await this.gameRatingSelectElement(user);

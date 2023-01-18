@@ -91,9 +91,12 @@
     margin-left: .5vw;
     -webkit-text-stroke: 0.1vw #5cfd42;
 }
+#genres-wrapper{
+    width: 21.5vw
+}
 #genres-wrapper-wrapper {
    overflow: scroll;
-    margin: 2.5vw 0.5vw 0.5vw 0.5vw;
+    margin-top: 2.5vw;
 }
 .favorite-game{
     height: 24vw;
@@ -164,13 +167,19 @@
 
 /* Icons */
 #upload-profile-picture{
-    width: 3.5vw;
-    height: 3.5vw;
+    width: 10vw;
+    height: 10vw;
     position: absolute;
-    margin-top: 14vw;
-    margin-left: 15.5vw;
+    margin-top: 4.5vw;
+    margin-left: 5.5vw;
     cursor: pointer;
     z-index: 5;
+}
+.darken {
+    filter: brightness(50%);
+}
+.hidden {
+    display: none;
 }
 #favorite-icon{
     width: 12vw;
@@ -258,6 +267,19 @@
     /*text-align: center;*/
     animation: glow-text 20s linear 0s infinite;
 }
+#addGameCard{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#addGameCard p{
+    color: #5CFD42;
+    font-size: 2vw;
+    margin-top: 1vw;
+}
+#addGameCard img{
+    margin-top: -2vw;
+}
 
 @keyframes glow-text {
     from {
@@ -298,10 +320,8 @@
     }
 
     .profile-image {
-        height: 45vw;
-        width: 45vw;
-        margin-top: -20vw;
-        margin-left: 25vw;
+        height: 13vh;
+        width: 25vw;
         border: solid #5CFD42 0.3vw;
         border-radius: 50%;
         background-position: center;
@@ -311,17 +331,24 @@
         z-index: 4;
     }
 
-
-
-
-
+    .username {
+        color: #5CFD42;
+        font-size: 6vw;
+        position: absolute;
+        height: 4vh;
+        width: 60vw;
+        margin-top: -17vh;
+        margin-left: 25vw;
+        display: flex;
+        align-items: center;
+    }
 
 
     .my-games {
         height: 30vw;
         width: 60vw;
-        margin-top: 62vh;
-        margin-left: 30vw;
+        margin-top: 54vh;
+        margin-left: 32vw;
         position: absolute;
         display: flex;
     }
@@ -394,8 +421,8 @@
     width: 27vw;
     background-size: cover;
     background-position: center;
-    margin-top: 60vh;
-    margin-left: 4vw;
+    margin-top: 51.5vh;
+    margin-left: 5.5vw;
     overflow: hidden;
     position: absolute;
     border: solid #5CFD42 0.3vw;
@@ -403,33 +430,31 @@
 }
 .info-container {
     border: solid #5CFD42 0.3vw;
-    height: 38vh;
-    width: 80vw;
+    height: 32vh;
+    width: 90vw;
     position: absolute;
-    margin-top: 20vh;
-    margin-left: 7.5vw;
+    margin-top: 18vh;
+    margin-left: 2.5vw;
     z-index: 3;
     display: flex;
-    justify-content: center;
 }
 .gamertag {
     color: #5CFD42;
-    font-size: 10vw;
+    font-size: 3.5vw;
     position: absolute;
     height: 4vw;
-    width: 80vw;
-    margin-top: -5.5vh;
-    margin-left: auto;
-    justify-content: center;
+    width: 60vw;
+    margin-top: -13vh;
+    margin-left: 30vw;
 }
 
 .bio div {
     color: #5CFD42;
     font-size: 4vw;
     margin-top: 1vh;
-    height: 12vw;
-    width: 75vw;
-    margin-left: 0;
+    height: 12vh;
+    width: 60vw;
+    margin-left: 1vw;
     position: relative;
 }
 .icon {
@@ -442,33 +467,36 @@
 .my-platforms {
     color: #5CFD42;
     font-size: 5vw;
-    margin-top: 59vh;
+    margin-top: 50vh;
     margin-left: 30vw;
     position: absolute;
 }
 #upload-profile-picture {
-    width: 10vw;
+    width: 20vw;
     height: auto;
     position: absolute;
-    margin-top: 9vh;
-    margin-left: 65vw;
+    margin-top: 2.5vh;
+    margin-left: 6vw;
     cursor: pointer;
     z-index: 5;
 }
 .genres {
     border: solid #5CFD42 0.3vw;
-    height: 12vh;
-    width: 80vw;
-    margin-top: 25vh;
-    margin-left: auto;
+    height: 30vh;
+    width: 25vw;
     position: absolute;
+    margin-left: 62vw;
     display: flex;
     justify-content: center;
 }
 .genres h3 {
-    font-size: 2.5vw;
+    font-size: 5vw;
+    height: 2.25vh;
+    margin-top: -1vh;
     color: #5CFD42;
     position: absolute;
+    background-color: black;
+    z-index: 1;
 }
 #hr {
     width: 100%;
@@ -484,18 +512,17 @@
 }
 
 .genres p {
-    font-size: 5vw;
-    color: #000000;
+    font-size: 3vw;
+    color: #5cfd42;
     margin-left: 0.5vw;
-    -webkit-text-stroke: 0.3vw #5cfd42;
 }
 .preferences {
-    font-size: 2vw;
+    font-size: 2.5vw;
     border: 0.3vw solid;
     color: #5cfd42;
     width: 90vw;
     height: 4vw;
-    margin-top: 18vh;
+    margin-top: 15vh;
     margin-left: 2.5vw;
     justify-content: space-evenly;
     align-items: center;
@@ -503,7 +530,30 @@
     z-index: 5;
     display: flex;
 }
-
+#location-icon {
+    width: auto;
+    margin-top: -13.5vh;
+    margin-right: 20vw;
+    height: 2.5vh;
+    position: absolute;
+}
+.location{
+    margin-top: -13vh;
+    margin-left: 7vw;
+    font-size: 2.5vw;
+    position: absolute;
+}
+    #favorite-icon {
+        width: 20vw;
+        height: 20vw;
+        position: absolute;
+        margin-top: -7vw;
+        margin-left: 13.5vw;
+        transform: rotate(225deg);
+    }
+    #genres-wrapper{
+        width: 24.5vw;
+    }
 }
 
 

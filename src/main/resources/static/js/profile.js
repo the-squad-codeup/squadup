@@ -7,22 +7,15 @@ $(async function (){
     const isRecruit = $backendDiv.attr("data-is-recruit") === "true";
     const currentUser = await fetch(`${Utils.url()}user/${currentUserId}/info`).then(res => res.json());
 
-    console.log(`User profile belongs to: ${currentUser.username}. Their info is:`);
-    console.log(currentUser);
-    console.log(`This is my profile: ${isMyProfile}`);
-    console.log(`This is a Comrade: ${isComrade}`);
-    console.log(`This is a Recruit: ${isRecruit}`);
     async function getUserGames() {
         // let userGames = await fetch(`${Utils.url()}game/user`).then(res => res.json());
         let userGames = currentUser.preferences.games;
-        console.log("Array of user's games")
-        console.log(userGames)
         for(let game of userGames){
             // $('.my-games').append(`
             //     <div class="game" style="background-image: url(${game.artwork});">
             //     </div>
             // `)
-            $('.track').append(`
+            $('.track').prepend(`
 <!--                <div class="card-container">-->
                     <div class="card rgb" style="background-image: url(${game.artwork});"></div>
 <!--                </div>-->
@@ -36,8 +29,6 @@ $(async function (){
     async function getUserFavorite() {
         // let favoriteGame = await fetch(`${Utils.url()}game/favorite`).then(res => res.json());
         let favoriteGame = currentUser.preferences.favoriteGame;
-        console.log("favorite game:")
-        console.log(favoriteGame)
         if (favoriteGame.id !== null) {
             $('#page-wrapper').append(`
                 <div class="favorite-game rgb" style="background-image: url(${favoriteGame.artwork});">
@@ -94,16 +85,11 @@ $(async function (){
             </div>
         `);
 
-        console.log("Printing gamertag.");
-        console.log(`isMyProfile: ${isMyProfile}`);
-        console.log(`isComrade: ${isComrade}`);
-        console.log(`isRecruit: ${isRecruit}`);
         // Gamertag
         if(isMyProfile || isComrade) {
-            console.log("Why am I inside here?");
             $('.info-container').append(`
                 <div class="gamertag">
-                       Discord: ${userInfo.preferences.gamertag}
+                       ${userInfo.preferences.gamertag}
                 </div>
             `);
         }
@@ -121,7 +107,7 @@ $(async function (){
 
         // location
         $('.preferences').append(`
-                    <div class="location">${userInfo.preferences.location.timezone} | </div>
+                    <div class="location">${userInfo.preferences.location.timezone}</div>
         `)
 
         // Languages
@@ -150,8 +136,6 @@ $(async function (){
 
 
 
-        console.log("user info:")
-        console.log(userInfo)
     }
     getUserInfo()
 
@@ -207,15 +191,26 @@ prev.addEventListener("click", function () {
     }
 });
 
-// genreUp.addEventListener("click",(e)=>{
-//     e.preventDefault();
-//     console.log("up")
-//
-//     index2 += 1;
-//     UpDown.style.transform = "translateY(-10vw)";
-// });
-// genreDown.addEventListener("click",()=>{
-//     console.log("Down")
-//     index2 -= 1;
-//     UpDown.style.transform = "translateY(-10vw)";
-// });
+// IS AUTHENTICATED //
+function editPermissions(){
+    if(document.getElementById("profile-backend-info").getAttribute("data-is-current-user") === "true"){
+        $('#profile-image-container').append(`             
+            <img id="upload-profile-picture" class="hidden" src="/Icons/edit.png">
+        `)
+        $(document)
+            .on("mouseenter", "#profile-image-container", function() {
+                $(".profile-image").addClass("darken");
+                $("#upload-profile-picture").removeClass("hidden");
+            })
+            .on("mouseleave", "#profile-image-container", function() {
+                $(".profile-image").removeClass("darken");
+                $("#upload-profile-picture").addClass("hidden");
+            })
+    }
+}
+editPermissions()
+
+$(document)
+.on("click","#addGameCard",()=>{
+    window.location.href =`${Utils.url()}games`;
+})

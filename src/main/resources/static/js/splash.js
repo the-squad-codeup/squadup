@@ -37,7 +37,6 @@ function startAnimations() {
         $('.item--'+items[6]).animate({
             left: '-20%'
         }, 1000);
-        console.log('animations-complete');
         setTimeout(function(){
             items.unshift(items.pop());
             setTimeout(function(){
