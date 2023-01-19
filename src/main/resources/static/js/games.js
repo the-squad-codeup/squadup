@@ -55,11 +55,8 @@ $(function () {
             `);
         },
         async gameResults(data) {
-            console.log("inside gameresults")
             let games = await MyGames.sortGamesByYear(await data);
             MyGames.addGameDiv.empty();
-            console.log(games);
-            console.log(games.length);
             if(games.length > 4) {
                 next2.classList.remove("hidden");
             }
