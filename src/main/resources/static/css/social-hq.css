@@ -254,8 +254,18 @@ img.card-img-top {
 #chat-messages-div-wrapper::-webkit-scrollbar-thumb
 {
     background-image: linear-gradient(180deg, yellowgreen 0%, #5CFD42 99%);
+    border: .15em solid black;
     border-radius: 100px;
     width: 9px;
+}
+
+.su-card-middle::-webkit-scrollbar-track,
+.side-wrapper::-webkit-scrollbar-track,
+.card-slider-mask::-webkit-scrollbar-track,
+.invite-mask::-webkit-scrollbar-track,
+.modal-squad-members-mask::-webkit-scrollbar-track,
+#chat-messages-div-wrapper::-webkit-scrollbar-track{
+    margin-block: .1em;
 }
 
 .su-card-middle::-webkit-scrollbar,
@@ -604,6 +614,16 @@ img.card-img-top {
     .modal-squad-members-mask::-webkit-scrollbar-thumb{
         visibility: hidden;
     }
+
+    .su-card-middle::-webkit-scrollbar-track,
+    .side-wrapper::-webkit-scrollbar-track,
+    .card-slider-mask::-webkit-scrollbar-track,
+    .invite-mask::-webkit-scrollbar-track,
+    .modal-squad-members-mask::-webkit-scrollbar-track,
+    #chat-messages-div-wrapper::-webkit-scrollbar-track{
+        visibility: hidden;
+    }
+
 }
 
 #comrades-call-to-action {
