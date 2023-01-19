@@ -83,8 +83,14 @@
 #chat-messages-div-wrapper::-webkit-scrollbar-thumb,
 #squad-users-div::-webkit-scrollbar-thumb{
     background-image: linear-gradient(180deg, yellowgreen 0%, #5CFD42 99%);
+    border: .15em solid black;
     border-radius: 100px;
     width: 9px;
+}
+
+#chat-messages-div-wrapper::-webkit-scrollbar-track,
+#squad-users-div::-webkit-scrollbar-track{
+    margin-block: .1em;
 }
 
 #chat-messages-div-wrapper::-webkit-scrollbar,
@@ -319,6 +325,10 @@
         visibility: hidden;
     }
 
+    #chat-messages-div-wrapper::-webkit-scrollbar-track,
+    #squad-users-div::-webkit-scrollbar-track{
+        visibility: hidden;
+    }
 }
 
 
