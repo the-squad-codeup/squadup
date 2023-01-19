@@ -334,6 +334,9 @@ img.card-img-top {
 
 .modal-user-img {
     width: 4em;
+    height: 4em;
+    min-width: 4em;
+    min-height: 4em;
 }
 
 .add-modal-squad-invites-wrapper {
