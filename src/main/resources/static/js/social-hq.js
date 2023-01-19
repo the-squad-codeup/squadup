@@ -221,7 +221,7 @@ $(function () {
             body: JSON.stringify(squadToCreate)
         };
         let addedSquad = await fetch(`${Utils.url()}squads/create/new`, fetchOptions).then(res => res.json());
-        printNewSquad(addedSquad);
+        // printNewSquad(addedSquad);
     }
 
     function showModal() {
@@ -619,7 +619,7 @@ $(function () {
             $(this).parent().parent().remove();
         })
         .on("click", ".add-modal-squad-create-btn", async function() {
-            createSquad();
+            await createSquad();
             hideModal();
             location.reload(true);
         })
@@ -639,7 +639,7 @@ $(function () {
         .on("click", ".modal-squad-invite-accept-btn", async function() {
             let acceptedSquad = await postAcceptSquadInvite($("#modal-squad-info").attr("data-squad-id"));
             removeSquadInvite($("#modal-squad-info").attr("data-squad-id"));
-            await printNewSquad(acceptedSquad);
+            // await printNewSquad(acceptedSquad);
             hideModal();
             location.reload(true);
         })
@@ -647,6 +647,7 @@ $(function () {
             await postRejectSquadInvite($("#modal-squad-info").attr("data-squad-id"));
             removeSquadInvite($("#modal-squad-info").attr("data-squad-id"));
             hideModal();
+            location.reload(true);
         })
         .on("mouseenter", ".editable-squad-img", function() {
             $(this).addClass("darken");

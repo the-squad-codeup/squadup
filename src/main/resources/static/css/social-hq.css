@@ -275,6 +275,10 @@ img.card-img-top {
     width: 100%;
 }
 
+.squad-modal-wrapper {
+    margin-bottom: 180px;
+}
+
 .squad-modal {
     display: flex;
     flex-direction: column;
@@ -288,7 +292,7 @@ img.card-img-top {
     border-radius: 16px;
     padding: 2vh;
     border: 1px solid;
-
+    margin-bottom: 70px;
 }
 
 .add-modal-title {
