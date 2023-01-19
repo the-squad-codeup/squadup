@@ -619,9 +619,9 @@ $(function () {
             $(this).parent().parent().remove();
         })
         .on("click", ".add-modal-squad-create-btn", async function() {
-            createSquad();
+            await createSquad();
+            await printNewSquad()
             hideModal();
-            location.reload(true);
         })
         .on("click", ".modal-squad-chat-btn", function() {
             window.location.href=`${Utils.url()}squads/${$("#modal-squad-info").attr("data-squad-id")}/chat`;
@@ -641,7 +641,6 @@ $(function () {
             removeSquadInvite($("#modal-squad-info").attr("data-squad-id"));
             await printNewSquad(acceptedSquad);
             hideModal();
-            location.reload(true);
         })
         .on("click", ".modal-squad-invite-reject-btn", async function() {
             await postRejectSquadInvite($("#modal-squad-info").attr("data-squad-id"));
