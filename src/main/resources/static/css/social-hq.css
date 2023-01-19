@@ -530,7 +530,8 @@ img.card-img-top {
     }
 
     .social-title {
-        display: none;
+        visibility: hidden;
+        height: 0px;
     }
 
     .side-wrapper {
