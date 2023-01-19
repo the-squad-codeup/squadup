@@ -81,7 +81,8 @@
 }
 
 #chat-messages-div-wrapper::-webkit-scrollbar-thumb,
-#squad-users-div::-webkit-scrollbar-thumb{
+#squad-users-div::-webkit-scrollbar-thumb,
+#squad-users-div-wrapper::-webkit-scrollbar-thumb{
     background-image: linear-gradient(180deg, yellowgreen 0%, #5CFD42 99%);
     border: .15em solid black;
     border-radius: 100px;
@@ -89,12 +90,14 @@
 }
 
 #chat-messages-div-wrapper::-webkit-scrollbar-track,
-#squad-users-div::-webkit-scrollbar-track{
+#squad-users-div::-webkit-scrollbar-track,
+#squad-users-div-wrapper::-webkit-scrollbar-track{
     margin-block: .1em;
 }
 
 #chat-messages-div-wrapper::-webkit-scrollbar,
-#squad-users-div::-webkit-scrollbar{
+#squad-users-div::-webkit-scrollbar,
+#squad-users-div-wrapper::-webkit-scrollbar{
     background-color: black;
     border-radius: 100px;
     width: 9px;
@@ -326,9 +329,11 @@
     }
 
     #chat-messages-div-wrapper::-webkit-scrollbar-track,
-    #squad-users-div::-webkit-scrollbar-track{
+    #squad-users-div::-webkit-scrollbar-track,
+    #squad-users-div-wrapper::-webkit-scrollbar-track{
         visibility: hidden;
     }
+
 }
 
 
