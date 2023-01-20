@@ -14,6 +14,8 @@ import pro.squadup.utils.Utils;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Controller
 public class ProfileController {
@@ -95,27 +97,18 @@ public class ProfileController {
         return "profile/games";
     }
 
-    @PostMapping("/profile/preferences/{id}/edit")
-    public String editProfilePreferences(@PathVariable Long id, @RequestBody Preferences updatedPreferences) throws JsonProcessingException {
+    @PostMapping("/profile/preferences/edit")
+    public String editProfilePreferences(@PathVariable Long id, @RequestBody Preferences updatedPreferences, Model model) throws JsonProcessingException {
         User currentUser = userDao.findById(Utils.currentUserId()).get();
         Preferences userPreferences = currentUser.getPreferences();
-        userPreferences.setBio(updatedPreferences.getBio());
-        userPreferences.setLocation(locationDao.findByTimezone(updatedPreferences.getLocation().getTimezone()));
-        Set<Language> updatedLanguages = new HashSet<>();
-        for(Language language : updatedPreferences.getLanguages()) {
-            updatedLanguages.add(languageDao.findByLanguage(language.getLanguage()));
+        if(preferencesValidated(updatedPreferences)) {
+            packagePreferences(userPreferences, updatedPreferences);
+            preferencesDao.save(userPreferences);
+            return "redirect:/hq";
+        } else {
+            model.addAttribute("preferences", updatedPreferences);
+            return "redirect:/profile/preferences" + invalidPreferencesParamsRedirectString(updatedPreferences);
         }
-        userPreferences.setLanguages(updatedLanguages);
-        userPreferences.setMatureLanguage(updatedPreferences.isMatureLanguage());
-        userPreferences.setRating(ratingDao.findByRating(updatedPreferences.getRating().getRating()));
-        Set<Platform> updatedPlatforms = new HashSet<>();
-        for(Platform platform : updatedPreferences.getPlatforms()) {
-            updatedPlatforms.add(platformDao.findByType(platform.getType()));
-        }
-        userPreferences.setPlatforms(updatedPlatforms);
-        userPreferences.setGamertag(updatedPreferences.getGamertag());
-        preferencesDao.save(userPreferences);
-        return "redirect:/hq";
     }
 
 
@@ -151,5 +144,73 @@ public class ProfileController {
         model.addAttribute("isMyProfile", isMyProfile(currentUser, user));
         model.addAttribute("isRecruit", isRecruit(currentUser, user));
         model.addAttribute("isComrade", isComrade(currentUser, user));
+    }
+
+    private boolean preferencesValidated(Preferences preferences) {
+        if(
+                preferences.getLocation() == null ||
+                preferences.getLanguages() == null ||
+                preferences.getRating() == null ||
+                preferences.getPlatforms() == null ||
+                preferences.getGamertag().equals("") ||
+                preferences.getBio().equals("")
+        ) {
+            return false;
+        }
+        return true;
+    }
+
+    private boolean invalidGamertag(String input) {
+        final Pattern pattern = Pattern.compile("^[A-Za-z0-9]+#\\d\\d\\d\\d$", Pattern.CASE_INSENSITIVE);
+        final Matcher matcher = pattern.matcher(input);
+        return !matcher.matches();
+    }
+
+    private void packagePreferences(Preferences userPreferences, Preferences updatedPreferences) {
+        userPreferences.setBio(updatedPreferences.getBio());
+        userPreferences.setLocation(locationDao.findByTimezone(updatedPreferences.getLocation().getTimezone()));
+        Set<Language> updatedLanguages = new HashSet<>();
+        for(Language language : updatedPreferences.getLanguages()) {
+            updatedLanguages.add(languageDao.findByLanguage(language.getLanguage()));
+        }
+        userPreferences.setLanguages(updatedLanguages);
+        userPreferences.setMatureLanguage(updatedPreferences.isMatureLanguage());
+        userPreferences.setRating(ratingDao.findByRating(updatedPreferences.getRating().getRating()));
+        Set<Platform> updatedPlatforms = new HashSet<>();
+        for(Platform platform : updatedPreferences.getPlatforms()) {
+            updatedPlatforms.add(platformDao.findByType(platform.getType()));
+        }
+        userPreferences.setPlatforms(updatedPlatforms);
+        userPreferences.setGamertag(updatedPreferences.getGamertag());
+    }
+
+    public String invalidPreferencesParamsRedirectString(Preferences preferences) {
+        String paramString = "";
+        if(preferences.getLocation() == null) {
+            paramString = paramString + paramPrefix(paramString) + "invalidLocation";
+        }
+        if(preferences.getLanguages() == null) {
+            paramString = paramString + paramPrefix(paramString) + "invalidLanguages";
+        }
+        if(preferences.getRating() == null) {
+            paramString = paramString + paramPrefix(paramString) + "invalidRating";
+        }
+        if(preferences.getPlatforms() == null) {
+            paramString = paramString + paramPrefix(paramString) + "invalidPlatforms";
+        }
+        if(preferences.getGamertag().equals("") || invalidGamertag(preferences.getGamertag())) {
+            paramString = paramString + paramPrefix(paramString) + "invalidGamertag";
+        }
+        if(preferences.getBio().equals("")) {
+            paramString = paramString + paramPrefix(paramString) + "invalidBio";
+        }
+        return paramString;
+    }
+
+    public String paramPrefix(String paramString) {
+        if(paramString.length() == 0) {
+            return "?";
+        }
+        return "&";
     }
 }

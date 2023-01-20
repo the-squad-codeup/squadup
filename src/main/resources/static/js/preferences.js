@@ -102,7 +102,7 @@ $(function() {
                     },
                     body: JSON.stringify(preferencesObject)
                 }
-                let results = await fetch(`/profile/preferences/${$("#hidden-preferences-id").text()}/edit`, postOptions).then(res => res);
+                let results = await fetch(`/profile/preferences/edit`, postOptions).then(res => res);
             }
         }
     }
