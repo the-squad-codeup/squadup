@@ -45,22 +45,84 @@ $(function() {
             }
             return options;
         },
-
-
-
-        // $('#mature-language').multiselect();
-
-
-    packagePreferencesObject() {
+        formValidated(preferencesObject) {
+            console.log("Inside formValidated check. preferencesObject:");
+            console.log(preferencesObject);
+            if(
+                this.locationValidated(preferencesObject.location) &&
+                this.languagesValidated(preferencesObject.languages) &&
+                this.ratingValidated(preferencesObject.rating) &&
+                this.platformsValidated(preferencesObject.platforms) &&
+                this.gamertagValidated(preferencesObject.gamertag) &&
+                this.bioValidated(preferencesObject.bio)
+            ) {
+                return true;
+            }
+            Print.formNotValid();
+            return false;
+        },
+        locationValidated(location) {
+            let isValid = true;
+            if(location == null) {
+                isValid = false;
+            }
+            Print.locationValidation(isValid);
+            return isValid;
+        },
+        languagesValidated(languages) {
+            if(languages.length < 1) {
+                Print.locationsNotValid();
+                return false;
+            }
+            return true;
+        },
+        ratingValidated(rating) {
+            if(rating == null) {
+                Print.ratingNotValid();
+                return false;
+            }
+            return true;
+        },
+        platformsValidated(platforms) {
+            if(platforms.length < 1) {
+                Print.platformsNotValid();
+                return false;
+            }
+            return true;
+        },
+        gamertagValidated(gamertag) {
+            if(gamertag === "" && !this.gamertagValidDiscordName(gamertag)) {
+                Print.gamertagNotValid();
+                return false;
+            }
+            return true;
+        },
+        gamertagValidDiscordName(gamertag) {
+            console.log("Inside gamertagValidDiscordName. gamertagSplit array: ");
+            let gamertagSplit = gamertag.split("#");
+            console.log(gamertagSplit);
+            if(gamertagSplit.length !== 2 || isNaN(gamertagSplit[1])) {
+                console.log("returning false");
+                return false;
+            }
+            console.log("returning true");
+            return true;
+        },
+        bioValidated(bio) {
+            if(bio === "") {
+                Print.bioNotValid();
+                return false;
+            }
+            return true;
+        },
+        packagePreferencesObject() {
             const preferencesObject = {
                 bio: $("#bio").val(),
                 //bio is updating table and saving to page
                 location: {
                     timezone: $("#location").find(":selected").val()
-
                 },
                 languages: MyPreferences.packageLanguageOptions($("#languages")),
-
                 matureLanguage: $("#mature-language").is(":checked"),
                 // mature language is updating table
 
@@ -77,7 +139,7 @@ $(function() {
             return preferencesObject;
         },
         baseUrl: $("#base-url").text()
-    }
+    };
 
     const Fetch = {
         Get: {
@@ -200,16 +262,53 @@ $(function() {
                     `);
                 }
             }
+        },
+        locationValidation(isValid) {
+            let locationInput = $("#select2-location-container");
+            isValid ? locationInput.css("background", "none") : locationInput.css("background", "#fc3503");
+        },
+        languagesValidation(isValid) {
+            let languagesInput = $("#languages").parent().find(".select2-selection");
+            isValid ? languagesInput.css("background", "none") : languagesInput.css("background", "#fc3503");
+        },
+        ratingValidation(isValid) {
+            let ratingInput = $("#select2-game-ratings-container");
+            isValid ? ratingInput.css("background", "none") : ratingInput.css("background", "#fc3503");
+        },
+        platformsValidation(isValid) {
+            let platformsInput = $("#platforms").parent().find(".select2-selection");
+            isValid ? platformsInput.css("background", "none") : platformsInput.css("background", "#fc3503");
+        },
+        gamertagValidation(isValid) {
+            let gamertagInput = $("#gamertag");
+            isValid ? gamertagInput.css("background", "none") : gamertagInput.css("background", "#fc3503");
+        },
+        bioValidation(isValid) {
+            let bioInput = $("bio");
+            isValid ? bioInput.css("background", "none") : bioInput.css("background", "#fc3503");
+        },
+        formNotValid() {
+            $("#preferences-form").prepend(`
+                <p>
+                    <span>All fields are required. Please enter correct values.</span>
+                </p>
+            `);
         }
-    }
+    };
 
     const Events = {
         initialize() {
             $(document)
                 .on("click", "#edit-preferences-submit-button", async function() {
-                    console.log("User clicked edit preferences submit")
-                    await Fetch.Post.updatedPreferences(MyPreferences.packagePreferencesObject());
-                    // window.location.replace(`/games`);
+                    console.log("User clicked edit preferences submit");
+                    let preferencesObject = MyPreferences.packagePreferencesObject();
+                    if(MyPreferences.formValidated(preferencesObject)) {
+                        await Fetch.Post.updatedPreferences(preferencesObject);
+                        console.log("Form validated. Redirecting to /hq");
+                        // window.location.replace(`/hq`);
+                    } else {
+                        document.body.scrollTop = document.documentElement.scrollTop = 0;
+                    }
                 })
                 .on("change", "#location", function() {
                     Overlays.toggleOverlay();
