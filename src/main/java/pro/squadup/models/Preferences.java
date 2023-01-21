@@ -170,10 +170,7 @@ public class Preferences {
     public Preferences() {
         this.bio = "";
         this.gamertag = "";
-//        this.location = "";
-//        this.language = "";
         this.matureLanguage = false;
-//        this.game_age_rating = "";
     }
 
     public Preferences(String bio, String gamertag, Location location, Set<Language> languages, boolean matureLanguage, Rating rating) {
