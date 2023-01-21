@@ -2,12 +2,10 @@ package pro.squadup.controllers;
 
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 import pro.squadup.models.*;
 import pro.squadup.repositories.*;
 import pro.squadup.utils.Utils;
@@ -19,6 +17,8 @@ import java.util.regex.Pattern;
 
 @Controller
 public class ProfileController {
+
+    private ObjectMapper mapper = new ObjectMapper();
 
     private UserRepository userDao;
     private PreferencesRepository preferencesDao;
@@ -98,16 +98,21 @@ public class ProfileController {
     }
 
     @PostMapping("/profile/preferences/edit")
-    public String editProfilePreferences(@PathVariable Long id, @RequestBody Preferences updatedPreferences, Model model) throws JsonProcessingException {
+    public @ResponseBody String editProfilePreferences(@RequestBody Preferences updatedPreferences, Model model) throws JsonProcessingException {
+        System.out.println("Inside editProfilePreferences.");
+        System.out.printf("updatedPreferences passed in: %n%s%n", mapper.writeValueAsString(updatedPreferences));
         User currentUser = userDao.findById(Utils.currentUserId()).get();
         Preferences userPreferences = currentUser.getPreferences();
         if(preferencesValidated(updatedPreferences)) {
+            System.out.println("Preferences are valid");
             packagePreferences(userPreferences, updatedPreferences);
             preferencesDao.save(userPreferences);
             return "redirect:/hq";
         } else {
             model.addAttribute("preferences", updatedPreferences);
-            return "redirect:/profile/preferences" + invalidPreferencesParamsRedirectString(updatedPreferences);
+            String urlPathSuffix = invalidPreferencesParamsRedirectString(updatedPreferences);
+            System.out.printf("Suffix string: %s%n", urlPathSuffix);
+            return urlPathSuffix;
         }
     }
 
@@ -149,9 +154,9 @@ public class ProfileController {
     private boolean preferencesValidated(Preferences preferences) {
         if(
                 preferences.getLocation() == null ||
-                preferences.getLanguages() == null ||
+                preferences.getLanguages().size() == 0 ||
                 preferences.getRating() == null ||
-                preferences.getPlatforms() == null ||
+                preferences.getPlatforms().size() == 0 ||
                 preferences.getGamertag().equals("") ||
                 preferences.getBio().equals("")
         ) {
@@ -209,7 +214,7 @@ public class ProfileController {
 
     public String paramPrefix(String paramString) {
         if(paramString.length() == 0) {
-            return "?";
+            return "?invalid&";
         }
         return "&";
     }

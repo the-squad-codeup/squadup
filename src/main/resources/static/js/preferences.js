@@ -94,6 +94,7 @@ $(function() {
         },
         Post: {
             async updatedPreferences(preferencesObject) {
+                console.log("inside updatedPreferences post method")
                 const postOptions = {
                     method: 'POST',
                     headers: {
@@ -102,7 +103,8 @@ $(function() {
                     },
                     body: JSON.stringify(preferencesObject)
                 }
-                let results = await fetch(`/profile/preferences/edit`, postOptions).then(res => res);
+                let results = await fetch(`${Utils.url()}profile/preferences/edit`, postOptions).then(res => res);
+                console.log(results);
             }
         }
     }
@@ -205,8 +207,9 @@ $(function() {
         initialize() {
             $(document)
                 .on("click", "#edit-preferences-submit-button", async function() {
+                    console.log("User clicked edit preferences submit")
                     await Fetch.Post.updatedPreferences(MyPreferences.packagePreferencesObject());
-                    window.location.replace(`/games`);
+                    // window.location.replace(`/games`);
                 })
                 .on("change", "#location", function() {
                     Overlays.toggleOverlay();
