@@ -50,15 +50,18 @@ public class GameController {
         this.preferencesDao = preferencesDao;
     }
 
+    // returns current user's games
     @GetMapping("/user")
     public Set<Game> getMyGames(){
         User currentUser = userDao.findById(Utils.currentUserId()).get();
         return currentUser.getPreferences().getGames();
     }
 
+    // returns list of games based on search query string
+    // calls IGDB api to populate list
+    // filters based on current user's preferences
     @PostMapping("/search")
     public List<Game> searchGames(@RequestBody String query) throws IOException {
-        long startTime = System.currentTimeMillis();
         User user = userDao.findById(Utils.currentUserId()).get();
         List<Game> allGames = scrapeGamesInfo(gameApiService.searchGames(query));
         List<Game> trimmedGames = new ArrayList<>();
@@ -68,10 +71,10 @@ public class GameController {
                 trimmedGames.add(scrapedGame);
             }
         }
-        long endTime = System.currentTimeMillis();
         return trimmedGames;
     }
 
+    // returns user's favorite game
     @GetMapping("/favorite")
     public Game getFavoriteGame() {
         User user = userDao.findById(Utils.currentUserId()).get();
@@ -82,6 +85,7 @@ public class GameController {
         return new Game();
     }
 
+    // sets user's favorite game by game id
     @PostMapping("/{gameId}/favorite")
     public Game setFavoriteGame(@PathVariable Long gameId) {
         User user = userDao.findById(Utils.currentUserId()).get();
@@ -91,6 +95,8 @@ public class GameController {
         return gameToFavorite;
     }
 
+    // adds game based on game id
+    // will only add if game is not already in user's game list
     @PostMapping("/{gameId}/add")
     public Game addGame(@PathVariable long gameId) throws JsonProcessingException {
         User currentUser = userDao.findById(Utils.currentUserId()).get();
@@ -114,6 +120,8 @@ public class GameController {
         return game;
     }
 
+    // removes games from current user's game list
+    // does not delete game from database
     @PostMapping("/{gameId}/remove")
     public Game removeGame(@PathVariable Long gameId) {
         User currentUser = userDao.findById(Utils.currentUserId()).get();
@@ -127,18 +135,18 @@ public class GameController {
         return gameToRemove;
     }
 
+    // gets list of game objects from IGDB api and calls method to scrape each game for only info we store in database
     private List<Game> scrapeGamesInfo(List<Game> igdbGames) {
-        long startTime = System.currentTimeMillis();
         List<Game> games = new ArrayList<>();
         for(Game game : igdbGames) {
             games.add(scrapeGameInfo(game));
         }
-        long endTime = System.currentTimeMillis();
         return games;
     }
 
+    // scrapes info we use from IDGB api games
+    // saves game to database if not already saved
     private Game scrapeGameInfo(Game game) {
-        // Sets game to existing game in database if it already exists, or creates new game
         if(gameDao.existsByIgdbId(game.getIgdbId())) {
             game = gameDao.findByIgdbId(game.getIgdbId());
         } else {
@@ -150,8 +158,8 @@ public class GameController {
         return game;
     }
 
+    // Checks current genres in database and adds any that are not present
     private void setGameGenres(Game game) {
-        // Checks current genres in database and adds any that are not present
         Set<Genre> genres = new HashSet<>();
         for (Genre genre : game.getGenres()) {
             if (genreDao.existsByName(genre.getName())) {
@@ -163,8 +171,8 @@ public class GameController {
         game.setGenres(genres);
     }
 
+    // Sets game platform based on the platforms in our database
     private void setGamePlatforms(Game game) {
-        // Sets game platform based on the platforms in our database
         Set<Platform> platforms = new HashSet<>();
         for (Platform platform : game.getPlatforms()) {
             Long mappingId = platform.getIgdbIds().stream().findFirst().get().getIgdbId();
@@ -180,6 +188,7 @@ public class GameController {
         game.setPlatforms(platforms);
     }
 
+    // sets correct game rating based on how it is saved in database
     private void setGameRating(Game game) {
         Rating rating;
         if(game.getRating() != null) {
@@ -190,6 +199,7 @@ public class GameController {
         game.setRating(rating);
     }
 
+    // returns true or false if game matches user's preferences
     private boolean gameMatchesUserPreferences(Game game, User user) {
         if(
                 platformMatches(game, user) &&
@@ -200,6 +210,7 @@ public class GameController {
         return false;
     }
 
+    // returns true or false based on whether game title contains the word "edition"
     private boolean notGameEdition(Game game) {
         if(game.getTitle().contains("Edition")) {
             return false;
@@ -207,6 +218,7 @@ public class GameController {
         return true;
     }
 
+    // returns true or false based on if game platform matches user's platforms
     private boolean platformMatches(Game game, User user) {
         for(Platform gamePlatform : game.getPlatforms()) {
             if(user.getPreferences().getPlatforms().contains(gamePlatform)) {
@@ -216,6 +228,7 @@ public class GameController {
         return false;
     }
 
+    // returns true or false based on whether game age rating matches user's age rating preference
     private boolean ratingMatches(Game game, User user) {
         if(user.getPreferences().getRating().getId() >= game.getRating().getId()) {
             return true;

@@ -28,6 +28,7 @@ public class GeneralController {
         this.recruitDao = recruiteDao;
     }
 
+    // simple get mapping redirects
     @GetMapping("/")
     public String showSplashPage() {
         return "general/splash";
@@ -43,12 +44,14 @@ public class GeneralController {
         return "general/contact-us";
     }
 
+    // saves contact us form data into database strays table
     @PostMapping("/contact")
     public String submittedEmail(@ModelAttribute Stray stray){
         strayDao.save(stray);
         return "redirect:/";
     }
 
+    // redirects to dashboard with current user's squads passed in
     @GetMapping("/dashboard")
     public String showHomePage(Model model) {
         User currentUser = userDao.findById(Utils.currentUserId()).get();
