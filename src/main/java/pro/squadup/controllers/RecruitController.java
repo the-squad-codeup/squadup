@@ -24,10 +24,7 @@ public class RecruitController {
 
     private UserRepository userDao;
     private RecruitRepository recruitDao;
-
     private ComradeRepository comradeDao;
-
-
 
     public RecruitController(UserRepository userDao, RecruitRepository recruitDao, ComradeRepository comradeDao) {
         this.userDao = userDao;
@@ -35,12 +32,14 @@ public class RecruitController {
         this.comradeDao = comradeDao;
     }
 
+    // returns all recruits of current user
+    // only returns recruits that are not already accepted or rejected by user
     @GetMapping("/recruits/all")
     public Set<Recruit> getAllByUser(){
         User user = userDao.findById(Utils.currentUserId()).get();
         Set<Recruit> allRecruits;
         Set<Recruit> trimmedRecruits = new HashSet<>();
-      allRecruits = user.getRecruits();
+        allRecruits = user.getRecruits();
         for(Recruit recruit : allRecruits){
             if(!recruit.isAccepted() && !recruit.isRejected()){
                 trimmedRecruits.add(recruit);
@@ -49,6 +48,7 @@ public class RecruitController {
         return trimmedRecruits;
     }
 
+    // accepts recruit based on current user and recruit id passed in
     @PostMapping("/recruits/{id}/accept")
     public Recruit acceptRecruit(@PathVariable Long id){
         User user = userDao.findById(Utils.currentUserId()).get();
@@ -67,7 +67,7 @@ public class RecruitController {
         return recruit;
     }
 
-
+    // rejects recruit based on current user and recruit id passed in
     @PostMapping("/recruits/{id}/reject")
     public Recruit rejectRecruit(@PathVariable Long id){
         Recruit recruit = recruitDao.findById(id).get();

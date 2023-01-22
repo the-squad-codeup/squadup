@@ -36,6 +36,8 @@ public class SquadChatController {
         this.squadChatDao = squadChatDao;
     }
 
+    // saves message to database based on user added to squad messaging
+    // happens when a squad member joins the chat and is subscribed to message stream
     @MessageMapping("/squad-chat/{squadId}/add-user")
     public void addUser(@DestinationVariable Long squadId, @Payload SquadChatMessage chatMessage, SimpMessageHeaderAccessor headerAccessor) {
         initializeMessage(chatMessage, squadId);
@@ -50,11 +52,14 @@ public class SquadChatController {
         messagingTemplate.convertAndSend(format("/secured/squad-room/%s", squadId), chatMessage);
     }
 
+    // saves message to database based on user removed from squad messaging
+    // happens when a squad member leaves the chat and is no longer subscribed to message stream
     @MessageMapping("/squad-chat/{squadId}/remove-user")
     public void removeUser(@DestinationVariable Long squadId, @Payload SquadChatMessage chatMessage, SimpMessageHeaderAccessor headerAccessor) {
         initializeMessage(chatMessage, squadId);
     }
 
+    // sends chat message to squad id message stream
     @MessageMapping("/squad-chat/{squadId}/send")
     public void sendMessage(@DestinationVariable Long squadId, @Payload SquadChatMessage chatMessage) {
         initializeMessage(chatMessage, squadId);
@@ -62,6 +67,7 @@ public class SquadChatController {
         messagingTemplate.convertAndSend(format("/secured/squad-room/%s", squadId), chatMessage);
     }
 
+    // edits message in squad chat and sends edit message to squad chat stream
     @MessageMapping("/squad-chat/{squadId}/edit")
     public void editMessage(@DestinationVariable Long squadId, @Payload SquadChatMessage editMessage) throws JsonProcessingException {
         SquadChatMessage messageToEdit = squadChatDao.findById(editMessage.getId()).get();
@@ -75,6 +81,7 @@ public class SquadChatController {
         }
     }
 
+    // deletes message in squad chat and sends delete message to squad chat stream
     @MessageMapping("/squad-chat/{squadId}/delete")
     public void deleteMessage(@DestinationVariable Long squadId, @Payload SquadChatMessage deleteMessage) {
         SquadChatMessage messageToDelete = squadChatDao.findById(deleteMessage.getId()).get();
@@ -86,6 +93,7 @@ public class SquadChatController {
         }
     }
 
+    // sets current time stamp, user, and squad for new message
     private SquadChatMessage initializeMessage(SquadChatMessage message, Long squadId) {
         Timestamp messageTime = new Timestamp(new Date().getTime());
         User currentUser = userDao.findById(Utils.currentUserId()).get();
@@ -95,17 +103,5 @@ public class SquadChatController {
         message.setChat(squad.getChat());
         return message;
     }
-
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////// Unsure if needed ////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//
-//    @MessageMapping("/chat")
-//    @SendTo("/topic/messages")
-//    public OutputMessage send(Message message) throws Exception {
-//        Timestamp time = new Timestamp(new Date().getTime());
-//        return new OutputMessage(message.getSender(), message.getText(), time);
-//    }
 
 }

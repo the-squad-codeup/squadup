@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class SocialController {
 
+    // simple getmapping redirects
     @GetMapping("/comrades")
     public String comradesPage(){
         return "social/comrades";
