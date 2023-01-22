@@ -70,38 +70,42 @@ $(function() {
             return isValid;
         },
         languagesValidated(languages) {
+            let isValid = true;
             if(languages.length < 1) {
-                Print.locationsNotValid();
-                return false;
+                isValid = false;
             }
-            return true;
+            Print.languagesValidation(isValid);
+            return isValid;
         },
         ratingValidated(rating) {
+            let isValid = true;
             if(rating == null) {
-                Print.ratingNotValid();
-                return false;
+                isValid = false;
             }
-            return true;
+            Print.ratingValidation(isValid);
+            return isValid;
         },
         platformsValidated(platforms) {
+            let isValid = true;
             if(platforms.length < 1) {
-                Print.platformsNotValid();
-                return false;
+                isValid = false;
             }
-            return true;
+            Print.platformsValidation(isValid);
+            return isValid;
         },
         gamertagValidated(gamertag) {
-            if(gamertag === "" && !this.gamertagValidDiscordName(gamertag)) {
-                Print.gamertagNotValid();
-                return false;
+            let isValid = true;
+            if(gamertag === "" || !this.gamertagValidDiscordName(gamertag)) {
+                isValid = false;
             }
-            return true;
+            Print.gamertagValidation(isValid);
+            return isValid;
         },
         gamertagValidDiscordName(gamertag) {
             console.log("Inside gamertagValidDiscordName. gamertagSplit array: ");
             let gamertagSplit = gamertag.split("#");
             console.log(gamertagSplit);
-            if(gamertagSplit.length !== 2 || isNaN(gamertagSplit[1])) {
+            if(gamertagSplit.length !== 2 || isNaN(gamertagSplit[1]) || gamertagSplit[1].length !== 4) {
                 console.log("returning false");
                 return false;
             }
@@ -109,11 +113,12 @@ $(function() {
             return true;
         },
         bioValidated(bio) {
+            let isValid = true;
             if(bio === "") {
-                Print.bioNotValid();
-                return false;
+                isValid = false;
             }
-            return true;
+            Print.bioValidation(isValid);
+            return isValid;
         },
         packagePreferencesObject() {
             const preferencesObject = {
@@ -265,31 +270,32 @@ $(function() {
         },
         locationValidation(isValid) {
             let locationInput = $("#select2-location-container");
-            isValid ? locationInput.css("background", "none") : locationInput.css("background", "#fc3503");
+            isValid ? locationInput.css("background", "") : locationInput.css("background", "#fc3503");
         },
         languagesValidation(isValid) {
             let languagesInput = $("#languages").parent().find(".select2-selection");
-            isValid ? languagesInput.css("background", "none") : languagesInput.css("background", "#fc3503");
+            isValid ? languagesInput.css("background", "") : languagesInput.css("background", "#fc3503");
         },
         ratingValidation(isValid) {
             let ratingInput = $("#select2-game-ratings-container");
-            isValid ? ratingInput.css("background", "none") : ratingInput.css("background", "#fc3503");
+            isValid ? ratingInput.css("background", "") : ratingInput.css("background", "#fc3503");
         },
         platformsValidation(isValid) {
             let platformsInput = $("#platforms").parent().find(".select2-selection");
-            isValid ? platformsInput.css("background", "none") : platformsInput.css("background", "#fc3503");
+            isValid ? platformsInput.css("background", "") : platformsInput.css("background", "#fc3503");
         },
         gamertagValidation(isValid) {
             let gamertagInput = $("#gamertag");
-            isValid ? gamertagInput.css("background", "none") : gamertagInput.css("background", "#fc3503");
+            isValid ? gamertagInput.css("background", "") : gamertagInput.css("background", "#fc3503");
         },
         bioValidation(isValid) {
             let bioInput = $("bio");
-            isValid ? bioInput.css("background", "none") : bioInput.css("background", "#fc3503");
+            isValid ? bioInput.css("background", "") : bioInput.css("background", "#fc3503");
         },
         formNotValid() {
+            $("#preferences-form").find("#validation-prepend").remove();
             $("#preferences-form").prepend(`
-                <p>
+                <p id="validation-prepend">
                     <span>All fields are required. Please enter correct values.</span>
                 </p>
             `);
