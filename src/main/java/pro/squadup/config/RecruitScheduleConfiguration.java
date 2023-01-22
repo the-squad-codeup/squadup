@@ -14,6 +14,7 @@ public class RecruitScheduleConfiguration {
     @Autowired
     private RecruitMatchingService recruitMatchingService;
 
+    // Runs recruit matching algorithm to every user every night at midnight
     @Scheduled(cron = "0 0 0 * * ?")
     public void runRecruitMatchScheduler() throws JsonProcessingException {
         recruitMatchingService.matchAllRecruits();

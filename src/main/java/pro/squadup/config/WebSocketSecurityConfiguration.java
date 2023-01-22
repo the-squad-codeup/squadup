@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.socket.AbstractSecurit
 public class WebSocketSecurityConfiguration extends AbstractSecurityWebSocketMessageBrokerConfigurer {
 
 
+    // Dictates which message endpaths are secured and require authentication
     @Override
     protected void configureInbound(MessageSecurityMetadataSourceRegistry messages) {
         messages
