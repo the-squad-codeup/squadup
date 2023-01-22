@@ -99,21 +99,11 @@ public class ProfileController {
 
     @PostMapping("/profile/preferences/edit")
     public @ResponseBody String editProfilePreferences(@RequestBody Preferences updatedPreferences, Model model) throws JsonProcessingException {
-        System.out.println("Inside editProfilePreferences.");
-        System.out.printf("updatedPreferences passed in: %n%s%n", mapper.writeValueAsString(updatedPreferences));
         User currentUser = userDao.findById(Utils.currentUserId()).get();
         Preferences userPreferences = currentUser.getPreferences();
-        if(preferencesValidated(updatedPreferences)) {
-            System.out.println("Preferences are valid");
-            packagePreferences(userPreferences, updatedPreferences);
-            preferencesDao.save(userPreferences);
-            return "redirect:/hq";
-        } else {
-            model.addAttribute("preferences", updatedPreferences);
-            String urlPathSuffix = invalidPreferencesParamsRedirectString(updatedPreferences);
-            System.out.printf("Suffix string: %s%n", urlPathSuffix);
-            return urlPathSuffix;
-        }
+        packagePreferences(userPreferences, updatedPreferences);
+        preferencesDao.save(userPreferences);
+        return "redirect:/hq";
     }
 
 
@@ -151,26 +141,6 @@ public class ProfileController {
         model.addAttribute("isComrade", isComrade(currentUser, user));
     }
 
-    private boolean preferencesValidated(Preferences preferences) {
-        if(
-                preferences.getLocation() == null ||
-                preferences.getLanguages().size() == 0 ||
-                preferences.getRating() == null ||
-                preferences.getPlatforms().size() == 0 ||
-                preferences.getGamertag().equals("") ||
-                preferences.getBio().equals("")
-        ) {
-            return false;
-        }
-        return true;
-    }
-
-    private boolean invalidGamertag(String input) {
-        final Pattern pattern = Pattern.compile("^[A-Za-z0-9]+#\\d\\d\\d\\d$", Pattern.CASE_INSENSITIVE);
-        final Matcher matcher = pattern.matcher(input);
-        return !matcher.matches();
-    }
-
     private void packagePreferences(Preferences userPreferences, Preferences updatedPreferences) {
         userPreferences.setBio(updatedPreferences.getBio());
         userPreferences.setLocation(locationDao.findByTimezone(updatedPreferences.getLocation().getTimezone()));
@@ -187,35 +157,5 @@ public class ProfileController {
         }
         userPreferences.setPlatforms(updatedPlatforms);
         userPreferences.setGamertag(updatedPreferences.getGamertag());
-    }
-
-    public String invalidPreferencesParamsRedirectString(Preferences preferences) {
-        String paramString = "";
-        if(preferences.getLocation() == null) {
-            paramString = paramString + paramPrefix(paramString) + "invalidLocation";
-        }
-        if(preferences.getLanguages() == null) {
-            paramString = paramString + paramPrefix(paramString) + "invalidLanguages";
-        }
-        if(preferences.getRating() == null) {
-            paramString = paramString + paramPrefix(paramString) + "invalidRating";
-        }
-        if(preferences.getPlatforms() == null) {
-            paramString = paramString + paramPrefix(paramString) + "invalidPlatforms";
-        }
-        if(preferences.getGamertag().equals("") || invalidGamertag(preferences.getGamertag())) {
-            paramString = paramString + paramPrefix(paramString) + "invalidGamertag";
-        }
-        if(preferences.getBio().equals("")) {
-            paramString = paramString + paramPrefix(paramString) + "invalidBio";
-        }
-        return paramString;
-    }
-
-    public String paramPrefix(String paramString) {
-        if(paramString.length() == 0) {
-            return "?invalid&";
-        }
-        return "&";
     }
 }

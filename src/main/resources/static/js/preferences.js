@@ -45,22 +45,89 @@ $(function() {
             }
             return options;
         },
-
-
-
-        // $('#mature-language').multiselect();
-
-
-    packagePreferencesObject() {
+        formValidated(preferencesObject) {
+            let isLocationValid = this.locationValidated(preferencesObject.location);
+            let areLanguagesValid = this.languagesValidated(preferencesObject.languages);
+            let isRatingValid = this.ratingValidated(preferencesObject.rating);
+            let arePlatformsValid = this.platformsValidated(preferencesObject.platforms);
+            let isGamertagValid = this.gamertagValidated(preferencesObject.gamertag);
+            let isBioValid = this.bioValidated(preferencesObject.gamertag);
+            if(
+                isLocationValid &&
+                areLanguagesValid &&
+                isRatingValid &&
+                arePlatformsValid &&
+                isGamertagValid &&
+                isBioValid
+            ) {
+                return true;
+            }
+            Print.formNotValid();
+            return false;
+        },
+        locationValidated(location) {
+            let isValid = true;
+            if(location.timezone === "" || location.timezone === "Unspecified Time Zone") {
+                isValid = false;
+            }
+            Print.locationValidation(isValid);
+            return isValid;
+        },
+        languagesValidated(languages) {
+            let isValid = true;
+            if(languages.length < 1) {
+                isValid = false;
+            }
+            Print.languagesValidation(isValid);
+            return isValid;
+        },
+        ratingValidated(rating) {
+            let isValid = true;
+            if(rating.rating === "") {
+                isValid = false;
+            }
+            Print.ratingValidation(isValid);
+            return isValid;
+        },
+        platformsValidated(platforms) {
+            let isValid = true;
+            if(platforms.length < 1) {
+                isValid = false;
+            }
+            Print.platformsValidation(isValid);
+            return isValid;
+        },
+        gamertagValidated(gamertag) {
+            let isValid = true;
+            if(gamertag === "" || !this.gamertagValidDiscordName(gamertag)) {
+                isValid = false;
+            }
+            Print.gamertagValidation(isValid);
+            return isValid;
+        },
+        gamertagValidDiscordName(gamertag) {
+            let gamertagSplit = gamertag.split("#");
+            if(gamertagSplit.length !== 2 || isNaN(gamertagSplit[1]) || gamertagSplit[1].length !== 4) {
+                return false;
+            }
+            return true;
+        },
+        bioValidated(bio) {
+            let isValid = true;
+            if(bio === "") {
+                isValid = false;
+            }
+            Print.bioValidation(isValid);
+            return isValid;
+        },
+        packagePreferencesObject() {
             const preferencesObject = {
                 bio: $("#bio").val(),
                 //bio is updating table and saving to page
                 location: {
                     timezone: $("#location").find(":selected").val()
-
                 },
                 languages: MyPreferences.packageLanguageOptions($("#languages")),
-
                 matureLanguage: $("#mature-language").is(":checked"),
                 // mature language is updating table
 
@@ -77,7 +144,7 @@ $(function() {
             return preferencesObject;
         },
         baseUrl: $("#base-url").text()
-    }
+    };
 
     const Fetch = {
         Get: {
@@ -94,7 +161,6 @@ $(function() {
         },
         Post: {
             async updatedPreferences(preferencesObject) {
-                console.log("inside updatedPreferences post method")
                 const postOptions = {
                     method: 'POST',
                     headers: {
@@ -104,7 +170,6 @@ $(function() {
                     body: JSON.stringify(preferencesObject)
                 }
                 let results = await fetch(`${Utils.url()}profile/preferences/edit`, postOptions).then(res => res);
-                console.log(results);
             }
         }
     }
@@ -200,16 +265,52 @@ $(function() {
                     `);
                 }
             }
+        },
+        locationValidation(isValid) {
+            let locationInput = $("#select2-location-container");
+            isValid ? locationInput.css("background", "") : locationInput.css("background", "#fc3503");
+        },
+        languagesValidation(isValid) {
+            let languagesInput = $("#languages").parent().find(".select2-selection");
+            isValid ? languagesInput.css("background", "") : languagesInput.css("background", "#fc3503");
+        },
+        ratingValidation(isValid) {
+            let ratingInput = $("#select2-game-ratings-container");
+            isValid ? ratingInput.css("background", "") : ratingInput.css("background", "#fc3503");
+        },
+        platformsValidation(isValid) {
+            let platformsInput = $("#platforms").parent().find(".select2-selection");
+            isValid ? platformsInput.css("background", "") : platformsInput.css("background", "#fc3503");
+        },
+        gamertagValidation(isValid) {
+            let gamertagInput = $("#gamertag");
+            isValid ? gamertagInput.css("background", "") : gamertagInput.css("background", "#fc3503");
+        },
+        bioValidation(isValid) {
+            let bioInput = $("#bio");
+            isValid ? bioInput.css("background", "") : bioInput.css("background", "#fc3503");
+        },
+        formNotValid() {
+            $("#preferences-form").find("#validation-prepend").remove();
+            $("#preferences-form").prepend(`
+                <p id="validation-prepend">
+                    <span>All fields are required. Please enter correct values.</span>
+                </p>
+            `);
         }
-    }
+    };
 
     const Events = {
         initialize() {
             $(document)
                 .on("click", "#edit-preferences-submit-button", async function() {
-                    console.log("User clicked edit preferences submit")
-                    await Fetch.Post.updatedPreferences(MyPreferences.packagePreferencesObject());
-                    // window.location.replace(`/games`);
+                    let preferencesObject = MyPreferences.packagePreferencesObject();
+                    if(MyPreferences.formValidated(preferencesObject)) {
+                        await Fetch.Post.updatedPreferences(preferencesObject);
+                        window.location.replace(`/hq`);
+                    } else {
+                        document.body.scrollTop = document.documentElement.scrollTop = 0;
+                    }
                 })
                 .on("change", "#location", function() {
                     Overlays.toggleOverlay();

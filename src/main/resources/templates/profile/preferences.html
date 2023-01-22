@@ -20,14 +20,14 @@
     </div>
 
     <div hidden th:text="${preferences.id}" id="hidden-preferences-id"></div>
-    <div class="container bg-dark rounded-3 p-5 rainbow" style="width: 90%;"><!--the dark gray bubble area -->
+    <div id="preferences-form" class="container bg-dark rounded-3 p-5 rainbow" style="width: 90%;"><!--the dark gray bubble area -->
 <!--        <div>-->
 
 <!--        </div>-->
 
 <!--timezone dropdown-->
         <p>
-            <span>Pick your time Zone</span>
+            <span>Pick your time Zone*</span>
             <select class="location form-select form-select-sm mb-3" aria-label=".form-select-sm example" id="location" name="location" style="width: 100%">
                 <option value=""></option>
                 <option value="Unspecified Time Zone">(UTC ??:??) Unspecified</option>
@@ -63,7 +63,7 @@
 
 <!--Languages Selection-->
         <p>
-            <span>Languages</span>
+            <span>Languages*</span>
             <br>
             <select class="languages form-select form-select-sm mb-3" aria-label=".form-select-sm example" id="languages" name="languages" multiple="multiple" style="width: 100%">
                 <option value=""></option>
@@ -83,7 +83,7 @@
 <!--ESRB Ratings-->
         <p>
             <br>
-            <span>Preferred ESRB Rating</span>
+            <span>Preferred ESRB Rating*</span>
             <br>
             <select class="game-ratings form-select form-select-sm mb-3" aria-label=".form-select-sm example" id="game-ratings" name="game-ratings" style="width: 100%">
                 <option value=""></option>
@@ -110,7 +110,7 @@
 
 <!--Platforms selection-->
         <p>
-            <span>Platforms</span>
+            <span>Platforms*</span>
             <br>
             <select class="platforms form-select form-select-sm mb-3" id="platforms" size="4" aria-label=".form-select-sm example" multiple="multiple" style="width: 100%">
                 <option value="PC">PC</option>
@@ -123,7 +123,7 @@
 
 <!--Gamertag-->
         <p>
-            <label for="gamertag">Enter your Discord Username:</label>
+            <label for="gamertag">Enter your Discord Username*</label>
             <br>
             <textarea type="text" class="form-control" id="gamertag" name="gamertag" rows="1" maxlength="38" placeholder="DiscordUsername#1234"></textarea>
             <br>
@@ -132,7 +132,7 @@
 
 <!--Biography-->
         <p>
-            <label for="bio">Tell us a little about you:</label>
+            <label for="bio">Tell us a little about you*</label>
             <br>
             <textarea type="text" class="form-control" id="bio" name="bio" rows="3" maxlength="250" placeholder="Max Length 250"></textarea>
             <br>
