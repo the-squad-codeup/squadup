@@ -67,7 +67,7 @@ $(function() {
         },
         locationValidated(location) {
             let isValid = true;
-            if(location == null) {
+            if(location.timezone === "" || location.timezone === "Unspecified Time Zone") {
                 isValid = false;
             }
             Print.locationValidation(isValid);
@@ -83,7 +83,7 @@ $(function() {
         },
         ratingValidated(rating) {
             let isValid = true;
-            if(rating == null) {
+            if(rating.rating === "") {
                 isValid = false;
             }
             Print.ratingValidation(isValid);
