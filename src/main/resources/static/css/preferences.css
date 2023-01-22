@@ -51,6 +51,10 @@ body {
     font-size: 3vw;
 }
 
+#validation-prepend {
+    color: #fc3503;
+}
+
 #edit-preferences-submit-button {
     margin: 2%;
     width: 30vw;
