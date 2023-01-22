@@ -46,8 +46,6 @@ $(function() {
             return options;
         },
         formValidated(preferencesObject) {
-            console.log("Inside formValidated check. preferencesObject:");
-            console.log(preferencesObject);
             if(
                 this.locationValidated(preferencesObject.location) &&
                 this.languagesValidated(preferencesObject.languages) &&
@@ -102,14 +100,10 @@ $(function() {
             return isValid;
         },
         gamertagValidDiscordName(gamertag) {
-            console.log("Inside gamertagValidDiscordName. gamertagSplit array: ");
             let gamertagSplit = gamertag.split("#");
-            console.log(gamertagSplit);
             if(gamertagSplit.length !== 2 || isNaN(gamertagSplit[1]) || gamertagSplit[1].length !== 4) {
-                console.log("returning false");
                 return false;
             }
-            console.log("returning true");
             return true;
         },
         bioValidated(bio) {
@@ -161,7 +155,6 @@ $(function() {
         },
         Post: {
             async updatedPreferences(preferencesObject) {
-                console.log("inside updatedPreferences post method")
                 const postOptions = {
                     method: 'POST',
                     headers: {
@@ -171,7 +164,6 @@ $(function() {
                     body: JSON.stringify(preferencesObject)
                 }
                 let results = await fetch(`${Utils.url()}profile/preferences/edit`, postOptions).then(res => res);
-                console.log(results);
             }
         }
     }
@@ -306,12 +298,10 @@ $(function() {
         initialize() {
             $(document)
                 .on("click", "#edit-preferences-submit-button", async function() {
-                    console.log("User clicked edit preferences submit");
                     let preferencesObject = MyPreferences.packagePreferencesObject();
                     if(MyPreferences.formValidated(preferencesObject)) {
                         await Fetch.Post.updatedPreferences(preferencesObject);
-                        console.log("Form validated. Redirecting to /hq");
-                        // window.location.replace(`/hq`);
+                        window.location.replace(`/hq`);
                     } else {
                         document.body.scrollTop = document.documentElement.scrollTop = 0;
                     }
