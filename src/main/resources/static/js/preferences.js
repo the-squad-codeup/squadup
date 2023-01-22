@@ -46,13 +46,19 @@ $(function() {
             return options;
         },
         formValidated(preferencesObject) {
+            let isLocationValid = this.locationValidated(preferencesObject.location);
+            let areLanguagesValid = this.languagesValidated(preferencesObject.languages);
+            let isRatingValid = this.ratingValidated(preferencesObject.rating);
+            let arePlatformsValid = this.platformsValidated(preferencesObject.platforms);
+            let isGamertagValid = this.gamertagValidated(preferencesObject.gamertag);
+            let isBioValid = this.bioValidated(preferencesObject.gamertag);
             if(
-                this.locationValidated(preferencesObject.location) &&
-                this.languagesValidated(preferencesObject.languages) &&
-                this.ratingValidated(preferencesObject.rating) &&
-                this.platformsValidated(preferencesObject.platforms) &&
-                this.gamertagValidated(preferencesObject.gamertag) &&
-                this.bioValidated(preferencesObject.bio)
+                isLocationValid &&
+                areLanguagesValid &&
+                isRatingValid &&
+                arePlatformsValid &&
+                isGamertagValid &&
+                isBioValid
             ) {
                 return true;
             }
@@ -281,7 +287,7 @@ $(function() {
             isValid ? gamertagInput.css("background", "") : gamertagInput.css("background", "#fc3503");
         },
         bioValidation(isValid) {
-            let bioInput = $("bio");
+            let bioInput = $("#bio");
             isValid ? bioInput.css("background", "") : bioInput.css("background", "#fc3503");
         },
         formNotValid() {
