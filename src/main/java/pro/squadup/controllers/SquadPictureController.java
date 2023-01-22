@@ -22,12 +22,15 @@ public class SquadPictureController {
         this.squadPictureDao = squadPictureDao;
     }
 
+    // returns squad picture based on squad id
     @GetMapping("/squads/{squadId}/picture")
     public SquadPicture getSquadPicture(@PathVariable Long squadId) {
         Squad squad = squadDao.findById(squadId).get();
         return squad.getSquadPicture();
     }
 
+    // saves squad picture to database based on squad id and picture passed in
+    // only happens if current user is squad owner
     @PostMapping("/squads/{squadId}/picture")
     public SquadPicture setSquadPicture(@PathVariable Long squadId, @RequestBody SquadPicture squadPicture) {
         User currentUser = userDao.findById(Utils.currentUserId()).get();
@@ -44,6 +47,7 @@ public class SquadPictureController {
         return squadPicture;
     }
 
+    // adds new squad picture to squad picture table based on squad picture passed in
     @PostMapping("/squads/picture/new")
     public SquadPicture setAddSquadPicture(@RequestBody SquadPicture squadPicture) {
         squadPictureDao.save(squadPicture);

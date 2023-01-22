@@ -8,6 +8,7 @@ import pro.squadup.models.User;
 @Controller
 public class AuthenticationController {
 
+    // method to show login form and pass new user object
     @GetMapping("/login")
     public String showLoginForm(Model model) {
         model.addAttribute("user", new User());

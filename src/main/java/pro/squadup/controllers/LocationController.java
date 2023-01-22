@@ -17,6 +17,7 @@ public class LocationController {
         this.locationDao = locationDao;
     }
 
+    // returns list of all locations currently in our database
     @GetMapping("/location/all")
     public List<Location> getAllLocations(){
         return locationDao.findAll();

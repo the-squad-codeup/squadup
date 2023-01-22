@@ -30,18 +30,22 @@ public class SquadInviteController {
         this.squadDao = squadDao;
     }
 
+    // returns all squad invites that current user has sent
     @GetMapping("/invites/sender")
     public Set<SquadInvite> getAllMySenderInvites() {
         User currentUser = userDao.findById(Utils.currentUserId()).get();
         return squadInviteDao.findAllBySender(currentUser);
     }
 
+    // returns all squad invites that current user is recepient of
     @GetMapping("/invites/recipient")
     public Set<SquadInvite> getAllMyRecipientInvites() {
         User currentUser = userDao.findById(Utils.currentUserId()).get();
         return squadInviteDao.findAllByRecipient(currentUser);
     }
 
+    // returns all users that current user can invite to squad based on squad id
+    // includes all current user comrades and all comrades of squad members
     @GetMapping("/invites/{squadId}/possible")
     public Set<User> getAllPossibleUsersToInvite(@PathVariable Long squadId) {
         Squad squad = squadDao.findById(squadId).get();
@@ -59,6 +63,7 @@ public class SquadInviteController {
         return possibleInvitees;
     }
 
+    // returns all users currently invited to squad based on squad id
     @GetMapping("/invites/{squadId}/current")
     public Set<User> getAllCurrentInvitees(@PathVariable Long squadId) {
         Squad squad = squadDao.findById(squadId).get();
@@ -70,6 +75,7 @@ public class SquadInviteController {
         return invitees;
     }
 
+    // accepts squad invite based on current user and squad id
     @PostMapping("/invites/{squadId}/accept")
     public Squad acceptSquadInvite(@PathVariable Long squadId) throws JsonProcessingException {
         User currentUser = userDao.findById(Utils.currentUserId()).get();
@@ -85,6 +91,7 @@ public class SquadInviteController {
         return squad;
     }
 
+    // rejects squad invite based on squad id and current user
     @PostMapping("/invites/{squadId}/reject")
     public void rejectSquadInvite(@PathVariable Long squadId) {
         User currentUser = userDao.findById(Utils.currentUserId()).get();

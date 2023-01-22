@@ -18,7 +18,6 @@ import java.util.Set;
 public class ComradesController {
 
     private UserRepository userDao;
-
     private ComradeRepository comradeDao;
 
     public ComradesController(UserRepository userDao, ComradeRepository comradeDao) {
@@ -26,20 +25,24 @@ public class ComradesController {
         this.comradeDao = comradeDao;
     }
 
+    // Returns all comrades of currently logged in user
     @GetMapping("/comrades/all")
     public Set<Comrade> getAllByUser(){
         User user = userDao.findById(Utils.currentUserId()).get();
         return user.getComrades();
     }
 
+    // deletes comrade by id included in path after verifying current user is deleting their comrade
     @PostMapping("/comrades/{id}/delete")
     public void deleteComrade(@PathVariable Long id){
         User user = userDao.findById(Utils.currentUserId()).get();
         Comrade comrade = comradeDao.findById(id).get();
-        User inverseUser = comrade.getUserTwo();
-        Comrade inverseComrade = comradeDao.findByUserOneAndUserTwo(inverseUser, user);
-        comradeDao.delete(comrade);
-        comradeDao.delete(inverseComrade);
+        if(user.getId() == comrade.getUserOne().getId()) {
+            User inverseUser = comrade.getUserTwo();
+            Comrade inverseComrade = comradeDao.findByUserOneAndUserTwo(inverseUser, user);
+            comradeDao.delete(comrade);
+            comradeDao.delete(inverseComrade);
+        }
     }
 
 

@@ -20,6 +20,8 @@ public class ProfilePictureController {
         this.profilePictureDao = profilePictureDao;
     }
 
+    // returns current user's profile picture
+    // if no current user logged in, returns default url profile picture
     @GetMapping("/user/picture")
     public ProfilePicture getMyProfilePicture() throws JsonProcessingException {
         if(Utils.currentUserId() == null) {
@@ -29,6 +31,8 @@ public class ProfilePictureController {
         }
     }
 
+    // sets current user's profile picture
+    // deletes current profile picture after saving new picture
     @PostMapping("/user/picture")
     public ProfilePicture setProfilePicture(@RequestBody ProfilePicture picture) throws JsonProcessingException {
         User user = userDao.findById(Utils.currentUserId()).get();
@@ -42,6 +46,7 @@ public class ProfilePictureController {
         return picture;
     }
 
+    // returns profile picture based on user id
     @GetMapping("/user/{userId}/picture")
     public ProfilePicture getProfilePicture(@PathVariable Long userId) {
         User user = userDao.findById(userId).get();

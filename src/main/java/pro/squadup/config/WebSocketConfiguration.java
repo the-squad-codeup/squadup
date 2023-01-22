@@ -10,12 +10,14 @@ import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 @EnableWebSocketMessageBroker
 public class WebSocketConfiguration extends AbstractWebSocketMessageBrokerConfigurer {
 
+    // Dictates broker endpaths
     @Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
         config.enableSimpleBroker("/secured/squad-room");
         config.setApplicationDestinationPrefixes("/secured/squad-app");
     }
 
+    // Dictates stomp endpath
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         registry.addEndpoint("/secured/squad-sock").withSockJS();

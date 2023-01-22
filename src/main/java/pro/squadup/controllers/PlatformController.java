@@ -16,6 +16,7 @@ public class PlatformController {
         this.platformDao = platformDao;
     }
 
+    // returns all platforms in database
     @GetMapping("/platform/all")
     public List<Platform> getAllPlatforms(){
         return platformDao.findAll();

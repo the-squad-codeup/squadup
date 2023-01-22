@@ -32,6 +32,8 @@ public class SquadController {
         this.squadInviteDao = squadInviteDao;
     }
 
+    // shows squads page
+    // NO LONGER USED
     @GetMapping("/squads")
     public String showSquadsPage(Model model) {
         User currentUser = userDao.findById(Utils.currentUserId()).get();
@@ -41,11 +43,13 @@ public class SquadController {
         return "squad/main";
     }
 
+    // returns squad object based on squad id passed in
     @GetMapping("/squads/{squadId}/info")
     public @ResponseBody Squad getSquadInfoById(@PathVariable Long squadId) {
         return squadDao.findById(squadId).get();
     }
 
+    // creates squad based on current user and squad object passed in
     @PostMapping("/squads/create")
     public String createSquad(Model model, @ModelAttribute Squad squad) throws JsonProcessingException {
         // getting user, default squadPicture, empty Chat to set in squad
@@ -60,7 +64,6 @@ public class SquadController {
         // saving new entities
         squadPictureDao.save(squadPicture);
         squadChatDao.save(chat);
-//        squadDao.save(squad);
         squad.setSquadPicture(squadPicture);
         squad.setChat(chat);
         // saving changes to squad
@@ -69,6 +72,8 @@ public class SquadController {
         return "squad/chat";
     }
 
+    // creates new squad based on new squad info passed in
+    // uses a custom NewSquadInfo object that has limited squad information
     @PostMapping("/squads/create/new")
     public @ResponseBody Squad createNewSquad(@RequestBody NewSquadInfo newSquadInfo) throws JsonProcessingException {
         User currentUser = userDao.findById(Utils.currentUserId()).get();
@@ -102,6 +107,7 @@ public class SquadController {
         return squad;
     }
 
+    // redirects to squad chat page based on squad id in path
     @GetMapping("/squads/{squadId}/chat")
     public String showSquadPage(Model model, @PathVariable Long squadId) {
         User currentUser = userDao.findById(Utils.currentUserId()).get();
@@ -113,12 +119,14 @@ public class SquadController {
         return "social/social-hq";
     }
 
+    // returns members of squad based on squad id in path
     @GetMapping("/squads/{squadId}/members")
     public @ResponseBody Set<User> getSquadMembers(@PathVariable Long squadId) {
         Squad squad = squadDao.findById(squadId).get();
         return squad.getMembers();
     }
 
+    // invites user to squad based on squad id and user id in path
     @PostMapping("/squads/{squadId}/invite/{userId}")
     public @ResponseBody User inviteUser(@PathVariable Long squadId, @PathVariable Long userId) {
         Squad squad = squadDao.findById(squadId).get();
@@ -135,12 +143,15 @@ public class SquadController {
         return invitee;
     }
 
+    // returns set of all chat messages based on squad id
     @GetMapping("/squads/{squadId}/messages")
     public @ResponseBody Set<SquadChatMessage> getAllSquadChatMessages(@PathVariable Long squadId) {
         Squad squad = squadDao.findById(squadId).get();
         return squadChatMessageDao.findAllByChat(squad.getChat());
     }
 
+    // deletes squad based on squad id
+    // only happens if current user is owner of squad
     @PostMapping("/squads/{squadId}/delete")
     public @ResponseBody Squad deleteSquad(@PathVariable Long squadId) {
         User currentUser = userDao.findById(Utils.currentUserId()).get();
@@ -154,6 +165,7 @@ public class SquadController {
         return squadToDelete;
     }
 
+    // returns user who is owner of squad based on squad id
     @GetMapping("/squads/{squadId}/owner")
     public @ResponseBody User getSquadOwner(@PathVariable Long squadId) {
         Squad squad = squadDao.findById(squadId).get();

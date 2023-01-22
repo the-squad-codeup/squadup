@@ -11,6 +11,7 @@ public class KeyController {
     @Autowired
     private KeyService keys;
 
+    // returns KeyService object containing api key tokens
     @GetMapping("/keys")
     public KeyService getKeys() {
         return keys;

@@ -16,6 +16,7 @@ public class RatingController {
         this.ratingDao = ratingDao;
     }
 
+    // returns list of all age ratings in database
     @GetMapping("/rating/all")
     public List<Rating> getAllRatings(){
         return ratingDao.findAll();
