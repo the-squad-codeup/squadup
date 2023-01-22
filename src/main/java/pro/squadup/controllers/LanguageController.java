@@ -11,13 +11,13 @@ import java.util.List;
 @RestController
 public class LanguageController {
 
-
     private LanguageRepository languageDao;
 
     public LanguageController(LanguageRepository languageDao) {
         this.languageDao = languageDao;
     }
 
+    // returns list of all languages currently in our database
     @GetMapping("/language/all")
     public List<Language> getAllLanguages(){
         return languageDao.findAll();

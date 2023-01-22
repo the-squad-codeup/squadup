@@ -2,7 +2,6 @@ package pro.squadup.controllers;
 
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -12,13 +11,9 @@ import pro.squadup.utils.Utils;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 @Controller
 public class ProfileController {
-
-    private ObjectMapper mapper = new ObjectMapper();
 
     private UserRepository userDao;
     private PreferencesRepository preferencesDao;
@@ -49,6 +44,8 @@ public class ProfileController {
         this.recruitDao = recruitDao;
     }
 
+    // redirects to profile page
+    // calls a method to add attributes to model passing in current user info
     @GetMapping("/profile")
     public String myProfilePage(Model model) {
         User user = userDao.findById(Utils.currentUserId()).get();
@@ -56,6 +53,8 @@ public class ProfileController {
         return "profile/profile";
     }
 
+    // redirects to profile page
+    // calls a method to add attributes to model passing in user who is comrade to current user matching comrade id
     @GetMapping("/profile/{comradeId}/comrade")
     public String profilePageFromComrade(Model model, @PathVariable Long comradeId) {
         User user = userDao.findById(comradeDao.findById(comradeId).get().getUserTwo().getId()).get();
@@ -63,6 +62,8 @@ public class ProfileController {
         return "profile/profile";
     }
 
+    // redirects to profile page
+    // calls a method to add attributes to model passing in user who is recruit to current user matching recruit id
     @GetMapping("/profile/{recruitId}/recruit")
     public String profilePageFromRecruit(Model model, @PathVariable Long recruitId) {
         User user = userDao.findById(recruitDao.findById(recruitId).get().getUserTwo().getId()).get();
@@ -70,6 +71,9 @@ public class ProfileController {
         return "profile/profile";
     }
 
+    // redirects to preferences page
+    // if user has no preferences object, creates blank preferences object to add to model
+    // otherwise passes user's preferences
     @GetMapping("/profile/preferences")
     public String preferencesPage(Model model){
         User user = userDao.findById(Utils.currentUserId()).get();
@@ -87,6 +91,7 @@ public class ProfileController {
         return "profile/preferences";
     }
 
+    // simple getmapping redirects
     @GetMapping("/build-profile")
     public String buildProfilePage(){
         return "profile/build-profile";
@@ -97,6 +102,7 @@ public class ProfileController {
         return "profile/games";
     }
 
+    // updates user's preferences based on form info
     @PostMapping("/profile/preferences/edit")
     public @ResponseBody String editProfilePreferences(@RequestBody Preferences updatedPreferences, Model model) throws JsonProcessingException {
         User currentUser = userDao.findById(Utils.currentUserId()).get();
@@ -106,11 +112,12 @@ public class ProfileController {
         return "redirect:/hq";
     }
 
-
+    // returns true if current user id matches user id
     private boolean isMyProfile(User currentUser, User user) {
         return currentUser.getId().equals(user.getId());
     }
 
+    // returns true if user is in current user recruits list
     private boolean isRecruit(User currentUser, User user) {
         for(Recruit recruit : currentUser.getRecruits()) {
             if(recruit.getUserTwo().getId().equals(user.getId())) {
@@ -120,6 +127,7 @@ public class ProfileController {
         return false;
     }
 
+    // returns true if user is in current user comrades list
     private boolean isComrade(User currentUser, User user) {
         for(Comrade comrade : currentUser.getComrades()) {
             if(comrade.getUserTwo().getId().equals(user.getId())) {
@@ -129,6 +137,7 @@ public class ProfileController {
         return false;
     }
 
+    // adds model attributes to be passed into profile redirect based on user and current user relationship
     private void prepProfileRedirect(Model model, User user) {
         User currentUser = userDao.findById(Utils.currentUserId()).get();
         if(isMyProfile(currentUser, user)) {
@@ -141,6 +150,7 @@ public class ProfileController {
         model.addAttribute("isComrade", isComrade(currentUser, user));
     }
 
+    // updates user preferences in database based on updated preferences passed in
     private void packagePreferences(Preferences userPreferences, Preferences updatedPreferences) {
         userPreferences.setBio(updatedPreferences.getBio());
         userPreferences.setLocation(locationDao.findByTimezone(updatedPreferences.getLocation().getTimezone()));

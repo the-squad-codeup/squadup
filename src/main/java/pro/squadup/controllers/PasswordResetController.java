@@ -29,11 +29,14 @@ public class PasswordResetController {
         this.passwordEncoder = passwordEncoder;
     }
 
+    // redirects to forgot-pw view
     @GetMapping("/pwreset")
-    public String forgotPasswordLink(Model model) {
+    public String forgotPasswordLink() {
         return "reset/forgot-pw";
     }
 
+    // creates password reset token and sends pw reset email
+    // only does this if email exists in users table
     @PostMapping("/pwreset")
     public String sendForgotPasswordEmail(@RequestParam(name = "email") String email, Model model) throws MessagingException {
         if(userDao.existsByEmail(email)) {
@@ -45,6 +48,8 @@ public class PasswordResetController {
         return "redirect:/pwreset?invalidEmail";
     }
 
+    // redirects to password reset form based on token in url path
+    // checks before redirect if token still valid
     @GetMapping("/pwreset/{token}")
     public String resetPasswordForm(@PathVariable String token, Model model) {
         PasswordReset passwordReset = passwordResetDao.findByToken(token);
@@ -60,6 +65,7 @@ public class PasswordResetController {
         return "reset/pw-reset";
     }
 
+    // resets user password if token still valid
     @PostMapping("pwreset/{token}")
     public String resetPassword(@ModelAttribute User user, @PathVariable String token) {
         PasswordReset passwordReset = passwordResetDao.findByToken(token);

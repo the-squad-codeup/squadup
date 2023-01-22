@@ -9,6 +9,8 @@ import org.apache.commons.io.IOUtils;
 import java.io.IOException;
 import java.io.InputStream;
 
+// this controller returns image view when url path goes to image
+// used for images in database we need access to in css
 @Controller
 public class ImageController {
 
