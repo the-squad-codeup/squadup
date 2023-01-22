@@ -62,36 +62,40 @@ public class UserController {
                 )
         ;
         userDao.save(user);
-//        user.setProfilePicture(defaultProfilePicture);
         defaultProfilePicture.setUser(user);
         profilePictureDao.save(defaultProfilePicture);
         authWithHttpServletRequest(httpServletRequest, user.getUsername(), plainPassword);
         return "redirect:/profile/preferences";
     }
 
+    // returns current user
     @GetMapping("/user/get")
     public @ResponseBody User getCurrentUser() {
         User currentUser = userDao.findById(Utils.currentUserId()).get();
         return currentUser;
     }
 
+    // returns user based on user id
     @GetMapping("/user/{userId}/info")
     public @ResponseBody User getUserInfo(@PathVariable Long userId) {
         return userDao.findById(userId).get();
     }
 
+    // returns all squads current user is member of
     @GetMapping("/user/squads")
     public @ResponseBody Set<Squad> getAllSquads() {
         User currentUser = userDao.findById(Utils.currentUserId()).get();
         return squadDao.findAllByMembers(currentUser);
     }
 
+    // returns all squads current user is owner of
     @GetMapping("/user/squads-owned")
     public @ResponseBody Set<Squad> getAllSquadsOwned() {
         User currentUser = userDao.findById(Utils.currentUserId()).get();
         return squadDao.findAllByOwner(currentUser);
     }
 
+    // logs user in
     private void authWithHttpServletRequest(HttpServletRequest request, String username, String password) {
         try {
             request.login(username, password);
