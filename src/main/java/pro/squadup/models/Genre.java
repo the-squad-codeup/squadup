@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import java.util.Set;
 
+// Genre object, saved in database
 @Entity
 @Table(name = "genres")
 public class Genre {

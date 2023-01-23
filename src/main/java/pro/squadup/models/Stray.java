@@ -4,6 +4,8 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.*;
 
+// Stray object, saved in database
+// Used to store Contact Us form information
 @Entity
 @Table(name="strays")
 public class Stray {

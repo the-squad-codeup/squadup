@@ -2,6 +2,7 @@ package pro.squadup.models;
 
 import javax.persistence.*;
 
+// Platform Mapping object, saved in database
 @Entity
 @Table(name = "platform_mapping")
 public class PlatformMapping {

@@ -4,6 +4,7 @@ package pro.squadup.models;
 import javax.persistence.*;
 import java.sql.Timestamp;
 
+// Password Reset object, saved in database
 @Entity
 @Table(name="pw_reset")
 public class PasswordReset {

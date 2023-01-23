@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import java.util.Set;
 
+// Squad Chat object, saved in database
 @Entity
 @Table(name = "squad_chats")
 public class SquadChat {

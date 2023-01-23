@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import java.util.Set;
 
+// Language object, saved in database
 @Entity
 @Table(name = "languages")
 public class Language {

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 
+// LastSeenMessage object, saved in database
 @Entity
 @Table(name = "last_seen_messages")
 public class LastSeenMessage {

@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Date;
 
+// Comrade object, saved in database
 @Entity
 @Table(name = "comrades")
 public class Comrade {
