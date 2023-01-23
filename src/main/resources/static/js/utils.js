@@ -1,7 +1,9 @@
 export const Utils = {
+    // Returns url path of current protocol and host so development and live will have fetch request work correctly
     url() {
         return `${window.location.protocol}//${window.location.host}/`;
     },
+    // returns new date value of timestamp string passed in
     dateStringToJSDate(string) {
         let year = string.slice(0, 4);
         let month = string.slice(5, 7);
