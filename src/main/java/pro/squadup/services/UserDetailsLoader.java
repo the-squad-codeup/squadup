@@ -8,6 +8,7 @@ import pro.squadup.models.User;
 import pro.squadup.models.UserWithRoles;
 import pro.squadup.repositories.UserRepository;
 
+// Service to load user details for spring security
 @Service
 public class UserDetailsLoader implements UserDetailsService {
 

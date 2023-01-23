@@ -33,6 +33,7 @@ public class RecruitMatchingService {
         this.genreDao = genreDao;
     }
 
+    // Checks every user in database to see if any recruit matches are available
     public void matchAllRecruits() throws JsonProcessingException {
         Set<User> allUsers = new HashSet<>(userDao.findAll());
         for(User user : allUsers) {
@@ -40,6 +41,7 @@ public class RecruitMatchingService {
         }
     }
 
+    // Checks all users against one user to see if any recruit matches are available
     public void matchRecruits(User user, Set<User> allUsers) throws JsonProcessingException {
         for(User otherUser : allUsers) {
             if(
@@ -59,14 +61,17 @@ public class RecruitMatchingService {
         }
     }
 
+    // Returns true if users are currently comrades
     private boolean areComrades(User user1, User user2) {
         return comradeDao.existsByUserOneAndUserTwo(user1, user2);
     }
 
+    // Returns true if users have already been recruited
     private boolean alreadyRecruited(User user1, User user2) {
         return recruitDao.existsByUserOneAndUserTwo(user1, user2);
     }
 
+    // Returns true if users share a matching platform in platforms list
     private boolean containsMatchingPlatform(User user1, User user2) {
         Set<Platform> user1Platforms = user1.getPreferences().getPlatforms();
         Set<Platform> user2Platforms = user2.getPreferences().getPlatforms();
@@ -78,6 +83,7 @@ public class RecruitMatchingService {
         return false;
     }
 
+    // Returns true if users contain a matching game in games list
     private boolean containsMatchingGames(User user1, User user2) {
         Set<Game> user1Games = user1.getPreferences().getGames();
         Set<Game> user2Games = user2.getPreferences().getGames();
@@ -89,6 +95,7 @@ public class RecruitMatchingService {
         return false;
     }
 
+    // Returns true if users contain a matching genre in genres list
     private boolean containsMatchingGenres(User user1, User user2) throws JsonProcessingException {
         Set<Genre> user1Genres = extractUserGenres(user1);
         Set<Genre> user2Genres = extractUserGenres(user2);
@@ -102,6 +109,7 @@ public class RecruitMatchingService {
         return false;
     }
 
+    // Returns set of genre objects from user passed in
     private Set<Genre> extractUserGenres(User user) {
         Set<Genre> allGenres = new HashSet<>();
         allGenres.addAll(user.getPreferences().getGenres());
@@ -115,6 +123,7 @@ public class RecruitMatchingService {
         return allGenres;
     }
 
+    // Adds recruit and inverse recruit object for two users passed in
     public void addRecruits(User user1, User user2) {
         Timestamp currentTimeAndDate = new Timestamp(new Date().getTime());
         Recruit newRecruit = new Recruit(currentTimeAndDate, false);

@@ -21,6 +21,7 @@ public class ApiService {
 
     }
 
+    // Sets up timeout rules
     public HttpClient buildHttpClient() {
         return HttpClient.create()
                 .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 30000)
@@ -30,6 +31,7 @@ public class ApiService {
                                 .addHandlerLast(new WriteTimeoutHandler(30000, TimeUnit.MILLISECONDS)));
     }
 
+    // Builds the WebClient
     public WebClient buildWebClient(HttpClient httpClient, String bodyString) {
         return WebClient.builder()
                 .clientConnector(new ReactorClientHttpConnector(httpClient))
