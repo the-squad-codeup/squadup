@@ -3,6 +3,8 @@ package pro.squadup.services;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+// Service to access key token values from application.properties or environment variables
+// Gets called to pass values to front end in a fetch request
 @Service
 public class KeyService {
 

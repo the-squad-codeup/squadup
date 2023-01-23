@@ -7,6 +7,7 @@ import pro.squadup.utils.GameDeserializer;
 import javax.persistence.*;
 import java.util.Set;
 
+// Game object, saved in database
 @Entity
 @Table(name="games")
 @JsonDeserialize(using = GameDeserializer.class)

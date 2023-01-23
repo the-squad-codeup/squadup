@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
+// Custom game deserializer to convert json string to Game object
 public class GameDeserializer extends StdDeserializer<Game> {
 
 

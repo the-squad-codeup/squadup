@@ -5,6 +5,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
+// User With Roles object
+// gets correct User Details from User object to pass to Spring Security
 public class UserWithRoles extends User implements UserDetails {
     public UserWithRoles(User user) { super(user); }
 

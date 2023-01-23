@@ -17,7 +17,7 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.util.List;
 
-
+// Mail service to send password reset tokens to user if they forgot password
 @Service("mailService")
 public class MailService {
 
@@ -39,7 +39,6 @@ public class MailService {
         MimeMessage mimeMessage = emailSender.createMimeMessage();
         MimeMessageHelper msg = new MimeMessageHelper(mimeMessage, "UTF-8");
 
-//        SimpleMailMessage msg = new SimpleMailMessage();
         msg.setFrom(from);
         msg.setTo(passwordReset.getEmail());
         msg.setSubject("Password Reset Request");
@@ -52,6 +51,7 @@ public class MailService {
         }
     }
 
+    // Constructs the HTML template and returns as String
     private String constructHTMLTemplate(String token) {
         Context context = new Context();
         context.setVariable("token", token);

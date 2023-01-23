@@ -2,6 +2,7 @@ package pro.squadup.models;
 
 import java.util.ArrayList;
 
+// New Squad Info object, used to accept specific JSon from front end
 public class NewSquadInfo {
 
     private String name;

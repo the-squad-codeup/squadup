@@ -7,6 +7,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Set;
 
+// Recruit object, saved in database
 @Entity
 @Table(name = "recruits")
 public class Recruit {

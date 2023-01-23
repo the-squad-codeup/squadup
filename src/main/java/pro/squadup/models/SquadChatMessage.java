@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Set;
 
+// Squad Chat Message object, saved in database
 @Entity
 @Table(name = "squad_chat_messages")
 public class SquadChatMessage {

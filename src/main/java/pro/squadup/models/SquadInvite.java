@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 
+// Squad Invite object, saved in database
 @Entity
 @Table(name = "invites")
 public class SquadInvite {

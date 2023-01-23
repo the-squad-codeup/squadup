@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 
+// Profile Picture object, saved in database
 @Entity
 @Table(name = "profile_pictures")
 public class ProfilePicture {
