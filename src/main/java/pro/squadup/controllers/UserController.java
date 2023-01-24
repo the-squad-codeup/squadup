@@ -15,6 +15,8 @@ import pro.squadup.utils.Utils;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Controller
@@ -77,8 +79,13 @@ public class UserController {
     }
 
     @GetMapping("/user/all")
-    public @ResponseBody UserSlim getAllUsers() {
-        return null;
+    public @ResponseBody List<UserSlim> getAllUsers() {
+        List<User> allUsers = userDao.findAll();
+        List<UserSlim> allSlimUsers = new ArrayList<>();
+        for(User user : allUsers) {
+            allSlimUsers.add(new UserSlim(user.getUsername(), user.getEmail()));
+        }
+        return allSlimUsers;
     }
 
     // returns user based on user id
