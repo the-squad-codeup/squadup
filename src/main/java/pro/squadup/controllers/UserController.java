@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import pro.squadup.models.ProfilePicture;
 import pro.squadup.models.Squad;
 import pro.squadup.models.User;
+import pro.squadup.models.UserSlim;
 import pro.squadup.repositories.ProfilePictureRepository;
 import pro.squadup.repositories.SquadRepository;
 import pro.squadup.repositories.UserRepository;
@@ -14,6 +15,8 @@ import pro.squadup.utils.Utils;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Controller
@@ -73,6 +76,16 @@ public class UserController {
     public @ResponseBody User getCurrentUser() {
         User currentUser = userDao.findById(Utils.currentUserId()).get();
         return currentUser;
+    }
+
+    @GetMapping("/user/all")
+    public @ResponseBody List<UserSlim> getAllUsers() {
+        List<User> allUsers = userDao.findAll();
+        List<UserSlim> allSlimUsers = new ArrayList<>();
+        for(User user : allUsers) {
+            allSlimUsers.add(new UserSlim(user.getUsername(), user.getEmail()));
+        }
+        return allSlimUsers;
     }
 
     // returns user based on user id
