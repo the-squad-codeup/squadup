@@ -13,7 +13,7 @@
 
     <div class="su-outer rounded-3 rainbow">
         <h1 class="text-center outlined signup">Sign Up for SquadUp!</h1>
-        <form class="form-signtwo text-light rgb" th:action="@{/signup}" method="POST" th:object="${user}">
+        <form id="signup-form" class="form-signtwo text-light rgb" th:action="@{/signup}" method="POST" th:object="${user}">
             <div class="mb-3">
                 <label for="signupEmailAddress" class="form-label">Email Address</label>
                 <input type="email" class="form-control" id="signupEmailAddress" th:field="*{email}" autocomplete="off">
@@ -45,7 +45,7 @@
 <nav th:replace="partials :: footer"></nav>
 
 <div th:replace="partials :: scripts"></div>
-<script th:src="@{/js/signup-form.js}"></script>
+<script type="module" th:src="@{/js/signup-form.js}"></script>
 
 </body>
 </html>

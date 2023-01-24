@@ -1,3 +1,5 @@
+import { Utils } from "./utils.js";
+
 $(function() {
     // Local variables and requirements
     let passwordFulfillsRequirements = false;
@@ -72,6 +74,35 @@ $(function() {
         // Checks if confirm password field matches password field
         confirmMatchesPassword: () => {
             return $("#signupConfirmPassword").val() === $("#signupPassword").val();
+        },
+        async userValid() {
+            let users = await fetch(`${Utils.url()}user/all`).then(res => res.json());
+            let usernameValid = this.usernameValid(users);
+            let emailValid = this.emailValid(users);
+            if(usernameValid && emailValid) {
+                return true;
+            }
+            return false;
+        },
+        usernameValid(users) {
+            let isValid = true;
+            for(let user of users) {
+                if(user.username.toLowerCase() === $("#signupUsername").val().toLowerCase()) {
+                    isValid = false;
+                }
+            }
+            usernameValidation(isValid);
+            return isValid;
+        },
+        emailValid(users) {
+            let isValid = true;
+            for(let user of users) {
+                if(user.email.toLowerCase() === $("#signupEmailAddress").val().toLowerCase()) {
+                    isValid = false;
+                }
+            }
+            emailValidation(isValid);
+            return isValid;
         }
     }
 
@@ -160,6 +191,38 @@ $(function() {
         })
     ;
 
+    function emailValidation(isValid) {
+        let emailInput = $("#signupEmailAddress");
+        if(isValid) {
+            emailInput.css("background", "");
+            emailInput.parent().find("#email-validation-prepend").remove();
+        } else {
+            emailInput.css("background", "#fc3503");
+            emailInput.parent().find("#email-validation-prepend").remove();
+            emailInput.parent().prepend(`
+                <p id="email-validation-prepend" class="validation-prepend">
+                    <span>Email must be unique. Please choose another or sign in</span>
+                </p>
+            `);
+        }
+    }
+
+    function usernameValidation(isValid) {
+        let usernameInput = $("#signupUsername");
+        if(isValid) {
+            usernameInput.css("background", "");
+            usernameInput.parent().find("#username-validation-prepend").remove();
+        } else {
+            usernameInput.css("background", "#fc3503");
+            usernameInput.parent().find("#username-validation-prepend").remove();
+            usernameInput.parent().prepend(`
+                <p id="username-validation-prepend" class="validation-prepend">
+                    <span>Username must be unique. Please choose another or sign in</span>
+                </p>
+            `);
+        }
+    }
+
     // Toggles signup sheet
     // $("#notAUserToggle")
     //     .click(() => {
@@ -198,6 +261,15 @@ $(function() {
 
     $("#forgot-password-link").on("click", function() {
         window.location.href = "/pwreset";
+    });
+
+    $("#signupPasswordSubmit").on("click", async function(e) {
+        e.preventDefault();
+        if(await Check.userValid()) {
+            $("#signup-form").submit();
+        } else {
+            document.body.scrollTop = document.documentElement.scrollTop = 0;
+        }
     });
 
     $(window).ready( function() {

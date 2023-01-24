@@ -60,7 +60,7 @@
                 <div id="signupContainer" class="li-outer container rounded-3 rainbow" style="display: none;">
                     <h1 class="login text-center text-light">Signup</h1>
 
-                    <form class=" inner-login text-light rgb bg-dark" th:action="@{/signup}" method="POST" th:object="${user}">
+                    <form id="signup=form" class=" inner-login text-light rgb bg-dark" th:action="@{/signup}" method="POST" th:object="${user}">
                         <div class="mb-3">
                             <label for="signupEmailAddress" class="form-label">Email Address</label>
                             <input type="email" class="form-control" id="signupEmailAddress" th:field="*{email}" autocomplete="off">
@@ -96,7 +96,7 @@
 <nav th:replace="partials :: footer"></nav>
 
 <div th:replace="partials :: scripts"></div>
-<script th:src="@{/js/signup-form.js}"></script>
+<script type="module" th:src="@{/js/signup-form.js}"></script>
 
 </body>
 </html>
