@@ -10,7 +10,7 @@
     </parent>
     <groupId>pro</groupId>
     <artifactId>squadup</artifactId>
-    <version>0.0.4.3</version>
+    <version>0.0.4.4</version>
     <name>squadup</name>
     <description>squadup</description>
     <properties>
