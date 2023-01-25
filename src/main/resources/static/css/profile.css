@@ -69,6 +69,7 @@
     margin-left: 10vw;
     height: 12vw;
     width: 40vw;
+    overflow-wrap: break-word;
 
 }
 

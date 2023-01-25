@@ -279,6 +279,12 @@ img.card-img-top {
     width: 9px;
     height: 9px;
 }
+
+.h5, h5{
+    overflow-wrap: anywhere;
+    text-align: center;
+}
+
 /*------------------------------*/
 
 .side-content {
