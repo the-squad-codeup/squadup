@@ -2,7 +2,9 @@ import { Utils } from "./utils.js";
 
 $(function() {
 
+    // SquadChat object with global variables and methods
     const SquadChat = {
+        // global variables
         csrfToken: $("meta[name='_csrf']").attr("content"),
         squadId: $("#squad-title").attr("data-squad-id"),
         stompClient: null,
@@ -10,12 +12,15 @@ $(function() {
         currentSubscription: null,
         messageInputBox: $("#chat-text-input"),
         messageOutputBox: $("#chat-messages-div"),
+        // called during page load, initializes all event handlers
         initialize() {
             Events.initialize();
         },
+        // method to scroll to bottom of chat message element
         scrollToBottom() {
             document.getElementById("chat-messages-div-wrapper").scrollTo(0, document.getElementById("chat-messages-div").scrollHeight);
         },
+        // returns true if previous message in chat is from same user and time between messages is less than one minute
         recentMessage(message) {
             let lastMessage = SquadChat.messageOutputBox.children().last();
             if(lastMessage[0].previousElementSibling.attributes.length > 2) {
@@ -27,38 +32,50 @@ $(function() {
             }
             return false;
         },
+        // sends an edit chat message socketjs message
         editMessage(messageDiv) {
             let messageId = messageDiv.attr("data-message-id");
             let content = messageDiv.find(".single-message-content").text().trim();
             Socket.editMessage(messageId, content);
         },
+        // sends a delete chat message socketjs message
         deleteMessage(messageDiv) {
             let messageId = messageDiv.attr("data-message-id");
             Socket.deleteMessage(messageId);
         }
     };
 
+    // Socket object with methods for SocketJS functionality
     const Socket = {
+        // connects to the backend with SockJS and Stomp client
         connect() {
             let socket = new SockJS("/secured/squad-sock");
             SquadChat.stompClient = Stomp.over(socket);
             SquadChat.stompClient.connect({'X-CSRF-TOKEN': $("meta[name='_csrf']").attr("content")}, this.onConnected, this.onError);
         },
+        // calls method when connected
         onConnected() {
             Socket.enterSquad(SquadChat.squadId);
         },
+        // method when error happens
         onError(error) {
         },
+        // subscribes to correct squad chat room
+        // sends join chat message
         enterSquad(squadId) {
             SquadChat.topic = `/secured/squad-app/squad-chat/${squadId}`;
             SquadChat.currentSubscription = SquadChat.stompClient.subscribe(`/secured/squad-room/${squadId}`, this.onMessageReceived);
             SquadChat.stompClient.send(`${SquadChat.topic}/add-user`, {}, JSON.stringify({messageType: 'JOIN'}));
         },
+        // unsubscribes to squad chat room
+        // sends leave chat message
         leaveSquad(squadId) {
             SquadChat.topic = `/secured/squad-app/squad-chat/${squadId}`;
             SquadChat.stompClient.send(`${SquadChat.topic}add-user`, {}, JSON.stringify({messageType: 'LEAVE'}));
             SquadChat.currentSubscription = SquadChat.stompClient.unsubscribe();
         },
+        // sends chat message to squad chat
+        // checks if correctly connected before attempting
         sendMessage() {
             let messageContent = SquadChat.messageInputBox.val();
             SquadChat.topic = `/secured/squad-app/squad-chat/${SquadChat.squadId}`;
@@ -71,6 +88,7 @@ $(function() {
             }
             SquadChat.messageInputBox.val("");
         },
+        // sends edit message to squad chat
         editMessage(messageId, messageContent) {
             SquadChat.topic = `/secured/squad-app/squad-chat/${SquadChat.squadId}`;
             if(messageContent && SquadChat.stompClient) {
@@ -82,6 +100,7 @@ $(function() {
                 SquadChat.stompClient.send(`${SquadChat.topic}/edit`, {}, JSON.stringify(editMessage));
             }
         },
+        // sends delete message to squad chat
         deleteMessage(messageId) {
             SquadChat.topic = `/secured/squad-app/squad-chat/${SquadChat.squadId}`;
             if(messageId && SquadChat.stompClient) {
@@ -92,6 +111,7 @@ $(function() {
                 SquadChat.stompClient.send(`${SquadChat.topic}/delete`, {}, JSON.stringify(deleteMessage));
             }
         },
+        // method that runs when a chat message is received from stream the stomp client is subscribed to
         async onMessageReceived(payload) {
             let message = JSON.parse(payload.body);
             if(message.messageType === 'JOIN') {
@@ -109,7 +129,11 @@ $(function() {
         }
     };
 
+    // Print object and methods
     const Print = {
+        // ------------------------------------------------UNUSED METHOD------------------------------------------------
+        // attempted to create message when user first joins the chat
+        // ----------------------------------------MORE TROUBLESHOOTING REQUIRED----------------------------------------
         async joinMessage(message) {
             let squadMemberIds = (await Fetch.Get.squadMembers()).map(member => member.id);
             if(!squadMemberIds.includes(message.sender.id)) {
@@ -118,8 +142,10 @@ $(function() {
                 this.singleMessage(message);
             }
         },
+        // leave message print will go here
         leaveMessage(message) {
         },
+        // appends username and profile picture of current squad members
         async currentSquadMembers() {
             let squadMembers = await Fetch.Get.squadMembers();
             for(let member of squadMembers) {
@@ -131,6 +157,7 @@ $(function() {
                 `);
             }
         },
+        // appends message history for chat room when page first loads
         async messageHistory() {
             let messages = await Fetch.Get.squadMessages();
             for(let message of messages) {
@@ -140,6 +167,7 @@ $(function() {
             }
             SquadChat.scrollToBottom();
         },
+        // appends a single message with correct formatting
         singleMessage(message) {
 
                 SquadChat.messageOutputBox.append(`
@@ -180,6 +208,7 @@ $(function() {
                 `);
             }
         },
+        // adds "(edited)" to message after user edits a message
         async editMessage(message) {
             $("#chat-messages-div").find(`[data-message-id="${message.id}"]`).find(".single-message-content span").remove();
             $("#chat-messages-div").find(`[data-message-id="${message.id}"]`).find(".single-message-content").text(message.content);
@@ -188,13 +217,16 @@ $(function() {
                 `)
             ;
         },
+        // removes message from messages element when it has successfully been deleted
         async deleteMessage(message) {
             SquadChat.messageOutputBox.find(`[data-message-id="${message.id}"]`).remove();
         },
+        // updates squadpicture
         async squadPicture() {
             let squadPicture = await Fetch.Get.squadPicture();
             $('.squad-image').attr('src', `${squadPicture.url}`);
         },
+        // creates hidden div with current user id and whether user is owner of squad
         async squadUserDetails() {
             let squadOwner = await Fetch.Get.squadOwner();
             let currentUser = await Fetch.Get.currentUser();
@@ -205,25 +237,35 @@ $(function() {
         }
     };
 
+    // Fetch object and methods for Get and Post requests to backend
     const Fetch = {
+        // Get requests
         Get: {
+            // gets array of all users who are squad members
             async squadMembers() {
                 return await fetch(`${Utils.url()}squads/${SquadChat.squadId}/members`).then(res => res.json());
             },
+            // gets array of all messages in squad chat history
             async squadMessages() {
                 return await fetch(`${Utils.url()}squads/${SquadChat.squadId}/messages`).then(res => res.json());
             },
+            // gets squadpicture
             async squadPicture() {
                 return await fetch(`${Utils.url()}squads/${SquadChat.squadId}/picture`).then(res => res.json());
             },
+            // gets user who is owner of squad
             async squadOwner() {
                 return await fetch(`${Utils.url()}squads/${SquadChat.squadId}/owner`).then(res => res.json());
             },
+            // gets current user
             async currentUser() {
                 return await fetch(`${Utils.url()}user/get`).then(res => res.json());
             }
         },
+        // Post requests
         Post: {
+            // ----------------------------------------------UNUSED METHOD----------------------------------------------
+            // posts edit message with simple HTTP request
             async editMessage(messageId, content) {
                 const message = {
                     id: messageId,
@@ -241,9 +283,13 @@ $(function() {
         }
     }
 
+    // Event listeners
     const Events = {
+        // called when page loads
         async initialize() {
+            // waits for socket to connect before moving on
             await Socket.connect();
+            // waits for window to load and prints information for chat room
             await $(window)
                 .ready(async function() {
                     await Print.currentSquadMembers();
@@ -255,6 +301,7 @@ $(function() {
                     }
                 })
             ;
+            // document event listeners
             $(document)
                 .on("click", "#chat-send-button", Socket.sendMessage)
                 .on("click", ".message-edit-button", async function() {
@@ -313,5 +360,6 @@ $(function() {
         }
     };
 
+    // initializes the JS file when loading
     SquadChat.initialize();
 });
