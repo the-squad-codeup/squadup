@@ -1,4 +1,4 @@
-
+// Overlays for time zones
 export const Overlays = {
     hideOverlays() {
         document.getElementById('HAST').style.display = "none";

@@ -1,5 +1,6 @@
 $(function() {
 
+    // sets background on every page
     let url = `${window.location.protocol}//${window.location.host}/background-image`;
     $('head').append(`
                 <style>

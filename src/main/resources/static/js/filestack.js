@@ -4,14 +4,19 @@ import { Utils } from "./utils.js";
 
 $(async function() {
 
+    // Fetch object with Get and Post methods
     const Fetch = {
+        // Get methods
         Get: {
+            // Method to access filestack key from backend
             async filestackKey() {
                 let keys = await fetch(`${Utils.url()}keys`).then(res => res.json());
                 return keys.filestack_KEY;
             }
         },
+        // Post methods
         Post: {
+            // Method to post profile picture to database
             async profilePicture(file) {
                 let postOptions = {
                     method: 'POST',
@@ -23,6 +28,7 @@ $(async function() {
                 }
                 return await fetch(`${Utils.url()}user/picture`, postOptions).then(res => res.json());
             },
+            // Method to post squad picture to database
             async squadPicture(file) {
                 let postOptions = {
                     method: 'POST',
@@ -34,6 +40,7 @@ $(async function() {
                 }
                 return await fetch(`${Utils.url()}squads/${$("#modal-squad-info").attr("data-squad-id")}/picture`, postOptions).then(res => res.json());
             },
+            // Method to add default squad picture to database
             async addSquadPicture(file) {
                 let postOptions = {
                     method: 'POST',
@@ -48,12 +55,15 @@ $(async function() {
         }
     }
 
+    // Filestack object and globals/methods
     const FileStack = {
+        // initializes filestack api object and event handlers
         async initialize() {
             this.client = await filestack.init(this.filestackKey);
             Events.initialize();
-            },
+        },
         client: null,
+        // filestack options to use for user profile picture
         userProfileOptions: {
             fromSources: ["local_file_system", "url"],
             accept: ["image/*"],
@@ -69,6 +79,7 @@ $(async function() {
                 $('.profile-image').css('background-image', `url("${uploadedPicture.url}")`)
             }
         },
+        // filestack options to use for squad picture
         squadOptions: {
             fromSources: ["local_file_system", "url"],
             accept: ["image/*"],
@@ -85,6 +96,7 @@ $(async function() {
                 $(`.solo-squad[data-squad-id='${$("#modal-squad-info").attr("data-squad-id")}']`).find("img").attr('src', `${uploadedPicture.url}`);
             }
         },
+        // filestack options to use for squad picture in add squad modal
         addSquadOptions: {
             fromSources: ["local_file_system", "url"],
             accept: ["image/*"],
@@ -105,6 +117,7 @@ $(async function() {
         csrfToken: $("meta[name='_csrf']").attr("content")
     };
 
+    // Event handlers
     const Events = {
         initialize() {
             $(document)
@@ -123,6 +136,7 @@ $(async function() {
         }
     }
 
+    // Runs on js file load to initialize filestack object and event handlers
     FileStack.initialize();
 
 });
