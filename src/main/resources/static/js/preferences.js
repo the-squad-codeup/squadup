@@ -1,8 +1,6 @@
 import { Utils } from "./utils.js";
 import { Overlays } from "./pref-overlays.js";
 
-//print form not working
-
 $(function() {
 
     const MyPreferences = {
