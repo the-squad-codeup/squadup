@@ -1,6 +1,9 @@
 import { Utils } from "./utils.js";
 $(function () {
+
+    // MyGames object with globals/methods
     const MyGames = {
+        // initializes event handlers and prints favorite game
         initialize() {
             Events.initialize();
             Print.myFavoriteGame(this.myFavoriteGameDiv);
@@ -11,6 +14,7 @@ $(function () {
         addGameDiv: $("#games-div").find(".track"),
         myGamesDiv: $("#my-games"),
         myFavoriteGameDiv: $("#my-favorite-game"),
+        // sorts games by year most recent to oldest
         sortGamesByYear(games) {
             if(Array.isArray(games)) {
                 games = games.sort((prev, current) => parseInt(prev.year) - parseInt(current.year));
@@ -19,7 +23,9 @@ $(function () {
         }
     };
 
+    // Print object with methods
     const Print = {
+        // appends favorite game elements. uses a placeholder if no favorite game
         async myFavoriteGame() {
             let favoriteGame = await Fetch.Get.myFavoriteGame().then(res => res);
             if(favoriteGame.id != null) {
@@ -42,7 +48,7 @@ $(function () {
                 `);
             }
         },
-
+        // prints a single game in MyGame element
         async singleMyGame(data, div) {
             let game = await data;
             div.prepend(`
@@ -54,6 +60,7 @@ $(function () {
                     </div>
             `);
         },
+        // prints game results from search query
         async gameResults(data) {
             let games = await MyGames.sortGamesByYear(await data);
             MyGames.addGameDiv.empty();
@@ -65,6 +72,7 @@ $(function () {
             }
             return games;
         },
+        // prints single searched game
         async singleSearchedGame(data, div) {
             let game = await data;
             div.prepend(`
@@ -77,23 +85,30 @@ $(function () {
         }
     };
 
+    // Fetch object with methods
     const Fetch = {
+        // Get methods
         Get: {
+            // gets keys from backend
             async keys() {
                 let results = await fetch(`${MyGames.baseUrl}keys`);
                 let data = await results.json();
                 return data;
             },
+            // gets current user games
             async myGames() {
                 let data = await fetch(`${MyGames.baseUrl}game/user`).then(res => res.json());
                 return data;
             },
+            // gets current user favorite game
             async myFavoriteGame() {
                 let data = await fetch(`${MyGames.baseUrl}game/favorite`).then(res => res.json());
                 return data;
             }
         },
+        // Post methods
         Post: {
+            // posts query for backend API call
             async backendGameSearch(query) {
                 const fetchOptions = {
                     method: 'POST',
@@ -106,6 +121,7 @@ $(function () {
                 let data = await results.json();
                 return data;
             },
+            // posts to add game to user game list by game id
             async addGame(id) {
                 const fetchOptions = {
                     method: 'POST',
@@ -116,6 +132,7 @@ $(function () {
                 let data = await fetch(`${MyGames.baseUrl}game/${id}/add`, fetchOptions).then(res => res.json());
                 return data;
             },
+            // posts to remove game from user game list by game id
             async removeGame(id) {
                 const fetchOptions = {
                     method: 'POST',
@@ -126,6 +143,7 @@ $(function () {
                 let data = await fetch(`${MyGames.baseUrl}game/${id}/remove`, fetchOptions).then(res => res.json());
                 return data;
             },
+            // posts to set user favorite game by game id
             async favoriteGame(id) {
                 const fetchOptions = {
                     method: 'POST',
@@ -139,9 +157,12 @@ $(function () {
         }
     };
 
+    // event handlers
     const Events = {
         initialize() {
             $(document)
+                // when game search button clicked, prints all results
+                // sets styling for carousel
                 .on("click", "#game-search-button", async function() {
                     $(".search-track").css("transform", "translateX(0vw)");
                     index2 = 0;
@@ -153,11 +174,14 @@ $(function () {
 
                     // Fetch.Get.gameSearch($("#game-search-input").val());
                 })
+                // searches games when user hits enter on game search field
                 .on("keyup", function(e) {
                     if($("#game-search-input").is(":focus") && e.key === "Enter") {
                         $("#game-search-button").trigger("click");
                     }
                 })
+                // adds game to user list when clicked
+                // changes some styling variables to keep carousel working corrently with new game added to list
                 .on("click", ".add-game-button", async function() {
                     let userGames = await fetch(`${Utils.url()}game/user`).then(res => res.json());
                     if(userGames == 0) {
@@ -171,11 +195,13 @@ $(function () {
                         await Print.singleMyGame(addedGame, MyGames.myGamesDiv.find(".track"));
                     }
                 })
+                // removes game from user list when clicked
                 .on("click", ".remove-game-button", async function() {
                     await Fetch.Post.removeGame($(this).parent().parent().attr("data-game-id"));
                     // await Print.myGames();
                     $(this).parent().parent().remove();
                 })
+                // changes favorite game when clicked
                 .on("click", ".favorite-game-button", async function() {
                     await Fetch.Post.favoriteGame($(this).parent().parent().attr("data-game-id"));
                     await Print.myFavoriteGame(MyGames.myFavoriteGameDiv);
@@ -184,29 +210,16 @@ $(function () {
         }
     };
 
+    // initializes event handlers
     MyGames.initialize();
 });
 
-//
-// let song = {
-//     title: spotifyName.name,
-//     artist: {
-//         artistName: spotifyArtist.name
-//         genres: genreObjects
-//     }
-// }
-//
-// let postOptions = {
-//     method: 'POST',
-//     headers: {
-//
-//     },
-//     body: JSON.stringify(song)
-// }
 /*<!--        Stroke inducing carousel -->*/
 
+// method to get current user's games
 async function getUserGames() {
     let userGames = await fetch(`${Utils.url()}game/user`).then(res => res.json());
+    // setting up carousel for mobile and regular view
     if(userGames.length > 0) {
         $("#my-games").find(".track").empty();
         setMaxIndex(userGames)
@@ -219,28 +232,24 @@ async function getUserGames() {
                 next.classList.remove("hidden");
             }
         }
+        // loops through game list and prints every game to carousel
         for (let game of userGames) {
-            // $('.my-games').append(`
-            //     <div class="game" style="background-image: url(${game.artwork});">
-            //     </div>
-            // `)
             $('#my-games').find(".track").append(`
-    <!--                <div class="card-container">-->
-                        <div class="card" data-game-id="${game.id}" style="background-image: url(${game.artwork});">
-                            <div class="buttons-div d-flex justify-content-between">
-                                <img class="favorite-game-button clickable" src="Icons/favorite.png">
-                                <img class="remove-game-button clickable" src="/Icons/trash.png">
-                            </div>
-                        </div>
-    
-    <!--                </div>-->
-                 `)
+                <div class="card" data-game-id="${game.id}" style="background-image: url(${game.artwork});">
+                    <div class="buttons-div d-flex justify-content-between">
+                        <img class="favorite-game-button clickable" src="Icons/favorite.png">
+                        <img class="remove-game-button clickable" src="/Icons/trash.png">
+                    </div>
+                </div>
+            `);
         }
     }
 
 }
-getUserGames()
+// calls method created above
+getUserGames();
 
+// global variables used for carousels
 const prev = document.querySelector(".prev");
 const next = document.querySelector(".next");
 const prev2 = document.querySelector(".prev2");
@@ -254,45 +263,14 @@ let index = 0;
 let index2 = 0;
 let maxIndex = 0;
 let maxIndex2 = 0;
+const loading = document.querySelector(".load-gif");
+
+//-----------------------------------------------carousel event listeners-----------------------------------------------
+// adjusts carousel width variable when window resized
 window.addEventListener("resize", function () {
     width = carousel.offsetWidth;
 });
-// next.addEventListener("click", function (e) {
-//     e.preventDefault();
-//     index = index + 1;
-//     prev.classList.remove("hidden");
-//     track.style.transform = "translateX(" + index * -70 + "vw)";
-//     if (track.offsetWidth - (index+1) * width < index * width / 6) {
-//         next.classList.add("hidden");
-//     }
-// });
-// prev.addEventListener("click", function () {
-//     index = index - 1;
-//     next.classList.remove("hidden");
-//     if (index === 0) {
-//         prev.classList.add("hidden");
-//     }
-//     track.style.transform = "translateX(" + index * -70 + "vw)";
-// });
-// next2.addEventListener("click", function (e) {
-//     e.preventDefault();
-//     index2 = index2 + 1;
-//     prev2.classList.remove("hidden");
-//     searchTrack.style.transform = "translateX(" + index2 * -70 + "vw)";
-//     if (searchTrack.offsetWidth - (index2+1) * width < index2 * width / 6) {
-//         next2.classList.add("hidden");
-//     }
-// });
-// prev2.addEventListener("click", function () {
-//     index2 = index2 - 1;
-//     next2.classList.remove("hidden");
-//     if (index2 === 0) {
-//         prev2.classList.add("hidden");
-//     }
-//     searchTrack.style.transform = "translateX(" + index2 * -70 + "vw)";
-// });
 
-const loading = document.querySelector(".load-gif");
 $(window).on("load", function () {
     loading.classList.add("none");
 });
@@ -300,9 +278,7 @@ $(window).on("load", function () {
 //media query
 let mobileView = window.matchMedia("(max-width: 480px)")
 
-window.addEventListener("resize", function () {
-    width = carousel.offsetWidth;
-});
+//-----------------------------------------event listeners for carousel buttons-----------------------------------------
 next.addEventListener("click", function (e) {
     e.preventDefault();
     index += 1;
@@ -327,13 +303,6 @@ prev.addEventListener("click", function () {
     }else{
         track.style.transform = "translateX(" + index * -70 + "vw)";
     }
-});
-
-
-// carousel 2
-
-window.addEventListener("resize", function () {
-    width = carousel.offsetWidth;
 });
 next2.addEventListener("click", function (e) {
     e.preventDefault();
@@ -361,6 +330,7 @@ prev2.addEventListener("click", function () {
     }
 });
 
+// sets index for first carousel to indicate when to show/hide next/prev buttons
 function setMaxIndex(userGames) {
     if(mobileView.matches) {
         maxIndex = Math.ceil(userGames.length / 3);
@@ -375,6 +345,7 @@ function setMaxIndex(userGames) {
     }
 }
 
+// sets index for second carousel to indicate when to show/hide next/prev buttons
 function setMaxIndex2(gameResults) {
     if(mobileView.matches) {
         maxIndex2 = Math.ceil(gameResults.length / 4);
