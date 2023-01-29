@@ -1,10 +1,14 @@
+
+// setting global variables for carousel
 let items = [0,1,2,3,4,5,6];
 let animating = false;
 
+// sets interval for carousel in ms
 window.setInterval(function(){
     startAnimations();
 }, 800);
 
+// function to start animations
 function startAnimations() {
     if(!animating){
         animating = true;
@@ -47,8 +51,4 @@ function startAnimations() {
 
 }
 
-
-
-// items.push(items.shift());
-// videos.push(videos.shift());
 
