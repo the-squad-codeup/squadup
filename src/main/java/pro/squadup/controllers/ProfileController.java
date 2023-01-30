@@ -92,11 +92,6 @@ public class ProfileController {
     }
 
     // simple getmapping redirects
-    @GetMapping("/build-profile")
-    public String buildProfilePage(){
-        return "profile/build-profile";
-    }
-
     @GetMapping("/games")
     public String gamesPage(){
         return "profile/games";

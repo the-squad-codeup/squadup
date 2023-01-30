@@ -32,17 +32,6 @@ public class SquadController {
         this.squadInviteDao = squadInviteDao;
     }
 
-    // shows squads page
-    // NO LONGER USED
-    @GetMapping("/squads")
-    public String showSquadsPage(Model model) {
-        User currentUser = userDao.findById(Utils.currentUserId()).get();
-        Set<Squad> userSquads = squadDao.findAllByMembers(currentUser);
-        model.addAttribute("userSquads", userSquads);
-        model.addAttribute("squad", new Squad());
-        return "squad/main";
-    }
-
     // returns squad object based on squad id passed in
     @GetMapping("/squads/{squadId}/info")
     public @ResponseBody Squad getSquadInfoById(@PathVariable Long squadId) {
