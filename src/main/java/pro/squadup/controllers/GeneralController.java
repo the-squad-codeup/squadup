@@ -50,13 +50,4 @@ public class GeneralController {
         strayDao.save(stray);
         return "redirect:/";
     }
-
-    // redirects to dashboard with current user's squads passed in
-    @GetMapping("/dashboard")
-    public String showHomePage(Model model) {
-        User currentUser = userDao.findById(Utils.currentUserId()).get();
-        Set<Squad> squads = squadDao.findAllByMembers(currentUser);
-        model.addAttribute("userSquads", squads);
-        return "general/dashboard";
-    }
 }
