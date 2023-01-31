@@ -7,6 +7,7 @@ import pro.squadup.models.Squad;
 import pro.squadup.models.User;
 
 @Repository
-public interface LastSeenMessageInterface extends JpaRepository<LastSeenMessage, Long> {
+public interface LastSeenMessageRepository extends JpaRepository<LastSeenMessage, Long> {
     LastSeenMessage findByUserAndSquad(User user, Squad squad);
+    boolean existsByUserAndSquad(User user, Squad squad);
 }

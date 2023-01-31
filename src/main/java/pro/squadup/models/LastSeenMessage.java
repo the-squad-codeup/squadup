@@ -28,6 +28,12 @@ public class LastSeenMessage {
     public LastSeenMessage() {
     }
 
+    public LastSeenMessage(User user, Squad squad, SquadChatMessage squadChatMessage) {
+        this.user = user;
+        this.squad = squad;
+        this.squadChatMessage = squadChatMessage;
+    }
+
     public Long getId() {
         return id;
     }
