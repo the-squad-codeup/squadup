@@ -123,6 +123,7 @@ $(function() {
             } else if(message.messageType === 'DELETE') {
                 await Print.deleteMessage(message);
             } else {
+                await Fetch.Post.setLastSeenMessage(message);
                 await Print.singleMessage(message);
                 SquadChat.scrollToBottom();
             }
@@ -279,6 +280,17 @@ $(function() {
                     body: JSON.stringify(message)
                 }
                 return await fetch(`${Utils.url()}messages/${SquadChat.squadId}/edit/${messageId}`, fetchOptions).then(res => res.json());
+            },
+            async setLastSeenMessage(message) {
+                console.log(message);
+                let squadId = $("#modal-squad-info").attr("data-squad-id");
+                let fetchOptions = {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN' : SquadChat.csrfToken
+                    }
+                };
+                await fetch(`${Utils.url()}messages/last/${squadId}/${message.id}`, fetchOptions).then(res => res.json());
             }
         }
     }
