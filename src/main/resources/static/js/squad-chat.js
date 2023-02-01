@@ -166,6 +166,8 @@ $(function() {
                     this.singleMessage(message);
                 }
             }
+            let lastSeenMessage = await Fetch.Get.lastSeenMessage();
+            console.log(lastSeenMessage);
             SquadChat.scrollToBottom();
         },
         // appends a single message with correct formatting
@@ -261,6 +263,9 @@ $(function() {
             // gets current user
             async currentUser() {
                 return await fetch(`${Utils.url()}user/get`).then(res => res.json());
+            },
+            async lastSeenMessage() {
+                return await fetch(`${Utils.url()}messages/last/${$("#modal-squad-info").attr("data-squad-id")}`).then(res => res.json());
             }
         },
         // Post requests
