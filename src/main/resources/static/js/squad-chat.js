@@ -20,6 +20,10 @@ $(function() {
         scrollToBottom() {
             document.getElementById("chat-messages-div-wrapper").scrollTo(0, document.getElementById("chat-messages-div").scrollHeight);
         },
+        // method to scroll element to last seen message of current user
+        scrollToLastSeenMessage(lastSeenMessage) {
+            $("#chat-messages-div-wrapper").scrollTo($("#chat-messages-div").find(`[data-message-id="${lastSeenMessage.id}"]`));
+        },
         // returns true if previous message in chat is from same user and time between messages is less than one minute
         recentMessage(message) {
             let lastMessage = SquadChat.messageOutputBox.children().last();
@@ -168,7 +172,12 @@ $(function() {
             }
             let lastSeenMessage = await Fetch.Get.lastSeenMessage();
             console.log(lastSeenMessage);
-            SquadChat.scrollToBottom();
+            if(lastSeenMessage.id > 0) {
+                SquadChat.scrollToLastSeenMessage(lastSeenMessage);
+                this.showLastSeenMessageBar(lastSeenMessage);
+            } else {
+                SquadChat.scrollToBottom();
+            }
         },
         // appends a single message with correct formatting
         singleMessage(message) {
@@ -210,6 +219,16 @@ $(function() {
                     <span class="was-edited">(edited)</span>
                 `);
             }
+        },
+        // adds last seen message bar letting user know where the last seen message was
+        showLastSeenMessageBar(lastSeenMessage) {
+            let lastSeenMessageElement = $("#chat-messages-div").find(`[data-message-id="${lastSeenMessage.id}"]`);
+            lastSeenMessageElement.css("border-top", "2px solid red");
+        },
+        // removes last seen message bar
+        removeLastSeenMessageBar(lastSeenMessage) {
+            let lastSeenMessageElement = $("#chat-messages-div").find(`[data-message-id="${lastSeenMessage.id}"]`);
+            lastSeenMessageElement.css("border-top", "");
         },
         // adds "(edited)" to message after user edits a message
         async editMessage(message) {
