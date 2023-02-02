@@ -22,7 +22,12 @@ $(function() {
         },
         // method to scroll element to last seen message of current user
         scrollToLastSeenMessage(lastSeenMessage) {
-            $("#chat-messages-div-wrapper").scrollTo($("#chat-messages-div").find(`[data-message-id="${lastSeenMessage.id}"]`));
+            console.log("Inside scrollToLastSeenMessage");
+            $("#chat-messages-div-wrapper").animate(
+                {
+                    scrollTop: $(`.single-message-wrapper[data-message-id='${lastSeenMessage.squadChatMessage.id}']`)
+                }, 0
+            );
         },
         // returns true if previous message in chat is from same user and time between messages is less than one minute
         recentMessage(message) {
@@ -222,13 +227,14 @@ $(function() {
         },
         // adds last seen message bar letting user know where the last seen message was
         showLastSeenMessageBar(lastSeenMessage) {
-            let lastSeenMessageElement = $("#chat-messages-div").find(`[data-message-id="${lastSeenMessage.id}"]`);
-            lastSeenMessageElement.css("border-top", "2px solid red");
+            console.log("Inside showLastSeenMessageBar");
+            console.log($(`.single-message-wrapper[data-message-id='${lastSeenMessage.squadChatMessage.id}']`));
+            $(`.single-message-wrapper[data-message-id='${lastSeenMessage.squadChatMessage.id}']`).css("border-top", "2px solid red");
         },
         // removes last seen message bar
         removeLastSeenMessageBar(lastSeenMessage) {
-            let lastSeenMessageElement = $("#chat-messages-div").find(`[data-message-id="${lastSeenMessage.id}"]`);
-            lastSeenMessageElement.css("border-top", "");
+            console.log("Inside removeLastSeenMessageBar");
+            $(`.single-message-wrapper[data-message-id='${lastSeenMessage.squadChatMessage.id}']`).css("border-top", "");
         },
         // adds "(edited)" to message after user edits a message
         async editMessage(message) {
