@@ -25,7 +25,7 @@ $(function() {
             console.log("Inside scrollToLastSeenMessage");
             $("#chat-messages-div-wrapper").animate(
                 {
-                    scrollTop: $(`.single-message-wrapper[data-message-id='${lastSeenMessage.squadChatMessage.id}']`)
+                    scrollTop: $(`.single-message-wrapper[data-message-id='${lastSeenMessage.squadChatMessage.id}']`).offset().top
                 }, 0
             );
         },
