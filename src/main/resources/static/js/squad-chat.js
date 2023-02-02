@@ -20,6 +20,15 @@ $(function() {
         scrollToBottom() {
             document.getElementById("chat-messages-div-wrapper").scrollTo(0, document.getElementById("chat-messages-div").scrollHeight);
         },
+        // method to scroll element to last seen message of current user
+        scrollToLastSeenMessage(lastSeenMessage) {
+            console.log("Inside scrollToLastSeenMessage");
+            $("#chat-messages-div-wrapper").animate(
+                {
+                    scrollTop: $(`.single-message-wrapper[data-message-id='${lastSeenMessage.squadChatMessage.id}']`).offset().top
+                }, 0
+            );
+        },
         // returns true if previous message in chat is from same user and time between messages is less than one minute
         recentMessage(message) {
             let lastMessage = SquadChat.messageOutputBox.children().last();
@@ -166,7 +175,14 @@ $(function() {
                     this.singleMessage(message);
                 }
             }
-            SquadChat.scrollToBottom();
+            let lastSeenMessage = await Fetch.Get.lastSeenMessage();
+            console.log(lastSeenMessage);
+            if(lastSeenMessage.id > 0) {
+                SquadChat.scrollToLastSeenMessage(lastSeenMessage);
+                this.showLastSeenMessageBar(lastSeenMessage);
+            } else {
+                SquadChat.scrollToBottom();
+            }
         },
         // appends a single message with correct formatting
         singleMessage(message) {
@@ -208,6 +224,17 @@ $(function() {
                     <span class="was-edited">(edited)</span>
                 `);
             }
+        },
+        // adds last seen message bar letting user know where the last seen message was
+        showLastSeenMessageBar(lastSeenMessage) {
+            console.log("Inside showLastSeenMessageBar");
+            console.log($(`.single-message-wrapper[data-message-id='${lastSeenMessage.squadChatMessage.id}']`));
+            $(`.single-message-wrapper[data-message-id='${lastSeenMessage.squadChatMessage.id}']`).css("border-top", "2px solid red");
+        },
+        // removes last seen message bar
+        removeLastSeenMessageBar(lastSeenMessage) {
+            console.log("Inside removeLastSeenMessageBar");
+            $(`.single-message-wrapper[data-message-id='${lastSeenMessage.squadChatMessage.id}']`).css("border-top", "");
         },
         // adds "(edited)" to message after user edits a message
         async editMessage(message) {
@@ -261,6 +288,9 @@ $(function() {
             // gets current user
             async currentUser() {
                 return await fetch(`${Utils.url()}user/get`).then(res => res.json());
+            },
+            async lastSeenMessage() {
+                return await fetch(`${Utils.url()}messages/last/${$("#modal-squad-info").attr("data-squad-id")}`).then(res => res.json());
             }
         },
         // Post requests
